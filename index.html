@@ -1,0 +1,880 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>AcadaBee</title><meta name="theme-color" content="#0B1E3A"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="AcadaBee"><script src="./config.js"></script><script src="./vendor/supabase.js"></script><script src="./vendor/react.production.min.js"></script><script src="./vendor/react-dom.production.min.js"></script><script src="./site.js"></script><script src="./support.js"></script></head><body>
+<x-dc>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800;900&amp;display=swap"><style>html,body{margin:0;background:#0B1E3A}body{font-family:Nunito,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#45E0E6}a:hover{color:#8FF3F5}button{font-family:Nunito,system-ui,sans-serif}input,select,textarea{font-family:Nunito,system-ui,sans-serif}@keyframes rbFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}@keyframes wave{0%,100%{transform:translateX(0)}50%{transform:translateX(-18px)}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}@keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes toastIn{0%{transform:translate(-50%,20px);opacity:0}100%{transform:translate(-50%,0);opacity:1}}</style></helmet>
+<div ref="{{ rootRef }}" style="min-height:100vh;background:var(--bg,linear-gradient(180deg,#0B1E3A 0%,#10637A 48%,#2FC2D9 78%,#8FEBF7 100%));font-family:Nunito,system-ui,sans-serif;color:var(--ink,#fff);position:relative;overflow-x:hidden">
+
+  <!-- PICK -->
+  <sc-if value="{{ isPick }}" hint-placeholder-val="{{ true }}">
+  <div data-screen-label="Who's playing" style="max-width:560px;margin:0 auto;min-height:100vh;padding:48px 22px 40px;display:flex;flex-direction:column;align-items:center;gap:18px;position:relative">
+    <div style="position:absolute;left:-40px;right:-40px;top:360px;height:60px;border-radius:50%;background:rgba(255,255,255,.16);animation:wave 6s ease-in-out infinite;pointer-events:none"></div>
+    <div style="position:absolute;left:-60px;right:-60px;top:400px;height:70px;border-radius:50%;background:rgba(255,255,255,.12);animation:wave 7s ease-in-out infinite reverse;pointer-events:none"></div>
+    <div style="width:170px;animation:rbFloat 3.2s ease-in-out infinite;filter:drop-shadow(0 18px 14px rgba(0,0,0,.35));position:relative">
+      <svg viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><defs><radialGradient id="rbB" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#FFF3B0"></stop><stop offset=".45" stop-color="#FFD83D"></stop><stop offset="1" stop-color="#E89A00"></stop></radialGradient><linearGradient id="rbS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A3321"></stop><stop offset="1" stop-color="#1C120B"></stop></linearGradient><linearGradient id="rbW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"></stop><stop offset="1" stop-color="#BFE9FF" stop-opacity=".7"></stop></linearGradient><clipPath id="rbC"><rect x="30" y="40" width="80" height="84" rx="20"></rect></clipPath></defs><g fill="url(#rbW)" stroke="#9ED5F2" stroke-width="1.5"><path d="M33 56 C10 40 -2 58 6 76 C12 88 26 86 33 76 Z"></path><path d="M107 60 C130 44 142 60 134 78 C128 90 114 88 107 80 Z"></path></g><g stroke="#FFFFFF" stroke-width="1.2" fill="none" opacity=".8"><path d="M33 64 L10 58 M33 66 L8 70 M33 70 L14 80"></path><path d="M107 68 L130 62 M107 70 L132 74 M107 74 L126 84"></path></g><g fill="none" stroke="#2A1B10" stroke-width="3" stroke-linecap="round"><path d="M58 41 C57 30 56 22 54 14 c-6 -8 -16 2 -8 8 c5 4 11 -3 6 -6"></path><path d="M84 40 C88 30 92 22 97 13 c6 -8 16 2 8 8 c-5 4 -11 -3 -6 -6"></path></g><path d="M70 124 L65 140 L75 140 Z" fill="#2A1B10"></path><rect x="30" y="40" width="80" height="84" rx="20" fill="url(#rbB)"></rect><g clip-path="url(#rbC)"><rect x="26" y="84" width="88" height="11" fill="url(#rbS)"></rect><rect x="26" y="103" width="88" height="11" fill="url(#rbS)"></rect></g><rect x="30" y="40" width="80" height="84" rx="20" fill="none" stroke="#B06E00" stroke-opacity=".35" stroke-width="2"></rect><path d="M40 54 Q44 45 57 44" stroke="#fff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round" fill="none"></path><ellipse cx="56" cy="64" rx="8" ry="10" fill="#fff"></ellipse><ellipse cx="84" cy="64" rx="8" ry="10" fill="#fff"></ellipse><circle cx="57" cy="66" r="4" fill="#1C120B"></circle><circle cx="85" cy="66" r="4" fill="#1C120B"></circle><circle cx="58.5" cy="64.5" r="1.4" fill="#fff"></circle><circle cx="86.5" cy="64.5" r="1.4" fill="#fff"></circle><ellipse cx="45" cy="76" rx="5" ry="3" fill="#FF9A8B" fill-opacity=".6"></ellipse><ellipse cx="95" cy="76" rx="5" ry="3" fill="#FF9A8B" fill-opacity=".6"></ellipse><path d="M62 78 Q70 86 78 78" stroke="#1C120B" stroke-width="3" stroke-linecap="round" fill="none"></path></svg>
+    </div>
+    <div style="text-align:center;display:flex;flex-direction:column;gap:6px;position:relative">
+      <h1 style="margin:0;font:700 40px/1 Fredoka,sans-serif;color:#fff;letter-spacing:-.01em;text-shadow:0 3px 0 rgba(0,0,0,.25)">Who's playing?</h1>
+      <p style="margin:0;font:700 15px/1.3 Nunito,sans-serif;color:#C9F3FF">Founders only. Tap your name.</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:14px;width:100%;margin-top:8px;position:relative">
+      <button onClick="{{ pickZ }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:26px;background:linear-gradient(160deg,#1E4F7A,#0E2C4F);box-shadow:inset 0 3px 0 rgba(255,255,255,.16),inset 0 -8px 0 rgba(0,0,0,.35),0 16px 26px -10px rgba(0,0,0,.6);color:#fff;text-align:left" style-active="transform:translateY(3px)">
+        <span style="flex:none;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:radial-gradient(circle at 35% 30%,#8FF3F5,#2BB9C2 70%);box-shadow:inset 0 -5px 0 rgba(0,60,70,.35),0 6px 10px -4px rgba(0,0,0,.5);overflow:hidden"><sc-if value="{{ zAvUrl }}" hint-placeholder-val="{{ false }}"><img src="{{ zAvUrl }}" alt="" style="width:54px;height:54px;display:block"></sc-if><sc-if value="{{ zNoAv }}" hint-placeholder-val="{{ true }}">🎨</sc-if></span>
+        <span style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"><span style="font:600 22px/1.1 Fredoka,sans-serif">{{ zName }}</span><span style="font:700 13px/1.2 Nunito,sans-serif;color:#8FD9E8">{{ zRole }} · {{ zWorld }}</span></span>
+        <sc-if value="{{ zPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
+        <span style="font:600 20px/1 Fredoka,sans-serif;color:#45E0E6">→</span>
+      </button>
+      <button onClick="{{ pickR }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:26px;background:linear-gradient(160deg,#FFF6DD,#FFE1A8);box-shadow:inset 0 3px 0 rgba(255,255,255,.9),inset 0 -8px 0 rgba(160,110,30,.22),0 16px 26px -10px rgba(0,40,60,.45);color:#0B2E3F;text-align:left" style-active="transform:translateY(3px)">
+        <span style="flex:none;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:radial-gradient(circle at 35% 30%,#FFB5A8,#FF6F61 70%);box-shadow:inset 0 -5px 0 rgba(150,30,20,.3),0 6px 10px -4px rgba(0,0,0,.3);overflow:hidden"><sc-if value="{{ rAvUrl }}" hint-placeholder-val="{{ false }}"><img src="{{ rAvUrl }}" alt="" style="width:54px;height:54px;display:block"></sc-if><sc-if value="{{ rNoAv }}" hint-placeholder-val="{{ true }}">🦈</sc-if></span>
+        <span style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"><span style="font:600 22px/1.1 Fredoka,sans-serif">{{ rName }}</span><span style="font:700 13px/1.2 Nunito,sans-serif;color:#7A5A2E">{{ rRole }} · {{ rWorld }}</span></span>
+        <sc-if value="{{ rPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
+        <span style="font:600 20px/1 Fredoka,sans-serif;color:#FF6F61">→</span>
+      </button>
+      <button onClick="{{ pickD }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:26px;background:linear-gradient(160deg,#F2F7F9,#D7E3E9);box-shadow:inset 0 3px 0 rgba(255,255,255,.9),inset 0 -7px 0 rgba(40,70,90,.18),0 14px 22px -10px rgba(0,40,60,.35);color:#0B2E3F;text-align:left" style-active="transform:translateY(3px)">
+        <span style="flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:24px;background:radial-gradient(circle at 35% 30%,#FFE680,#FFC61A 70%);box-shadow:inset 0 -5px 0 rgba(160,100,0,.3),0 6px 10px -4px rgba(0,0,0,.3);overflow:hidden"><sc-if value="{{ dAvUrl }}" hint-placeholder-val="{{ false }}"><img src="{{ dAvUrl }}" alt="" style="width:46px;height:46px;display:block"></sc-if><sc-if value="{{ dNoAv }}" hint-placeholder-val="{{ true }}">💼</sc-if></span>
+        <span style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"><span style="font:600 20px/1.1 Fredoka,sans-serif">Dad</span><span style="font:700 13px/1.2 Nunito,sans-serif;color:#4B6A7C">Investor &amp; Customer No. 1 · {{ dWorld }}</span></span>
+        <sc-if value="{{ dPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
+        <span style="font:600 20px/1 Fredoka,sans-serif;color:#4B6A7C">→</span>
+      </button>
+    </div>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.0 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+  </div>
+  </sc-if>
+
+  <!-- APP SHELL -->
+  <sc-if value="{{ isApp }}" hint-placeholder-val="{{ false }}">
+  <div style="max-width:640px;margin:0 auto;padding:18px 16px 130px;display:flex;flex-direction:column;gap:14px">
+
+    <sc-if value="{{ navOn }}">
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font:600 24px/1 Fredoka,sans-serif;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ headTitle }}</span>
+      <span style="margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:700 16px/1 Fredoka,sans-serif;white-space:nowrap;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow)">⭐ {{ pts }}</span>
+      <button onClick="{{ goShop }}" aria-label="Gems and the shop" style="flex:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:999px;background:linear-gradient(180deg,#C9F7FF,#45C8E6);color:#06303A;font:700 16px/1 Fredoka,sans-serif;white-space:nowrap;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(0,90,120,.35),0 8px 14px -6px var(--shadow)" style-active="transform:translateY(2px)">💎 {{ gems }}</button>
+      <button onClick="{{ goPick }}" aria-label="Switch player" style="flex:none;border:0;cursor:pointer;padding:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--opt);box-shadow:inset 0 -4px 0 var(--cardLo),0 6px 10px -4px var(--shadow);font-size:20px;overflow:hidden" style-active="transform:translateY(2px)"><sc-if value="{{ whoAvUrl }}"><img src="{{ whoAvUrl }}" alt="" style="width:34px;height:34px;display:block"></sc-if><sc-if value="{{ whoNoAv }}">{{ whoEmoji }}</sc-if></button>
+    </div>
+    </sc-if>
+
+    <!-- MAP -->
+    <sc-if value="{{ isMap }}">
+    <div data-screen-label="Map" style="display:flex;flex-direction:column;gap:14px">
+      <sc-if value="{{ showNoteHint }}">
+      <div style="display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:20px;background:var(--hint);color:var(--hintInk);box-shadow:inset 0 2px 0 rgba(255,255,255,.3),inset 0 -5px 0 rgba(0,0,0,.15),0 10px 16px -8px var(--shadow)">
+        <p style="margin:0;flex:1;font:700 13px/1.4 Nunito,sans-serif">Spotted something to change? Bugs, looks and ideas all go in 📝 Notes. You and Dad build the fixes with Claude.</p>
+        <button onClick="{{ noteHintOk }}" style="border:0;cursor:pointer;flex:none;padding:10px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(160,100,0,.35)">Got it</button>
+      </div>
+      </sc-if>
+      <div style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow)">
+        <div style="display:flex;flex-direction:column;align-items:center;min-width:64px"><span style="font:700 36px/1 Fredoka,sans-serif;color:var(--acc)">{{ streakN }}</span><span style="font:800 10px/1 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-top:4px">day streak</span></div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:8px;min-width:0">
+          <div style="display:flex;gap:5px"><sc-for list="{{ hexes }}" as="h" hint-placeholder-count="7"><span style="width:30px;height:34px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:{{ h.bg }};outline:{{ h.outline }};outline-offset:-2px"></span></sc-for></div>
+          <span style="font:800 10px/1 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)">last 7 days · honeycomb</span>
+        </div>
+      </div>
+      <sc-if value="{{ hasPractice }}"><div style="padding:12px 16px;border-radius:18px;background:var(--hint);color:var(--hintInk);font:800 13px/1.4 Nunito,sans-serif">{{ practiceT }}</div></sc-if>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+        <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0"><b style="font:600 15px/1.2 Fredoka,sans-serif;color:var(--ink)">⭐ {{ lvlT }}</b><span style="display:block;height:12px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ lvlW }};border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800)"></span></span><small style="font:700 11px/1.25 Nunito,sans-serif;color:var(--soft)">{{ lvlS }}</small></div>
+        <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0"><b style="font:600 15px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ cellsT }}</b><span style="display:block;height:12px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ cellsW }};border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800)"></span></span><small style="font:700 11px/1.25 Nunito,sans-serif;color:var(--soft)">{{ cellsS }}</small></div>
+      </div>
+      <p style="margin:-4px 4px 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ vaultT }}</p>
+      <sc-if value="{{ hasExam }}">
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px">
+        <span style="font:800 10px/1 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)">{{ examK }}</span>
+        <span style="font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ examBig }}</span>
+        <span style="font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">{{ examDate }}</span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px"><sc-for list="{{ examChips }}" as="c" hint-placeholder-count="0"><span style="display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;background:var(--chip);color:var(--chipInk);font:800 11px/1 Nunito,sans-serif;white-space:nowrap"><span>{{ c.ic }}</span><span>{{ c.t }}</span></span></sc-for></div>
+        <sc-if value="{{ hasJump }}"><button onClick="{{ jump }}" style="margin-top:4px;align-self:flex-start;border:0;cursor:pointer;padding:10px 16px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow)" style-active="transform:translateY(2px)">{{ jumpT }}</button></sc-if>
+      </div>
+      </sc-if>
+      <div style="display:flex;align-items:center;flex-wrap:wrap;gap:4px 10px;padding:0 4px"><span style="display:inline-flex;align-items:center;gap:6px;font:600 17px/1 Fredoka,sans-serif;color:var(--ink);white-space:nowrap"><span>🗺️</span><span>{{ mapPct }}</span></span><span style="font:700 13px/1 Nunito,sans-serif;color:var(--soft)">{{ mapMast }}</span></div>
+      <div style="position:relative;border-radius:32px;padding:18px 12px 24px;background:radial-gradient(circle at 20px 20px,var(--seaDot) 2px,transparent 3px) 0 0/40px 40px,var(--sea);box-shadow:inset 0 0 0 2px var(--seaRing),inset 0 12px 30px rgba(0,0,0,.25);display:flex;flex-direction:column;gap:18px">
+        <sc-for list="{{ isles }}" as="it" hint-placeholder-count="2">
+          <sc-if value="{{ it.notFirst }}"><div style="display:flex;justify-content:center;gap:22px;position:relative;height:14px"><span style="width:16px;height:10px;border-radius:50%;background:var(--stone);box-shadow:0 3px 0 var(--stoneLo)"></span><span style="width:16px;height:10px;border-radius:50%;background:var(--stone);box-shadow:0 3px 0 var(--stoneLo)"></span><span style="width:16px;height:10px;border-radius:50%;background:var(--stone);box-shadow:0 3px 0 var(--stoneLo)"></span><sc-if value="{{ it.boat }}"><span style="position:absolute;right:14%;top:-16px;font-size:26px;filter:drop-shadow(0 6px 4px rgba(0,0,0,.4))">⛵</span></sc-if></div></sc-if>
+          <div id="{{ it.domId }}" style="width:93%;margin-left:{{ it.ml }};margin-right:{{ it.mr }};padding:16px 14px 18px;border-radius:{{ it.radius }};background:{{ it.bg }};box-shadow:{{ it.shadow }};opacity:{{ it.op }};position:relative;display:flex;flex-direction:column;gap:12px;color:var(--isleInk)">
+            <sc-if value="{{ it.hasDeco }}"><span style="position:absolute;top:10px;right:16px;font-size:22px;letter-spacing:2px;white-space:nowrap;filter:drop-shadow(0 4px 2px rgba(0,0,0,.25))">{{ it.deco }}</span></sc-if>
+            <div style="display:inline-flex;align-self:flex-start;flex-direction:column;padding:8px 14px;border-radius:14px;background:var(--chip);color:var(--chipInk);box-shadow:inset 0 2px 0 rgba(255,255,255,.15),inset 0 -4px 0 rgba(0,0,0,.4),0 8px 10px -5px rgba(0,0,0,.5);max-width:82%"><span style="display:flex;align-items:center;gap:6px;font:600 17px/1.2 Fredoka,sans-serif"><span>{{ it.signIc }}</span><span>{{ it.signName }}</span></span><sc-if value="{{ it.hasSignSmall }}"><span style="font:700 12px/1.3 Nunito,sans-serif;color:#FFE680">{{ it.signSmall }}</span></sc-if></div>
+            <sc-for list="{{ it.groups }}" as="g" hint-placeholder-count="1">
+              <sc-if value="{{ g.border }}"><div style="height:0;border-top:3px dashed rgba(0,0,0,.28);margin:2px 8px"></div></sc-if>
+              <sc-if value="{{ g.hasName }}"><div style="font:800 11px/1 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--isleSoft);padding:2px 4px">{{ g.name }}</div></sc-if>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <sc-for list="{{ g.stops }}" as="st" hint-placeholder-count="2">
+                  <button onClick="{{ st.go }}" aria-label="{{ st.aria }}" style="border:0;background:transparent;padding:0 0 0 {{ st.pl }};cursor:pointer;display:flex;align-items:center;gap:12px;text-align:left;opacity:{{ st.op }};color:var(--isleInk)" style-active="transform:translateY(3px)">
+                    <span style="flex:none;width:64px;height:64px;border-radius:50%;background:{{ st.ring }};padding:5px;box-shadow:0 6px 0 {{ st.lo }},0 12px 14px -6px rgba(0,0,0,.45)"><span style="width:100%;height:100%;border-radius:50%;display:grid;place-items:center;font-size:24px;background:{{ st.iconBg }};box-shadow:inset 0 -5px 0 rgba(0,0,0,.25)">{{ st.icon }}</span></span>
+                    <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:600 16px/1.15 Fredoka,sans-serif">{{ st.title }}</span><span style="font:700 12px/1.25 Nunito,sans-serif;color:var(--isleSoft)">{{ st.small }}</span></span>
+                  </button>
+                </sc-for>
+              </div>
+            </sc-for>
+            <sc-if value="{{ it.hasRev }}">
+              <button onClick="{{ it.revGo }}" style="border:0;background:transparent;padding:0 0 0 13%;cursor:pointer;display:flex;align-items:center;gap:12px;text-align:left;color:var(--isleInk)" style-active="transform:translateY(3px)">
+                <span style="flex:none;width:64px;height:64px;border-radius:50%;background:var(--ring);padding:5px;box-shadow:0 6px 0 {{ it.lo }},0 12px 14px -6px rgba(0,0,0,.45)"><span style="width:100%;height:100%;border-radius:50%;display:grid;place-items:center;font-size:24px;background:radial-gradient(circle at 35% 30%,#FFC4E6,#F07BC0 70%);box-shadow:inset 0 -5px 0 rgba(120,20,80,.35)">🧠</span></span>
+                <span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:600 16px/1.15 Fredoka,sans-serif">Revision</span><span style="font:700 12px/1.25 Nunito,sans-serif;color:var(--isleSoft)">your weakest stop: {{ it.revTitle }}</span></span>
+              </button>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+      <p style="margin:0;text-align:center;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ syncNote }}</p>
+    </div>
+    </sc-if>
+
+    <!-- LESSON -->
+    <sc-if value="{{ isLesson }}">
+    <div data-screen-label="Quiz" style="display:flex;flex-direction:column;gap:16px;min-height:calc(100vh - 60px)">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button onClick="{{ quit }}" aria-label="Back to map" style="border:0;cursor:pointer;flex:none;width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:var(--opt);color:var(--optInk);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -4px 0 var(--cardLo),0 8px 12px -6px var(--shadow);font:700 18px/1 Fredoka,sans-serif" style-active="transform:translateY(2px)">✕</button>
+        <span style="flex:1;height:22px;border-radius:999px;background:var(--field);box-shadow:inset 0 3px 6px rgba(0,0,0,.25);overflow:hidden;padding:4px;box-sizing:border-box"><span style="display:block;width:{{ fill }};height:100%;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800);box-shadow:inset 0 2px 0 rgba(255,255,255,.7),inset 0 -2px 0 rgba(160,100,0,.3);transition:width .4s cubic-bezier(.2,.7,.3,1)"></span></span>
+        <span style="flex:none;padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:700 16px/1 Fredoka,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow)">{{ earnedTxt }}</span>
+        <button onClick="{{ hintQ }}" aria-label="Show a clue (half points)" style="border:0;cursor:pointer;flex:none;width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:var(--opt);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -4px 0 var(--cardLo),0 8px 12px -6px var(--shadow);font-size:18px;opacity:{{ hintOp }}" style-active="transform:translateY(2px)">❓</button>
+        <button onClick="{{ noteLesson }}" aria-label="Add a note about this question" style="border:0;cursor:pointer;flex:none;width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:var(--opt);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -4px 0 var(--cardLo),0 8px 12px -6px var(--shadow);font-size:18px" style-active="transform:translateY(2px)">📝</button>
+      </div>
+      <div style="position:relative;margin-top:44px;padding:22px 20px 20px;border-radius:28px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 18px 30px -12px var(--shadow);display:flex;flex-direction:column;gap:10px">
+        <div style="position:absolute;right:12px;top:-62px;width:84px;filter:drop-shadow(0 10px 8px rgba(0,0,0,.35));animation:rbFloat 3s ease-in-out infinite"><svg viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><g fill="url(#rbW)" stroke="#9ED5F2" stroke-width="1.5"><path d="M33 56 C10 40 -2 58 6 76 C12 88 26 86 33 76 Z"></path><path d="M107 60 C130 44 142 60 134 78 C128 90 114 88 107 80 Z"></path></g><g fill="none" stroke="#2A1B10" stroke-width="3" stroke-linecap="round"><path d="M58 41 C57 30 56 22 54 14 c-6 -8 -16 2 -8 8 c5 4 11 -3 6 -6"></path><path d="M84 40 C88 30 92 22 97 13 c6 -8 16 2 8 8 c-5 4 -11 -3 -6 -6"></path></g><path d="M70 124 L65 140 L75 140 Z" fill="#2A1B10"></path><rect x="30" y="40" width="80" height="84" rx="20" fill="url(#rbB)"></rect><g clip-path="url(#rbC)"><rect x="26" y="84" width="88" height="11" fill="url(#rbS)"></rect><rect x="26" y="103" width="88" height="11" fill="url(#rbS)"></rect></g><path d="M40 54 Q44 45 57 44" stroke="#fff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round" fill="none"></path><ellipse cx="56" cy="64" rx="8" ry="10" fill="#fff"></ellipse><ellipse cx="84" cy="64" rx="8" ry="10" fill="#fff"></ellipse><circle cx="57" cy="66" r="4" fill="#1C120B"></circle><circle cx="85" cy="66" r="4" fill="#1C120B"></circle><circle cx="58.5" cy="64.5" r="1.4" fill="#fff"></circle><circle cx="86.5" cy="64.5" r="1.4" fill="#fff"></circle><path d="M62 78 Q70 86 78 78" stroke="#1C120B" stroke-width="3" stroke-linecap="round" fill="none"></path></svg></div>
+        <span style="align-self:flex-start;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;padding:5px 12px;border-radius:10px;background:var(--chip);color:var(--chipInk);font:600 12px/1.2 Fredoka,sans-serif;letter-spacing:.06em;text-transform:uppercase;box-shadow:inset 0 -3px 0 rgba(0,0,0,.35)"><span>{{ qtype }}</span><span>{{ qtypeIc }}</span><span>{{ qtypeTail }}</span></span>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:-4px"><sc-if value="{{ hasLessonTag }}"><span style="padding:4px 10px;border-radius:999px;background:var(--hint);color:var(--hintInk);font:800 11px/1.2 Nunito,sans-serif">{{ lessonTag }}</span></sc-if><sc-if value="{{ hasSting }}"><span style="padding:4px 10px;border-radius:999px;background:linear-gradient(180deg,#FFB5A8,#FF6F61);color:#fff;font:800 11px/1.2 Nunito,sans-serif">{{ stingT }}</span></sc-if></div>
+        <p style="margin:0;font:600 22px/1.3 Fredoka,sans-serif;color:var(--ink);text-wrap:pretty">{{ qtext }}</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+        <sc-for list="{{ opts }}" as="o" hint-placeholder-count="4">
+          <button onClick="{{ o.pick }}" style="border:0;cursor:pointer;min-height:92px;padding:14px;border-radius:22px;display:grid;place-items:center;text-align:center;font:800 15px/1.3 Nunito,sans-serif;color:{{ o.color }};background:{{ o.bg }};box-shadow:{{ o.shadow }};opacity:{{ o.op }};transform:{{ o.tf }};animation:{{ o.anim }};transition:transform .15s,opacity .2s" style-active="transform:translateY(3px)">{{ o.text }}</button>
+        </sc-for>
+      </div>
+      <sc-if value="{{ hasFb }}">
+      <div style="padding:16px 18px;border-radius:22px;background:{{ fbBg }};color:{{ fbInk }};box-shadow:inset 0 3px 0 rgba(255,255,255,.3),inset 0 -6px 0 rgba(0,0,0,.12),0 14px 22px -10px var(--shadow);display:flex;flex-direction:column;gap:4px;animation:popIn .3s cubic-bezier(.2,.7,.3,1)">
+        <span style="font:600 18px/1.2 Fredoka,sans-serif">{{ fbH }}</span>
+        <span style="font:700 14px/1.4 Nunito,sans-serif;text-wrap:pretty">{{ fbT }}</span>
+        <sc-if value="{{ fbLearn }}"><button onClick="{{ openLearn }}" style="border:0;cursor:pointer;align-self:flex-start;margin-top:8px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.85);font:800 13px/1 Nunito,sans-serif;color:#0F4A1C;white-space:nowrap;box-shadow:inset 0 -3px 0 rgba(0,0,0,.12),0 6px 10px -5px rgba(0,0,0,.3)">📚 Learn more</button></sc-if>
+      </div>
+      </sc-if>
+      <sc-if value="{{ nextOn }}">
+      <button onClick="{{ next }}" style="border:0;cursor:pointer;margin-top:auto;padding:18px;border-radius:22px;text-align:center;font:600 20px/1 Fredoka,sans-serif;color:#3A2600;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -8px 0 rgba(160,100,0,.35),0 16px 26px -10px var(--shadow);animation:popIn .3s cubic-bezier(.2,.7,.3,1)" style-active="transform:translateY(4px)">{{ nextLabel }}</button>
+      </sc-if>
+    </div>
+    </sc-if>
+
+    <!-- DONE -->
+    <sc-if value="{{ isDone }}">
+    <div data-screen-label="Island cleared" style="margin-top:60px;padding:24px 20px 22px;border-radius:30px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 20px 34px -12px var(--shadow);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;position:relative">
+      <div style="position:absolute;left:50%;top:-78px;width:130px;margin-left:-65px;filter:drop-shadow(0 14px 10px rgba(0,0,0,.35));animation:rbFloat 3s ease-in-out infinite"><svg viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><g fill="url(#rbW)" stroke="#9ED5F2" stroke-width="1.5"><path d="M33 56 C10 40 -2 58 6 76 C12 88 26 86 33 76 Z"></path><path d="M107 60 C130 44 142 60 134 78 C128 90 114 88 107 80 Z"></path></g><g fill="none" stroke="#2A1B10" stroke-width="3" stroke-linecap="round"><path d="M58 41 C57 30 56 22 54 14 c-6 -8 -16 2 -8 8 c5 4 11 -3 6 -6"></path><path d="M84 40 C88 30 92 22 97 13 c6 -8 16 2 8 8 c-5 4 -11 -3 -6 -6"></path></g><path d="M70 124 L65 140 L75 140 Z" fill="#2A1B10"></path><rect x="30" y="40" width="80" height="84" rx="20" fill="url(#rbB)"></rect><g clip-path="url(#rbC)"><rect x="26" y="84" width="88" height="11" fill="url(#rbS)"></rect><rect x="26" y="103" width="88" height="11" fill="url(#rbS)"></rect></g><path d="M40 54 Q44 45 57 44" stroke="#fff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round" fill="none"></path><path d="M48 62 Q56 56 64 62" stroke="#1C120B" stroke-width="3.5" stroke-linecap="round" fill="none"></path><path d="M76 62 Q84 56 92 62" stroke="#1C120B" stroke-width="3.5" stroke-linecap="round" fill="none"></path><ellipse cx="45" cy="74" rx="5" ry="3" fill="#FF9A8B" fill-opacity=".7"></ellipse><ellipse cx="95" cy="74" rx="5" ry="3" fill="#FF9A8B" fill-opacity=".7"></ellipse><path d="M58 76 Q70 92 82 76 Z" fill="#1C120B"></path></svg></div>
+      <h2 style="margin:50px 0 0;font:700 30px/1.1 Fredoka,sans-serif;color:var(--ink)">{{ doneTitle }}</h2>
+      <div style="font:700 54px/1 Fredoka,sans-serif;color:#3A2600;padding:10px 26px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -6px 0 rgba(160,100,0,.35),0 14px 22px -10px var(--shadow);animation:popIn .5s cubic-bezier(.2,.7,.3,1)">{{ donePts }}</div>
+      <p style="margin:0;font:700 14px/1.4 Nunito,sans-serif;color:var(--soft);text-wrap:pretty">{{ doneMsg }}</p>
+      <sc-if value="{{ hasExtras }}"><div style="width:100%;display:flex;flex-direction:column;gap:6px"><sc-for list="{{ doneExtras }}" as="x" hint-placeholder-count="0"><div style="padding:10px 14px;border-radius:16px;background:var(--hint);color:var(--hintInk);font:800 13px/1.35 Nunito,sans-serif;text-align:left">{{ x.t }}</div></sc-for></div></sc-if>
+      <p style="margin:10px 0 0;font:600 18px/1 Fredoka,sans-serif;color:var(--ink)">What next?</p>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;width:100%">
+        <button onClick="{{ doneRevise }}" style="border:0;cursor:pointer;padding:14px 8px;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--opt);color:var(--optInk);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow)" style-active="transform:translateY(3px)"><span style="font-size:26px;line-height:1">🧠</span><b style="font:600 16px/1 Fredoka,sans-serif">Revise</b><small style="font:700 11px/1.2 Nunito,sans-serif;color:var(--soft)">{{ reviseSub }}</small></button>
+        <button onClick="{{ donePrev }}" disabled="{{ noPrev }}" style="border:0;cursor:pointer;padding:14px 8px;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--opt);color:var(--optInk);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow);opacity:{{ prevOp }}" style-active="transform:translateY(3px)"><span style="font-size:26px;line-height:1">⬅️</span><b style="font:600 16px/1 Fredoka,sans-serif">Back</b><small style="font:700 11px/1.2 Nunito,sans-serif;color:var(--soft)">{{ prevSub }}</small></button>
+        <button onClick="{{ doneNext }}" disabled="{{ noNext }}" style="border:0;cursor:pointer;padding:14px 8px;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:4px;background:var(--opt);color:var(--optInk);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow);opacity:{{ nextOp }}" style-active="transform:translateY(3px)"><span style="font-size:26px;line-height:1">➡️</span><b style="font:600 16px/1 Fredoka,sans-serif">Next</b><small style="font:700 11px/1.2 Nunito,sans-serif;color:var(--soft)">{{ nextSub }}</small></button>
+      </div>
+      <button onClick="{{ doneBack }}" style="border:0;cursor:pointer;width:100%;margin-top:8px;padding:18px;border-radius:22px;font:600 20px/1 Fredoka,sans-serif;color:#3A2600;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -8px 0 rgba(160,100,0,.35),0 16px 26px -10px var(--shadow)" style-active="transform:translateY(4px)">🗺️ Back to the map</button>
+      <button onClick="{{ noteDone }}" style="border:0;cursor:pointer;width:100%;padding:14px;border-radius:18px;background:var(--opt);color:var(--optInk);font:800 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow)" style-active="transform:translateY(3px)">📝 Note about this island</button>
+    </div>
+    </sc-if>
+
+    <!-- PROFILE -->
+    <sc-if value="{{ isProfile }}">
+    <div data-screen-label="Profile" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow)">
+        <span style="flex:none;width:96px;height:96px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,var(--acc),var(--chip) 90%);box-shadow:inset 0 -6px 0 rgba(0,0,0,.25),0 10px 16px -8px var(--shadow)"><img src="{{ profAv }}" alt="Your bee" style="width:88px;height:88px;display:block"></span>
+        <div style="min-width:0"><h2 style="margin:0;font:600 26px/1.1 Fredoka,sans-serif;color:var(--ink)">{{ profName }}</h2><p style="margin:2px 0 0;font:700 13px/1.3 Nunito,sans-serif;color:var(--soft)">{{ profRole }}</p></div>
+      </div>
+      <div style="padding:14px 18px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:8px">
+        <b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">⭐ {{ lvlT }}</b><span style="display:block;height:12px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ lvlW }};border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800)"></span></span><small style="font:700 12px/1.2 Nunito,sans-serif;color:var(--soft)">{{ lvlS }}</small>
+        <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:4px"><sc-for list="{{ seasonStats }}" as="s" hint-placeholder-count="4"><div style="padding:8px 4px;border-radius:14px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center"><span style="font:600 15px/1 Fredoka,sans-serif;white-space:nowrap">{{ s.ic }} {{ s.k }}</span><small style="font:700 10px/1.2 Nunito,sans-serif;opacity:.8">{{ s.l }}</small></div></sc-for></div>
+        <button onClick="{{ goShop }}" style="border:0;cursor:pointer;padding:12px 16px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow);align-self:flex-start" style-active="transform:translateY(2px)">💎 Open the Shop</button>
+      </div>
+      <sc-if value="{{ hasBadges }}"><div style="display:flex;flex-direction:column;gap:6px"><sc-for list="{{ badges }}" as="bd" hint-placeholder-count="1"><div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:20px;background:linear-gradient(160deg,#FFF3B0,#FFC61A);color:#3A2600;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -5px 0 rgba(160,100,0,.3)"><span style="font-size:30px">{{ bd.ic }}</span><span style="display:flex;flex-direction:column;gap:2px"><b style="font:600 17px/1.1 Fredoka,sans-serif">{{ bd.t }}</b><small style="font:700 12px/1.2 Nunito,sans-serif">{{ bd.s }}</small></span></div></sc-for></div></sc-if>
+      <div style="padding:14px 18px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px">
+        <b style="font:600 16px/1.2 Fredoka,sans-serif;color:var(--ink)">👕 Earned merch</b>
+        <sc-for list="{{ merch }}" as="m" hint-placeholder-count="3"><div style="font:700 13px/1.4 Nunito,sans-serif;color:var(--ink)">{{ m.ic }} {{ m.t }}</div></sc-for>
+        <small style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ merchT }}</small>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+        <sc-for list="{{ profStats }}" as="s" hint-placeholder-count="4"><div style="padding:12px 6px;border-radius:18px;background:var(--card);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow);display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center"><span style="display:flex;align-items:center;gap:4px;font:600 16px/1 Fredoka,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap"><span>{{ s.ic }}</span><b>{{ s.k }}</b></span><small style="font:700 10px/1.2 Nunito,sans-serif;color:var(--soft)">{{ s.l }}</small></div></sc-for>
+      </div>
+      <sc-if value="{{ hasNext }}">
+      <div style="padding:14px 18px;border-radius:20px;background:var(--card);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo),0 12px 18px -8px var(--shadow);display:flex;flex-direction:column;gap:6px">
+        <b style="font:600 16px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ nextT }}</b><small style="font:700 12px/1.2 Nunito,sans-serif;color:var(--soft)">{{ nextS }}</small>
+        <span style="height:12px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ nextW }};border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800)"></span></span>
+      </div>
+      </sc-if>
+      <h3 style="margin:8px 4px 0;font:600 18px/1 Fredoka,sans-serif;color:var(--ink)">1 · Pick your bee</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+        <sc-for list="{{ beeOpts }}" as="b" hint-placeholder-count="6">
+          <button onClick="{{ b.pick }}" aria-pressed="{{ b.sel }}" style="border:0;cursor:pointer;padding:12px 8px;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:6px;background:{{ b.bg }};color:{{ b.ink }};box-shadow:{{ b.shadow }};opacity:{{ b.op }};text-align:center" style-active="transform:translateY(3px)"><img src="{{ b.url }}" alt="" style="width:64px;height:64px;display:block"><span style="display:flex;align-items:center;gap:4px;font:800 12px/1.2 Nunito,sans-serif;white-space:nowrap"><sc-if value="{{ b.locked }}"><span>🔒</span></sc-if><span>{{ b.label }}</span></span><sc-if value="{{ b.hasSmall }}"><small style="font:700 10px/1.2 Nunito,sans-serif;opacity:.8">{{ b.small }}</small></sc-if></button>
+        </sc-for>
+        <div style="padding:12px 8px;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo);opacity:.6;text-align:center;color:var(--ink)"><span style="font-size:44px;line-height:64px">🎨</span><span style="font:800 12px/1.2 Nunito,sans-serif">{{ zName }}'s bee</span><small style="font:700 10px/1.2 Nunito,sans-serif;color:var(--soft)">coming soon</small></div>
+      </div>
+      <h3 style="margin:8px 4px 0;font:600 18px/1 Fredoka,sans-serif;color:var(--ink)">2 · Dress it</h3>
+      <sc-for list="{{ dressGroups }}" as="dg" hint-placeholder-count="6">
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="font:800 11px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:4px 4px 0">{{ dg.title }}</div>
+          <div style="display:flex;gap:10px;overflow-x:auto;padding:4px 4px 10px;scrollbar-width:none">
+            <sc-for list="{{ dg.opts }}" as="b" hint-placeholder-count="4">
+              <button onClick="{{ b.pick }}" aria-pressed="{{ b.sel }}" style="border:0;cursor:pointer;flex:none;width:104px;padding:10px 6px;border-radius:18px;display:flex;flex-direction:column;align-items:center;gap:4px;background:{{ b.bg }};color:{{ b.ink }};box-shadow:{{ b.shadow }};opacity:{{ b.op }};text-align:center" style-active="transform:translateY(3px)"><img src="{{ b.url }}" alt="" style="width:56px;height:56px;display:block"><span style="display:flex;align-items:center;gap:4px;font:800 12px/1.2 Nunito,sans-serif;white-space:nowrap"><sc-if value="{{ b.locked }}"><span>🔒</span></sc-if><span>{{ b.label }}</span></span><sc-if value="{{ b.hasSmall }}"><small style="font:700 10px/1.2 Nunito,sans-serif;opacity:.8">{{ b.small }}</small></sc-if></button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+      <h3 style="margin:10px 4px 0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">3 · Pick your world</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <sc-for list="{{ worldOpts }}" as="w" hint-placeholder-count="6">
+          <button onClick="{{ w.pick }}" aria-label="{{ w.name }}" style="border:{{ w.border }};cursor:pointer;padding:0;border-radius:18px;overflow:hidden;background:var(--card);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow);opacity:{{ w.op }};display:flex;flex-direction:column;text-align:center;color:var(--ink)" style-active="transform:translateY(3px)">
+            <span style="height:62px;background:{{ w.prev }};position:relative;display:block"><span style="position:absolute;left:18%;right:18%;bottom:8px;height:22px;border-radius:40px 30px 44px 26px;background:{{ w.isle }}"></span><span style="position:absolute;top:6px;left:8px;font-size:20px">{{ w.ic }}</span></span>
+            <span style="padding:6px 4px 8px;display:flex;flex-direction:column;gap:2px"><b style="font:800 12px/1.2 Nunito,sans-serif">{{ w.selT }}{{ w.name }}</b><sc-if value="{{ w.hasSmall }}"><small style="font:700 10px/1.2 Nunito,sans-serif;opacity:.8">{{ w.small }}</small></sc-if></span>
+          </button>
+        </sc-for>
+      </div>
+      <p style="margin:0 4px;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">You start with a Honey Bee, three free items (spiky hair, black hair, a cap) and your home world. Every round you finish is a step, and steps unlock new items one by one. Special bees are in the 💎 Shop. Every tap saves.</p>
+    </div>
+    </sc-if>
+
+    <!-- SHOP -->
+    <sc-if value="{{ isShop }}">
+    <div data-screen-label="Shop" style="display:flex;flex-direction:column;gap:14px">
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;align-items:center;gap:14px">
+        <span style="font-size:40px">💎</span>
+        <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><b style="font:600 24px/1 Fredoka,sans-serif;color:var(--ink)">{{ walletT }} to spend</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft)">🔐 {{ pendingT }} more wait in the Team Vault. It opens Sunday 9 pm if all three hit their goals.</small></div>
+      </div>
+      <sc-if value="{{ hasMelted }}"><p style="margin:0 4px;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ meltedT }}</p></sc-if>
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;align-items:center;gap:14px">
+        <span style="font-size:40px">🧊</span>
+        <div style="flex:1;display:flex;flex-direction:column;gap:3px;min-width:0"><b style="font:600 18px/1.1 Fredoka,sans-serif;color:var(--ink)">Honeycomb freezer</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft)">Saves your streak on a day you miss, so the wasp can't eat your honeycomb. It doesn't cover the team goal. {{ frzT }}.</small></div>
+        <button onClick="{{ buyFreezer }}" style="border:0;cursor:pointer;padding:12px 16px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow);flex:none" style-active="transform:translateY(2px)">{{ frzBtn }}</button>
+      </div>
+      <h3 style="margin:6px 4px 0;font:600 18px/1 Fredoka,sans-serif;color:var(--ink)">Special bees</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px">
+        <sc-for list="{{ skins }}" as="k" hint-placeholder-count="3">
+          <button onClick="{{ k.buy }}" style="border:0;cursor:pointer;padding:12px 8px;border-radius:20px;display:flex;flex-direction:column;align-items:center;gap:6px;background:var(--card);color:var(--ink);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow);opacity:{{ k.op }};text-align:center" style-active="transform:translateY(3px)"><img src="{{ k.url }}" alt="" style="width:64px;height:64px;display:block"><span style="font:800 12px/1.2 Nunito,sans-serif">{{ k.name }}</span><small style="font:800 12px/1 Nunito,sans-serif;color:var(--acc)">{{ k.price }}</small><span style="padding:6px 12px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 12px/1 Nunito,sans-serif">{{ k.btn }}</span></button>
+        </sc-for>
+      </div>
+      <div style="padding:14px 18px;border-radius:22px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:8px">
+        <b style="font:600 16px/1.2 Fredoka,sans-serif;color:var(--ink)">How to earn 💎</b>
+        <sc-for list="{{ earnRows }}" as="e" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:10px;font:700 13px/1.3 Nunito,sans-serif;color:var(--ink)"><span style="font-size:18px">{{ e.ic }}</span><span style="flex:1">{{ e.t }}</span><b style="white-space:nowrap;color:var(--acc)">{{ e.n }}</b></div></sc-for>
+        <small style="font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">❓ Clues are free: that question just gives half points. Gems you earn wait in the Team Vault until Sunday 9 pm. Two missed team weeks in a row and the older week's gems melt.</small>
+      </div>
+      <button onClick="{{ backMap }}" style="border:0;cursor:pointer;width:100%;padding:16px;border-radius:22px;font:600 18px/1 Fredoka,sans-serif;color:#3A2600;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -8px 0 rgba(160,100,0,.35),0 16px 26px -10px var(--shadow)" style-active="transform:translateY(3px)">🗺️ Back to the map</button>
+    </div>
+    </sc-if>
+
+    <!-- BOARD -->
+    <sc-if value="{{ isBoard }}">
+    <div data-screen-label="Board" style="display:flex;flex-direction:column;gap:14px">
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:14px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ teamTitle }}</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ teamTip }}</p></div>
+        <sc-for list="{{ teamRows }}" as="r" hint-placeholder-count="3">
+          <div style="display:flex;gap:12px;align-items:flex-start;padding-top:12px;border-top:1px solid var(--line)">
+            <span style="flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--opt);box-shadow:inset 0 -4px 0 var(--cardLo);overflow:hidden"><sc-if value="{{ r.avUrl }}"><img src="{{ r.avUrl }}" alt="" style="width:40px;height:40px;display:block"></sc-if><sc-if value="{{ r.noAv }}">{{ r.emoji }}</sc-if></span>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:8px">
+              <div style="font:800 14px/1.3 Nunito,sans-serif;color:var(--ink)">{{ r.name }}</div>
+              <div style="display:flex;gap:6px"><sc-for list="{{ r.dots }}" as="d" hint-placeholder-count="7"><span onClick="{{ d.tap }}" title="{{ d.title }}" style="width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font:800 12px/1 Nunito,sans-serif;background:{{ d.bg }};color:{{ d.ink }};outline:{{ d.outline }};outline-offset:-2px;cursor:{{ d.cursor }};box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)">{{ d.letter }}</span></sc-for></div>
+              <sc-if value="{{ r.tip }}"><div style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ r.tip }}</div></sc-if>
+              <sc-for list="{{ r.stats }}" as="s" hint-placeholder-count="1"><div style="font:700 13px/1.4 Nunito,sans-serif;color:{{ s.c }};text-wrap:pretty">{{ s.t }}</div></sc-for>
+              <sc-if value="{{ r.isDad }}">
+                <div style="display:flex;flex-direction:column;gap:8px">
+                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="0" placeholder="steps so far" aria-label="Steps so far this week" value="{{ dadSteps }}" onChange="{{ onDadSteps }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ saveSteps }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(160,100,0,.35)">Save steps</button></div>
+                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="1000" step="1000" aria-label="Weekly step goal" value="{{ dadTarget }}" onChange="{{ onDadTarget }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ setTarget }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:var(--opt);color:var(--optInk);font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 var(--cardLo)">Set weekly goal</button></div>
+                  <div style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">35,000 while the winter pollution lasts, then 50,000.</div>
+                </div>
+              </sc-if>
+            </div>
+          </div>
+        </sc-for>
+        <div style="padding:12px 14px;border-radius:16px;background:{{ resBg }};color:{{ resInk }};font:800 13px/1.4 Nunito,sans-serif;text-wrap:pretty">{{ resT }}</div>
+        <p style="margin:0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Team rule: gems wait in the Team Vault. Sunday 9 pm: if all three hit their goals, it opens (+300 💎 each and a honey jar). Missed a day? Do 2 extra rounds for it by Sunday. Your own ⭐ points always count.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
+        <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ jarsT }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">{{ jarsS }}</small></div>
+        <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 14px/1.25 Fredoka,sans-serif;color:var(--ink)">{{ vaultMine }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">opens Sunday 9 pm</small></div>
+      </div>
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:10px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🍯 The Wish Jar</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Add a wish. Dad prices it in honey jars. Win team weeks to fill the jar.</p></div>
+        <sc-if value="{{ noWishes }}"><p style="margin:0;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">No wishes yet.</p></sc-if>
+        <sc-for list="{{ wishes }}" as="w" hint-placeholder-count="1">
+          <div style="padding:10px 12px;border-radius:16px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;gap:6px;opacity:{{ w.op }}">
+            <div style="display:flex;align-items:flex-start;gap:8px"><span style="flex:1;font:800 14px/1.35 Nunito,sans-serif">{{ w.text }}</span><span style="flex:none;font:800 12px/1.3 Nunito,sans-serif;white-space:nowrap">{{ w.priceT }}</span></div>
+            <small style="font:700 11px/1.2 Nunito,sans-serif;opacity:.8">{{ w.by }}</small>
+            <sc-if value="{{ w.isDad }}"><div style="display:flex;gap:6px;flex-wrap:wrap"><input type="number" inputMode="numeric" min="1" placeholder="jars" aria-label="Price in honey jars" value="{{ w.priceIn }}" onChange="{{ w.onPrice }}" style="width:80px;border:0;padding:8px 10px;border-radius:12px;background:var(--field);color:var(--fieldInk);font:700 14px/1 Nunito,sans-serif"><button onClick="{{ w.setPrice }}" style="border:0;cursor:pointer;padding:8px 12px;border-radius:12px;background:var(--chip);color:var(--chipInk);font:800 12px/1 Nunito,sans-serif">Set price</button><button onClick="{{ w.grant }}" style="border:0;cursor:pointer;padding:8px 12px;border-radius:12px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 12px/1 Nunito,sans-serif">Grant 🎉</button></div></sc-if>
+            <sc-if value="{{ w.canDel }}"><button onClick="{{ w.del }}" style="align-self:flex-start;border:0;cursor:pointer;padding:6px 10px;border-radius:10px;background:transparent;color:inherit;font:800 11px/1 Nunito,sans-serif;opacity:.75">🗑 remove</button></sc-if>
+          </div>
+        </sc-for>
+        <sc-if value="{{ notDad }}"><div style="display:flex;gap:8px"><input type="text" placeholder="My wish…" aria-label="Your wish" value="{{ wishText }}" onChange="{{ onWishText }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ addWish }}" style="border:0;cursor:pointer;padding:12px 16px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow);flex:none" style-active="transform:translateY(2px)">Add</button></div></sc-if>
+      </div>
+      <div style="font:800 12px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:6px 4px 0">Season 1 points</div>
+      <sc-for list="{{ boardRows }}" as="r" hint-placeholder-count="3">
+        <div style="display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:22px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo),0 12px 20px -10px var(--shadow)">
+          <span style="flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:26px;background:var(--opt);box-shadow:inset 0 -4px 0 var(--cardLo);overflow:hidden"><sc-if value="{{ r.avUrl }}"><img src="{{ r.avUrl }}" alt="" style="width:46px;height:46px;display:block"></sc-if><sc-if value="{{ r.noAv }}">{{ r.emoji }}</sc-if></span>
+          <span style="display:flex;flex-direction:column;gap:2px;flex:1;min-width:0"><span style="font:600 20px/1.1 Fredoka,sans-serif;color:var(--ink)">{{ r.name }}</span><span style="font:700 13px/1.2 Nunito,sans-serif;color:var(--soft)">{{ r.streak }}</span></span>
+          <span style="flex:none;padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:700 16px/1 Fredoka,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35);font-variant-numeric:tabular-nums;white-space:nowrap;display:inline-flex;align-items:center;gap:6px"><span>{{ r.pts }}</span><span>⭐</span></span>
+        </div>
+      </sc-for>
+      <p style="margin:0;text-align:center;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Board meeting: Sunday.</p>
+    </div>
+    </sc-if>
+
+    <!-- CHAPTERS -->
+    <sc-if value="{{ isChapters }}">
+    <div data-screen-label="Chapters" style="display:flex;flex-direction:column;gap:14px">
+      <div role="group" aria-label="Whose chapters" style="display:flex;gap:8px">
+        <sc-for list="{{ whoTabs }}" as="w" hint-placeholder-count="3"><button onClick="{{ w.pick }}" aria-pressed="{{ w.sel }}" style="flex:1;border:0;cursor:pointer;padding:12px 8px;border-radius:999px;background:{{ w.bg }};color:{{ w.ink }};font:800 14px/1 Nunito,sans-serif;white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:6px;box-shadow:inset 0 2px 0 rgba(255,255,255,.3),inset 0 -4px 0 rgba(0,0,0,.15),0 8px 14px -8px var(--shadow)" style-active="transform:translateY(2px)"><span>{{ w.ic }}</span><span>{{ w.t }}</span></button></sc-for>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px">
+        <sc-for list="{{ dash }}" as="d" hint-placeholder-count="4"><div style="padding:12px 6px;border-radius:18px;background:var(--card);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow);display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center"><b style="font:600 18px/1 Fredoka,sans-serif;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap">{{ d.k }}</b><small style="font:700 10px/1.2 Nunito,sans-serif;color:var(--soft)">{{ d.l }}</small></div></sc-for>
+      </div>
+      <sc-if value="{{ hasDashTip }}"><p style="margin:0 4px;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">{{ dashTip }}</p></sc-if>
+      <label style="display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><span aria-hidden="true">🔎</span><input type="search" placeholder="Type a chapter name…" autoComplete="off" aria-label="Search chapters" value="{{ chapSearch }}" onChange="{{ onSearch }}" style="flex:1;min-width:0;border:0;background:transparent;color:var(--fieldInk);font:700 15px/1.2 Nunito,sans-serif;outline:none"></label>
+      <sc-for list="{{ subjects }}" as="sj" hint-placeholder-count="3">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="display:flex;align-items:center;gap:8px;margin:8px 4px 0"><span style="display:inline-flex;align-items:center;gap:6px;font:600 18px/1 Fredoka,sans-serif;color:var(--ink);white-space:nowrap"><span>{{ sj.ic }}</span><span>{{ sj.h }}</span></span><small style="font:700 12px/1 Nunito,sans-serif;color:var(--soft)">{{ sj.count }}</small></div>
+          <sc-for list="{{ sj.items }}" as="c" hint-placeholder-count="2">
+            <button onClick="{{ c.go }}" aria-label="{{ c.aria }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:flex-start;gap:12px;padding:14px;border-radius:20px;background:var(--card);color:var(--ink);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo),0 12px 20px -10px var(--shadow);opacity:{{ c.op }};text-align:left" style-active="transform:translateY(2px)">
+              <span style="flex:none;min-width:36px;height:36px;padding:0 8px;border-radius:12px;display:grid;place-items:center;background:var(--chip);color:var(--chipInk);font:600 14px/1 Fredoka,sans-serif">{{ c.n }}</span>
+              <span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px">
+                <span style="display:flex;align-items:center;flex-wrap:wrap;gap:6px"><span style="font:600 16px/1.2 Fredoka,sans-serif">{{ c.t }}</span><sc-if value="{{ c.hasChip }}"><span style="padding:4px 8px;border-radius:999px;background:{{ c.chipBg }};color:{{ c.chipInk }};font:800 10px/1 Nunito,sans-serif">{{ c.chip }}</span></sc-if></span>
+                <span style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ c.sub }}</span>
+                <sc-if value="{{ c.live }}">
+                  <span style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ c.isl }}</span>
+                  <span style="height:8px;border-radius:999px;background:var(--field);overflow:hidden"><span style="display:block;height:100%;width:{{ c.barW }};border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800)"></span></span>
+                </sc-if>
+                <sc-if value="{{ c.soon }}"><span style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">🔜 Coming soon</span></sc-if>
+              </span>
+              <sc-if value="{{ c.live }}"><span style="flex:none;font:600 15px/1 Fredoka,sans-serif;color:var(--acc);font-variant-numeric:tabular-nums">{{ c.cm }}</span></sc-if>
+            </button>
+          </sc-for>
+        </div>
+      </sc-for>
+      <sc-if value="{{ noMatch }}"><div style="padding:18px;border-radius:20px;background:var(--card);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo);font:700 14px/1.4 Nunito,sans-serif;color:var(--soft);text-align:center">{{ noMatchT }}</div></sc-if>
+      <p style="margin:0;text-align:center;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">🔜 Coming soon? Send photos of that chapter to Dad and it becomes an island.</p>
+    </div>
+    </sc-if>
+
+    <!-- NOTE: compose -->
+    <sc-if value="{{ isNote }}">
+    <div data-screen-label="New note" style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <button onClick="{{ cancel }}" aria-label="Close without saving" style="border:0;cursor:pointer;flex:none;width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:var(--opt);color:var(--optInk);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -4px 0 var(--cardLo),0 8px 12px -6px var(--shadow);font:700 18px/1 Fredoka,sans-serif" style-active="transform:translateY(2px)">✕</button>
+        <h2 style="margin:0;font:600 24px/1 Fredoka,sans-serif;color:var(--ink)">New note 📝</h2>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label for="noteAbout" style="font:800 11px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-left:4px">About</label><select id="noteAbout" value="{{ noteAbout }}" onChange="{{ onAbout }}" style="border:0;padding:14px 16px;border-radius:16px;background:var(--field);color:var(--fieldInk);font:700 15px/1.2 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);appearance:auto"><sc-for list="{{ aboutOpts }}" as="a" hint-placeholder-count="3"><option value="{{ a.v }}">{{ a.t }}</option></sc-for></select></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><span style="font:800 11px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-left:4px">What kind?</span><div role="group" style="display:flex;flex-wrap:wrap;gap:8px"><sc-for list="{{ kinds }}" as="k" hint-placeholder-count="4"><button onClick="{{ k.pick }}" aria-pressed="{{ k.sel }}" style="border:0;cursor:pointer;padding:12px 16px;border-radius:999px;background:{{ k.bg }};color:{{ k.ink }};font:800 14px/1 Nunito,sans-serif;white-space:nowrap;display:inline-flex;align-items:center;gap:6px;box-shadow:inset 0 2px 0 rgba(255,255,255,.3),inset 0 -4px 0 rgba(0,0,0,.15),0 8px 14px -8px var(--shadow)" style-active="transform:translateY(2px)"><span>{{ k.ic }}</span><span>{{ k.t }}</span></button></sc-for></div></div>
+      <div style="display:flex;flex-direction:column;gap:6px"><label for="noteText" style="font:800 11px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-left:4px">What should change?</label><textarea id="noteText" rows="5" placeholder="e.g. Make the Next button bigger" value="{{ noteText }}" onChange="{{ onText }}" style="border:0;padding:14px 16px;border-radius:16px;background:var(--field);color:var(--fieldInk);font:700 15px/1.4 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);resize:vertical;min-height:120px"></textarea><p style="margin:0 4px;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">On a tablet or phone, tap the 🎤 on the keyboard to talk instead of typing.</p><sc-if value="{{ noteErr }}"><p style="margin:0 4px;font:800 13px/1.4 Nunito,sans-serif;color:#FF6F61">Write what should change, then save.</p></sc-if></div>
+      <button onClick="{{ save }}" style="border:0;cursor:pointer;padding:18px;border-radius:22px;font:600 20px/1 Fredoka,sans-serif;color:#3A2600;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -8px 0 rgba(160,100,0,.35),0 16px 26px -10px var(--shadow)" style-active="transform:translateY(4px)">Save note</button>
+    </div>
+    </sc-if>
+
+    <!-- NOTEBOOK -->
+    <sc-if value="{{ isNotes }}">
+    <div data-screen-label="Notebook" style="display:flex;flex-direction:column;gap:14px">
+      <div style="display:flex;align-items:center;gap:10px"><p style="margin:0;flex:1;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">Bugs, looks and ideas for AcadaBee. You and Dad build the fixes with Claude.</p><button onClick="{{ newNote }}" style="border:0;cursor:pointer;flex:none;padding:12px 16px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow)" style-active="transform:translateY(2px)">+ New note</button></div>
+      <sc-if value="{{ hasOpen }}">
+      <div style="padding:14px 16px;border-radius:22px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo),0 12px 20px -10px var(--shadow);display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><a href="{{ waHref }}" target="_blank" rel="noopener" style="flex:1;min-width:140px;text-decoration:none;text-align:center;padding:14px;border-radius:16px;background:linear-gradient(180deg,#5EE08A,#25B35A);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.4),inset 0 -4px 0 rgba(0,80,30,.35)">Send on WhatsApp</a><button onClick="{{ copy }}" style="flex:1;min-width:120px;border:0;cursor:pointer;padding:14px;border-radius:16px;background:var(--chip);color:var(--chipInk);font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.15),inset 0 -4px 0 rgba(0,0,0,.35)" style-active="transform:translateY(2px)">Copy notes</button></div>
+        <p style="margin:0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">WhatsApp opens with your notes filled in. Pick Dad's chat, then press send.</p>
+        <sc-if value="{{ copyShown }}"><textarea readOnly aria-label="Your notes as text" value="{{ copyText }}" rows="6" style="border:0;padding:12px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:600 13px/1.4 Nunito,sans-serif"></textarea></sc-if>
+      </div>
+      </sc-if>
+      <sc-if value="{{ noNotes }}"><div style="padding:22px;border-radius:22px;background:var(--card);box-shadow:inset 0 2px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo);font:700 14px/1.4 Nunito,sans-serif;color:var(--soft);text-align:center">No notes yet. Spotted something to change? Tap + New note.</div></sc-if>
+      <sc-for list="{{ sections }}" as="sec" hint-placeholder-count="1">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="font:800 12px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:6px 4px 0">{{ sec.h }}</div>
+          <sc-for list="{{ sec.cards }}" as="n" hint-placeholder-count="2">
+            <div style="padding:14px 16px;border-radius:22px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo),0 12px 20px -10px var(--shadow);display:flex;flex-direction:column;gap:8px;opacity:{{ n.op }}">
+              <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px"><sc-for list="{{ n.tags }}" as="tg" hint-placeholder-count="1"><span style="display:inline-flex;align-items:center;gap:4px;padding:5px 9px;border-radius:999px;background:{{ tg.bg }};color:{{ tg.ink }};font:800 11px/1 Nunito,sans-serif;white-space:nowrap"><span>{{ tg.ic }}</span><span>{{ tg.t }}</span></span></sc-for><span style="font:800 12px/1 Nunito,sans-serif;color:var(--soft)">{{ n.about }}</span></div>
+              <sc-if value="{{ n.hasQ }}"><div style="font:700 13px/1.4 Nunito,sans-serif;color:var(--soft);font-style:italic">{{ n.q }}</div></sc-if>
+              <div style="font:700 15px/1.45 Nunito,sans-serif;color:var(--ink);white-space:pre-wrap;text-wrap:pretty">{{ n.text }}</div>
+              <div style="display:flex;align-items:center;gap:8px"><span style="flex:1;font:700 12px/1.2 Nunito,sans-serif;color:var(--soft)">{{ n.by }}</span><button onClick="{{ n.del }}" aria-label="Delete note" style="border:0;cursor:pointer;min-width:44px;height:40px;padding:0 12px;border-radius:14px;background:{{ n.delBg }};color:{{ n.delInk }};font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)">{{ n.delT }}</button><button onClick="{{ n.tick }}" aria-label="Mark as fixed" style="border:0;cursor:pointer;width:44px;height:40px;border-radius:14px;background:{{ n.tickBg }};color:{{ n.tickInk }};font:800 18px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(0,0,0,.2)">✓</button></div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-for>
+      <p style="margin:0;text-align:center;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ storeNote }}</p>
+    </div>
+    </sc-if>
+
+  </div>
+
+  <!-- NAV -->
+  <sc-if value="{{ navOn }}">
+  <div style="position:fixed;left:0;right:0;bottom:0;padding:8px 10px calc(10px + env(safe-area-inset-bottom,0px));z-index:40;background:var(--card);border-radius:24px 24px 0 0;box-shadow:inset 0 3px 0 var(--cardHi),0 -10px 24px -10px var(--shadow)">
+    <div style="max-width:612px;margin:0 auto;display:flex;gap:6px">
+      <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+        <button onClick="{{ n.go }}" aria-label="{{ n.aria }}" style="flex:1;min-width:0;border:0;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 4px;border-radius:20px;background:{{ n.bg }};color:{{ n.ink }};box-shadow:{{ n.shadow }};position:relative" style-active="transform:translateY(2px)">
+          <span style="font-size:20px;line-height:1;height:24px;display:grid;place-items:center"><sc-if value="{{ n.avUrl }}"><img src="{{ n.avUrl }}" alt="" style="width:26px;height:26px;display:block"></sc-if><sc-if value="{{ n.noAv }}">{{ n.ic }}</sc-if></span>
+          <span style="font:800 11px/1 Nunito,sans-serif">{{ n.l }}</span>
+          <sc-if value="{{ n.hasBadge }}"><span style="position:absolute;top:2px;right:8px;min-width:20px;height:20px;padding:0 5px;border-radius:999px;background:linear-gradient(180deg,#FF9A8B,#FF6F61);color:#fff;font:800 11px/20px Nunito,sans-serif;text-align:center;box-shadow:0 3px 0 rgba(120,20,10,.5)">{{ n.badge }}</span></sc-if>
+          <sc-if value="{{ n.hasDot }}"><span style="position:absolute;top:4px;left:10px;width:10px;height:10px;border-radius:50%;background:#45E0E6;box-shadow:0 0 0 2px var(--card)"></span></sc-if>
+        </button>
+      </sc-for>
+    </div>
+  </div>
+  </sc-if>
+  </sc-if>
+
+  <!-- LEARN SHEET -->
+  <sc-if value="{{ learnOpen }}" hint-placeholder-val="{{ false }}">
+  <div onClick="{{ learnOverlay }}" role="dialog" aria-modal="true" aria-labelledby="learnTitle" style="position:fixed;inset:0;background:rgba(5,20,40,.55);display:flex;align-items:flex-end;justify-content:center;z-index:70;padding:0 10px">
+    <div style="width:100%;max-width:600px;padding:20px 18px 28px;border-radius:30px 30px 0 0;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),0 -10px 40px rgba(0,0,0,.4);display:flex;flex-direction:column;gap:10px;color:var(--ink)">
+      <div style="display:flex;align-items:center;gap:10px"><h3 id="learnTitle" style="margin:0;flex:1;font:600 22px/1 Fredoka,sans-serif">Learn more 📚</h3><button onClick="{{ closeLearn }}" aria-label="Close" style="border:0;cursor:pointer;width:44px;height:44px;border-radius:16px;display:grid;place-items:center;background:var(--opt);color:var(--optInk);box-shadow:inset 0 -4px 0 var(--cardLo);font:700 18px/1 Fredoka,sans-serif">✕</button></div>
+      <p style="margin:0;font:700 14px/1.4 Nunito,sans-serif;color:var(--soft)">{{ learnBlurb }}</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ learnLinks }}" as="k" hint-placeholder-count="1"><a href="{{ k.href }}" target="_blank" rel="noopener noreferrer" style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:var(--opt);color:var(--optInk);text-decoration:none;box-shadow:inset 0 -4px 0 var(--cardLo)"><span style="font-size:22px">{{ k.icon }}</span><span style="display:flex;flex-direction:column;gap:2px;min-width:0"><span style="font:800 14px/1.3 Nunito,sans-serif">{{ k.title }}</span><small style="font:700 12px/1.2 Nunito,sans-serif;color:var(--soft)">{{ k.small }}</small></span></a></sc-for>
+      </div>
+      <p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Opens in a new tab. Come back here when you're done!</p>
+    </div>
+  </div>
+  </sc-if>
+
+  <sc-if value="{{ hasToast }}" hint-placeholder-val="{{ false }}"><div role="status" aria-live="polite" style="position:fixed;left:50%;top:18px;transform:translateX(-50%);max-width:min(92vw,520px);padding:12px 18px;border-radius:999px;background:#161513;color:#fff;font:800 14px/1.3 Nunito,sans-serif;box-shadow:0 14px 24px -10px rgba(0,0,0,.6);z-index:80;animation:toastIn .25s ease-out;text-wrap:pretty">{{ toast }}</div></sc-if>
+  <div ref="{{ fxRef }}" aria-hidden="true" style="position:fixed;inset:0;pointer-events:none;z-index:60"></div>
+  <div ref="{{ beeRef }}" aria-hidden="true" style="position:fixed;left:-220px;top:26%;width:170px;display:none;z-index:65;pointer-events:none;filter:drop-shadow(0 18px 14px rgba(0,0,0,.35))"><svg viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><g fill="url(#rbW)" stroke="#9ED5F2" stroke-width="1.5"><path d="M33 56 C10 40 -2 58 6 76 C12 88 26 86 33 76 Z"></path><path d="M107 60 C130 44 142 60 134 78 C128 90 114 88 107 80 Z"></path></g><g fill="none" stroke="#2A1B10" stroke-width="3" stroke-linecap="round"><path d="M58 41 C57 30 56 22 54 14 c-6 -8 -16 2 -8 8 c5 4 11 -3 6 -6"></path><path d="M84 40 C88 30 92 22 97 13 c6 -8 16 2 8 8 c-5 4 -11 -3 -6 -6"></path></g><path d="M70 124 L65 140 L75 140 Z" fill="#2A1B10"></path><rect x="30" y="40" width="80" height="84" rx="20" fill="url(#rbB)"></rect><g clip-path="url(#rbC)"><rect x="26" y="84" width="88" height="11" fill="url(#rbS)"></rect><rect x="26" y="103" width="88" height="11" fill="url(#rbS)"></rect></g><path d="M40 54 Q44 45 57 44" stroke="#fff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round" fill="none"></path><ellipse cx="56" cy="64" rx="8" ry="10" fill="#fff"></ellipse><ellipse cx="84" cy="64" rx="8" ry="10" fill="#fff"></ellipse><circle cx="57" cy="66" r="4" fill="#1C120B"></circle><circle cx="85" cy="66" r="4" fill="#1C120B"></circle><path d="M58 76 Q70 92 82 76 Z" fill="#1C120B"></path></svg></div>
+  <svg aria-hidden="true" width="0" height="0" style="position:absolute;width:0;height:0"><defs><radialGradient id="rbB" cx="35%" cy="28%" r="80%"><stop offset="0" stop-color="#FFF3B0"></stop><stop offset=".45" stop-color="#FFD83D"></stop><stop offset="1" stop-color="#E89A00"></stop></radialGradient><linearGradient id="rbS" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A3321"></stop><stop offset="1" stop-color="#1C120B"></stop></linearGradient><linearGradient id="rbW" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"></stop><stop offset="1" stop-color="#BFE9FF" stop-opacity=".7"></stop></linearGradient><clipPath id="rbC"><rect x="30" y="40" width="80" height="84" rx="20"></rect></clipPath></defs></svg>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;motion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;game-like&quot;,&quot;calm&quot;],&quot;default&quot;:&quot;game-like&quot;,&quot;tsType&quot;:&quot;\&quot;game-like\&quot; | \&quot;calm\&quot;&quot;,&quot;section&quot;:&quot;Feel&quot;}}">
+class Component extends DCLogic {
+  state={ready:false,screen:"pick",player:null,prevWho:null,lesson:null,round:[],qi:0,order:[],earned:0,newPts:0,revCount:0,roundLog:[],attempted:false,dimmed:[],fb:null,wrongFlash:null,nextOn:false,nextLabel:"Next →",done:{},doneNav:{prev:null,next:null},donePts:"+0",doneMsg:"",doneTitle:"",doneExtras:[],hintUsed:false,firstWrong:0,stung:false,practice:null,dbWishes:{},wishText:"",wishPrice:{},
+    noteCtx:null,noteBack:"map",noteKind:null,noteText:"",noteAbout:"Whole app",noteErr:false,lastPlace:"Whole app",delArm:null,copyBoxShown:false,notesSeenPrev:0,
+    chapWho:null,chapSearch:"",toast:null,learnOpen:false,learnEntry:null,db:null,dbNotes:{},dbSnap:{progress:{},dadlog:null},dbRows:[],dadStepsIn:"",dadTargetIn:"",told:0};
+  rootRef=React.createRef(); fxRef=React.createRef(); beeRef=React.createRef(); MEM={};
+
+  componentDidMount(){
+    window.__ab=this;
+    const sup=document.querySelector('script[src*="support.js"]'),base=sup?new URL(".",sup.src).href:new URL(".",location.href).href;
+    Promise.all([import(base+"acadabee-data.js"),import(base+"acadabee-lib.js")]).then(([D,L])=>{
+      this.D=D;this.L=L;L.prepPools(D.LESSONS,D.BANK);
+      const prev=this.load("ab_who",null);
+      this.setState({ready:true,prevWho:(prev&&D.LESSONS[prev])?prev:null},()=>{this.applyTheme();this.initDb()});
+    }).catch(e=>console.error("AcadaBee: content failed to load",e));
+    this._esc=e=>{if(e.key==="Escape"&&this.state.learnOpen)this.setState({learnOpen:false})};document.addEventListener("keydown",this._esc);
+    this._hyd=()=>{if(!this.L)return;Promise.resolve(this.state.db?this.loadSnap().then(()=>this.pullNotes()).then(()=>this.pullWishes()).then(()=>this.fetchBoard()):null).then(()=>{this.forceUpdate();this.announceNotes()})};window.addEventListener("ab-hydrated",this._hyd);
+  }
+  componentWillUnmount(){document.removeEventListener("keydown",this._esc);window.removeEventListener("ab-hydrated",this._hyd)}
+  componentDidUpdate(){this.applyTheme()}
+  applyTheme(){const r=this.rootRef.current;if(!r||!this.L)return;const S=this.state,key=S.screen==="pick"?"pick":this.L.WORLDS[this.worldOf(S.player||"p2")].theme;if(this._theme===key)return;this._theme=key;const th=this.L.THEMES[key];Object.keys(th).forEach(k=>r.style.setProperty("--"+k,th[k]))}
+
+  /* storage */
+  store(k,v){this.MEM[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  load(k,d){try{const v=localStorage.getItem(k);if(v)return JSON.parse(v)}catch(e){}return (k in this.MEM)?this.MEM[k]:d}
+  P(p=this.state.player){const L=this.L,s=this.load("ab_"+p,null),f=L.freshSeason();if(!s||s.season!==L.SEASON)return f;Object.keys(f).forEach(k=>{if(!(k in s))s[k]=f[k]});return s}
+  saveP(s){s.updatedAt=Date.now();this.store("ab_"+this.state.player,s);this.syncUp(s)}
+  PG(p=this.state.player){const g=this.load("ab_prog_"+p,null);return (g&&g.isl)?g:{v:1,isl:{}}}
+  islP(g,id){return g.isl[id]||(g.isl[id]={rounds:0,firstDone:null,lastDone:null,q:{}})}
+
+  /* navigation */
+  setScreen(s,extra){this.setState(Object.assign({screen:s},extra||{}),()=>window.scrollTo(0,0))}
+  goPick(){this.setScreen("pick")}
+  goMap(){this.setScreen("map")}
+  goBoard(){const W=this.weekInfo(),ds=this.dadStatus(W);this.fetchBoard();this.setScreen("board",{dadStepsIn:ds.steps?String(ds.steps):"",dadTargetIn:String(ds.L.target)})}
+  goChapters(){this.setScreen("chapters",{chapWho:this.state.player,chapSearch:""})}
+  goProfile(){this.setScreen("profile")}
+  goShop(){this.setScreen("shop")}
+  goNotes(){const S=this.state,ex={};if(S.screen==="map")ex.lastPlace="Map";else if(S.screen==="board")ex.lastPlace="Board";else if(S.screen==="chapters")ex.lastPlace="Chapters";
+    if(S.player==="dad"){ex.notesSeenPrev=this.load("ab_notes_seen",0);this.store("ab_notes_seen",Date.now())}this.setScreen("notes",ex)}
+  pick(p){const t=this.L.today();this.store("ab_who",p);const done=this.load("ab_done_"+p+"_"+t,{});
+    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.unlocked(p,false);this.announceNotes()})}
+  toast(msg){clearTimeout(this._toastT);this.setState({toast:msg});this._toastT=setTimeout(()=>this.setState({toast:null}),2400)}
+
+  /* exams + islands */
+  liveIslands(p){return this.D.LESSONS[p].filter(L=>L.qs.length)}
+  examOver(x){const t=this.L.today();return x.d<t||(x.d===t&&new Date().getHours()>=13)}
+  upcomingExams(p){return (this.L.EXAMS[p]||[]).filter(x=>!this.examOver(x))}
+  examWeek(p){const W=this.weekInfo();return (this.L.EXAMS[p]||[]).some(x=>x.d>=W.start)}
+  requiredIslands(p){const live=this.liveIslands(p);if(!this.examWeek(p))return live;const ids=new Set(this.upcomingExams(p).flatMap(x=>x.isl));return live.filter(L=>ids.has(L.id))}
+  lessonById(p,id){return this.D.LESSONS[p].find(L=>L.id===id)}
+  subjOf(p,id){const r=(this.D.CHAPTERS[p]||[]).find(c=>c.isl===id);return r?r.s:"Specials"}
+  examDateOf(p,id){const x=this.upcomingExams(p).find(e=>e.isl.includes(id));return x?x.d:null}
+  earliest(p,list){return list.map(L=>this.examDateOf(p,L.id)).filter(Boolean).sort()[0]||null}
+  fullyMastered(p,L){const s=this.islStats(p,L);return L.qs.length>0&&s.mastered>=L.qs.length}
+  buildIsles(p){
+    const L=this.L,D=this.D,ord=this.liveIslands(p),ex=this.upcomingExams(p),rows=D.CHAPTERS[p]||[],out=[],td=L.today();
+    const rank=x=>{const i=ex.findIndex(e=>e.isl.includes(x.id));return i<0?99:i};
+    L.ISLES.forEach((I,ii)=>{
+      const stops=ord.filter(x=>I.subs.includes(this.subjOf(p,x.id))).sort((a,b)=>rank(a)-rank(b)||ord.indexOf(a)-ord.indexOf(b));
+      const isLive=c=>c.isl&&this.lessonById(p,c.isl)&&this.lessonById(p,c.isl).qs.length;
+      let soon=rows.filter(c=>I.subs.includes(c.s)&&!isLive(c)&&c.x&&c.x>=td);
+      if(!stops.length){soon=rows.filter(c=>I.subs.includes(c.s)&&!isLive(c)&&c.term==="now");if(!soon.length)soon=rows.filter(c=>I.subs.includes(c.s)&&!isLive(c)).slice(0,2)}
+      if(!stops.length&&!soon.length)return;
+      let lands=null;
+      if(I.lands){const subs=I.subs.filter(s=>stops.some(x=>this.subjOf(p,x.id)===s)||soon.some(c=>c.s===s));
+        lands=subs.map(s=>{const st=stops.filter(x=>this.subjOf(p,x.id)===s);return {s,stops:st,soon:soon.filter(c=>c.s===s),ex:this.earliest(p,st)}}).sort((a,b)=>(a.ex||"9")<(b.ex||"9")?-1:(a.ex||"9")>(b.ex||"9")?1:0)}
+      const seq=lands?lands.flatMap(l=>l.stops):stops;
+      out.push({I,ii,stops,soon:soon.slice(0,4),lands,seq,ex:this.earliest(p,stops)});
+    });
+    out.sort((a,b)=>(a.stops.length?0:1)-(b.stops.length?0:1)||((a.ex||"9")<(b.ex||"9")?-1:(a.ex||"9")>(b.ex||"9")?1:a.ii-b.ii));
+    return out;
+  }
+  mapOrder(p){return this.buildIsles(p).flatMap(it=>it.seq)}
+  stopLocked(p,list,i){return this.L.today()>=this.L.LOCKS_FROM&&i>0&&!this.fullyMastered(p,list[i-1])}
+
+  /* progress */
+  progOf(p){const l=this.load("ab_prog_"+p,null),r=this.state.dbSnap.progress[p];const lo=l&&l.isl&&Object.keys(l.isl).length?l:null,ro=r&&r.isl&&Object.keys(r.isl).length?r:null;if(lo&&ro)return this.L.mergeProg(lo,ro);return lo||ro||null}
+  islStats(p,L){const g=this.progOf(p),ip=g&&g.isl[L.id];if(!ip)return {rounds:0,rev:0,mastered:0,total:L.qs.length,last:null};
+    return {rounds:ip.rounds||0,rev:Math.max(0,(ip.rounds||0)-1),mastered:L.qs.filter(Q=>ip.q&&ip.q[Q.id]&&ip.q[Q.id].m).length,total:L.qs.length,last:ip.lastDone||null}}
+  roundsByDay(p){const g=this.progOf(p),out={};if(!g)return out;Object.values(g.isl).forEach(ip=>Object.entries(ip.days||{}).forEach(([d,n])=>{out[d]=(out[d]||0)+n}));return out}
+  islandsPlayed(p,from,to){const g=this.progOf(p);if(!g)return [];return Object.keys(g.isl).filter(id=>Object.keys(g.isl[id].days||{}).some(d=>d>=from&&d<=to))}
+  masteredCount(L){const ip=(this.PG().isl||{})[L.id];if(!ip)return 0;return L.qs.filter(Q=>ip.q[Q.id]&&ip.q[Q.id].m).length}
+  statsOf(p){const L=this.L,r=this.load("ab_"+p,null),s=(r&&r.season===L.SEASON)?r:L.freshSeason(),g=this.progOf(p);return {points:s.points||0,streak:s.streak||0,bestStreak:Math.max(s.bestStreak||0,s.streak||0),golden:(s.golden||[]).length,mastered:this.D.LESSONS[p].filter(Lx=>this.fullyMastered(p,Lx)).length,rounds:g?Object.values(g.isl).reduce((a,ip)=>a+(ip.rounds||0),0):0}}
+  worldOf(p){const L=this.L,w=this.load("ab_world_"+p,null),have=new Set(this.load("ab_unlock_"+p,[]));if(w&&L.WORLDS[w]){const e=L.worldEarn(p,w);if(!e||have.has(e))return w}return L.HOME_WORLD[p]||"coral"}
+  itemsFor(p,k){const L=this.L,n=[L.itemOf(k)].filter(x=>x!==k);Object.keys(L.WORLDS).forEach(w=>{if(L.worldEarn(p,w)===k)n.push(L.WORLDS[w].name+" world")});return n.length?n.join(" + "):k}
+  unlocked(p,announce){const E=this.L.EARN,have=new Set(this.load("ab_unlock_"+p,[])),st=this.statsOf(p),fresh=[];
+    Object.keys(E).forEach(k=>{if(!have.has(k)&&E[k].ok(st)){have.add(k);fresh.push(k)}});
+    if(fresh.length){this.store("ab_unlock_"+p,[...have]);if(announce)this.toast("🎁 Unlocked for your bee: "+fresh.map(k=>this.itemsFor(p,k)).join(", ")+"! See Profile.")}
+    return have}
+  avOf(p,remote){const l=this.load("ab_av_"+p,null);if(remote&&(!l||(remote.t||0)>(l.t||0)))return remote;return l}
+  avNode(p,remote){const a=this.avOf(p,remote);return {avUrl:a?this.L.avatarURL(a):null,noAv:!a,emoji:this.L.EMO[p]}}
+
+  /* lesson engine */
+  pickRound(L){const ip=this.islP(this.PG(),L.id),st=Q=>ip.q[Q.id]||{},rank=Q=>{const s=st(Q);if(!s.seen)return 0;if(!s.m)return 1;return 2};
+    const pool=this.L.shuffle(L.qs.slice()).sort((a,b)=>rank(a)-rank(b)||((st(a).last||"")<(st(b).last||"")?-1:1)),out=[],used={};
+    for(const Q of pool){if(out.length>=this.L.ROUND)break;if(!used[Q.c]){out.push(Q);used[Q.c]=1}}
+    for(const Q of pool){if(out.length>=this.L.ROUND)break;if(!out.includes(Q))out.push(Q)}
+    return this.L.shuffle(out)}
+  sleeping(){const h=new Date().getHours();return h>=this.L.SLEEP_FROM||h<this.L.SLEEP_TO}
+  roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
+  practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";return null}
+  practiceMsg(w){const L=this.L;return {prelaunch:"🧪 Practice round: Season 1 starts "+L.fmtDay(L.LAUNCH)+". No ⭐ or 💎 yet.",sleep:"🌙 The hive is sleeping (9 pm–6 am): practice only, no ⭐ or 💎.",cap:"🛑 "+L.DAY_CAP+" rounds today! Practice only now: no more ⭐ or 💎 today."}[w]||""}
+  isHindi(id){return this.L.HINDI_ISLANDS.includes(id)}
+  addGems(s,n,why){const t=this.L.today();s.gems=s.gems||[];s.gems.push({w:this.L.mondayOf(t),d:t,n,why})}
+  isGolden(p,Lx){const g=this.progOf(p),ip=g&&g.isl[Lx.id];if(!ip||!Lx.qs.length)return false;return Lx.qs.every(Q=>ip.q&&ip.q[Q.id]&&(ip.q[Q.id].ok||0)>=2)}
+  goldenOf(p){const r=this.load("ab_"+p,null);return (r&&r.season===this.L.SEASON&&r.golden)||[]}
+  startLesson(Lx){const round=this.pickRound(Lx);if(!round.length){this.toast("No questions on this island yet");return}
+    const why=this.practiceWhy(this.state.player);
+    this.setState({lesson:Lx,qi:0,earned:0,newPts:0,revCount:0,roundLog:[],round,order:this.L.shuffle([0,1,2,3].slice(0,round[0].o.length)),attempted:false,hintUsed:false,firstWrong:0,stung:false,practice:why,dimmed:[],fb:null,wrongFlash:null,nextOn:false,learnOpen:false,screen:"lesson"},()=>{window.scrollTo(0,0);if(why)this.toast(this.practiceMsg(why))})}
+  isScored(Q){const s=this.islP(this.PG(),this.state.lesson.id).q[Q.id];return !!(s&&s.sc)}
+  learnFor(Q){const S=this.state;return (S.lesson&&this.D.LEARN[S.lesson.id]&&Q&&this.D.LEARN[S.lesson.id][Q.c])||null}
+  answer(i,btn){
+    const S=this.state,L=this.L,Q=S.round[S.qi];if(S.nextOn)return;
+    const fresh=!this.isScored(Q),last=S.qi+1>=S.round.length,learn=!!this.learnFor(Q),mult=this.isHindi(S.lesson.id)?2:1;
+    if(i===Q.a){let pts=fresh?((S.attempted||S.hintUsed)?Math.round(Q.p/2):Q.p)*mult:0;if(S.practice)pts=0;
+      const h=pts?("Correct! +"+pts+" ⭐"+(mult>1?" (Hindi ×2)":"")):(fresh&&S.practice?"Correct! (practice: no points)":"Correct! 🧠 (revision: no new points)");
+      this.setState(s=>({earned:s.earned+pts,newPts:s.newPts+pts,revCount:s.revCount+(fresh?0:1),roundLog:[...s.roundLog,{id:Q.id,ok:!s.attempted,pts}],nextOn:true,nextLabel:last?"Finish! 🎉":"Next →",wrongFlash:null,fb:{kind:"good",h,t:Q.why,learn}}));
+      this.burst(btn,14,false);
+    }else{
+      this.setState({wrongFlash:i});setTimeout(()=>this.setState({wrongFlash:null}),420);
+      if(!S.attempted){const fw=S.firstWrong+1;
+        if(fw>=L.STING_AT){this.setState(s=>({attempted:true,firstWrong:fw,stung:true,dimmed:[...s.dimmed,i],roundLog:[...s.roundLog,{id:Q.id,ok:false,pts:0,miss:true}],nextOn:true,nextLabel:"See your round",fb:{kind:"hint",h:"🐝 Ouch! "+L.STING_AT+" wrong first tries: the bee stings. Round over.",t:"The answer was: "+Q.o[Q.a]+". "+Q.why+" Your points from this round stay.",learn}}));return}
+        this.setState(s=>({attempted:true,firstWrong:fw,dimmed:[...s.dimmed,i],fb:{kind:"hint",h:(fresh&&!S.practice?"Hmm, try once more (half points)":"Hmm, try once more")+" · 🐝 "+fw+"/"+L.STING_AT,t:"Hint: "+Q.hint,learn:false}}))}
+      else this.setState(s=>({roundLog:[...s.roundLog,{id:Q.id,ok:false,pts:0,miss:true}],nextOn:true,nextLabel:last?"Finish!":"Next →",fb:{kind:"good",h:"The answer: "+Q.o[Q.a],t:Q.why,learn}}));
+    }
+  }
+  hintQ(){const S=this.state,Q=S.round[S.qi];if(!Q||S.nextOn)return;if(S.attempted||S.hintUsed){this.toast("The clue is already showing 👇");return}
+    const fresh=!this.isScored(Q);this.setState({hintUsed:true,fb:{kind:"hint",h:"❓ Clue"+(fresh&&!S.practice?" (this question now gives half points)":""),t:Q.hint,learn:false}})}
+  nextQ(){const S=this.state;if(S.stung){this.finishLesson();return}const qi=S.qi+1;if(qi<S.round.length){this.setState({qi,order:this.L.shuffle([0,1,2,3].slice(0,S.round[qi].o.length)),attempted:false,hintUsed:false,dimmed:[],fb:null,nextOn:false,wrongFlash:null},()=>window.scrollTo(0,0))}else this.finishLesson()}
+  saveProgress(){const S=this.state,g=this.PG(),ip=this.islP(g,S.lesson.id),t=this.L.today();
+    S.roundLog.forEach(r=>{const s=ip.q[r.id]||(ip.q[r.id]={seen:0,ok:0,miss:0});s.seen++;s.last=t;if(r.ok){s.ok++;s.m=1}else if(r.miss){s.miss++}if(r.pts>0)s.sc=1});
+    ip.rounds++;if(!ip.firstDone)ip.firstDone=t;ip.lastDone=t;ip.days=ip.days||{};ip.days[t]=(ip.days[t]||0)+1;
+    this.store("ab_prog_"+S.player,g);
+    const db=S.db;if(db){try{Promise.resolve(db.doc("progress/"+S.player).set({p:S.player,name:this.L.NAMES[S.player],updatedAt:Date.now(),prog:g})).catch(()=>{})}catch(e){}}
+    return ip}
+  finishLesson(){
+    const S=this.state,L=this.L,p=S.player,lesson=S.lesson,s=this.P(),t=L.today(),ex=[],pr=S.practice,before=L.levelOf(s.points).n,g0=(s.gems||[]).reduce((a,g)=>a+g.n,0);
+    s.points+=S.newPts;
+    if(s.lastDay!==t){
+      if(!s.lastDay)s.streak=1;
+      else{const gap=[];for(let d=L.addDays(s.lastDay,1);d<t;d=L.addDays(d,1))gap.push(d);const sick=this.sickOf(p),need=gap.filter(d=>!sick[d]);
+        if(need.length<=(s.freezers||0)){if(need.length){s.freezers-=need.length;s.frozen=[...(s.frozen||[]),...need].slice(-30);ex.push("🧊 "+(need.length>1?need.length+" freezers":"A freezer")+" saved your streak")}s.streak=(s.streak||0)+1}
+        else s.streak=1}
+      s.lastDay=t;if(!s.days.includes(t))s.days.push(t);s.days=s.days.slice(-60);s.bestStreak=Math.max(s.bestStreak||0,s.streak);
+      if(!pr&&s.streak%7===0&&s.lastChest!==t){s.lastChest=t;this.addGems(s,L.GEMS.chest,"chest");ex.push("🎁 Treasure chest: "+s.streak+" days in a row! +"+L.nfmt(L.GEMS.chest)+" 💎")}
+    }
+    if(!pr){const after=L.levelOf(s.points).n;if(after>before){this.addGems(s,L.GEMS.level*(after-before),"level");ex.push("⬆️ Level "+after+": "+L.levelOf(s.points).name+"! +"+L.GEMS.level*(after-before)+" 💎")}
+      if(!S.stung){s.cells=(s.cells||0)+1;if(s.cells>=L.CELLS_PER_HIVE){s.cells-=L.CELLS_PER_HIVE;s.hives=(s.hives||0)+1;this.addGems(s,L.GEMS.hive,"hive");ex.push("🍯 Full hive! +"+L.nfmt(L.GEMS.hive)+" 💎")}}}
+    this.saveProgress();
+    if(!pr&&!(s.golden||[]).includes(lesson.id)&&this.isGolden(p,lesson)){s.golden=[...(s.golden||[]),lesson.id];this.addGems(s,L.GEMS.golden,"golden");ex.push("🌟 "+lesson.title+" is now GOLDEN! +"+L.GEMS.golden+" 💎")}
+    const gNew=(s.gems||[]).reduce((a,g)=>a+g.n,0)-g0;if(gNew>0)ex.push("🔐 +"+L.nfmt(gNew)+" 💎 wait in the Team Vault until Sunday 9 pm");
+    this.saveP(s);
+    const done=Object.assign({},S.done,{[lesson.id]:true});this.store("ab_done_"+p+"_"+t,done);
+    const m=this.masteredCount(lesson),ord=this.mapOrder(p),i=ord.findIndex(x=>x.id===lesson.id);
+    const title=S.stung?"Ouch! The bee stung 🐝":pr?"Practice round 🧪":"Island cleared! 🏝️";
+    const msg=(pr?this.practiceMsg(pr).replace(/^\S+ /,""):S.stung?"Round over after "+L.STING_AT+" wrong first tries. Points earned stay; no honeycomb cell this time.":S.newPts>0?"new points in the hive":"revision round: brain points only 🧠")+" · "+m+"/"+lesson.qs.length+" mastered · streak "+s.streak+" 🔥";
+    this.setState({done,donePts:"+"+S.newPts,doneTitle:title,doneMsg:msg,doneExtras:ex.map((x,k)=>({key:k,t:x})),doneNav:{prev:i>0?ord[i-1]:null,next:(i>=0&&i<ord.length-1)?ord[i+1]:null},screen:"done"},()=>{window.scrollTo(0,0);this.unlocked(p,true);if(!S.stung)this.bigCelebrate()});
+  }
+
+  /* confetti + bee */
+  calm(){const p=this.state.player;if(p&&this.L&&this.upcomingExams(p).length&&this.examWeek(p))return true;return (this.props.motion??"game-like")==="calm"||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)}
+  burst(el,n,big){
+    if(!el||!this.fxRef.current||this.calm())return;
+    const C=["#FFD83D","#45E0E6","#FFFFFF","#7ED957","#FF6F61"],r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
+    for(let i=0;i<n;i++){const s=document.createElement("span");s.style.cssText="position:absolute;width:10px;height:14px;border-radius:3px;left:"+cx+"px;top:"+cy+"px;background:"+C[i%C.length];this.fxRef.current.appendChild(s);
+      const ang=Math.random()*Math.PI*2,d=(big?130:70)+Math.random()*(big?160:60);
+      s.animate([{transform:"translate(0,0) rotate(0)",opacity:1},{transform:"translate("+Math.cos(ang)*d+"px,"+(Math.sin(ang)*d+(big?120:60))+"px) rotate("+(Math.random()*540-270)+"deg)",opacity:0}],{duration:big?1300:750,easing:"cubic-bezier(.2,.7,.3,1)"}).onfinish=()=>s.remove()}
+  }
+  bigCelebrate(){
+    if(this.calm())return;
+    const r=this.rootRef.current,pts=r&&r.querySelector('[data-screen-label="Island cleared"]');if(pts)this.burst(pts,60,true);
+    const bee=this.beeRef.current;if(!bee)return;bee.style.display="block";const W=window.innerWidth;
+    bee.animate([{transform:"translateX(0) rotate(-6deg)"},{transform:"translateX("+(W*0.45+110)+"px) translateY(-26px) rotate(5deg)",offset:.45},{transform:"translateX("+(W*0.55+110)+"px) translateY(-20px) rotate(5deg)",offset:.6},{transform:"translateX("+(W+400)+"px) translateY(-60px) rotate(-4deg)"}],{duration:2600,easing:"ease-in-out"}).onfinish=()=>{bee.style.display="none"};
+    if(navigator.vibrate){try{navigator.vibrate(60)}catch(e){}}
+  }
+
+  /* hive sync (optional) */
+  async initDb(){let db=null;try{db=await (window.claude&&window.claude.use?window.claude.use("db"):null)}catch(e){db=null}
+    this.setState({db});if(!db)return;await this.loadSnap();await this.pullNotes();await this.pullWishes();await this.fetchBoard();this.announceNotes()}
+  async pullWishes(){const db=this.state.db;if(!db)return;try{const snap=await db.collection("wishes").get();const m={};snap.forEach(d=>{const n=d.data();if(n&&n.id)m[n.id]=n});this.setState({dbWishes:m})}catch(e){}}
+  async syncUp(s){const S=this.state;if(!S.db||!S.player)return;try{await S.db.doc("players/"+S.player).set(Object.assign({},s,{p:S.player,name:this.L.NAMES[S.player],av:this.load("ab_av_"+S.player,null),updatedAt:s.updatedAt||Date.now()}))}catch(e){}}
+  async loadSnap(){const db=this.state.db;if(!db)return;const snap={progress:{},dadlog:null},N=this.L.NAMES;
+    try{const s=await db.collection("progress").get();s.forEach(d=>{const x=d.data();const k=(x&&x.p&&(x.p in N))?x.p:Object.keys(N).find(n=>N[n]===(x&&x.name));if(k&&x.prog&&x.prog.isl)snap.progress[k]=x.prog})}catch(e){}
+    try{const s=await db.collection("dadlog").get();s.forEach(d=>{const x=d.data();if(x&&x.duo)snap.dadlog=x})}catch(e){}
+    this.setState({dbSnap:snap})}
+  async fetchBoard(){const db=this.state.db;if(!db)return;const rows=[];try{const snap=await db.collection("players").get();snap.forEach(d=>rows.push(d.data()))}catch(e){}this.setState({dbRows:rows})}
+  async pullNotes(){const db=this.state.db;if(!db)return;try{const snap=await db.collection("notes").get();const m={};snap.forEach(d=>{const n=d.data();if(n&&n.id)m[n.id]=n});this.setState({dbNotes:m})}catch(e){}}
+
+  /* Dad's log + the team week */
+  dadLog(){const def={duo:{},steps:{},sick:{},target:35000,updatedAt:0},l=this.load("ab_dadlog",null),r=this.state.dbSnap.dadlog;
+    if(!l&&!r)return def;
+    if(l&&r){const newer=(l.updatedAt||0)>=(r.updatedAt||0)?l:r;return {duo:JSON.parse(JSON.stringify(newer.duo||{})),steps:Object.assign({},r.steps,l.steps,newer.steps),sick:JSON.parse(JSON.stringify(newer.sick||{})),target:newer.target||35000,updatedAt:newer.updatedAt||0}}
+    return Object.assign(def,JSON.parse(JSON.stringify(l||r)))}
+  sickOf(p){const d=this.dadLog();return (d.sick&&d.sick[p])||{}}
+  saveDadLog(d){d.updatedAt=Date.now();this.store("ab_dadlog",d);const db=this.state.db;if(db){try{Promise.resolve(db.doc("dadlog/dad").set(d)).catch(()=>{})}catch(e){}}this.setState({dbSnap:Object.assign({},this.state.dbSnap,{dadlog:d})})}
+  weekInfo(){const L=this.L,t=L.today(),mon=L.mondayOf(t),end=L.addDays(mon,6),practice=t<L.LAUNCH,start=(!practice&&mon<L.LAUNCH)?L.LAUNCH:mon,days=[];for(let d=start;d<=end;d=L.addDays(d,1))days.push(d);return {t,start,end,days,practice,mon}}
+  weekOf(mon){const L=this.L,end=L.addDays(mon,6),start=mon<L.LAUNCH?L.LAUNCH:mon,days=[];for(let d=start;d<=end;d=L.addDays(d,1))days.push(d);return {t:L.addDays(end,1),start,end,days,practice:false,mon,final:true}}
+  launchWeekend(W){return W.start===this.L.LAUNCH&&W.days.length<=2}
+  requiredIslandsFor(p,W){const L=this.L,live=this.liveIslands(p);if(this.launchWeekend(W))return [];if(!W.final)return this.requiredIslands(p);
+    const ex=L.EXAMS[p]||[];if(!ex.some(x=>x.d>=W.start))return live;const ids=new Set(ex.filter(x=>x.d>W.end).flatMap(x=>x.isl));return live.filter(Lx=>ids.has(Lx.id))}
+  boyStatus(p,W){const rbd=this.roundsByDay(p),sick=this.sickOf(p),has=!!this.progOf(p),past=W.days.filter(d=>d<W.t),played=W.days.filter(d=>(rbd[d]||0)>0),missed=past.filter(d=>!((rbd[d]||0)>0)&&!sick[d]);
+    const total=W.days.reduce((s,d)=>s+(rbd[d]||0),0),extras=Math.max(0,total-played.length),need=2*missed.length,done=this.islandsPlayed(p,W.start,W.end),left=this.requiredIslandsFor(p,W).filter(Lx=>!done.includes(Lx.id));
+    return {has,rbd,sick,missed,need,extras,makeupOK:extras>=need,left,ok:extras>=need&&left.length===0}}
+  teamWeekStatus(W){const z=this.boyStatus("p1",W),r=this.boyStatus("p2",W),d=this.dadStatus(W);if(!z.has||!r.has)return "unknown";return (z.ok&&r.ok&&d.ok)?"ok":"missed"}
+  vault(p){const L=this.L,raw=this.load("ab_"+p,null),s=(raw&&raw.season===L.SEASON)?raw:L.freshSeason(),byW={};(s.gems||[]).forEach(g=>{byW[g.w]=(byW[g.w]||0)+g.n});
+    const now=new Date(),cur=L.mondayOf(L.today());let mon=L.mondayOf(L.LAUNCH),carry=0,wallet=0,melted=0,jars=0,last=null;
+    while(mon<=cur){const end=L.addDays(mon,6),dl=L.parseISO(end);dl.setHours(L.VAULT_HOUR,0,0,0);const gw=byW[mon]||0;
+      if(now>=dl){const st=this.teamWeekStatus(this.weekOf(mon));last=st;if(st==="ok"){wallet+=gw+carry+L.GEMS.team;jars++;carry=0}else if(st==="unknown"){carry+=gw}else{melted+=carry;carry=gw}}
+      else carry+=gw;
+      mon=L.addDays(mon,7)}
+    return {wallet:Math.max(0,wallet-(s.spent||0)),pending:carry,melted,jars,last}}
+  teamJars(){const v=this.vault("dad"),spent=this.wishesAll().filter(w=>w.done).reduce((a,w)=>a+(w.price||0),0);return {earned:v.jars,left:Math.max(0,v.jars-spent)}}
+  dadStatus(W){const L=this.dadLog(),rbd=this.roundsByDay("dad"),past=W.days.filter(d=>d<W.t),missed=past.filter(d=>!L.duo[d]),rounds=W.days.reduce((s,d)=>s+(rbd[d]||0),0),need=2*missed.length;
+    const tgt=Math.round((L.target||35000)*W.days.length/7/100)*100,steps=L.steps[W.start]||0;
+    return {L,rbd,missed,need,extras:rounds,makeupOK:rounds>=need,steps,tgt,stepsOK:steps>=tgt,ok:rounds>=need&&steps>=tgt}}
+
+  /* notes */
+  localNotes(){const a=this.load("ab_notes",[]);return Array.isArray(a)?a:[]}
+  notesAll(){const m={};Object.values(this.state.dbNotes).forEach(n=>{if(n&&n.id)m[n.id]=n});this.localNotes().forEach(n=>{if(n&&n.id&&(!m[n.id]||(n.upd||0)>=(m[n.id].upd||0)))m[n.id]=n});return Object.values(m).filter(n=>!n.del).sort((a,b)=>(b.at||0)-(a.at||0))}
+  putNote(n){n.upd=Date.now();const a=this.localNotes(),i=a.findIndex(x=>x.id===n.id);if(i>=0)a[i]=n;else a.push(n);this.store("ab_notes",a);
+    const db=this.state.db;if(db){this.setState({dbNotes:Object.assign({},this.state.dbNotes,{[n.id]:n})});try{Promise.resolve(db.doc("notes/"+n.id).set(n)).catch(()=>{})}catch(e){}}}
+  fromBoys(n){return n.p?n.p!=="dad":n.by!==this.L.NAMES.dad}
+  newNotesForDad(){const seen=this.load("ab_notes_seen",0);return this.notesAll().filter(n=>!n.done&&this.fromBoys(n)&&(n.at||0)>seen)}
+  announceNotes(){if(this.state.player!=="dad")return;const nn=this.newNotesForDad().length;if(nn&&nn>(this.state.told||0))this.toast("📝 "+nn+" new note"+(nn>1?"s":"")+" from the founders");this.setState({told:nn})}
+  notesText(){const K=this.L.KINDS,open=this.notesAll().filter(n=>!n.done).reverse();
+    return "🐝 AcadaBee notes ("+open.length+")\n\n"+open.map((n,i)=>(i+1)+". "+(n.kind&&K[n.kind]?K[n.kind]+" · ":"")+(n.about||"Whole app")+" ("+(n.by||"Founder")+")\n"+(n.q?"“"+(n.q.length>60?n.q.slice(0,60)+"…":n.q)+"”\n":"")+n.text).join("\n\n")}
+  openNote(ctx,back,place){const P=this.L.PLACES;this.setScreen("note",{noteCtx:ctx,noteBack:back,noteKind:null,noteAbout:ctx?"ctx":(P.includes(place)?place:"Whole app"),noteText:this.load("ab_note_draft","")||"",noteErr:false})}
+  saveNote(){const S=this.state,t=(S.noteText||"").trim();if(t.length<2){this.setState({noteErr:true});return}
+    const useCtx=(S.noteAbout==="ctx"&&S.noteCtx);
+    const n={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),p:S.player||null,by:this.L.NAMES[S.player]||"Founder",kind:S.noteKind,about:useCtx?S.noteCtx.label:S.noteAbout,q:useCtx?(S.noteCtx.q||""):"",text:t,at:Date.now(),done:false};
+    this.putNote(n);this.store("ab_note_draft","");this.toast("Saved in Notes ✓");this.setScreen(S.noteBack,{noteText:""})}
+  copyNotes(){const txt=this.notesText(),fb=()=>{this.setState({copyBoxShown:true});this.toast("Select the text below and copy it")};
+    try{if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(()=>this.toast("Copied ✓ Paste it to Dad"),fb)}else fb()}catch(e){fb()}}
+
+  /* the Wish Jar */
+  localWishes(){const a=this.load("ab_wishes",[]);return Array.isArray(a)?a:[]}
+  wishesAll(){const m={};Object.values(this.state.dbWishes||{}).forEach(n=>{if(n&&n.id)m[n.id]=n});this.localWishes().forEach(n=>{if(n&&n.id&&(!m[n.id]||(n.upd||0)>=(m[n.id].upd||0)))m[n.id]=n});return Object.values(m).filter(n=>!n.del).sort((a,b)=>(a.at||0)-(b.at||0))}
+  putWish(n){n.upd=Date.now();const a=this.localWishes(),i=a.findIndex(x=>x.id===n.id);if(i>=0)a[i]=n;else a.push(n);this.store("ab_wishes",a);
+    const db=this.state.db;this.setState({dbWishes:Object.assign({},this.state.dbWishes,{[n.id]:n})});if(db){try{Promise.resolve(db.doc("wishes/"+n.id).set(n)).catch(()=>{})}catch(e){}}}
+  addWish(){const S=this.state,t=(S.wishText||"").trim();if(t.length<2){this.toast("Write your wish first");return}
+    this.putWish({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),p:S.player,by:this.L.NAMES[S.player],text:t,price:0,at:Date.now(),done:false});this.setState({wishText:""});this.toast("🍯 Wish added! Dad will price it in honey jars.")}
+
+  /* learn more */
+  openLearn(){const S=this.state,e=this.learnFor(S.round[S.qi]);if(!e)return;this.setState({learnOpen:true,learnEntry:e})}
+
+  /* ---------- render values ---------- */
+  renderVals(){
+    const S=this.state;if(!S.ready||!this.L)return {ready:false,isPick:true,isApp:false,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,zNoAv:true,rNoAv:true,dNoAv:true,pickZ:()=>{},pickR:()=>{},pickD:()=>{}};
+    const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",navOn:["map","board","notes","chapters","profile","shop"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
+    /* pick */
+    ["p1","p2","dad"].forEach((k,i)=>{const c="zrd"[i],a=this.avNode(k);o[c+"AvUrl"]=a.avUrl;o[c+"NoAv"]=a.noAv;o[c+"Prev"]=S.prevWho===k;o[c+"World"]=L.WORLDS[this.worldOf(k)].name;o[c+"Name"]=L.NAMES[k];o[c+"Role"]=L.ROLE[k]||""});
+    o.pickZ=()=>this.pick("p1");o.pickR=()=>this.pick("p2");o.pickD=()=>this.pick("dad");
+    if(!p)return o;
+    /* header */
+    const me=this.avNode(p);o.pts=L.nfmt(this.P().points);o.gems=L.nfmt(this.vault(p).wallet);o.goShop=()=>this.goShop();o.whoAvUrl=me.avUrl;o.whoNoAv=me.noAv;o.whoEmoji=me.emoji;o.goPick=()=>this.goPick();
+    o.headTitle={map:"The Map",chapters:"Chapters 📚",board:"The Board 🐝",notes:"The Notebook 📝",profile:"Profile",shop:"Shop 💎"}[scr]||"";
+    if(scr==="map")Object.assign(o,this.mapVals());
+    else if(scr==="lesson")Object.assign(o,this.lessonVals());
+    else if(scr==="done")Object.assign(o,this.doneVals());
+    else if(scr==="profile")Object.assign(o,this.profileVals());
+    else if(scr==="board")Object.assign(o,this.boardVals());
+    else if(scr==="chapters")Object.assign(o,this.chaptersVals());
+    else if(scr==="note")Object.assign(o,this.noteVals());
+    else if(scr==="notes")Object.assign(o,this.notesVals());
+    else if(scr==="shop")Object.assign(o,this.shopVals());
+    if(o.navOn)Object.assign(o,this.navVals());
+    if(S.learnOpen&&S.learnEntry){const e=S.learnEntry;o.learnBlurb=e.blurb||"";o.learnLinks=(e.links||[]).map((k,i)=>({key:i,href:k.url,icon:k.kind==="video"?"▶️":"📖",title:(k.kind==="video"?"Watch: ":"Read: ")+k.title,small:k.kind==="video"?((k.channel||"YouTube")+(k.mins?" · "+k.mins+" min":"")):(/simple\.wikipedia/.test(k.url)?"Simple Wikipedia":/hi\.wikipedia/.test(k.url)?"हिंदी विकिपीडिया":"Wikipedia")}));
+      o.closeLearn=()=>this.setState({learnOpen:false});o.learnOverlay=e=>{if(e.target===e.currentTarget)this.setState({learnOpen:false})}}
+    return o;
+  }
+  mapVals(){
+    const L=this.L,S=this.state,p=S.player,s=this.P(),o={};
+    o.streakN=s.streak;o.hexes=[];for(let i=6;i>=0;i--){const d=L.daysAgoISO(i);o.hexes.push({key:d,bg:s.days.includes(d)?"linear-gradient(180deg,#FFE680,#FFB800)":"var(--ring)",outline:i===0?"2px dashed var(--acc)":"none"})}
+    const lv=L.levelOf(s.points);o.lvlT="Level "+lv.n+" · "+lv.name;o.lvlW=(lv.nextAt?Math.max(3,Math.round((s.points-lv.at)*100/(lv.nextAt-lv.at))):100)+"%";o.lvlS=lv.nextAt?L.nfmt(s.points)+" / "+L.nfmt(lv.nextAt)+" ⭐ to "+lv.nextName:"Top level! 👑";
+    o.cellsT="🍯 Hive "+(s.cells||0)+"/"+L.CELLS_PER_HIVE;o.cellsW=Math.max(3,Math.round((s.cells||0)*100/L.CELLS_PER_HIVE))+"%";o.cellsS="every round = 1 cell · full hive = "+L.nfmt(L.GEMS.hive)+" 💎";
+    const v=this.vault(p);o.vaultT=v.pending?"🔐 Team Vault: "+L.nfmt(v.pending)+" 💎 waiting · opens Sunday 9 pm if all three hit their goals":"🔐 Team Vault: gems you earn this week wait here until Sunday 9 pm";
+    const pw=this.practiceWhy(p);o.hasPractice=!!pw;o.practiceT=pw?this.practiceMsg(pw):"";
+    o.showNoteHint=!this.load("ab_notehint",0);o.noteHintOk=()=>{this.store("ab_notehint",1);this.forceUpdate()};
+    const up=this.upcomingExams(p);o.hasExam=up.length>0;
+    if(up.length){const nx=up[0],dd=L.daysTo(nx.d),ic=L.SUBJ_ICON[nx.s]||"📘";o.examK=L.EXAM_NAME+" revision plan";o.examBig=dd===0?ic+" "+nx.s+" today. Good luck! 🍀":ic+" "+nx.s+" is up next";
+      o.examDate=dd===0?"After school, the next paper's islands move to the top.":L.fmtDay(nx.d)+" · "+(dd===1?"tomorrow. One calm round of each island?":dd+" days to practise · its islands are at the top");
+      o.examChips=up.slice(1).map(x=>({key:x.s,ic:L.SUBJ_ICON[x.s]||"📘",t:x.s+" · "+L.fmtDay(x.d)}));
+      const tgt=this.buildIsles(p).find(it=>it.stops.some(Lx=>nx.isl.includes(Lx.id)));o.hasJump=!!tgt;
+      if(tgt){o.jumpT="⬇️ Jump to "+tgt.I.name;o.jump=()=>{const e=document.getElementById("isle-"+tgt.I.k);if(e){const y=e.getBoundingClientRect().top+window.scrollY-16;window.scrollTo({top:y,behavior:this.calm()?"auto":"smooth"})}}}}
+    let tot=0,mast=0;this.liveIslands(p).forEach(Lx=>{tot+=Lx.qs.length;mast+=this.islStats(p,Lx).mastered});
+    o.mapPct="Map "+(tot?Math.round(mast*100/tot):0)+"% complete";o.mapMast=L.nfmt(mast)+"/"+L.nfmt(tot)+" questions mastered";
+    const offs=[0,1,2,1],td=L.today();
+    o.isles=this.buildIsles(p).map((it,n)=>{
+      const left=n%2===0,fog=!it.stops.length,lo=left?"var(--isleALo)":"var(--isleBLo)";let k=0;
+      const gold=this.goldenOf(p);
+      const stopV=(Lx,locked)=>{const x=this.islStats(p,Lx),pc=x.total?Math.round(x.mastered*100/x.total):0,tdn=!!S.done[Lx.id],off=offs[k++%4],gd=gold.includes(Lx.id),hi=this.isHindi(Lx.id);
+        return {key:Lx.id,pl:(off*13)+"%",lo,ring:gd?"conic-gradient(#FFD34D 100%,#FFD34D 0)":"conic-gradient(var(--acc) "+pc+"%,var(--ring) 0)",icon:locked?"🔒":(gd?"🌟":(tdn?"✓":Lx.icon)),iconBg:locked?"radial-gradient(circle at 35% 30%,#6E8AA3,#3E566E 70%)":(gd?"radial-gradient(circle at 35% 30%,#FFF3B0,#FFC61A 70%)":(tdn?"radial-gradient(circle at 35% 30%,#B6F58B,#5CC96A 70%)":"radial-gradient(circle at 35% 30%,#FFE680,#FFB800 70%)")),title:Lx.title,small:locked?"🔒 master the stop before":(gd?"🌟 golden · ":"")+x.mastered+"/"+x.total+" mastered"+(hi?" · ⭐×2":"")+(tdn?" · played today":""),op:locked?.75:1,aria:Lx.title+", "+x.mastered+" of "+x.total+" mastered"+(locked?", locked":""),go:()=>{if(locked){this.toast("🔒 Master the stop before to open "+Lx.title);return}this.startLesson(Lx)}}};
+      const soonV=c=>{const off=offs[k++%4];return {key:"soon-"+c.s+c.n+c.t,pl:(off*13)+"%",lo,ring:"var(--ring)",icon:"🔒",iconBg:"radial-gradient(circle at 35% 30%,#6E8AA3,#3E566E 70%)",title:c.t,small:(c.x&&c.x>=td?L.EXAM_NAME+" · ":"")+"coming soon · send Dad photos",op:.6,aria:c.t+", coming soon",go:()=>this.toast("🔜 "+c.t+" is coming soon. Send Dad photos of the chapter!")}};
+      const groups=it.lands?it.lands.map((l,j)=>({key:l.s,name:L.LAND[l.s]||l.s,hasName:true,border:j>0,stops:[...l.stops.map((Lx,i)=>stopV(Lx,this.stopLocked(p,l.stops,i))),...l.soon.map(soonV)]})):[{key:"main",name:"",hasName:false,border:false,stops:[...it.stops.map((Lx,i)=>stopV(Lx,this.stopLocked(p,it.stops,i))),...it.soon.map(soonV)]}];
+      let rev=null;if(it.stops.length){const st=it.seq,played=st.filter(Lx=>this.islStats(p,Lx).rounds>0),pool=played.length?played:st,frac=Lx=>{const x=this.islStats(p,Lx);return x.mastered/(x.total||1)},pickL=pool.slice().sort((a,b)=>frac(a)-frac(b))[0];rev={title:pickL.title,go:()=>this.startLesson(pickL)}}
+      return {key:it.I.k,domId:"isle-"+it.I.k,notFirst:n>0,boat:n>0&&n%2===0,ml:left?"0":"auto",mr:left?"auto":"0",bg:left?"var(--isleA)":"var(--isleB)",lo,shadow:"0 14px 0 "+lo+",inset 0 4px 0 rgba(255,255,255,.18),0 26px 30px -10px var(--shadow)",radius:left?"50px 38px 56px 34px":"38px 52px 34px 50px",op:fog?.6:1,signIc:it.I.icon,signName:it.I.name,signSmall:it.ex?L.EXAM_NAME+" from "+L.fmtDay(it.ex):(fog?"🔒 coming soon":""),hasSignSmall:!!(it.ex||fog),deco:it.I.deco,hasDeco:!!it.I.deco,groups,hasRev:!!rev,revTitle:rev?rev.title:"",revGo:rev?rev.go:()=>{}}});
+    o.syncNote=S.db?"hive synced ✓":"scores saved on this device";
+    return o;
+  }
+  lessonVals(){
+    const S=this.state,Q=S.round[S.qi];if(!Q)return {};const fresh=!this.isScored(Q),o={};
+    o.fill=(S.qi/S.round.length*100)+"%";o.earnedTxt="+"+S.earned;o.qtype=Q.t+" ·";o.qtypeIc=fresh?"🆕":"🧠";o.qtypeTail=fresh?"new":"revise";o.qtext=Q.q;
+    o.hintQ=()=>this.hintQ();o.hintOp=(S.attempted||S.hintUsed||S.nextOn)?.5:1;
+    o.lessonTag=S.practice?(S.practice==="sleep"?"🌙 practice":"🧪 practice"):(this.isHindi(S.lesson.id)?"🪶 Hindi · ⭐×2":"");o.hasLessonTag=!!o.lessonTag;
+    o.stingT=S.firstWrong?"🐝 "+S.firstWrong+"/"+this.L.STING_AT:"";o.hasSting=!!S.firstWrong;
+    o.quit=()=>this.goMap();o.noteLesson=()=>this.openNote({label:S.lesson.title+" · Q"+(S.qi+1),q:Q.q},"lesson");
+    o.opts=S.order.map(oi=>{const isAns=oi===Q.a,rev=S.nextOn;let bg="var(--opt)",color="var(--optInk)",op=1,tf="none",anim="none",shadow="inset 0 2px 0 var(--cardHi),inset 0 -6px 0 var(--cardLo),0 10px 16px -8px var(--shadow)";
+      if(rev&&isAns){bg="linear-gradient(180deg,#C9F7B4,#7ED957)";color="#0F4A1C";tf="scale(1.03)";shadow="inset 0 3px 0 rgba(255,255,255,.7),inset 0 -6px 0 rgba(40,110,20,.35),0 14px 22px -8px rgba(60,160,40,.6)"}
+      else if(rev||S.dimmed.includes(oi))op=.5;
+      if(S.wrongFlash===oi){bg="linear-gradient(180deg,#FFB5A8,#FF6F61)";color="#fff";op=1;anim="shake .4s"}
+      return {key:oi,text:Q.o[oi],bg,color,op,tf,anim,shadow,pick:e=>this.answer(oi,e.currentTarget)}});
+    o.hasFb=!!S.fb;if(S.fb){o.fbBg=S.fb.kind==="good"?"var(--good)":"var(--hint)";o.fbInk=S.fb.kind==="good"?"var(--goodInk)":"var(--hintInk)";o.fbH=S.fb.h;o.fbT=S.fb.t;o.fbLearn=!!S.fb.learn;o.openLearn=()=>this.openLearn()}
+    o.nextOn=S.nextOn;o.nextLabel=S.nextLabel;o.next=()=>this.nextQ();
+    return o;
+  }
+  doneVals(){const S=this.state,d=S.doneNav;return {donePts:S.donePts,doneMsg:S.doneMsg,doneTitle:S.doneTitle||"Island cleared! 🏝️",doneExtras:S.doneExtras||[],hasExtras:(S.doneExtras||[]).length>0,reviseSub:S.lesson?S.lesson.title:"",noPrev:!d.prev,noNext:!d.next,prevOp:d.prev?1:.45,nextOp:d.next?1:.45,prevSub:d.prev?d.prev.title:"start of the map",nextSub:d.next?d.next.title:"end of the map",
+    doneRevise:()=>this.startLesson(S.lesson),donePrev:()=>{if(d.prev)this.startLesson(d.prev)},doneNext:()=>{if(d.next)this.startLesson(d.next)},doneBack:()=>this.goMap(),noteDone:()=>this.openNote({label:S.lesson.title,q:""},"done")}}
+  profileVals(){
+    const L=this.L,p=this.state.player,have=this.unlocked(p,false),av=Object.assign({},L.AV_DEFAULT,this.load("ab_av_"+p,null)||{}),o={profAv:L.avatarURL(av),profName:L.NAMES[p],profRole:L.ROLE[p]||""};
+    const st=this.statsOf(p),E=L.EARN,me=this.P(p),lv=L.levelOf(me.points),v=this.vault(p);
+    o.lvlT="Level "+lv.n+" · "+lv.name;o.lvlW=(lv.nextAt?Math.max(3,Math.round((me.points-lv.at)*100/(lv.nextAt-lv.at))):100)+"%";o.lvlS=lv.nextAt?L.nfmt(lv.nextAt-me.points)+" ⭐ to Level "+(lv.n+1)+" ("+lv.nextName+")":"Top level! 👑";
+    o.seasonStats=[["💎",L.nfmt(v.wallet),"gems to spend"],["🔐",L.nfmt(v.pending),"in the vault"],["🧊",(me.freezers||0)+"/"+L.FREEZER.max,"freezers"],["🌟",String((me.golden||[]).length),"golden islands"]].map(([ic,k,l])=>({key:l,ic,k,l}));
+    o.badges=(L.BADGES[p]||[]).map((b,i)=>({key:i,ic:b.ic,t:b.t,s:b.s}));o.hasBadges=o.badges.length>0;
+    o.merch=L.MERCH.map(m=>({key:m.k,ok:m.ok(st),ic:m.ok(st)?"✅":"⬜",t:m.t}));const mN=o.merch.filter(m=>m.ok).length;o.merchT=mN===3?"🎉 All three done: special merch unlocked!":mN?"🎁 Small merch unlocked! Do all three for special merch.":"Do any one for small merch · all three for special merch";
+    o.goShop=()=>this.goShop();
+    o.profStats=[["⭐",L.nfmt(st.points),"points"],["🔥",String(st.streak),"day streak"],["🎯",String(st.rounds),"rounds done"],["🎁",have.size+"/"+Object.keys(E).length,"items unlocked"]].map(([ic,k,l])=>({key:l,ic,k,l}));
+    const nx=Object.keys(E).filter(k=>E[k].n&&!have.has(k)).sort((a,b)=>E[a].n-E[b].n)[0];o.hasNext=!!nx;
+    if(nx){const prev=Object.keys(E).filter(k=>E[k].n&&E[k].n<E[nx].n).map(k=>E[k].n).sort((a,b)=>b-a)[0]||0,togo=E[nx].n-st.rounds;o.nextT="🎁 Next unlock: "+L.itemOf(nx);o.nextS=togo+" more round"+(togo>1?"s":"")+" to go";o.nextW=Math.max(4,Math.round((st.rounds-prev)*100/(E[nx].n-prev)))+"%"}
+    const myW=this.worldOf(p);o.worldOpts=Object.keys(L.WORLDS).map(w=>{const W=L.WORLDS[w],e=L.worldEarn(p,w),lk=!!(e&&!have.has(e)),sel=w===myW,th=L.THEMES[W.theme];
+      return {key:w,name:W.name,ic:W.ic,prev:th.bg,isle:th.isleA,lk,small:lk?E[e].t:(w===L.HOME_WORLD[p]?"your home world":""),hasSmall:lk||w===L.HOME_WORLD[p],op:lk?.55:1,border:sel?"3px solid #FFC61A":"3px solid transparent",selT:sel?"✓ ":"",
+        pick:()=>{if(lk){this.toast("🔒 "+E[e].t+" to unlock "+W.name);return}this.store("ab_world_"+p,w);this._theme=null;this.applyTheme();this.toast(W.ic+" Welcome to "+W.name+"!");this.forceUpdate()}}});
+    const save=a=>{a.t=Date.now();this.store("ab_av_"+p,a);try{this.syncUp(this.P())}catch(e){}this.forceUpdate()};
+    const opt=(label,avx,earnKey,onPick,sel,small)=>{const lockedNow=!!(earnKey&&!have.has(earnKey));return {key:label,url:L.avatarURL(avx),locked:lockedNow,label,small:lockedNow?E[earnKey].t:(small||""),hasSmall:!!(lockedNow||small),sel,op:lockedNow?.6:1,bg:sel?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--card)",ink:sel?"#3A2600":"var(--ink)",shadow:sel?"inset 0 2px 0 rgba(255,255,255,.6),inset 0 -5px 0 rgba(160,100,0,.35),0 10px 16px -8px var(--shadow)":"inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow)",pick:()=>{if(lockedNow){this.toast("🔒 "+E[earnKey].t+" to unlock "+label);return}onPick()}}};
+    o.beeOpts=Object.entries(L.BEES).map(([k,B])=>{if(B.shop&&!(me.owned||[]).includes(k)){const x=opt(B.name,Object.assign({},av,{bee:k}),null,()=>{},false,"🛒 "+L.nfmt(B.shop)+" 💎 in the Shop");x.locked=true;x.op=.6;x.pick=()=>{this.toast("🛒 "+B.name+" is in the Shop for "+L.nfmt(B.shop)+" 💎");this.goShop()};return x}
+      return opt(B.name,Object.assign({},av,{bee:k}),B.earn,()=>save(Object.assign({},av,{bee:k})),av.bee===k,B.note)});
+    o.dressGroups=L.DRESS.map(([key,title,opts])=>({key,title,opts:opts.map(([v,label,earn])=>opt(label,Object.assign({},av,{[key]:v},key==="hc"&&av.hair==="none"?{hair:"spiky"}:{}),earn,()=>save(Object.assign({},av,{[key]:v})),av[key]===v))}));
+    return o;
+  }
+  shopVals(){
+    const L=this.L,p=this.state.player,s=this.P(p),v=this.vault(p),o={};
+    o.walletT=L.nfmt(v.wallet);o.pendingT=L.nfmt(v.pending);o.meltedT=v.melted?"🫠 "+L.nfmt(v.melted)+" 💎 melted after two missed team weeks in a row.":"";o.hasMelted=!!v.melted;
+    o.frzT="You have "+(s.freezers||0)+" of "+L.FREEZER.max;o.frzFull=(s.freezers||0)>=L.FREEZER.max;o.frzBtn=o.frzFull?"Full":"Buy · "+L.FREEZER.price+" 💎";
+    o.buyFreezer=()=>{const s2=this.P(p),v2=this.vault(p);if((s2.freezers||0)>=L.FREEZER.max){this.toast("You can hold only "+L.FREEZER.max+" freezers");return}if(v2.wallet<L.FREEZER.price){this.toast("You need "+L.FREEZER.price+" 💎 to spend. Gems in the vault open on Sunday 9 pm.");return}s2.freezers=(s2.freezers||0)+1;s2.spent=(s2.spent||0)+L.FREEZER.price;this.saveP(s2);this.toast("🧊 Freezer bought! It saves your streak on a missed day.");this.forceUpdate()};
+    const av=Object.assign({},L.AV_DEFAULT,this.load("ab_av_"+p,null)||{});
+    o.skins=Object.entries(L.BEES).filter(([k,B])=>B.shop).map(([k,B])=>{const own=(s.owned||[]).includes(k);return {key:k,name:B.name,url:L.avatarURL(Object.assign({},av,{bee:k})),price:L.nfmt(B.shop)+" 💎",own,btn:own?"✓ Yours":"Buy",op:own?.75:1,
+      buy:()=>{const s2=this.P(p),v2=this.vault(p);if((s2.owned||[]).includes(k)){this.toast("It's yours! Pick it in Profile.");return}if(v2.wallet<B.shop){this.toast("You need "+L.nfmt(B.shop)+" 💎 to spend");return}s2.owned=[...(s2.owned||[]),k];s2.spent=(s2.spent||0)+B.shop;this.saveP(s2);this.toast("🐝 "+B.name+" is yours! Pick it in Profile.");this.forceUpdate()}}});
+    o.earnRows=[["🍯","Full hive (20 rounds)",L.nfmt(L.GEMS.hive)],["🌟","Golden island (every question right twice)",L.nfmt(L.GEMS.golden)],["🎁","Chest for every 7 days in a row",L.nfmt(L.GEMS.chest)],["⬆️","Level up",L.nfmt(L.GEMS.level)],["🤝","Team week won (each of you)",L.nfmt(L.GEMS.team)]].map(([ic,t,n])=>({key:t,ic,t,n:"+"+n+" 💎"}));
+    o.backMap=()=>this.goMap();
+    return o;
+  }
+  boardVals(){
+    const L=this.L,S=this.state,p=S.player,W=this.weekInfo(),o={},lw=this.launchWeekend(W);
+    o.teamTitle=W.practice?"Practice week 🧪":(lw?"Launch weekend 🚀":"This week's team goal 🤝");
+    o.teamTip=W.practice?"Season 1 starts "+L.fmtDay(L.LAUNCH)+". Until then it's practice: nothing counts yet.":L.fmtDay(W.start)+" → "+L.fmtDay(W.end)+(lw?" · goal: everyone plays "+(W.days.length>1?"both days":"today"):" · make-up quests are due by Sunday 9 pm");
+    const blockers=[],bl={};let unknown=0;const block=(who,what)=>{(bl[who]=bl[who]||[]).push(what)};
+    const dots=(fn,neutral,tapFn,mark)=>{const arr=[];for(let i=0;i<7;i++){const d=L.addDays(W.mon,i);let bg="var(--ring)",ink="var(--soft)",outline="none",title="",letter=L.DAY_LETTER[i];
+      if(!W.days.includes(d)){title="before launch";bg="transparent"}else if(!neutral){const v=fn(d);if(mark&&mark(d)){bg="linear-gradient(180deg,#D7E9FF,#9CC7F5)";ink="#0B2E3F";letter="🤒";title=L.fmtDay(d)+": sick day"}else if(v){bg="linear-gradient(180deg,#FFE680,#FFB800)";ink="#3A2600"}else if(d<W.t){bg="linear-gradient(180deg,#FFB5A8,#FF6F61)";ink="#fff"}if(d===W.t)outline="2px dashed var(--acc)";if(!title)title=L.fmtDay(d)+(v?" ✓":"")}
+      const can=!!tapFn&&W.days.includes(d)&&d<=W.t;
+      arr.push({key:d,letter,bg,ink,outline,title,cursor:can?"pointer":"default",tap:can?()=>tapFn(d):()=>{}})}return arr};
+    const toggleSick=(k,d)=>{const Lg=this.dadLog();Lg.sick=Lg.sick||{};Lg.sick[k]=Lg.sick[k]||{};if(Lg.sick[k][d])delete Lg.sick[k][d];else Lg.sick[k][d]=true;this.saveDadLog(Lg);this.toast(Lg.sick[k][d]?"🤒 Sick day marked for "+L.NAMES[k]+": counts as played":"Sick day removed")};
+    const rows=[];
+    ["p1","p2"].forEach(k=>{const s=this.boyStatus(k,W),exW=this.examWeek(k),upN=this.upcomingExams(k).length,stats=[];
+      if(!s.has){unknown++;stats.push({key:"none",t:"No games from "+L.NAMES[k]+" yet. Scores show here once they play.",c:"var(--soft)"})}
+      else{if(s.missed.length){stats.push({key:"mk",t:(s.makeupOK?"✅ Make-up quest done: ":"⚠️ Make-up quest: ")+Math.min(s.extras,s.need)+"/"+s.need+" extra rounds for "+s.missed.length+" missed day"+(s.missed.length>1?"s":""),c:s.makeupOK?"#7ED957":"#FFB347"});if(!s.makeupOK)block(L.NAMES[k],(s.need-s.extras)+" make-up round"+(s.need-s.extras>1?"s":""))}
+        const total=this.requiredIslandsFor(k,W).length,doneN=total-s.left.length;
+        if(total)stats.push({key:"isl",t:(s.left.length?"🏝️ Islands this week: ":"✅ Every island played: ")+doneN+"/"+total+(s.left.length?" · still to visit: "+s.left.map(x=>x.title).join(", "):""),c:s.left.length?"var(--ink)":"#7ED957"});
+        if(s.left.length)block(L.NAMES[k],s.left.length+" island"+(s.left.length>1?"s":"")+" to visit")}
+      const goal=lw?(W.days.length>1?"play both days":"play today"):(exW?(upN?"play every day + every "+L.EXAM_NAME+" island":"play every day ("+L.EXAM_NAME+" papers done! 🎉)"):"play every day + every island");
+      rows.push(Object.assign(this.avNode(k),{key:k,name:L.NAMES[k]+" · "+goal,dots:dots(d=>(s.rbd[d]||0)>0,!s.has&&p!=="dad",p==="dad"?d=>toggleSick(k,d):null,d=>!!s.sick[d]),stats,isDad:false,tip:p==="dad"?"Dad: tap a day to mark a sick day 🤒 (counts as played).":""}))});
+    const ds=this.dadStatus(W),dst=[];
+    if(ds.missed.length){dst.push({key:"mk",t:(ds.makeupOK?"✅ Make-up quest done: ":"⚠️ Make-up quest: ")+Math.min(ds.extras,ds.need)+"/"+ds.need+" extra rounds for "+ds.missed.length+" missed Duolingo day"+(ds.missed.length>1?"s":""),c:ds.makeupOK?"#7ED957":"#FFB347"});if(!ds.makeupOK)block("Dad",(ds.need-ds.extras)+" make-up round"+(ds.need-ds.extras>1?"s":""))}
+    dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps this week: ")+L.nfmt(ds.steps)+" / "+L.nfmt(ds.tgt)+(W.days.length<7?" (short week)":""),c:ds.stepsOK?"#7ED957":"var(--ink)"});
+    if(!ds.stepsOK)block("Dad",L.nfmt(ds.tgt-ds.steps)+" more steps");
+    rows.push(Object.assign(this.avNode("dad"),{key:"dad",name:"Dad · Duolingo every day + "+L.nfmt(ds.L.target)+" steps a week",dots:dots(d=>!!ds.L.duo[d],false,p==="dad"?d=>{const Lg=this.dadLog();if(Lg.duo[d])delete Lg.duo[d];else Lg.duo[d]=true;this.saveDadLog(Lg)}:null,null),stats:dst,isDad:p==="dad",tip:p==="dad"?"Tap a day when you've done Duolingo.":""}));
+    o.teamRows=rows;
+    o.dadSteps=S.dadStepsIn;o.onDadSteps=e=>this.setState({dadStepsIn:e.target.value});o.saveSteps=()=>{const Lg=this.dadLog();Lg.steps[W.start]=Math.max(0,parseInt(this.state.dadStepsIn,10)||0);this.saveDadLog(Lg);this.toast("Steps saved 👟")};
+    o.dadTarget=S.dadTargetIn;o.onDadTarget=e=>this.setState({dadTargetIn:e.target.value});o.setTarget=()=>{const n=parseInt(this.state.dadTargetIn,10);if(n>0){const Lg=this.dadLog();Lg.target=n;this.saveDadLog(Lg);this.toast("Weekly goal: "+L.nfmt(n)+" steps")}};
+    Object.keys(bl).forEach(w=>blockers.push(w+": "+bl[w].join(" + ")));
+    if(unknown){o.resT="⏳ Waiting for everyone's scores. The vault can only open when all three show here.";o.resBg="var(--hint)";o.resInk="var(--hintInk)"}
+    else if(!blockers.length){o.resT=W.practice?"🔓 Practice: you'd all be on track!":"🔓 Everyone's on track: the Team Vault opens Sunday 9 pm!";o.resBg="var(--good)";o.resInk="var(--goodInk)"}
+    else{o.resT="🔒 The vault stays shut until: "+blockers.join(" · ");o.resBg="var(--chip)";o.resInk="var(--chipInk)"}
+    /* Team Vault + honey jars */
+    const v=this.vault(p),jars=this.teamJars();
+    o.vaultMine=v.pending?"🔐 Your gems in the vault: "+L.nfmt(v.pending)+" 💎":"🔐 Your vault is empty this week";
+    o.jarsT="🍯 "+jars.left+" honey jar"+(jars.left===1?"":"s");o.jarsS=jars.earned>jars.left?jars.earned+" earned · "+(jars.earned-jars.left)+" spent on wishes":"+1 jar for every team week won";
+    /* Wish Jar */
+    const isDad=p==="dad";o.isDadP=isDad;o.notDad=!isDad;
+    o.wishes=this.wishesAll().map(w=>{const price=w.price||0,can=isDad&&!w.done&&price>0&&jars.left>=price;
+      return {key:w.id,text:w.text,by:(w.by||"Founder"),priceT:w.done?"✅ granted":(price?"🍯 "+price+" jar"+(price>1?"s":""):"waiting for Dad's price"),op:w.done?.65:1,isDad,
+        priceIn:(S.wishPrice[w.id]!=null)?S.wishPrice[w.id]:(price?String(price):""),onPrice:e=>this.setState({wishPrice:Object.assign({},this.state.wishPrice,{[w.id]:e.target.value})}),
+        setPrice:()=>{const n=parseInt(this.state.wishPrice[w.id],10);if(!(n>0)){this.toast("Type a price in honey jars");return}w.price=n;this.putWish(w);this.toast("🍯 Priced at "+n+" jar"+(n>1?"s":""))},
+        canGrant:can,grant:()=>{if(!can){this.toast(price?"Not enough honey jars yet":"Set a price first");return}w.done=true;this.putWish(w);this.toast("🎉 Wish granted!");this.forceUpdate()},
+        canDel:!w.done&&(isDad||w.p===p),del:()=>{w.del=true;this.putWish(w);this.toast("Wish removed")}}});
+    o.noWishes=!o.wishes.length;o.wishText=S.wishText;o.onWishText=e=>this.setState({wishText:e.target.value});o.addWish=()=>this.addWish();
+    /* points board (never resets) */
+    let br=S.dbRows.slice();br.forEach(r=>{if(r&&!r.p)r.p=Object.keys(L.NAMES).find(x=>L.NAMES[x]===r.name)});br=br.filter(r=>r&&r.p&&(r.p in L.NAMES)&&(r.season===L.SEASON));
+    ["p1","p2","dad"].forEach(k=>{const l=this.load("ab_"+k,null),ls=(l&&l.season===L.SEASON)?l:null,i=br.findIndex(r=>r.p===k);if(i<0)br.push({p:k,points:ls?ls.points:0,streak:ls?ls.streak:0});else if(ls&&(ls.updatedAt||0)>(br[i].updatedAt||0))br[i]=Object.assign({},ls,{p:k,av:br[i].av})});
+    br.sort((a,b)=>(b.points||0)-(a.points||0));
+    o.boardRows=br.map(r=>{const lv=L.levelOf(r.points||0),bd=(L.BADGES[r.p]||[]).map(b=>b.ic).join("");return Object.assign(this.avNode(r.p,r.av),{key:r.p,name:L.NAMES[r.p]+(bd?" "+bd:""),streak:"Lv "+lv.n+" "+lv.name+" · streak "+(r.streak||0)+" 🔥",pts:L.nfmt(r.points||0)})});
+    return o;
+  }
+  chaptersVals(){
+    const L=this.L,D=this.D,S=this.state,p=S.chapWho||S.player||"p1",W=this.weekInfo(),list=D.CHAPTERS[p]||[],o={},td=L.today();
+    o.whoTabs=["p1","p2","dad"].map(k=>({key:k,ic:L.EMO[k],t:L.NAMES[k],sel:k===p,bg:k===p?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--card)",ink:k===p?"#3A2600":"var(--ink)",pick:()=>this.setState({chapWho:k})}));
+    const isl=this.liveIslands(p),st=isl.map(x=>this.islStats(p,x)),playedWk=this.islandsPlayed(p,W.mon,W.end).filter(id=>isl.some(x=>x.id===id));
+    const mast=st.reduce((s,x)=>s+x.mastered,0),tot=st.reduce((s,x)=>s+x.total,0),rev=st.reduce((s,x)=>s+x.rev,0),done=st.filter(x=>x.rounds>0).length;
+    o.dash=[[playedWk.length+"/"+isl.length,"islands this week"],[done+"/"+isl.length,"islands ever done"],[String(rev),"revision rounds"],[(tot?Math.round(mast*100/tot):0)+"%","mastered ("+mast+"/"+tot+")"]].map(([k,l])=>({key:l,k,l}));
+    o.dashTip=(!this.progOf(p)&&p!==S.player)?"No games from "+L.NAMES[p]+" on this device yet. Their progress shows here once AcadaBee goes live.":"";o.hasDashTip=!!o.dashTip;
+    o.chapSearch=S.chapSearch;o.onSearch=e=>this.setState({chapSearch:e.target.value});
+    const q=(S.chapSearch||"").trim().toLowerCase(),byId=id=>this.lessonById(p,id);
+    const match=c=>!q||[c.t,c.e||"",c.s,c.b,c.n].join(" ").toLowerCase().includes(q)||(c.isl&&byId(c.isl)&&byId(c.isl).title.toLowerCase().includes(q));
+    const subjects=[];list.forEach(c=>{if(!subjects.includes(c.s))subjects.push(c.s)});let shown=0;
+    o.subjects=subjects.map(s=>{
+      const liveL=c=>c.isl&&byId(c.isl)&&byId(c.isl).qs.length,rank=c=>(c.x&&c.x>=td?0:10)+(liveL(c)?0:({now:1,next:2,special:1,t1:3}[c.term]||4));
+      const items=list.map((c,i)=>[c,i]).filter(([c])=>c.s===s&&match(c)).sort((a,b)=>rank(a[0])-rank(b[0])||a[1]-b[1]).map(x=>x[0]);if(!items.length)return null;
+      const live=items.filter(liveL).length;
+      return {key:s,ic:L.SUBJ_ICON[s]||"📘",h:s,count:live?live+" live":"coming soon",items:items.map((c,i)=>{shown++;const Lx=liveL(c)?byId(c.isl):null;let chip="",chipBg="",chipInk="#3A2600";
+        if(c.x&&c.x>=td){chip=L.EXAM_NAME+" · "+L.parseISO(c.x).toLocaleDateString("en-IN",{day:"numeric",month:"short"});chipBg="linear-gradient(180deg,#FFB5A8,#FF6F61)";chipInk="#fff"}else{const tc=L.TERM_CHIP[c.term];if(tc){chip=tc[0];chipBg=tc[1]}}
+        const it={key:s+i,n:c.n,t:c.t,chip,chipBg,chipInk,hasChip:!!chip,sub:(c.e&&/[ऀ-ॿ]/.test(c.t)?c.e+" · ":"")+c.b+(c.n&&/^\d+$/.test(c.n)?" · Ch "+c.n:""),live:!!Lx,soon:!Lx,op:Lx?1:.72,aria:c.t};
+        if(Lx){const x=this.islStats(p,Lx);it.isl=x.rounds?("🏝️ "+Lx.title+" · "+x.rounds+" round"+(x.rounds>1?"s":"")+" · "+x.rev+" revision"+(x.rev===1?"":"s")+" · last "+L.fmtDay(x.last)):("🏝️ "+Lx.title+" · not played yet");it.barW=(x.total?Math.round(x.mastered*100/x.total):0)+"%";it.cm=x.mastered+"/"+x.total;it.aria=c.t+": "+x.mastered+" of "+x.total+" mastered";
+          it.go=()=>{if(p!==S.player){this.toast("That's "+L.NAMES[p]+"'s island. Switch player to play it.");return}this.startLesson(Lx)}}
+        else it.go=()=>this.toast("🔜 "+c.t+" is coming soon. Send Dad photos of the chapter!");
+        return it})}}).filter(Boolean);
+    o.noMatch=!shown;o.noMatchT="No chapter matches “"+S.chapSearch+"”. Try another word, like “water” or “chidiya”.";
+    return o;
+  }
+  noteVals(){const S=this.state,L=this.L,o={};
+    o.aboutOpts=[...(S.noteCtx?[{key:"ctx",v:"ctx",t:S.noteCtx.label}]:[]),...L.PLACES.map(x=>({key:x,v:x,t:x}))];o.noteAbout=S.noteAbout;o.onAbout=e=>this.setState({noteAbout:e.target.value});
+    o.kinds=Object.entries(L.KINDS).map(([k,t])=>({key:k,ic:t.split(" ")[0],t:t.split(" ").slice(1).join(" "),sel:S.noteKind===k,bg:S.noteKind===k?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--opt)",ink:S.noteKind===k?"#3A2600":"var(--optInk)",pick:()=>this.setState({noteKind:S.noteKind===k?null:k})}));
+    o.noteText=S.noteText;o.onText=e=>{this.store("ab_note_draft",e.target.value);this.setState({noteText:e.target.value,noteErr:false})};o.noteErr=S.noteErr;
+    o.cancel=()=>this.setScreen(S.noteBack);o.save=()=>this.saveNote();return o}
+  notesVals(){
+    const L=this.L,S=this.state,p=S.player,all=this.notesAll(),open=all.filter(n=>!n.done),fixed=all.filter(n=>n.done),o={};
+    o.newNote=()=>this.openNote(null,"notes",S.lastPlace);o.noNotes=!all.length;
+    const card=n=>{const tags=[];if(p==="dad"&&!n.done&&this.fromBoys(n)&&(n.at||0)>S.notesSeenPrev)tags.push({key:"new",ic:"🆕",t:"New",bg:"linear-gradient(180deg,#FFB5A8,#FF6F61)",ink:"#fff"});if(n.kind&&L.KINDS[n.kind]){const kk=L.KINDS[n.kind].split(" ");tags.push({key:"kind",ic:kk[0],t:kk.slice(1).join(" "),bg:"var(--chip)",ink:"var(--chipInk)"})}
+      const arm=S.delArm===n.id;
+      return {key:n.id,tags,about:n.about||"Whole app",hasQ:!!n.q,q:"“"+(n.q||"")+"”",text:n.text,by:(n.by||"Founder")+" · "+L.fmtWhen(n.at),op:n.done?.72:1,delT:arm?"Delete?":"🗑",delBg:arm?"linear-gradient(180deg,#FFB5A8,#FF6F61)":"var(--opt)",delInk:arm?"#fff":"var(--optInk)",
+        del:()=>{clearTimeout(this._delT);if(this.state.delArm===n.id){n.del=true;this.putNote(n);this.setState({delArm:null});this.toast("Note deleted")}else{this.setState({delArm:n.id});this._delT=setTimeout(()=>this.setState({delArm:null}),3000)}},
+        tickBg:n.done?"linear-gradient(180deg,#C9F7B4,#7ED957)":"var(--opt)",tickInk:n.done?"#0F4A1C":"var(--optInk)",tick:()=>{n.done=!n.done;this.putNote(n);this.toast(n.done?"Marked fixed 🎉":"Back on the list");this.forceUpdate()}}};
+    o.sections=[];if(open.length)o.sections.push({key:"open",h:"To fix ("+open.length+")",cards:open.map(card)});if(fixed.length)o.sections.push({key:"fixed",h:"Fixed ("+fixed.length+")",cards:fixed.map(card)});
+    o.hasOpen=open.length>0;o.waHref="https://wa.me/?text="+encodeURIComponent(this.notesText());o.copy=()=>this.copyNotes();o.copyShown=S.copyBoxShown;o.copyText=this.notesText();
+    o.storeNote=S.db?"Notes are saved in the hive too ✓":(L.storageOK?"Notes are saved on this device. Send them to Dad so they're safe.":"This browser can't keep notes after you close it. Send each note to Dad right after you write it.");
+    return o;
+  }
+  navVals(){const S=this.state,scr=S.screen,c=this.notesAll().filter(n=>!n.done).length,nn=S.player==="dad"?this.newNotesForDad().length:0,me=this.avOf(S.player);
+    const items=[["map","🗺️","Map",()=>this.goMap()],["chapters","📚","Chapters",()=>this.goChapters()],["board","🏆","Board",()=>this.goBoard()],["notes","📝","Notes",()=>this.goNotes()],["profile","🐝","Profile",()=>this.goProfile()]];
+    return {navItems:items.map(([k,ic,l,go])=>{const sel=scr===k,av=k==="profile"&&me?this.L.avatarURL(me):null;return {key:k,ic,l,go,sel,bg:sel?"linear-gradient(180deg,#FFE680,#FFC61A)":"transparent",ink:sel?"#3A2600":"var(--soft)",shadow:sel?"inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35)":"none",badge:k==="notes"&&c?String(c):"",hasBadge:k==="notes"&&c>0,hasDot:k==="notes"&&nn>0,avUrl:av,noAv:!av,aria:k==="notes"?"Notes, "+c+" open"+(nn?", "+nn+" new":""):l}})}}
+}
+</script>
+</body></html>
