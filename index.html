@@ -30,7 +30,7 @@
       </button>
       <button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.1 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.2 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -150,6 +150,7 @@
       <div style="position:absolute;left:50%;top:-78px;width:130px;margin-left:-65px;filter:drop-shadow(0 14px 10px rgba(0,0,0,.35));animation:rbFloat 3s ease-in-out infinite"><svg viewBox="0 0 140 150" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;display:block"><g fill="url(#rbW)" stroke="#9ED5F2" stroke-width="1.5"><path d="M33 56 C10 40 -2 58 6 76 C12 88 26 86 33 76 Z"></path><path d="M107 60 C130 44 142 60 134 78 C128 90 114 88 107 80 Z"></path></g><g fill="none" stroke="#2A1B10" stroke-width="3" stroke-linecap="round"><path d="M58 41 C57 30 56 22 54 14 c-6 -8 -16 2 -8 8 c5 4 11 -3 6 -6"></path><path d="M84 40 C88 30 92 22 97 13 c6 -8 16 2 8 8 c-5 4 -11 -3 -6 -6"></path></g><path d="M70 124 L65 140 L75 140 Z" fill="#2A1B10"></path><rect x="30" y="40" width="80" height="84" rx="20" fill="url(#rbB)"></rect><g clip-path="url(#rbC)"><rect x="26" y="84" width="88" height="11" fill="url(#rbS)"></rect><rect x="26" y="103" width="88" height="11" fill="url(#rbS)"></rect></g><path d="M40 54 Q44 45 57 44" stroke="#fff" stroke-opacity=".75" stroke-width="4" stroke-linecap="round" fill="none"></path><path d="M48 62 Q56 56 64 62" stroke="#1C120B" stroke-width="3.5" stroke-linecap="round" fill="none"></path><path d="M76 62 Q84 56 92 62" stroke="#1C120B" stroke-width="3.5" stroke-linecap="round" fill="none"></path><ellipse cx="45" cy="74" rx="5" ry="3" fill="#FF9A8B" fill-opacity=".7"></ellipse><ellipse cx="95" cy="74" rx="5" ry="3" fill="#FF9A8B" fill-opacity=".7"></ellipse><path d="M58 76 Q70 92 82 76 Z" fill="#1C120B"></path></svg></div>
       <h2 style="margin:50px 0 0;font:700 30px/1.1 Fredoka,sans-serif;color:var(--ink)">{{ doneTitle }}</h2>
       <div style="font:700 54px/1 Fredoka,sans-serif;color:#3A2600;padding:10px 26px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -6px 0 rgba(160,100,0,.35),0 14px 22px -10px var(--shadow);animation:popIn .5s cubic-bezier(.2,.7,.3,1)">{{ donePts }}</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><span style="padding:8px 14px;border-radius:999px;background:var(--opt);color:var(--optInk);font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 var(--cardLo)">🎯 {{ donePct }}</span><span style="padding:8px 14px;border-radius:999px;background:var(--opt);color:var(--optInk);font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 var(--cardLo)" aria-label="Time for this round">⏱️ {{ doneTime }}</span></div>
       <p style="margin:0;font:700 14px/1.4 Nunito,sans-serif;color:var(--soft);text-wrap:pretty">{{ doneMsg }}</p>
       <sc-if value="{{ hasExtras }}"><div style="width:100%;display:flex;flex-direction:column;gap:6px"><sc-for list="{{ doneExtras }}" as="x" hint-placeholder-count="0"><div style="padding:10px 14px;border-radius:16px;background:var(--hint);color:var(--hintInk);font:800 13px/1.35 Nunito,sans-serif;text-align:left">{{ x.t }}</div></sc-for></div></sc-if>
       <p style="margin:10px 0 0;font:600 18px/1 Fredoka,sans-serif;color:var(--ink)">What next?</p>
@@ -533,7 +534,7 @@ class Component extends DCLogic {
   goldenOf(p){const r=this.load("ab_"+p,null);return (r&&r.season===this.L.SEASON&&r.golden)||[]}
   startLesson(Lx){const round=this.pickRound(Lx);if(!round.length){this.toast("No questions on this island yet");return}
     const why=this.practiceWhy(this.state.player);
-    this.setState({lesson:Lx,qi:0,earned:0,newPts:0,revCount:0,roundLog:[],round,order:this.L.shuffle([0,1,2,3].slice(0,round[0].o.length)),attempted:false,hintUsed:false,firstWrong:0,stung:false,practice:why,dimmed:[],fb:null,wrongFlash:null,nextOn:false,learnOpen:false,screen:"lesson"},()=>{window.scrollTo(0,0);if(why)this.toast(this.practiceMsg(why))})}
+    this.setState({lesson:Lx,qi:0,earned:0,newPts:0,revCount:0,roundLog:[],roundStart:Date.now(),round,order:this.L.shuffle([0,1,2,3].slice(0,round[0].o.length)),attempted:false,hintUsed:false,firstWrong:0,stung:false,practice:why,dimmed:[],fb:null,wrongFlash:null,nextOn:false,learnOpen:false,screen:"lesson"},()=>{window.scrollTo(0,0);if(why)this.toast(this.practiceMsg(why))})}
   isScored(Q){const s=this.islP(this.PG(),this.state.lesson.id).q[Q.id];return !!(s&&s.sc)}
   learnFor(Q){const S=this.state;return (S.lesson&&this.D.LEARN[S.lesson.id]&&Q&&this.D.LEARN[S.lesson.id][Q.c])||null}
   answer(i,btn){
@@ -581,7 +582,8 @@ class Component extends DCLogic {
     const m=this.masteredCount(lesson),tw=this.twiceCount(lesson),gdn=(s.golden||[]).includes(lesson.id),ord=this.mapOrder(p),i=ord.findIndex(x=>x.id===lesson.id);
     const title=S.stung?"Ouch! The bee stung 🐝":pr?"Practice round 🧪":"Island cleared! 🏝️";
     const msg=(pr?this.practiceMsg(pr).replace(/^\S+ /,""):S.stung?"Round over after "+L.STING_AT+" wrong first tries. Points earned stay; no honeycomb cell this time.":S.newPts>0?"new points in the hive":"revision round: brain points only 🧠")+" · "+m+"/"+lesson.qs.length+" mastered"+(!gdn&&lesson.qs.length&&m>=lesson.qs.length?" · 🌟 "+tw+"/"+lesson.qs.length+" right twice for golden":"")+" · streak "+s.streak+" 🔥";
-    this.setState({done,donePts:"+"+S.newPts,doneTitle:title,doneMsg:msg,doneExtras:ex.map((x,k)=>({key:k,t:x})),doneNav:{prev:i>0?ord[i-1]:null,next:(i>=0&&i<ord.length-1)?ord[i+1]:null},screen:"done"},()=>{window.scrollTo(0,0);this.unlocked(p,true);if(!S.stung)this.bigCelebrate()});
+    const secs=Math.max(1,Math.round((Date.now()-(S.roundStart||Date.now()))/1000)),okN=S.roundLog.filter(r=>r.ok).length,ansN=S.roundLog.length||1;
+    this.setState({done,donePts:"+"+S.newPts,doneTitle:title,doneMsg:msg,donePct:Math.round(okN*100/ansN)+"% right first time",doneTime:secs<60?secs+" sec":Math.floor(secs/60)+":"+String(secs%60).padStart(2,"0")+" min",doneExtras:ex.map((x,k)=>({key:k,t:x})),doneNav:{prev:i>0?ord[i-1]:null,next:(i>=0&&i<ord.length-1)?ord[i+1]:null},screen:"done"},()=>{window.scrollTo(0,0);this.unlocked(p,true);if(!S.stung)this.bigCelebrate()});
   }
 
   /* confetti + bee */
@@ -742,7 +744,7 @@ class Component extends DCLogic {
     o.nextOn=S.nextOn;o.nextLabel=S.nextLabel;o.next=()=>this.nextQ();
     return o;
   }
-  doneVals(){const S=this.state,d=S.doneNav;return {donePts:S.donePts,doneMsg:S.doneMsg,doneTitle:S.doneTitle||"Island cleared! 🏝️",doneExtras:S.doneExtras||[],hasExtras:(S.doneExtras||[]).length>0,reviseSub:S.lesson?S.lesson.title:"",noPrev:!d.prev,noNext:!d.next,prevOp:d.prev?1:.45,nextOp:d.next?1:.45,prevSub:d.prev?d.prev.title:"start of the map",nextSub:d.next?d.next.title:"end of the map",
+  doneVals(){const S=this.state,d=S.doneNav;return {donePts:S.donePts,donePct:S.donePct||"",doneTime:S.doneTime||"",doneMsg:S.doneMsg,doneTitle:S.doneTitle||"Island cleared! 🏝️",doneExtras:S.doneExtras||[],hasExtras:(S.doneExtras||[]).length>0,reviseSub:S.lesson?S.lesson.title:"",noPrev:!d.prev,noNext:!d.next,prevOp:d.prev?1:.45,nextOp:d.next?1:.45,prevSub:d.prev?d.prev.title:"start of the map",nextSub:d.next?d.next.title:"end of the map",
     doneRevise:()=>this.startLesson(S.lesson),donePrev:()=>{if(d.prev)this.startLesson(d.prev)},doneNext:()=>{if(d.next)this.startLesson(d.next)},doneBack:()=>this.goMap(),noteDone:()=>this.openNote({label:S.lesson.title,q:""},"done")}}
   profileVals(){
     const L=this.L,p=this.state.player,have=this.unlocked(p,false),av=Object.assign({},L.AV_DEFAULT,this.load("ab_av_"+p,null)||{}),o={profAv:L.avatarURL(av),profName:L.NAMES[p],profRole:L.ROLE[p]||""};
