@@ -30,7 +30,7 @@
       </button>
       <button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.2 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.3 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -403,6 +403,17 @@
   </sc-if>
   </sc-if>
 
+  <!-- WHAT'S NEW -->
+  <sc-if value="{{ newOn }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="newTitle" style="position:fixed;inset:0;background:rgba(5,20,40,.6);display:flex;align-items:center;justify-content:center;z-index:75;padding:20px">
+    <div style="width:100%;max-width:420px;max-height:90vh;overflow:auto;padding:22px 20px 20px;border-radius:28px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 20px 40px rgba(0,0,0,.45);display:flex;flex-direction:column;gap:12px;color:var(--ink)">
+      <h3 id="newTitle" style="margin:0;font:700 24px/1.1 Fredoka,sans-serif">🐝 What's new in AcadaBee</h3>
+      <sc-for list="{{ newItems }}" as="n" hint-placeholder-count="4"><div style="display:flex;gap:10px;align-items:flex-start"><span style="flex:none;font-size:22px;line-height:1.2">{{ n.ic }}</span><span style="font:700 14px/1.45 Nunito,sans-serif;text-wrap:pretty">{{ n.t }}</span></div></sc-for>
+      <button onClick="{{ closeNew }}" style="margin-top:4px;border:0;cursor:pointer;padding:14px;border-radius:18px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:700 18px/1 Fredoka,sans-serif;box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -6px 0 rgba(160,100,0,.35)" style-active="transform:translateY(3px)">Got it! 🐝</button>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- LEARN SHEET -->
   <sc-if value="{{ learnOpen }}" hint-placeholder-val="{{ false }}">
   <div onClick="{{ learnOverlay }}" role="dialog" aria-modal="true" aria-labelledby="learnTitle" style="position:fixed;inset:0;background:rgba(5,20,40,.55);display:flex;align-items:flex-end;justify-content:center;z-index:70;padding:0 10px">
@@ -527,7 +538,12 @@ class Component extends DCLogic {
   sleeping(){const h=new Date().getHours();return h>=this.L.SLEEP_FROM||h<this.L.SLEEP_TO}
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
   practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";return null}
-  practiceMsg(w){const L=this.L;return {prelaunch:"🧪 Practice round: Season 1 starts "+L.fmtDay(L.LAUNCH)+". No ⭐ or 💎 yet.",sleep:"🌙 The hive is sleeping (9 pm–6 am): practice only, no ⭐ or 💎.",cap:"🛑 "+L.DAY_CAP+" rounds today! Practice only now: no more ⭐ or 💎 today."}[w]||""}
+  whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0];return [
+    {key:"sleep",ic:"🌙",t:"The hive now sleeps at 10 pm, not 9 pm. Rounds earn ⭐ and 💎 until 10."},
+    {key:"score",ic:"🎯",t:"After every round you see your % right first time and how long it took ⏱️. "+Z+"'s idea!"},
+    {key:"gold",ic:"🌟",t:"Golden islands: a full ring means every question is right once. Get each one right twice to turn it golden. The island shows how many are left, and rounds give you the ones you still need."},
+    {key:"dad",ic:"👔",t:"Dad has his own corner now, with his Duolingo and steps goals. He still counts for the Team Vault!"}]}
+  practiceMsg(w){const L=this.L;return {prelaunch:"🧪 Practice round: Season 1 starts "+L.fmtDay(L.LAUNCH)+". No ⭐ or 💎 yet.",sleep:"🌙 The hive is sleeping (10 pm–6 am): practice only, no ⭐ or 💎.",cap:"🛑 "+L.DAY_CAP+" rounds today! Practice only now: no more ⭐ or 💎 today."}[w]||""}
   isHindi(id){return this.L.HINDI_ISLANDS.includes(id)}
   addGems(s,n,why){const t=this.L.today();s.gems=s.gems||[];s.gems.push({w:this.L.mondayOf(t),d:t,n,why})}
   isGolden(p,Lx){const g=this.progOf(p),ip=g&&g.isl[Lx.id];if(!ip||!Lx.qs.length)return false;return Lx.qs.every(Q=>ip.q&&ip.q[Q.id]&&(ip.q[Q.id].ok||0)>=2)}
@@ -678,6 +694,7 @@ class Component extends DCLogic {
   renderVals(){
     const S=this.state;if(!S.ready||!this.L)return {ready:false,isPick:true,isApp:false,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,zNoAv:true,rNoAv:true,dNoAv:true,pickZ:()=>{},pickR:()=>{},pickD:()=>{}};
     const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",navOn:["map","board","notes","chapters","profile","shop"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
+    o.newOn=!S.newClosed&&this.load("ab_seen_ver",null)!==L.APP_VERSION;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
     /* pick */
     ["p1","p2","dad"].forEach((k,i)=>{const c="zrd"[i],a=this.avNode(k);o[c+"AvUrl"]=a.avUrl;o[c+"NoAv"]=a.noAv;o[c+"Prev"]=S.prevWho===k;o[c+"World"]=L.WORLDS[this.worldOf(k)].name;o[c+"Name"]=L.NAMES[k];o[c+"Role"]=L.ROLE[k]||""});
     o.pickZ=()=>this.pick("p1");o.pickR=()=>this.pick("p2");o.pickD=()=>this.pick("dad");
