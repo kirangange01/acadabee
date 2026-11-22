@@ -159,7 +159,7 @@ export const GEMS={hive:1000,chest:300,level:200,golden:500,team:300};
 /* Dad (from 16 Nov 2026): no islands or points; two goals only: Duolingo every day + an average of DAD_STEPS_AVG steps a day */
 export const DAD_STEPS_AVG=7000, DAD_RULE_FROM="2026-11-16";
 /* "What's new" pop-up: shown once per device for each new version */
-export const APP_VERSION="1.3";
+export const APP_VERSION="1.4";
 export const CELLS_PER_HIVE=20, DAY_CAP=20, STING_AT=3, SLEEP_FROM=22, SLEEP_TO=6, VAULT_HOUR=21;
 export const FREEZER={price:400,max:2};
 export const HINDI_ISLANDS=["z-hindi","z-muha","r-hindi","r-nakli","d-hindi"];

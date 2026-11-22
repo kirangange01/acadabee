@@ -6,7 +6,9 @@
   var CFG = window.ACADABEE_CONFIG || {};
   var configured = !!(CFG.supabaseUrl && CFG.supabaseKey && window.supabase && window.supabase.createClient);
   var base = new URL(".", document.currentScript.src).href;
-  var client = null, session = null, names = null, mods = null, dbResolve;
+  var client = null, session = null, names = null, mods = null, dbResolve, family = null, role = null;
+  var USER_DOMAIN = "@acadabee.com"; /* a username like "sam" signs in as sam@acadabee.com */
+  function toEmail(u) { u = String(u || "").trim().toLowerCase(); return u.indexOf("@") >= 0 ? u : (u ? u + USER_DOMAIN : ""); }
   var dbReady = new Promise(function (r) { dbResolve = r; });
   window.claude = { use: function (k) { return k === "db" ? dbReady : Promise.resolve(null); } };
 
@@ -54,11 +56,11 @@
 
   /* ---------- the hive (Supabase) behind the app's db interface ---------- */
   function shimDb() {
-    var uid = session.user.id;
+    var owner = family || session.user.id;
     return {
       doc: function (path) {
         return { set: function (obj) {
-          return client.from("hive").upsert({ owner: uid, k: path, v: obj, updated_at: new Date().toISOString() }, { onConflict: "owner,k" })
+          return client.from("hive").upsert({ owner: owner, k: path, v: obj, updated_at: new Date().toISOString() }, { onConflict: "owner,k" })
             .then(function (r) { if (r.error) throw r.error; return true; });
         } };
       },
@@ -110,16 +112,16 @@
 
   /* ---------- screens ---------- */
   function signInScreen(msg) {
-    var g = gate('<h1>🐝 AcadaBee</h1><p>Sign in once on this device with the family login. Dad has it.</p>' +
-      '<div class="row"><label for="siEmail">Family email</label><input id="siEmail" type="email" autocomplete="username"></div>' +
+    var g = gate('<h1>🐝 AcadaBee</h1><p>Sign in once on this device with your AcadaBee username. Dad has them.</p>' +
+      '<div class="row"><label for="siEmail">Username</label><input id="siEmail" type="text" autocomplete="username" autocapitalize="none" autocorrect="off" spellcheck="false" placeholder="your username"></div>' +
       '<div class="row"><label for="siPass">Password</label><input id="siPass" type="password" autocomplete="current-password"></div>' +
       (msg ? '<p class="err" id="siErr">' + esc(msg) + "</p>" : "") + '<button id="siGo" type="button">Sign in</button>');
     var go = function () {
-      var e = g.querySelector("#siEmail").value.trim(), p = g.querySelector("#siPass").value;
-      if (!e || !p) return signInScreen("Type the family email and password.");
+      var e = toEmail(g.querySelector("#siEmail").value), p = g.querySelector("#siPass").value;
+      if (!e || !p) return signInScreen("Type your username and password.");
       g.querySelector("#siGo").textContent = "Signing in…";
       client.auth.signInWithPassword({ email: e, password: p }).then(function (r) {
-        if (r.error || !r.data || !r.data.session) return signInScreen("That didn't work. Check the family email and password.");
+        if (r.error || !r.data || !r.data.session) return signInScreen("That didn't work. Check your username and password.");
         session = r.data.session; afterSignIn();
       });
     };
@@ -137,9 +139,14 @@
       shimDb().doc("family/profile").set(v).then(function () { names = v; lsSet("ab_family", v); ready(shimDb()); }, function () { familyScreen("Couldn't save. Check the internet and try again."); });
     };
   }
+  function whoAmI() {
+    return Promise.all([client.rpc("my_family"), client.rpc("my_role")]).then(function (r) {
+      family = (r[0] && !r[0].error && r[0].data) || session.user.id; role = (r[1] && !r[1].error && r[1].data) || null;
+    }, function () { family = session.user.id; role = null; }).then(function () { window.ACADABEE_ROLE = role; });
+  }
   function afterSignIn() {
     gate("<h1>🐝 AcadaBee</h1><p>Opening the hive…</p>");
-    hydrate().then(function () { if (!names || !names.p1) return familyScreen(); return ready(shimDb()); },
+    whoAmI().then(hydrate).then(function () { if (!names || !names.p1) return familyScreen(); return ready(shimDb()); },
       function () { /* offline or blocked: play on this device, sync later */ names = names || lsGet("ab_family"); ready(shimDb()); });
   }
   function start() {

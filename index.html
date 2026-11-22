@@ -13,24 +13,24 @@
     </div>
     <div style="text-align:center;display:flex;flex-direction:column;gap:6px;position:relative">
       <h1 style="margin:0;font:700 40px/1 Fredoka,sans-serif;color:#fff;letter-spacing:-.01em;text-shadow:0 3px 0 rgba(0,0,0,.25)">Who's playing?</h1>
-      <p style="margin:0;font:700 15px/1.3 Nunito,sans-serif;color:#C9F3FF">Founders only. Tap your name.</p>
+      <p style="margin:0;font:700 15px/1.3 Nunito,sans-serif;color:#C9F3FF">{{ pickHint }}</p>
     </div>
     <div style="display:flex;flex-direction:column;gap:14px;width:100%;margin-top:8px;position:relative">
-      <button onClick="{{ pickZ }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:26px;background:linear-gradient(160deg,#1E4F7A,#0E2C4F);box-shadow:inset 0 3px 0 rgba(255,255,255,.16),inset 0 -8px 0 rgba(0,0,0,.35),0 16px 26px -10px rgba(0,0,0,.6);color:#fff;text-align:left" style-active="transform:translateY(3px)">
+      <sc-if value="{{ showZ }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickZ }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:26px;background:linear-gradient(160deg,#1E4F7A,#0E2C4F);box-shadow:inset 0 3px 0 rgba(255,255,255,.16),inset 0 -8px 0 rgba(0,0,0,.35),0 16px 26px -10px rgba(0,0,0,.6);color:#fff;text-align:left" style-active="transform:translateY(3px)">
         <span style="flex:none;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:radial-gradient(circle at 35% 30%,#8FF3F5,#2BB9C2 70%);box-shadow:inset 0 -5px 0 rgba(0,60,70,.35),0 6px 10px -4px rgba(0,0,0,.5);overflow:hidden"><sc-if value="{{ zAvUrl }}" hint-placeholder-val="{{ false }}"><img src="{{ zAvUrl }}" alt="" style="width:54px;height:54px;display:block"></sc-if><sc-if value="{{ zNoAv }}" hint-placeholder-val="{{ true }}">🎨</sc-if></span>
         <span style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"><span style="font:600 22px/1.1 Fredoka,sans-serif">{{ zName }}</span><span style="font:700 13px/1.2 Nunito,sans-serif;color:#8FD9E8">{{ zRole }} · {{ zWorld }}</span></span>
         <sc-if value="{{ zPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
         <span style="font:600 20px/1 Fredoka,sans-serif;color:#45E0E6">→</span>
-      </button>
-      <button onClick="{{ pickR }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:26px;background:linear-gradient(160deg,#FFF6DD,#FFE1A8);box-shadow:inset 0 3px 0 rgba(255,255,255,.9),inset 0 -8px 0 rgba(160,110,30,.22),0 16px 26px -10px rgba(0,40,60,.45);color:#0B2E3F;text-align:left" style-active="transform:translateY(3px)">
+      </button></sc-if>
+      <sc-if value="{{ showR }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickR }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:26px;background:linear-gradient(160deg,#FFF6DD,#FFE1A8);box-shadow:inset 0 3px 0 rgba(255,255,255,.9),inset 0 -8px 0 rgba(160,110,30,.22),0 16px 26px -10px rgba(0,40,60,.45);color:#0B2E3F;text-align:left" style-active="transform:translateY(3px)">
         <span style="flex:none;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;font-size:28px;background:radial-gradient(circle at 35% 30%,#FFB5A8,#FF6F61 70%);box-shadow:inset 0 -5px 0 rgba(150,30,20,.3),0 6px 10px -4px rgba(0,0,0,.3);overflow:hidden"><sc-if value="{{ rAvUrl }}" hint-placeholder-val="{{ false }}"><img src="{{ rAvUrl }}" alt="" style="width:54px;height:54px;display:block"></sc-if><sc-if value="{{ rNoAv }}" hint-placeholder-val="{{ true }}">🦈</sc-if></span>
         <span style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"><span style="font:600 22px/1.1 Fredoka,sans-serif">{{ rName }}</span><span style="font:700 13px/1.2 Nunito,sans-serif;color:#7A5A2E">{{ rRole }} · {{ rWorld }}</span></span>
         <sc-if value="{{ rPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
         <span style="font:600 20px/1 Fredoka,sans-serif;color:#FF6F61">→</span>
-      </button>
-      <button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button>
+      </button></sc-if>
+      <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button></sc-if>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.3 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.4 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -538,11 +538,12 @@ class Component extends DCLogic {
   sleeping(){const h=new Date().getHours();return h>=this.L.SLEEP_FROM||h<this.L.SLEEP_TO}
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
   practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";return null}
-  whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0];return [
-    {key:"sleep",ic:"🌙",t:"The hive now sleeps at 10 pm, not 9 pm. Rounds earn ⭐ and 💎 until 10."},
-    {key:"score",ic:"🎯",t:"After every round you see your % right first time and how long it took ⏱️. "+Z+"'s idea!"},
-    {key:"gold",ic:"🌟",t:"Golden islands: a full ring means every question is right once. Get each one right twice to turn it golden. The island shows how many are left, and rounds give you the ones you still need."},
-    {key:"dad",ic:"👔",t:"Dad has his own corner now, with his Duolingo and steps goals. He still counts for the Team Vault!"}]}
+  whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0],seen=parseFloat(this.load("ab_seen_ver",null))||0;return [
+    {v:1.4,key:"login",ic:"🔑",t:"Everyone has their own login now. Dad has your username and password. Your scores stay exactly as they are."},
+    {v:1.3,key:"sleep",ic:"🌙",t:"The hive now sleeps at 10 pm, not 9 pm. Rounds earn ⭐ and 💎 until 10."},
+    {v:1.3,key:"score",ic:"🎯",t:"After every round you see your % right first time and how long it took ⏱️. "+Z+"'s idea!"},
+    {v:1.3,key:"gold",ic:"🌟",t:"Golden islands: a full ring means every question is right once. Get each one right twice to turn it golden. The island shows how many are left, and rounds give you the ones you still need."},
+    {v:1.3,key:"dad",ic:"👔",t:"Dad has his own corner now, with his Duolingo and steps goals. He still counts for the Team Vault!"}].filter(x=>x.v>seen)}
   practiceMsg(w){const L=this.L;return {prelaunch:"🧪 Practice round: Season 1 starts "+L.fmtDay(L.LAUNCH)+". No ⭐ or 💎 yet.",sleep:"🌙 The hive is sleeping (10 pm–6 am): practice only, no ⭐ or 💎.",cap:"🛑 "+L.DAY_CAP+" rounds today! Practice only now: no more ⭐ or 💎 today."}[w]||""}
   isHindi(id){return this.L.HINDI_ISLANDS.includes(id)}
   addGems(s,n,why){const t=this.L.today();s.gems=s.gems||[];s.gems.push({w:this.L.mondayOf(t),d:t,n,why})}
@@ -620,8 +621,9 @@ class Component extends DCLogic {
   }
 
   /* hive sync (optional) */
+  roleKey(){const r=window.ACADABEE_ROLE;return (r==="p1"||r==="p2"||r==="dad")?r:null}
   async initDb(){let db=null;try{db=await (window.claude&&window.claude.use?window.claude.use("db"):null)}catch(e){db=null}
-    this.setState({db});if(!db)return;await this.loadSnap();await this.pullNotes();await this.pullWishes();await this.fetchBoard();this.announceNotes()}
+    this.setState({db});const rk=this.roleKey();if(rk&&this.state.screen==="pick"&&!this.state.player)this.pick(rk);if(!db)return;await this.loadSnap();await this.pullNotes();await this.pullWishes();await this.fetchBoard();this.announceNotes()}
   async pullWishes(){const db=this.state.db;if(!db)return;try{const snap=await db.collection("wishes").get();const m={};snap.forEach(d=>{const n=d.data();if(n&&n.id)m[n.id]=n});this.setState({dbWishes:m})}catch(e){}}
   async syncUp(s){const S=this.state;if(!S.db||!S.player)return;try{await S.db.doc("players/"+S.player).set(Object.assign({},s,{p:S.player,name:this.L.NAMES[S.player],av:this.load("ab_av_"+S.player,null),updatedAt:s.updatedAt||Date.now()}))}catch(e){}}
   async loadSnap(){const db=this.state.db;if(!db)return;const snap={progress:{},dadlog:null},N=this.L.NAMES;
@@ -696,6 +698,7 @@ class Component extends DCLogic {
     const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",navOn:["map","board","notes","chapters","profile","shop"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
     o.newOn=!S.newClosed&&this.load("ab_seen_ver",null)!==L.APP_VERSION;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
     /* pick */
+    {const rk=this.roleKey();o.showZ=!rk||rk==="p1";o.showR=!rk||rk==="p2";o.showD=!rk||rk==="dad";o.pickHint=rk?"Tap to play. Not you? Sign out below.":"Founders only. Tap your name."}
     ["p1","p2","dad"].forEach((k,i)=>{const c="zrd"[i],a=this.avNode(k);o[c+"AvUrl"]=a.avUrl;o[c+"NoAv"]=a.noAv;o[c+"Prev"]=S.prevWho===k;o[c+"World"]=L.WORLDS[this.worldOf(k)].name;o[c+"Name"]=L.NAMES[k];o[c+"Role"]=L.ROLE[k]||""});
     o.pickZ=()=>this.pick("p1");o.pickR=()=>this.pick("p2");o.pickD=()=>this.pick("dad");
     if(!p)return o;
