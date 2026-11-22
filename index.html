@@ -30,7 +30,7 @@
       </button></sc-if>
       <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button></sc-if>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.6 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.7 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -540,6 +540,7 @@ class Component extends DCLogic {
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
   practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";return null}
   whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0],seen=parseFloat(this.load("ab_seen_ver",null))||0;return [
+    {v:1.7,key:"wsmaths",ic:"📝",t:"New questions from your teachers' PA-2 practice sheets are on Expression, Triangle and Compass Islands. Rounds give you the new ones first. All the best for Maths, "+Z+"! 🍀"},
     {v:1.6,key:"double",ic:"💎",t:"Team weeks now DOUBLE your gems! If all three of you hit your goals, the Team Vault opens with twice your gems (at least +300) and a honey jar 🍯."},
     {v:1.6,key:"vaultmap",ic:"🔐",t:"Your Map shows the Team Vault: how many gems are waiting and what the team still has to do before Sunday 9 pm."},
     {v:1.6,key:"half",ic:"🏝️",t:"Exam weeks: play every day plus HALF of your PA-2 islands, any you like. Good luck in the exams! 🍀"},
