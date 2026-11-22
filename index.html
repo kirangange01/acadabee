@@ -28,14 +28,9 @@
         <sc-if value="{{ rPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
         <span style="font:600 20px/1 Fredoka,sans-serif;color:#FF6F61">→</span>
       </button>
-      <button onClick="{{ pickD }}" style="border:0;cursor:pointer;width:100%;display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:26px;background:linear-gradient(160deg,#F2F7F9,#D7E3E9);box-shadow:inset 0 3px 0 rgba(255,255,255,.9),inset 0 -7px 0 rgba(40,70,90,.18),0 14px 22px -10px rgba(0,40,60,.35);color:#0B2E3F;text-align:left" style-active="transform:translateY(3px)">
-        <span style="flex:none;width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font-size:24px;background:radial-gradient(circle at 35% 30%,#FFE680,#FFC61A 70%);box-shadow:inset 0 -5px 0 rgba(160,100,0,.3),0 6px 10px -4px rgba(0,0,0,.3);overflow:hidden"><sc-if value="{{ dAvUrl }}" hint-placeholder-val="{{ false }}"><img src="{{ dAvUrl }}" alt="" style="width:46px;height:46px;display:block"></sc-if><sc-if value="{{ dNoAv }}" hint-placeholder-val="{{ true }}">💼</sc-if></span>
-        <span style="display:flex;flex-direction:column;gap:2px;min-width:0;flex:1"><span style="font:600 20px/1.1 Fredoka,sans-serif">Dad</span><span style="font:700 13px/1.2 Nunito,sans-serif;color:#4B6A7C">Investor &amp; Customer No. 1 · {{ dWorld }}</span></span>
-        <sc-if value="{{ dPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
-        <span style="font:600 20px/1 Fredoka,sans-serif;color:#4B6A7C">→</span>
-      </button>
+      <button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.0 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.1 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -46,9 +41,9 @@
     <sc-if value="{{ navOn }}">
     <div style="display:flex;align-items:center;gap:10px">
       <span style="font:600 24px/1 Fredoka,sans-serif;color:var(--ink);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ headTitle }}</span>
-      <span style="margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:700 16px/1 Fredoka,sans-serif;white-space:nowrap;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow)">⭐ {{ pts }}</span>
-      <button onClick="{{ goShop }}" aria-label="Gems and the shop" style="flex:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:999px;background:linear-gradient(180deg,#C9F7FF,#45C8E6);color:#06303A;font:700 16px/1 Fredoka,sans-serif;white-space:nowrap;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(0,90,120,.35),0 8px 14px -6px var(--shadow)" style-active="transform:translateY(2px)">💎 {{ gems }}</button>
-      <button onClick="{{ goPick }}" aria-label="Switch player" style="flex:none;border:0;cursor:pointer;padding:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--opt);box-shadow:inset 0 -4px 0 var(--cardLo),0 6px 10px -4px var(--shadow);font-size:20px;overflow:hidden" style-active="transform:translateY(2px)"><sc-if value="{{ whoAvUrl }}"><img src="{{ whoAvUrl }}" alt="" style="width:34px;height:34px;display:block"></sc-if><sc-if value="{{ whoNoAv }}">{{ whoEmoji }}</sc-if></button>
+      <span style="margin-left:auto;flex:none;display:inline-flex;align-items:center;gap:6px;padding:8px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:700 16px/1 Fredoka,sans-serif;white-space:nowrap;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow);display:{{ pillDisp }}">⭐ {{ pts }}</span>
+      <button onClick="{{ goShop }}" aria-label="Gems and the shop" style="flex:none;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:999px;background:linear-gradient(180deg,#C9F7FF,#45C8E6);color:#06303A;font:700 16px/1 Fredoka,sans-serif;white-space:nowrap;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(0,90,120,.35),0 8px 14px -6px var(--shadow);display:{{ pillDisp }}" style-active="transform:translateY(2px)">💎 {{ gems }}</button>
+      <button onClick="{{ goPick }}" aria-label="Switch player" style="flex:none;border:0;cursor:pointer;padding:0;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--opt);box-shadow:inset 0 -4px 0 var(--cardLo),0 6px 10px -4px var(--shadow);font-size:20px;overflow:hidden;margin-left:{{ swMl }}" style-active="transform:translateY(2px)"><sc-if value="{{ whoAvUrl }}"><img src="{{ whoAvUrl }}" alt="" style="width:34px;height:34px;display:block"></sc-if><sc-if value="{{ whoNoAv }}">{{ whoEmoji }}</sc-if></button>
     </div>
     </sc-if>
 
@@ -269,9 +264,9 @@
               <sc-for list="{{ r.stats }}" as="s" hint-placeholder-count="1"><div style="font:700 13px/1.4 Nunito,sans-serif;color:{{ s.c }};text-wrap:pretty">{{ s.t }}</div></sc-for>
               <sc-if value="{{ r.isDad }}">
                 <div style="display:flex;flex-direction:column;gap:8px">
-                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="0" placeholder="steps so far" aria-label="Steps so far this week" value="{{ dadSteps }}" onChange="{{ onDadSteps }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ saveSteps }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(160,100,0,.35)">Save steps</button></div>
-                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="1000" step="1000" aria-label="Weekly step goal" value="{{ dadTarget }}" onChange="{{ onDadTarget }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ setTarget }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:var(--opt);color:var(--optInk);font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 var(--cardLo)">Set weekly goal</button></div>
-                  <div style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">35,000 while the winter pollution lasts, then 50,000.</div>
+                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="0" placeholder="average steps a day" aria-label="Average steps a day this week" value="{{ dadSteps }}" onChange="{{ onDadSteps }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ saveSteps }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(160,100,0,.35)">Save steps</button></div>
+                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="1000" step="500" aria-label="Goal: average steps a day" value="{{ dadTarget }}" onChange="{{ onDadTarget }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ setTarget }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:var(--opt);color:var(--optInk);font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 var(--cardLo)">Set daily goal</button></div>
+                  <div style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">Enter this week's daily average from your phone. Goal below.</div>
                 </div>
               </sc-if>
             </div>
@@ -461,13 +456,14 @@ class Component extends DCLogic {
   setScreen(s,extra){this.setState(Object.assign({screen:s},extra||{}),()=>window.scrollTo(0,0))}
   goPick(){this.setScreen("pick")}
   goMap(){this.setScreen("map")}
-  goBoard(){const W=this.weekInfo(),ds=this.dadStatus(W);this.fetchBoard();this.setScreen("board",{dadStepsIn:ds.steps?String(ds.steps):"",dadTargetIn:String(ds.L.target)})}
-  goChapters(){this.setScreen("chapters",{chapWho:this.state.player,chapSearch:""})}
+  goBoard(){const W=this.weekInfo(),ds=this.dadStatus(W);this.fetchBoard();this.setScreen("board",ds.old?{dadStepsIn:ds.steps?String(ds.steps):"",dadTargetIn:String(ds.L.target)}:{dadStepsIn:ds.avg?String(ds.avg):"",dadTargetIn:String(ds.tgtAvg)})}
+  goChapters(){const p=this.state.player;this.setScreen("chapters",{chapWho:p==="dad"?"p1":p,chapSearch:""})}
   goProfile(){this.setScreen("profile")}
   goShop(){this.setScreen("shop")}
   goNotes(){const S=this.state,ex={};if(S.screen==="map")ex.lastPlace="Map";else if(S.screen==="board")ex.lastPlace="Board";else if(S.screen==="chapters")ex.lastPlace="Chapters";
     if(S.player==="dad"){ex.notesSeenPrev=this.load("ab_notes_seen",0);this.store("ab_notes_seen",Date.now())}this.setScreen("notes",ex)}
   pick(p){const t=this.L.today();this.store("ab_who",p);const done=this.load("ab_done_"+p+"_"+t,{});
+    if(p==="dad"){this.setState({player:p,prevWho:p,done,told:0},()=>{this.goBoard();this.announceNotes()});return}
     this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.unlocked(p,false);this.announceNotes()})}
   toast(msg){clearTimeout(this._toastT);this.setState({toast:msg});this._toastT=setTimeout(()=>this.setState({toast:null}),2400)}
 
@@ -505,11 +501,12 @@ class Component extends DCLogic {
 
   /* progress */
   progOf(p){const l=this.load("ab_prog_"+p,null),r=this.state.dbSnap.progress[p];const lo=l&&l.isl&&Object.keys(l.isl).length?l:null,ro=r&&r.isl&&Object.keys(r.isl).length?r:null;if(lo&&ro)return this.L.mergeProg(lo,ro);return lo||ro||null}
-  islStats(p,L){const g=this.progOf(p),ip=g&&g.isl[L.id];if(!ip)return {rounds:0,rev:0,mastered:0,total:L.qs.length,last:null};
-    return {rounds:ip.rounds||0,rev:Math.max(0,(ip.rounds||0)-1),mastered:L.qs.filter(Q=>ip.q&&ip.q[Q.id]&&ip.q[Q.id].m).length,total:L.qs.length,last:ip.lastDone||null}}
+  islStats(p,L){const g=this.progOf(p),ip=g&&g.isl[L.id];if(!ip)return {rounds:0,rev:0,mastered:0,twice:0,total:L.qs.length,last:null};
+    return {rounds:ip.rounds||0,rev:Math.max(0,(ip.rounds||0)-1),mastered:L.qs.filter(Q=>ip.q&&ip.q[Q.id]&&ip.q[Q.id].m).length,twice:L.qs.filter(Q=>ip.q&&ip.q[Q.id]&&(ip.q[Q.id].ok||0)>=2).length,total:L.qs.length,last:ip.lastDone||null}}
   roundsByDay(p){const g=this.progOf(p),out={};if(!g)return out;Object.values(g.isl).forEach(ip=>Object.entries(ip.days||{}).forEach(([d,n])=>{out[d]=(out[d]||0)+n}));return out}
   islandsPlayed(p,from,to){const g=this.progOf(p);if(!g)return [];return Object.keys(g.isl).filter(id=>Object.keys(g.isl[id].days||{}).some(d=>d>=from&&d<=to))}
   masteredCount(L){const ip=(this.PG().isl||{})[L.id];if(!ip)return 0;return L.qs.filter(Q=>ip.q[Q.id]&&ip.q[Q.id].m).length}
+  twiceCount(L){const ip=(this.PG().isl||{})[L.id];if(!ip)return 0;return L.qs.filter(Q=>ip.q[Q.id]&&(ip.q[Q.id].ok||0)>=2).length}
   statsOf(p){const L=this.L,r=this.load("ab_"+p,null),s=(r&&r.season===L.SEASON)?r:L.freshSeason(),g=this.progOf(p);return {points:s.points||0,streak:s.streak||0,bestStreak:Math.max(s.bestStreak||0,s.streak||0),golden:(s.golden||[]).length,mastered:this.D.LESSONS[p].filter(Lx=>this.fullyMastered(p,Lx)).length,rounds:g?Object.values(g.isl).reduce((a,ip)=>a+(ip.rounds||0),0):0}}
   worldOf(p){const L=this.L,w=this.load("ab_world_"+p,null),have=new Set(this.load("ab_unlock_"+p,[]));if(w&&L.WORLDS[w]){const e=L.worldEarn(p,w);if(!e||have.has(e))return w}return L.HOME_WORLD[p]||"coral"}
   itemsFor(p,k){const L=this.L,n=[L.itemOf(k)].filter(x=>x!==k);Object.keys(L.WORLDS).forEach(w=>{if(L.worldEarn(p,w)===k)n.push(L.WORLDS[w].name+" world")});return n.length?n.join(" + "):k}
@@ -521,7 +518,7 @@ class Component extends DCLogic {
   avNode(p,remote){const a=this.avOf(p,remote);return {avUrl:a?this.L.avatarURL(a):null,noAv:!a,emoji:this.L.EMO[p]}}
 
   /* lesson engine */
-  pickRound(L){const ip=this.islP(this.PG(),L.id),st=Q=>ip.q[Q.id]||{},rank=Q=>{const s=st(Q);if(!s.seen)return 0;if(!s.m)return 1;return 2};
+  pickRound(L){const ip=this.islP(this.PG(),L.id),st=Q=>ip.q[Q.id]||{},rank=Q=>{const s=st(Q);if(!s.seen)return 0;if(!s.m)return 1;return (s.ok||0)>=2?3:2};
     const pool=this.L.shuffle(L.qs.slice()).sort((a,b)=>rank(a)-rank(b)||((st(a).last||"")<(st(b).last||"")?-1:1)),out=[],used={};
     for(const Q of pool){if(out.length>=this.L.ROUND)break;if(!used[Q.c]){out.push(Q);used[Q.c]=1}}
     for(const Q of pool){if(out.length>=this.L.ROUND)break;if(!out.includes(Q))out.push(Q)}
@@ -581,9 +578,9 @@ class Component extends DCLogic {
     const gNew=(s.gems||[]).reduce((a,g)=>a+g.n,0)-g0;if(gNew>0)ex.push("🔐 +"+L.nfmt(gNew)+" 💎 wait in the Team Vault until Sunday 9 pm");
     this.saveP(s);
     const done=Object.assign({},S.done,{[lesson.id]:true});this.store("ab_done_"+p+"_"+t,done);
-    const m=this.masteredCount(lesson),ord=this.mapOrder(p),i=ord.findIndex(x=>x.id===lesson.id);
+    const m=this.masteredCount(lesson),tw=this.twiceCount(lesson),gdn=(s.golden||[]).includes(lesson.id),ord=this.mapOrder(p),i=ord.findIndex(x=>x.id===lesson.id);
     const title=S.stung?"Ouch! The bee stung 🐝":pr?"Practice round 🧪":"Island cleared! 🏝️";
-    const msg=(pr?this.practiceMsg(pr).replace(/^\S+ /,""):S.stung?"Round over after "+L.STING_AT+" wrong first tries. Points earned stay; no honeycomb cell this time.":S.newPts>0?"new points in the hive":"revision round: brain points only 🧠")+" · "+m+"/"+lesson.qs.length+" mastered · streak "+s.streak+" 🔥";
+    const msg=(pr?this.practiceMsg(pr).replace(/^\S+ /,""):S.stung?"Round over after "+L.STING_AT+" wrong first tries. Points earned stay; no honeycomb cell this time.":S.newPts>0?"new points in the hive":"revision round: brain points only 🧠")+" · "+m+"/"+lesson.qs.length+" mastered"+(!gdn&&lesson.qs.length&&m>=lesson.qs.length?" · 🌟 "+tw+"/"+lesson.qs.length+" right twice for golden":"")+" · streak "+s.streak+" 🔥";
     this.setState({done,donePts:"+"+S.newPts,doneTitle:title,doneMsg:msg,doneExtras:ex.map((x,k)=>({key:k,t:x})),doneNav:{prev:i>0?ord[i-1]:null,next:(i>=0&&i<ord.length-1)?ord[i+1]:null},screen:"done"},()=>{window.scrollTo(0,0);this.unlocked(p,true);if(!S.stung)this.bigCelebrate()});
   }
 
@@ -617,10 +614,10 @@ class Component extends DCLogic {
   async pullNotes(){const db=this.state.db;if(!db)return;try{const snap=await db.collection("notes").get();const m={};snap.forEach(d=>{const n=d.data();if(n&&n.id)m[n.id]=n});this.setState({dbNotes:m})}catch(e){}}
 
   /* Dad's log + the team week */
-  dadLog(){const def={duo:{},steps:{},sick:{},target:35000,updatedAt:0},l=this.load("ab_dadlog",null),r=this.state.dbSnap.dadlog;
+  dadLog(){const def={duo:{},steps:{},avg:{},sick:{},target:35000,avgTarget:this.L.DAD_STEPS_AVG,updatedAt:0},l=this.load("ab_dadlog",null),r=this.state.dbSnap.dadlog;
     if(!l&&!r)return def;
-    if(l&&r){const newer=(l.updatedAt||0)>=(r.updatedAt||0)?l:r;return {duo:JSON.parse(JSON.stringify(newer.duo||{})),steps:Object.assign({},r.steps,l.steps,newer.steps),sick:JSON.parse(JSON.stringify(newer.sick||{})),target:newer.target||35000,updatedAt:newer.updatedAt||0}}
-    return Object.assign(def,JSON.parse(JSON.stringify(l||r)))}
+    if(l&&r){const newer=(l.updatedAt||0)>=(r.updatedAt||0)?l:r;return {duo:JSON.parse(JSON.stringify(newer.duo||{})),steps:Object.assign({},r.steps,l.steps,newer.steps),avg:Object.assign({},r.avg,l.avg,newer.avg),sick:JSON.parse(JSON.stringify(newer.sick||{})),target:newer.target||35000,avgTarget:newer.avgTarget||this.L.DAD_STEPS_AVG,updatedAt:newer.updatedAt||0}}
+    const o=Object.assign(def,JSON.parse(JSON.stringify(l||r)));o.avg=o.avg||{};o.avgTarget=o.avgTarget||this.L.DAD_STEPS_AVG;return o}
   sickOf(p){const d=this.dadLog();return (d.sick&&d.sick[p])||{}}
   saveDadLog(d){d.updatedAt=Date.now();this.store("ab_dadlog",d);const db=this.state.db;if(db){try{Promise.resolve(db.doc("dadlog/dad").set(d)).catch(()=>{})}catch(e){}}this.setState({dbSnap:Object.assign({},this.state.dbSnap,{dadlog:d})})}
   weekInfo(){const L=this.L,t=L.today(),mon=L.mondayOf(t),end=L.addDays(mon,6),practice=t<L.LAUNCH,start=(!practice&&mon<L.LAUNCH)?L.LAUNCH:mon,days=[];for(let d=start;d<=end;d=L.addDays(d,1))days.push(d);return {t,start,end,days,practice,mon}}
@@ -640,9 +637,11 @@ class Component extends DCLogic {
       mon=L.addDays(mon,7)}
     return {wallet:Math.max(0,wallet-(s.spent||0)),pending:carry,melted,jars,last}}
   teamJars(){const v=this.vault("dad"),spent=this.wishesAll().filter(w=>w.done).reduce((a,w)=>a+(w.price||0),0);return {earned:v.jars,left:Math.max(0,v.jars-spent)}}
-  dadStatus(W){const L=this.dadLog(),rbd=this.roundsByDay("dad"),past=W.days.filter(d=>d<W.t),missed=past.filter(d=>!L.duo[d]),rounds=W.days.reduce((s,d)=>s+(rbd[d]||0),0),need=2*missed.length;
-    const tgt=Math.round((L.target||35000)*W.days.length/7/100)*100,steps=L.steps[W.start]||0;
-    return {L,rbd,missed,need,extras:rounds,makeupOK:rounds>=need,steps,tgt,stepsOK:steps>=tgt,ok:rounds>=need&&steps>=tgt}}
+  dadStatus(W){const L=this.dadLog(),past=W.days.filter(d=>d<W.t),missed=past.filter(d=>!L.duo[d]);
+    if(W.start<this.L.DAD_RULE_FROM){const rbd=this.roundsByDay("dad"),rounds=W.days.reduce((s,d)=>s+(rbd[d]||0),0),need=2*missed.length,tgt=Math.round((L.target||35000)*W.days.length/7/100)*100,steps=L.steps[W.start]||0;
+      return {L,old:true,rbd,missed,need,extras:rounds,makeupOK:rounds>=need,steps,tgt,stepsOK:steps>=tgt,ok:rounds>=need&&steps>=tgt}}
+    const tgtAvg=L.avgTarget||this.L.DAD_STEPS_AVG,avg=(L.avg&&L.avg[W.start]!=null)?L.avg[W.start]:(L.steps&&L.steps[W.start]?Math.round(L.steps[W.start]/W.days.length):0);
+    return {L,old:false,missed,avg,tgtAvg,duoOK:!missed.length,stepsOK:avg>=tgtAvg,ok:!missed.length&&avg>=tgtAvg}}
 
   /* notes */
   localNotes(){const a=this.load("ab_notes",[]);return Array.isArray(a)?a:[]}
@@ -682,7 +681,7 @@ class Component extends DCLogic {
     o.pickZ=()=>this.pick("p1");o.pickR=()=>this.pick("p2");o.pickD=()=>this.pick("dad");
     if(!p)return o;
     /* header */
-    const me=this.avNode(p);o.pts=L.nfmt(this.P().points);o.gems=L.nfmt(this.vault(p).wallet);o.goShop=()=>this.goShop();o.whoAvUrl=me.avUrl;o.whoNoAv=me.noAv;o.whoEmoji=me.emoji;o.goPick=()=>this.goPick();
+    const me=this.avNode(p);o.pts=L.nfmt(this.P().points);o.gems=L.nfmt(this.vault(p).wallet);o.goShop=()=>this.goShop();o.whoAvUrl=me.avUrl;o.whoNoAv=me.noAv;o.whoEmoji=me.emoji;o.goPick=()=>this.goPick();o.pillDisp=p==="dad"?"none":"inline-flex";o.swMl=p==="dad"?"auto":"0";
     o.headTitle={map:"The Map",chapters:"Chapters 📚",board:"The Board 🐝",notes:"The Notebook 📝",profile:"Profile",shop:"Shop 💎"}[scr]||"";
     if(scr==="map")Object.assign(o,this.mapVals());
     else if(scr==="lesson")Object.assign(o,this.lessonVals());
@@ -719,7 +718,7 @@ class Component extends DCLogic {
       const left=n%2===0,fog=!it.stops.length,lo=left?"var(--isleALo)":"var(--isleBLo)";let k=0;
       const gold=this.goldenOf(p);
       const stopV=(Lx,locked)=>{const x=this.islStats(p,Lx),pc=x.total?Math.round(x.mastered*100/x.total):0,tdn=!!S.done[Lx.id],off=offs[k++%4],gd=gold.includes(Lx.id),hi=this.isHindi(Lx.id);
-        return {key:Lx.id,pl:(off*13)+"%",lo,ring:gd?"conic-gradient(#FFD34D 100%,#FFD34D 0)":"conic-gradient(var(--acc) "+pc+"%,var(--ring) 0)",icon:locked?"🔒":(gd?"🌟":(tdn?"✓":Lx.icon)),iconBg:locked?"radial-gradient(circle at 35% 30%,#6E8AA3,#3E566E 70%)":(gd?"radial-gradient(circle at 35% 30%,#FFF3B0,#FFC61A 70%)":(tdn?"radial-gradient(circle at 35% 30%,#B6F58B,#5CC96A 70%)":"radial-gradient(circle at 35% 30%,#FFE680,#FFB800 70%)")),title:Lx.title,small:locked?"🔒 master the stop before":(gd?"🌟 golden · ":"")+x.mastered+"/"+x.total+" mastered"+(hi?" · ⭐×2":"")+(tdn?" · played today":""),op:locked?.75:1,aria:Lx.title+", "+x.mastered+" of "+x.total+" mastered"+(locked?", locked":""),go:()=>{if(locked){this.toast("🔒 Master the stop before to open "+Lx.title);return}this.startLesson(Lx)}}};
+        return {key:Lx.id,pl:(off*13)+"%",lo,ring:gd?"conic-gradient(#FFD34D 100%,#FFD34D 0)":(x.total&&x.mastered>=x.total?"conic-gradient(#FFD34D "+Math.round(x.twice*100/x.total)+"%,var(--acc) 0)":"conic-gradient(var(--acc) "+pc+"%,var(--ring) 0)"),icon:locked?"🔒":(gd?"🌟":(tdn?"✓":Lx.icon)),iconBg:locked?"radial-gradient(circle at 35% 30%,#6E8AA3,#3E566E 70%)":(gd?"radial-gradient(circle at 35% 30%,#FFF3B0,#FFC61A 70%)":(tdn?"radial-gradient(circle at 35% 30%,#B6F58B,#5CC96A 70%)":"radial-gradient(circle at 35% 30%,#FFE680,#FFB800 70%)")),title:Lx.title,small:locked?"🔒 master the stop before":(gd?"🌟 golden · "+x.mastered+"/"+x.total+" mastered":(x.total&&x.mastered>=x.total?"✓ all mastered · 🌟 "+x.twice+"/"+x.total+" right twice for golden":x.mastered+"/"+x.total+" mastered"))+(hi?" · ⭐×2":"")+(tdn?" · played today":""),op:locked?.75:1,aria:Lx.title+", "+x.mastered+" of "+x.total+" mastered"+(!gd&&x.total&&x.mastered>=x.total?", "+x.twice+" of "+x.total+" right twice for golden":"")+(locked?", locked":""),go:()=>{if(locked){this.toast("🔒 Master the stop before to open "+Lx.title);return}this.startLesson(Lx)}}};
       const soonV=c=>{const off=offs[k++%4];return {key:"soon-"+c.s+c.n+c.t,pl:(off*13)+"%",lo,ring:"var(--ring)",icon:"🔒",iconBg:"radial-gradient(circle at 35% 30%,#6E8AA3,#3E566E 70%)",title:c.t,small:(c.x&&c.x>=td?L.EXAM_NAME+" · ":"")+"coming soon · send Dad photos",op:.6,aria:c.t+", coming soon",go:()=>this.toast("🔜 "+c.t+" is coming soon. Send Dad photos of the chapter!")}};
       const groups=it.lands?it.lands.map((l,j)=>({key:l.s,name:L.LAND[l.s]||l.s,hasName:true,border:j>0,stops:[...l.stops.map((Lx,i)=>stopV(Lx,this.stopLocked(p,l.stops,i))),...l.soon.map(soonV)]})):[{key:"main",name:"",hasName:false,border:false,stops:[...it.stops.map((Lx,i)=>stopV(Lx,this.stopLocked(p,it.stops,i))),...it.soon.map(soonV)]}];
       let rev=null;if(it.stops.length){const st=it.seq,played=st.filter(Lx=>this.islStats(p,Lx).rounds>0),pool=played.length?played:st,frac=Lx=>{const x=this.islStats(p,Lx);return x.mastered/(x.total||1)},pickL=pool.slice().sort((a,b)=>frac(a)-frac(b))[0];rev={title:pickL.title,go:()=>this.startLesson(pickL)}}
@@ -798,13 +797,17 @@ class Component extends DCLogic {
       const goal=lw?(W.days.length>1?"play both days":"play today"):(exW?(upN?"play every day + every "+L.EXAM_NAME+" island":"play every day ("+L.EXAM_NAME+" papers done! 🎉)"):"play every day + every island");
       rows.push(Object.assign(this.avNode(k),{key:k,name:L.NAMES[k]+" · "+goal,dots:dots(d=>(s.rbd[d]||0)>0,!s.has&&p!=="dad",p==="dad"?d=>toggleSick(k,d):null,d=>!!s.sick[d]),stats,isDad:false,tip:p==="dad"?"Dad: tap a day to mark a sick day 🤒 (counts as played).":""}))});
     const ds=this.dadStatus(W),dst=[];
-    if(ds.missed.length){dst.push({key:"mk",t:(ds.makeupOK?"✅ Make-up quest done: ":"⚠️ Make-up quest: ")+Math.min(ds.extras,ds.need)+"/"+ds.need+" extra rounds for "+ds.missed.length+" missed Duolingo day"+(ds.missed.length>1?"s":""),c:ds.makeupOK?"#7ED957":"#FFB347"});if(!ds.makeupOK)block("Dad",(ds.need-ds.extras)+" make-up round"+(ds.need-ds.extras>1?"s":""))}
-    dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps this week: ")+L.nfmt(ds.steps)+" / "+L.nfmt(ds.tgt)+(W.days.length<7?" (short week)":""),c:ds.stepsOK?"#7ED957":"var(--ink)"});
-    if(!ds.stepsOK)block("Dad",L.nfmt(ds.tgt-ds.steps)+" more steps");
-    rows.push(Object.assign(this.avNode("dad"),{key:"dad",name:"Dad · Duolingo every day + "+L.nfmt(ds.L.target)+" steps a week",dots:dots(d=>!!ds.L.duo[d],false,p==="dad"?d=>{const Lg=this.dadLog();if(Lg.duo[d])delete Lg.duo[d];else Lg.duo[d]=true;this.saveDadLog(Lg)}:null,null),stats:dst,isDad:p==="dad",tip:p==="dad"?"Tap a day when you've done Duolingo.":""}));
+    if(ds.old){if(ds.missed.length){dst.push({key:"mk",t:(ds.makeupOK?"✅ Make-up quest done: ":"⚠️ Make-up quest: ")+Math.min(ds.extras,ds.need)+"/"+ds.need+" extra rounds for "+ds.missed.length+" missed Duolingo day"+(ds.missed.length>1?"s":""),c:ds.makeupOK?"#7ED957":"#FFB347"});if(!ds.makeupOK)block("Dad",(ds.need-ds.extras)+" make-up round"+(ds.need-ds.extras>1?"s":""))}
+      dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps this week: ")+L.nfmt(ds.steps)+" / "+L.nfmt(ds.tgt)+(W.days.length<7?" (short week)":""),c:ds.stepsOK?"#7ED957":"var(--ink)"});
+      if(!ds.stepsOK)block("Dad",L.nfmt(ds.tgt-ds.steps)+" more steps")}
+    else{if(ds.missed.length){dst.push({key:"duo",t:"⚠️ Duolingo not ticked: "+ds.missed.map(d=>L.fmtDay(d)).join(", "),c:"#FFB347"});block("Dad","Duolingo on "+ds.missed.length+" day"+(ds.missed.length>1?"s":""))}
+      dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps: ")+(ds.avg?L.nfmt(ds.avg)+" a day on average":"this week's average not entered yet")+" · goal "+L.nfmt(ds.tgtAvg),c:ds.stepsOK?"#7ED957":"var(--ink)"});
+      if(!ds.stepsOK)block("Dad",ds.avg?"steps average below "+L.nfmt(ds.tgtAvg):"this week's steps average")}
+    const tickDuo=d=>{const Lg=this.dadLog();if(Lg.duo[d])delete Lg.duo[d];else Lg.duo[d]=true;this.saveDadLog(Lg)};
+    rows.push(Object.assign(this.avNode("dad"),{key:"dad",name:ds.old?"Dad · Duolingo every day + "+L.nfmt(ds.L.target)+" steps a week":"Dad · Duolingo every day + "+L.nfmt(ds.tgtAvg)+" steps a day on average",dots:dots(d=>!!ds.L.duo[d],false,p==="dad"?tickDuo:null,null),stats:dst,isDad:p==="dad",tip:p==="dad"?"Tap a day when you've done Duolingo.":""}));
     o.teamRows=rows;
-    o.dadSteps=S.dadStepsIn;o.onDadSteps=e=>this.setState({dadStepsIn:e.target.value});o.saveSteps=()=>{const Lg=this.dadLog();Lg.steps[W.start]=Math.max(0,parseInt(this.state.dadStepsIn,10)||0);this.saveDadLog(Lg);this.toast("Steps saved 👟")};
-    o.dadTarget=S.dadTargetIn;o.onDadTarget=e=>this.setState({dadTargetIn:e.target.value});o.setTarget=()=>{const n=parseInt(this.state.dadTargetIn,10);if(n>0){const Lg=this.dadLog();Lg.target=n;this.saveDadLog(Lg);this.toast("Weekly goal: "+L.nfmt(n)+" steps")}};
+    o.dadOld=!!ds.old;o.dadNew=!ds.old;o.dadSteps=S.dadStepsIn;o.onDadSteps=e=>this.setState({dadStepsIn:e.target.value});o.saveSteps=()=>{const Lg=this.dadLog(),n=Math.max(0,parseInt(this.state.dadStepsIn,10)||0);if(ds.old)Lg.steps[W.start]=n;else{Lg.avg=Lg.avg||{};Lg.avg[W.start]=n}this.saveDadLog(Lg);this.toast("Steps saved 👟")};
+    o.dadTarget=S.dadTargetIn;o.onDadTarget=e=>this.setState({dadTargetIn:e.target.value});o.setTarget=()=>{const n=parseInt(this.state.dadTargetIn,10);if(n>0){const Lg=this.dadLog();if(ds.old){Lg.target=n;this.saveDadLog(Lg);this.toast("Weekly goal: "+L.nfmt(n)+" steps")}else{Lg.avgTarget=n;this.saveDadLog(Lg);this.toast("Goal: "+L.nfmt(n)+" steps a day on average")}}};
     Object.keys(bl).forEach(w=>blockers.push(w+": "+bl[w].join(" + ")));
     if(unknown){o.resT="⏳ Waiting for everyone's scores. The vault can only open when all three show here.";o.resBg="var(--hint)";o.resInk="var(--hintInk)"}
     else if(!blockers.length){o.resT=W.practice?"🔓 Practice: you'd all be on track!":"🔓 Everyone's on track: the Team Vault opens Sunday 9 pm!";o.resBg="var(--good)";o.resInk="var(--goodInk)"}
@@ -812,6 +815,7 @@ class Component extends DCLogic {
     /* Team Vault + honey jars */
     const v=this.vault(p),jars=this.teamJars();
     o.vaultMine=v.pending?"🔐 Your gems in the vault: "+L.nfmt(v.pending)+" 💎":"🔐 Your vault is empty this week";
+    if(p==="dad"){const pend=this.vault("p1").pending+this.vault("p2").pending;o.vaultMine=pend?"🔐 The boys' gems in the vault: "+L.nfmt(pend)+" 💎":"🔐 The boys' vaults are empty this week"}
     o.jarsT="🍯 "+jars.left+" honey jar"+(jars.left===1?"":"s");o.jarsS=jars.earned>jars.left?jars.earned+" earned · "+(jars.earned-jars.left)+" spent on wishes":"+1 jar for every team week won";
     /* Wish Jar */
     const isDad=p==="dad";o.isDadP=isDad;o.notDad=!isDad;
@@ -823,15 +827,15 @@ class Component extends DCLogic {
         canDel:!w.done&&(isDad||w.p===p),del:()=>{w.del=true;this.putWish(w);this.toast("Wish removed")}}});
     o.noWishes=!o.wishes.length;o.wishText=S.wishText;o.onWishText=e=>this.setState({wishText:e.target.value});o.addWish=()=>this.addWish();
     /* points board (never resets) */
-    let br=S.dbRows.slice();br.forEach(r=>{if(r&&!r.p)r.p=Object.keys(L.NAMES).find(x=>L.NAMES[x]===r.name)});br=br.filter(r=>r&&r.p&&(r.p in L.NAMES)&&(r.season===L.SEASON));
-    ["p1","p2","dad"].forEach(k=>{const l=this.load("ab_"+k,null),ls=(l&&l.season===L.SEASON)?l:null,i=br.findIndex(r=>r.p===k);if(i<0)br.push({p:k,points:ls?ls.points:0,streak:ls?ls.streak:0});else if(ls&&(ls.updatedAt||0)>(br[i].updatedAt||0))br[i]=Object.assign({},ls,{p:k,av:br[i].av})});
+    let br=S.dbRows.slice();br.forEach(r=>{if(r&&!r.p)r.p=Object.keys(L.NAMES).find(x=>L.NAMES[x]===r.name)});br=br.filter(r=>r&&r.p&&r.p!=="dad"&&(r.p in L.NAMES)&&(r.season===L.SEASON));
+    ["p1","p2"].forEach(k=>{const l=this.load("ab_"+k,null),ls=(l&&l.season===L.SEASON)?l:null,i=br.findIndex(r=>r.p===k);if(i<0)br.push({p:k,points:ls?ls.points:0,streak:ls?ls.streak:0});else if(ls&&(ls.updatedAt||0)>(br[i].updatedAt||0))br[i]=Object.assign({},ls,{p:k,av:br[i].av})});
     br.sort((a,b)=>(b.points||0)-(a.points||0));
     o.boardRows=br.map(r=>{const lv=L.levelOf(r.points||0),bd=(L.BADGES[r.p]||[]).map(b=>b.ic).join("");return Object.assign(this.avNode(r.p,r.av),{key:r.p,name:L.NAMES[r.p]+(bd?" "+bd:""),streak:"Lv "+lv.n+" "+lv.name+" · streak "+(r.streak||0)+" 🔥",pts:L.nfmt(r.points||0)})});
     return o;
   }
   chaptersVals(){
-    const L=this.L,D=this.D,S=this.state,p=S.chapWho||S.player||"p1",W=this.weekInfo(),list=D.CHAPTERS[p]||[],o={},td=L.today();
-    o.whoTabs=["p1","p2","dad"].map(k=>({key:k,ic:L.EMO[k],t:L.NAMES[k],sel:k===p,bg:k===p?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--card)",ink:k===p?"#3A2600":"var(--ink)",pick:()=>this.setState({chapWho:k})}));
+    const L=this.L,D=this.D,S=this.state,p=(S.chapWho&&S.chapWho!=="dad")?S.chapWho:(S.player&&S.player!=="dad"?S.player:"p1"),W=this.weekInfo(),list=D.CHAPTERS[p]||[],o={},td=L.today();
+    o.whoTabs=["p1","p2"].map(k=>({key:k,ic:L.EMO[k],t:L.NAMES[k],sel:k===p,bg:k===p?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--card)",ink:k===p?"#3A2600":"var(--ink)",pick:()=>this.setState({chapWho:k})}));
     const isl=this.liveIslands(p),st=isl.map(x=>this.islStats(p,x)),playedWk=this.islandsPlayed(p,W.mon,W.end).filter(id=>isl.some(x=>x.id===id));
     const mast=st.reduce((s,x)=>s+x.mastered,0),tot=st.reduce((s,x)=>s+x.total,0),rev=st.reduce((s,x)=>s+x.rev,0),done=st.filter(x=>x.rounds>0).length;
     o.dash=[[playedWk.length+"/"+isl.length,"islands this week"],[done+"/"+isl.length,"islands ever done"],[String(rev),"revision rounds"],[(tot?Math.round(mast*100/tot):0)+"%","mastered ("+mast+"/"+tot+")"]].map(([k,l])=>({key:l,k,l}));
@@ -872,8 +876,9 @@ class Component extends DCLogic {
     o.storeNote=S.db?"Notes are saved in the hive too ✓":(L.storageOK?"Notes are saved on this device. Send them to Dad so they're safe.":"This browser can't keep notes after you close it. Send each note to Dad right after you write it.");
     return o;
   }
-  navVals(){const S=this.state,scr=S.screen,c=this.notesAll().filter(n=>!n.done).length,nn=S.player==="dad"?this.newNotesForDad().length:0,me=this.avOf(S.player);
-    const items=[["map","🗺️","Map",()=>this.goMap()],["chapters","📚","Chapters",()=>this.goChapters()],["board","🏆","Board",()=>this.goBoard()],["notes","📝","Notes",()=>this.goNotes()],["profile","🐝","Profile",()=>this.goProfile()]];
+  navVals(){const S=this.state,scr=S.screen,c=this.notesAll().filter(n=>!n.done).length,nn=S.player==="dad"?this.newNotesForDad().length:0,me=S.player==="dad"?null:this.avOf(S.player);
+    let items=[["map","🗺️","Map",()=>this.goMap()],["chapters","📚","Chapters",()=>this.goChapters()],["board","🏆","Board",()=>this.goBoard()],["notes","📝","Notes",()=>this.goNotes()],["profile","🐝","Profile",()=>this.goProfile()]];
+    if(S.player==="dad")items=items.filter(x=>x[0]==="board"||x[0]==="chapters"||x[0]==="notes");
     return {navItems:items.map(([k,ic,l,go])=>{const sel=scr===k,av=k==="profile"&&me?this.L.avatarURL(me):null;return {key:k,ic,l,go,sel,bg:sel?"linear-gradient(180deg,#FFE680,#FFC61A)":"transparent",ink:sel?"#3A2600":"var(--soft)",shadow:sel?"inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35)":"none",badge:k==="notes"&&c?String(c):"",hasBadge:k==="notes"&&c>0,hasDot:k==="notes"&&nn>0,avUrl:av,noAv:!av,aria:k==="notes"?"Notes, "+c+" open"+(nn?", "+nn+" new":""):l}})}}
 }
 </script>

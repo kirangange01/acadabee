@@ -156,6 +156,8 @@ export const SEASON=1;
 export const LEVELS=[[0,"Egg"],[1000,"Larva"],[3000,"Pupa"],[6000,"Worker Bee"],[10000,"Forager"],[15000,"Scout"],[21000,"Guard"],[28000,"Honey Maker"],[36000,"Hive Hero"],[45000,"Queen's Council"]];
 export function levelOf(points){let i=0;while(i+1<LEVELS.length&&points>=LEVELS[i+1][0])i++;const nx=LEVELS[i+1]||null;return {n:i+1,name:LEVELS[i][1],at:LEVELS[i][0],nextAt:nx?nx[0]:null,nextName:nx?nx[1]:null}}
 export const GEMS={hive:1000,chest:300,level:200,golden:500,team:300};
+/* Dad (from 16 Nov 2026): no islands or points; two goals only: Duolingo every day + an average of DAD_STEPS_AVG steps a day */
+export const DAD_STEPS_AVG=7000, DAD_RULE_FROM="2026-11-16";
 export const CELLS_PER_HIVE=20, DAY_CAP=20, STING_AT=3, SLEEP_FROM=21, SLEEP_TO=6, VAULT_HOUR=21;
 export const FREEZER={price:400,max:2};
 export const HINDI_ISLANDS=["z-hindi","z-muha","r-hindi","r-nakli","d-hindi"];
