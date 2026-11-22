@@ -30,7 +30,7 @@
       </button></sc-if>
       <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button></sc-if>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.5 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.6 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -56,6 +56,7 @@
         <button onClick="{{ noteHintOk }}" style="border:0;cursor:pointer;flex:none;padding:10px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(160,100,0,.35)">Got it</button>
       </div>
       </sc-if>
+      <sc-if value="{{ showVault }}"><button onClick="{{ goVault }}" aria-label="Team Vault: open the Board" style="border:0;cursor:pointer;text-align:left;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow)" style-active="transform:translateY(2px)"><span style="flex:none;font-size:32px;line-height:1">{{ vIc }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ vT }}</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft);text-wrap:pretty">{{ vS }}</small><small style="font:800 12px/1.35 Nunito,sans-serif;color:{{ vInk }};text-wrap:pretty">{{ vToDo }}</small></span><span style="flex:none;font:800 16px/1 Nunito,sans-serif;color:var(--soft)">›</span></button></sc-if>
       <div style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow)">
         <div style="display:flex;flex-direction:column;align-items:center;min-width:64px"><span style="font:700 36px/1 Fredoka,sans-serif;color:var(--acc)">{{ streakN }}</span><span style="font:800 10px/1 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-top:4px">day streak</span></div>
         <div style="flex:1;display:flex;flex-direction:column;gap:8px;min-width:0">
@@ -68,7 +69,6 @@
         <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0"><b style="font:600 15px/1.2 Fredoka,sans-serif;color:var(--ink)">⭐ {{ lvlT }}</b><span style="display:block;height:12px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ lvlW }};border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800)"></span></span><small style="font:700 11px/1.25 Nunito,sans-serif;color:var(--soft)">{{ lvlS }}</small></div>
         <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px;min-width:0"><b style="font:600 15px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ cellsT }}</b><span style="display:block;height:12px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ cellsW }};border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFB800)"></span></span><small style="font:700 11px/1.25 Nunito,sans-serif;color:var(--soft)">{{ cellsS }}</small></div>
       </div>
-      <p style="margin:-4px 4px 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ vaultT }}</p>
       <sc-if value="{{ hasExam }}">
       <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px">
         <span style="font:800 10px/1 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)">{{ examK }}</span>
@@ -228,7 +228,7 @@
     <div data-screen-label="Shop" style="display:flex;flex-direction:column;gap:14px">
       <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;align-items:center;gap:14px">
         <span style="font-size:40px">💎</span>
-        <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><b style="font:600 24px/1 Fredoka,sans-serif;color:var(--ink)">{{ walletT }} to spend</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft)">🔐 {{ pendingT }} more wait in the Team Vault. It opens Sunday 9 pm if all three hit their goals.</small></div>
+        <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><b style="font:600 24px/1 Fredoka,sans-serif;color:var(--ink)">{{ walletT }} to spend</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft)">🔐 {{ pendingT }} more wait in the Team Vault. If all three hit their goals, they open Sunday 9 pm, doubled.</small></div>
       </div>
       <sc-if value="{{ hasMelted }}"><p style="margin:0 4px;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ meltedT }}</p></sc-if>
       <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;align-items:center;gap:14px">
@@ -275,7 +275,7 @@
           </div>
         </sc-for>
         <div style="padding:12px 14px;border-radius:16px;background:{{ resBg }};color:{{ resInk }};font:800 13px/1.4 Nunito,sans-serif;text-wrap:pretty">{{ resT }}</div>
-        <p style="margin:0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Team rule: gems wait in the Team Vault. Sunday 9 pm: if all three hit their goals, it opens (+300 💎 each and a honey jar). Missed a day? Do 2 extra rounds for it by Sunday. Your own ⭐ points always count.</p>
+        <p style="margin:0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Team rule: gems wait in the Team Vault. Sunday 9 pm: if all three hit their goals, it opens and your gems double (at least +300 💎), plus a honey jar 🍯. Missed a day? Do 2 extra rounds for it by Sunday. Your own ⭐ points always count.</p>
       </div>
       <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
         <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ jarsT }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">{{ jarsS }}</small></div>
@@ -540,6 +540,9 @@ class Component extends DCLogic {
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
   practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";return null}
   whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0],seen=parseFloat(this.load("ab_seen_ver",null))||0;return [
+    {v:1.6,key:"double",ic:"💎",t:"Team weeks now DOUBLE your gems! If all three of you hit your goals, the Team Vault opens with twice your gems (at least +300) and a honey jar 🍯."},
+    {v:1.6,key:"vaultmap",ic:"🔐",t:"Your Map shows the Team Vault: how many gems are waiting and what the team still has to do before Sunday 9 pm."},
+    {v:1.6,key:"half",ic:"🏝️",t:"Exam weeks: play every day plus HALF of your PA-2 islands, any you like. Good luck in the exams! 🍀"},
     {v:1.5,key:"duolingo",ic:"🦉",t:"Your Duolingo streak now shows on your Profile and on the Board. It updates every evening."},
     {v:1.4,key:"login",ic:"🔑",t:"Everyone has their own login now. Dad has your username and password. Your scores stay exactly as they are."},
     {v:1.3,key:"sleep",ic:"🌙",t:"The hive now sleeps at 10 pm, not 9 pm. Rounds earn ⭐ and 💎 until 10."},
@@ -657,13 +660,16 @@ class Component extends DCLogic {
   requiredIslandsFor(p,W){const L=this.L,live=this.liveIslands(p);if(this.launchWeekend(W))return [];if(!W.final)return this.requiredIslands(p);
     const ex=L.EXAMS[p]||[];if(!ex.some(x=>x.d>=W.start))return live;const ids=new Set(ex.filter(x=>x.d>W.end).flatMap(x=>x.isl));return live.filter(Lx=>ids.has(Lx.id))}
   boyStatus(p,W){const rbd=this.roundsByDay(p),sick=this.sickOf(p),has=!!this.progOf(p),past=W.days.filter(d=>d<W.t),played=W.days.filter(d=>(rbd[d]||0)>0),missed=past.filter(d=>!((rbd[d]||0)>0)&&!sick[d]);
-    const total=W.days.reduce((s,d)=>s+(rbd[d]||0),0),extras=Math.max(0,total-played.length),need=2*missed.length,done=this.islandsPlayed(p,W.start,W.end),left=this.requiredIslandsFor(p,W).filter(Lx=>!done.includes(Lx.id));
-    return {has,rbd,sick,missed,need,extras,makeupOK:extras>=need,left,ok:extras>=need&&left.length===0}}
+    const total=W.days.reduce((s,d)=>s+(rbd[d]||0),0),extras=Math.max(0,total-played.length),need=2*missed.length,done=this.islandsPlayed(p,W.start,W.end),
+      g=this.islandGoal(p,W),doneReq=g.list.filter(Lx=>done.includes(Lx.id)).length,togo=Math.max(0,g.need-doneReq),left=togo?g.list.filter(Lx=>!done.includes(Lx.id)):[];
+    return {has,rbd,sick,missed,need,extras,makeupOK:extras>=need,left,togo,goalN:g.need,doneReq:Math.min(doneReq,g.need),half:g.half,ok:extras>=need&&togo===0}}
+  /* exam weeks (v1.6): half of the islands of the papers still ahead, any of them; other weeks: every required island */
+  islandGoal(p,W){const list=this.requiredIslandsFor(p,W),half=list.length>1&&(this.L.EXAMS[p]||[]).some(x=>x.d>=W.start);return {list,half,need:half?Math.ceil(list.length/2):list.length}}
   teamWeekStatus(W){const z=this.boyStatus("p1",W),r=this.boyStatus("p2",W),d=this.dadStatus(W);if(!z.has||!r.has)return "unknown";return (z.ok&&r.ok&&d.ok)?"ok":"missed"}
   vault(p){const L=this.L,raw=this.load("ab_"+p,null),s=(raw&&raw.season===L.SEASON)?raw:L.freshSeason(),byW={};(s.gems||[]).forEach(g=>{byW[g.w]=(byW[g.w]||0)+g.n});
     const now=new Date(),cur=L.mondayOf(L.today());let mon=L.mondayOf(L.LAUNCH),carry=0,wallet=0,melted=0,jars=0,last=null;
     while(mon<=cur){const end=L.addDays(mon,6),dl=L.parseISO(end);dl.setHours(L.VAULT_HOUR,0,0,0);const gw=byW[mon]||0;
-      if(now>=dl){const st=this.teamWeekStatus(this.weekOf(mon));last=st;if(st==="ok"){wallet+=gw+carry+L.GEMS.team;jars++;carry=0}else if(st==="unknown"){carry+=gw}else{melted+=carry;carry=gw}}
+      if(now>=dl){const st=this.teamWeekStatus(this.weekOf(mon));last=st;if(st==="ok"){const open=gw+carry;wallet+=open+Math.max(open,L.GEMS.team);jars++;carry=0}else if(st==="unknown"){carry+=gw}else{melted+=carry;carry=gw}}
       else carry+=gw;
       mon=L.addDays(mon,7)}
     return {wallet:Math.max(0,wallet-(s.spent||0)),pending:carry,melted,jars,last}}
@@ -732,6 +738,10 @@ class Component extends DCLogic {
   }
   mapVals(){
     const L=this.L,S=this.state,p=S.player,s=this.P(),o={};
+    {const W=this.weekInfo(),v=this.vault(p),dl=L.parseISO(W.end);dl.setHours(L.VAULT_HOUR,0,0,0);o.showVault=!W.practice&&p!=="dad";
+      if(o.showVault){if(new Date()>=dl){const won=v.last==="ok";o.vIc=won?"🔓":"🔒";o.vT=won?"The Team Vault opened!":"The Team Vault stayed shut";o.vS=won?"Your gems doubled and the team won a honey jar 🍯":"Not this week. Win next week to open the vault, doubled.";o.vToDo="";o.vInk="var(--soft)"}
+        else{const bv=this.boardVals();o.vIc="🔐";o.vT="Team Vault: "+L.nfmt(v.pending)+" 💎 waiting";o.vS="Opens Sunday 9 pm. If all three of you hit your goals, your gems double (at least +"+L.nfmt(L.GEMS.team)+") and the team wins a honey jar 🍯";o.vToDo=bv.toDoT;o.vInk=bv.toDoOK?"#7ED957":"var(--ink)"}}
+      o.goVault=()=>this.goBoard()}
     o.streakN=s.streak;o.hexes=[];for(let i=6;i>=0;i--){const d=L.daysAgoISO(i);o.hexes.push({key:d,bg:s.days.includes(d)?"linear-gradient(180deg,#FFE680,#FFB800)":"var(--ring)",outline:i===0?"2px dashed var(--acc)":"none"})}
     const lv=L.levelOf(s.points);o.lvlT="Level "+lv.n+" · "+lv.name;o.lvlW=(lv.nextAt?Math.max(3,Math.round((s.points-lv.at)*100/(lv.nextAt-lv.at))):100)+"%";o.lvlS=lv.nextAt?L.nfmt(s.points)+" / "+L.nfmt(lv.nextAt)+" ⭐ to "+lv.nextName:"Top level! 👑";
     o.cellsT="🍯 Hive "+(s.cells||0)+"/"+L.CELLS_PER_HIVE;o.cellsW=Math.max(3,Math.round((s.cells||0)*100/L.CELLS_PER_HIVE))+"%";o.cellsS="every round = 1 cell · full hive = "+L.nfmt(L.GEMS.hive)+" 💎";
@@ -807,7 +817,7 @@ class Component extends DCLogic {
     const av=Object.assign({},L.AV_DEFAULT,this.load("ab_av_"+p,null)||{});
     o.skins=Object.entries(L.BEES).filter(([k,B])=>B.shop).map(([k,B])=>{const own=(s.owned||[]).includes(k);return {key:k,name:B.name,url:L.avatarURL(Object.assign({},av,{bee:k})),price:L.nfmt(B.shop)+" 💎",own,btn:own?"✓ Yours":"Buy",op:own?.75:1,
       buy:()=>{const s2=this.P(p),v2=this.vault(p);if((s2.owned||[]).includes(k)){this.toast("It's yours! Pick it in Profile.");return}if(v2.wallet<B.shop){this.toast("You need "+L.nfmt(B.shop)+" 💎 to spend");return}s2.owned=[...(s2.owned||[]),k];s2.spent=(s2.spent||0)+B.shop;this.saveP(s2);this.toast("🐝 "+B.name+" is yours! Pick it in Profile.");this.forceUpdate()}}});
-    o.earnRows=[["🍯","Full hive (20 rounds)",L.nfmt(L.GEMS.hive)],["🌟","Golden island (every question right twice)",L.nfmt(L.GEMS.golden)],["🎁","Chest for every 7 days in a row",L.nfmt(L.GEMS.chest)],["⬆️","Level up",L.nfmt(L.GEMS.level)],["🤝","Team week won (each of you)",L.nfmt(L.GEMS.team)]].map(([ic,t,n])=>({key:t,ic,t,n:"+"+n+" 💎"}));
+    o.earnRows=[["🍯","Full hive (20 rounds)",L.nfmt(L.GEMS.hive)],["🌟","Golden island (every question right twice)",L.nfmt(L.GEMS.golden)],["🎁","Chest for every 7 days in a row",L.nfmt(L.GEMS.chest)],["⬆️","Level up",L.nfmt(L.GEMS.level)],["🤝","Team week won: your vault gems double (at least +"+L.nfmt(L.GEMS.team)+")","×2"]].map(([ic,t,n])=>({key:t,ic,t,n:(n==="×2"?"×2":"+"+n)+" 💎"}));
     o.backMap=()=>this.goMap();
     return o;
   }
@@ -825,10 +835,9 @@ class Component extends DCLogic {
     ["p1","p2"].forEach(k=>{const s=this.boyStatus(k,W),exW=this.examWeek(k),upN=this.upcomingExams(k).length,stats=[];
       if(!s.has){unknown++;stats.push({key:"none",t:"No games from "+L.NAMES[k]+" yet. Scores show here once they play.",c:"var(--soft)"})}
       else{if(s.missed.length){stats.push({key:"mk",t:(s.makeupOK?"✅ Make-up quest done: ":"⚠️ Make-up quest: ")+Math.min(s.extras,s.need)+"/"+s.need+" extra rounds for "+s.missed.length+" missed day"+(s.missed.length>1?"s":""),c:s.makeupOK?"#7ED957":"#FFB347"});if(!s.makeupOK)block(L.NAMES[k],(s.need-s.extras)+" make-up round"+(s.need-s.extras>1?"s":""))}
-        const total=this.requiredIslandsFor(k,W).length,doneN=total-s.left.length;
-        if(total)stats.push({key:"isl",t:(s.left.length?"🏝️ Islands this week: ":"✅ Every island played: ")+doneN+"/"+total+(s.left.length?" · still to visit: "+s.left.map(x=>x.title).join(", "):""),c:s.left.length?"var(--ink)":"#7ED957"});
-        if(s.left.length)block(L.NAMES[k],s.left.length+" island"+(s.left.length>1?"s":"")+" to visit")}
-      const goal=lw?(W.days.length>1?"play both days":"play today"):(exW?(upN?"play every day + every "+L.EXAM_NAME+" island":"play every day ("+L.EXAM_NAME+" papers done! 🎉)"):"play every day + every island");
+        if(s.goalN)stats.push({key:"isl",t:(s.togo?"🏝️ Islands this week: ":(s.half?"✅ Islands done: ":"✅ Every island played: "))+s.doneReq+"/"+s.goalN+(s.togo?(s.half?" · any "+s.togo+" more of: ":" · still to visit: ")+s.left.map(x=>x.title).join(", "):""),c:s.togo?"var(--ink)":"#7ED957"});
+        if(s.togo)block(L.NAMES[k],s.togo+" more island"+(s.togo>1?"s":""))}
+      const goal=lw?(W.days.length>1?"play both days":"play today"):(exW?(upN?"play every day + half the "+L.EXAM_NAME+" islands":"play every day ("+L.EXAM_NAME+" papers done! 🎉)"):"play every day + every island");
       const du=this.duoOf(k);if(du)stats.push({key:"duol",t:"🦉 Duolingo: "+(du.streak?"🔥 "+du.streak+"-day streak":"no streak right now")+(du.today?" · done today ✓":""),c:"var(--soft)"});
       rows.push(Object.assign(this.avNode(k),{key:k,name:L.NAMES[k]+" · "+goal,dots:dots(d=>(s.rbd[d]||0)>0,!s.has&&p!=="dad",p==="dad"?d=>toggleSick(k,d):null,d=>!!s.sick[d]),stats,isDad:false,tip:p==="dad"?"Dad: tap a day to mark a sick day 🤒 (counts as played).":""}))});
     const ds=this.dadStatus(W),dst=[];
@@ -848,6 +857,7 @@ class Component extends DCLogic {
     if(unknown){o.resT="⏳ Waiting for everyone's scores. The vault can only open when all three show here.";o.resBg="var(--hint)";o.resInk="var(--hintInk)"}
     else if(!blockers.length){o.resT=W.practice?"🔓 Practice: you'd all be on track!":"🔓 Everyone's on track: the Team Vault opens Sunday 9 pm!";o.resBg="var(--good)";o.resInk="var(--goodInk)"}
     else{o.resT="🔒 The vault stays shut until: "+blockers.join(" · ");o.resBg="var(--chip)";o.resInk="var(--chipInk)"}
+    o.toDoT=unknown?"⏳ Waiting for everyone's scores":blockers.length?"Still to do: "+blockers.join(" · "):"✅ Everyone's on track!";o.toDoOK=!unknown&&!blockers.length;
     /* Team Vault + honey jars */
     const v=this.vault(p),jars=this.teamJars();
     o.vaultMine=v.pending?"🔐 Your gems in the vault: "+L.nfmt(v.pending)+" 💎":"🔐 Your vault is empty this week";
