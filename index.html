@@ -30,7 +30,7 @@
       </button></sc-if>
       <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button></sc-if>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.4 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.5 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -176,6 +176,7 @@
         <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:4px"><sc-for list="{{ seasonStats }}" as="s" hint-placeholder-count="4"><div style="padding:8px 4px;border-radius:14px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center"><span style="font:600 15px/1 Fredoka,sans-serif;white-space:nowrap">{{ s.ic }} {{ s.k }}</span><small style="font:700 10px/1.2 Nunito,sans-serif;opacity:.8">{{ s.l }}</small></div></sc-for></div>
         <button onClick="{{ goShop }}" style="border:0;cursor:pointer;padding:12px 16px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow);align-self:flex-start" style-active="transform:translateY(2px)">💎 Open the Shop</button>
       </div>
+      <sc-if value="{{ hasDuo }}"><div style="padding:14px 18px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">🦉 Duolingo · {{ duoT }}</b><small style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ duoS }}</small><small style="font:800 12px/1.3 Nunito,sans-serif;color:var(--ink)">{{ duoNow }}</small></div></sc-if>
       <sc-if value="{{ hasBadges }}"><div style="display:flex;flex-direction:column;gap:6px"><sc-for list="{{ badges }}" as="bd" hint-placeholder-count="1"><div style="display:flex;align-items:center;gap:12px;padding:12px 16px;border-radius:20px;background:linear-gradient(160deg,#FFF3B0,#FFC61A);color:#3A2600;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -5px 0 rgba(160,100,0,.3)"><span style="font-size:30px">{{ bd.ic }}</span><span style="display:flex;flex-direction:column;gap:2px"><b style="font:600 17px/1.1 Fredoka,sans-serif">{{ bd.t }}</b><small style="font:700 12px/1.2 Nunito,sans-serif">{{ bd.s }}</small></span></div></sc-for></div></sc-if>
       <div style="padding:14px 18px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:6px">
         <b style="font:600 16px/1.2 Fredoka,sans-serif;color:var(--ink)">👕 Earned merch</b>
@@ -438,7 +439,7 @@
 class Component extends DCLogic {
   state={ready:false,screen:"pick",player:null,prevWho:null,lesson:null,round:[],qi:0,order:[],earned:0,newPts:0,revCount:0,roundLog:[],attempted:false,dimmed:[],fb:null,wrongFlash:null,nextOn:false,nextLabel:"Next →",done:{},doneNav:{prev:null,next:null},donePts:"+0",doneMsg:"",doneTitle:"",doneExtras:[],hintUsed:false,firstWrong:0,stung:false,practice:null,dbWishes:{},wishText:"",wishPrice:{},
     noteCtx:null,noteBack:"map",noteKind:null,noteText:"",noteAbout:"Whole app",noteErr:false,lastPlace:"Whole app",delArm:null,copyBoxShown:false,notesSeenPrev:0,
-    chapWho:null,chapSearch:"",toast:null,learnOpen:false,learnEntry:null,db:null,dbNotes:{},dbSnap:{progress:{},dadlog:null},dbRows:[],dadStepsIn:"",dadTargetIn:"",told:0};
+    chapWho:null,chapSearch:"",toast:null,learnOpen:false,learnEntry:null,db:null,dbNotes:{},dbSnap:{progress:{},dadlog:null,duol:null},dbRows:[],dadStepsIn:"",dadTargetIn:"",told:0};
   rootRef=React.createRef(); fxRef=React.createRef(); beeRef=React.createRef(); MEM={};
 
   componentDidMount(){
@@ -539,6 +540,7 @@ class Component extends DCLogic {
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
   practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";return null}
   whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0],seen=parseFloat(this.load("ab_seen_ver",null))||0;return [
+    {v:1.5,key:"duolingo",ic:"🦉",t:"Your Duolingo streak now shows on your Profile and on the Board. It updates every evening."},
     {v:1.4,key:"login",ic:"🔑",t:"Everyone has their own login now. Dad has your username and password. Your scores stay exactly as they are."},
     {v:1.3,key:"sleep",ic:"🌙",t:"The hive now sleeps at 10 pm, not 9 pm. Rounds earn ⭐ and 💎 until 10."},
     {v:1.3,key:"score",ic:"🎯",t:"After every round you see your % right first time and how long it took ⏱️. "+Z+"'s idea!"},
@@ -629,6 +631,7 @@ class Component extends DCLogic {
   async loadSnap(){const db=this.state.db;if(!db)return;const snap={progress:{},dadlog:null},N=this.L.NAMES;
     try{const s=await db.collection("progress").get();s.forEach(d=>{const x=d.data();const k=(x&&x.p&&(x.p in N))?x.p:Object.keys(N).find(n=>N[n]===(x&&x.name));if(k&&x.prog&&x.prog.isl)snap.progress[k]=x.prog})}catch(e){}
     try{const s=await db.collection("dadlog").get();s.forEach(d=>{const x=d.data();if(x&&x.duo)snap.dadlog=x})}catch(e){}
+    try{const s=await db.collection("duolingo").get();s.forEach(d=>{if(d.id==="summary")snap.duol=d.data()})}catch(e){}
     this.setState({dbSnap:snap})}
   async fetchBoard(){const db=this.state.db;if(!db)return;const rows=[];try{const snap=await db.collection("players").get();snap.forEach(d=>rows.push(d.data()))}catch(e){}this.setState({dbRows:rows})}
   async pullNotes(){const db=this.state.db;if(!db)return;try{const snap=await db.collection("notes").get();const m={};snap.forEach(d=>{const n=d.data();if(n&&n.id)m[n.id]=n});this.setState({dbNotes:m})}catch(e){}}
@@ -636,10 +639,18 @@ class Component extends DCLogic {
   /* Dad's log + the team week */
   dadLog(){const def={duo:{},steps:{},avg:{},sick:{},target:35000,avgTarget:this.L.DAD_STEPS_AVG,updatedAt:0},l=this.load("ab_dadlog",null),r=this.state.dbSnap.dadlog;
     if(!l&&!r)return def;
-    if(l&&r){const newer=(l.updatedAt||0)>=(r.updatedAt||0)?l:r;return {duo:JSON.parse(JSON.stringify(newer.duo||{})),steps:Object.assign({},r.steps,l.steps,newer.steps),avg:Object.assign({},r.avg,l.avg,newer.avg),sick:JSON.parse(JSON.stringify(newer.sick||{})),target:newer.target||35000,avgTarget:newer.avgTarget||this.L.DAD_STEPS_AVG,updatedAt:newer.updatedAt||0}}
-    const o=Object.assign(def,JSON.parse(JSON.stringify(l||r)));o.avg=o.avg||{};o.avgTarget=o.avgTarget||this.L.DAD_STEPS_AVG;return o}
+    /* the hive copy is the truth (scheduled tasks write there too); this device's copy only counts if a change never reached the hive */
+    if(l&&r&&this.load("ab_dadlog_pending",false)){const newer=(l.updatedAt||0)>=(r.updatedAt||0)?l:r;return {duo:JSON.parse(JSON.stringify(newer.duo||{})),steps:Object.assign({},r.steps,l.steps,newer.steps),avg:Object.assign({},r.avg,l.avg,newer.avg),sick:JSON.parse(JSON.stringify(newer.sick||{})),target:newer.target||35000,avgTarget:newer.avgTarget||this.L.DAD_STEPS_AVG,updatedAt:newer.updatedAt||0}}
+    const o=Object.assign(def,JSON.parse(JSON.stringify(r||l)));o.avg=o.avg||{};o.avgTarget=o.avgTarget||this.L.DAD_STEPS_AVG;return o}
   sickOf(p){const d=this.dadLog();return (d.sick&&d.sick[p])||{}}
-  saveDadLog(d){d.updatedAt=Date.now();this.store("ab_dadlog",d);const db=this.state.db;if(db){try{Promise.resolve(db.doc("dadlog/dad").set(d)).catch(()=>{})}catch(e){}}this.setState({dbSnap:Object.assign({},this.state.dbSnap,{dadlog:d})})}
+  duoOf(k){const s=this.state.dbSnap.duol,x=s&&s[k];if(!x||x.found===false)return null;const L=this.L,t=L.today(),y=L.addDays(t,-1),live=x.end===t||x.end===y;
+    return {streak:live?(x.streak||0):0,today:x.end===t,xp:x.xp||0,langs:(x.langs||[]).filter(Boolean)}}
+  async freshDadLog(){const db=this.state.db;if(!db)return;try{const s=await db.collection("dadlog").get();let x=null;s.forEach(d=>{const v=d.data();if(v&&v.duo)x=v});if(x)await new Promise(r=>this.setState({dbSnap:Object.assign({},this.state.dbSnap,{dadlog:x})},r))}catch(e){}}
+  /* change Dad's log on top of the latest copy in the hive, so automatic Duolingo ticks and step averages are never lost */
+  async editDadLog(fn){await this.freshDadLog();const Lg=this.dadLog(),msg=fn(Lg);this.saveDadLog(Lg);if(msg)this.toast(msg);return Lg}
+  saveDadLog(d){d.updatedAt=Date.now();const db=this.state.db;this.store("ab_dadlog",d);this.store("ab_dadlog_pending",!!db);
+    if(db){try{Promise.resolve(db.doc("dadlog/dad").set(d)).then(()=>this.store("ab_dadlog_pending",false),()=>{})}catch(e){}}
+    this.setState({dbSnap:Object.assign({},this.state.dbSnap,{dadlog:d})})}
   weekInfo(){const L=this.L,t=L.today(),mon=L.mondayOf(t),end=L.addDays(mon,6),practice=t<L.LAUNCH,start=(!practice&&mon<L.LAUNCH)?L.LAUNCH:mon,days=[];for(let d=start;d<=end;d=L.addDays(d,1))days.push(d);return {t,start,end,days,practice,mon}}
   weekOf(mon){const L=this.L,end=L.addDays(mon,6),start=mon<L.LAUNCH?L.LAUNCH:mon,days=[];for(let d=start;d<=end;d=L.addDays(d,1))days.push(d);return {t:L.addDays(end,1),start,end,days,practice:false,mon,final:true}}
   launchWeekend(W){return W.start===this.L.LAUNCH&&W.days.length<=2}
@@ -774,6 +785,7 @@ class Component extends DCLogic {
     o.badges=(L.BADGES[p]||[]).map((b,i)=>({key:i,ic:b.ic,t:b.t,s:b.s}));o.hasBadges=o.badges.length>0;
     o.merch=L.MERCH.map(m=>({key:m.k,ok:m.ok(st),ic:m.ok(st)?"✅":"⬜",t:m.t}));const mN=o.merch.filter(m=>m.ok).length;o.merchT=mN===3?"🎉 All three done: special merch unlocked!":mN?"🎁 Small merch unlocked! Do all three for special merch.":"Do any one for small merch · all three for special merch";
     o.goShop=()=>this.goShop();
+    const du=this.duoOf(p);o.hasDuo=!!du;if(du){o.duoT=du.streak?"🔥 "+du.streak+"-day streak":"no streak right now";o.duoS=(du.langs.length?du.langs.join(" · ")+" · ":"")+L.nfmt(du.xp)+" XP";o.duoNow=du.today?"✅ Today's lesson done":du.streak?"Do today's lesson to keep your streak going":"Do a lesson today to start a streak 🌱"}
     o.profStats=[["⭐",L.nfmt(st.points),"points"],["🔥",String(st.streak),"day streak"],["🎯",String(st.rounds),"rounds done"],["🎁",have.size+"/"+Object.keys(E).length,"items unlocked"]].map(([ic,k,l])=>({key:l,ic,k,l}));
     const nx=Object.keys(E).filter(k=>E[k].n&&!have.has(k)).sort((a,b)=>E[a].n-E[b].n)[0];o.hasNext=!!nx;
     if(nx){const prev=Object.keys(E).filter(k=>E[k].n&&E[k].n<E[nx].n).map(k=>E[k].n).sort((a,b)=>b-a)[0]||0,togo=E[nx].n-st.rounds;o.nextT="🎁 Next unlock: "+L.itemOf(nx);o.nextS=togo+" more round"+(togo>1?"s":"")+" to go";o.nextW=Math.max(4,Math.round((st.rounds-prev)*100/(E[nx].n-prev)))+"%"}
@@ -808,7 +820,7 @@ class Component extends DCLogic {
       if(!W.days.includes(d)){title="before launch";bg="transparent"}else if(!neutral){const v=fn(d);if(mark&&mark(d)){bg="linear-gradient(180deg,#D7E9FF,#9CC7F5)";ink="#0B2E3F";letter="🤒";title=L.fmtDay(d)+": sick day"}else if(v){bg="linear-gradient(180deg,#FFE680,#FFB800)";ink="#3A2600"}else if(d<W.t){bg="linear-gradient(180deg,#FFB5A8,#FF6F61)";ink="#fff"}if(d===W.t)outline="2px dashed var(--acc)";if(!title)title=L.fmtDay(d)+(v?" ✓":"")}
       const can=!!tapFn&&W.days.includes(d)&&d<=W.t;
       arr.push({key:d,letter,bg,ink,outline,title,cursor:can?"pointer":"default",tap:can?()=>tapFn(d):()=>{}})}return arr};
-    const toggleSick=(k,d)=>{const Lg=this.dadLog();Lg.sick=Lg.sick||{};Lg.sick[k]=Lg.sick[k]||{};if(Lg.sick[k][d])delete Lg.sick[k][d];else Lg.sick[k][d]=true;this.saveDadLog(Lg);this.toast(Lg.sick[k][d]?"🤒 Sick day marked for "+L.NAMES[k]+": counts as played":"Sick day removed")};
+    const toggleSick=(k,d)=>this.editDadLog(Lg=>{Lg.sick=Lg.sick||{};Lg.sick[k]=Lg.sick[k]||{};if(Lg.sick[k][d])delete Lg.sick[k][d];else Lg.sick[k][d]=true;return Lg.sick[k][d]?"🤒 Sick day marked for "+L.NAMES[k]+": counts as played":"Sick day removed"});
     const rows=[];
     ["p1","p2"].forEach(k=>{const s=this.boyStatus(k,W),exW=this.examWeek(k),upN=this.upcomingExams(k).length,stats=[];
       if(!s.has){unknown++;stats.push({key:"none",t:"No games from "+L.NAMES[k]+" yet. Scores show here once they play.",c:"var(--soft)"})}
@@ -817,6 +829,7 @@ class Component extends DCLogic {
         if(total)stats.push({key:"isl",t:(s.left.length?"🏝️ Islands this week: ":"✅ Every island played: ")+doneN+"/"+total+(s.left.length?" · still to visit: "+s.left.map(x=>x.title).join(", "):""),c:s.left.length?"var(--ink)":"#7ED957"});
         if(s.left.length)block(L.NAMES[k],s.left.length+" island"+(s.left.length>1?"s":"")+" to visit")}
       const goal=lw?(W.days.length>1?"play both days":"play today"):(exW?(upN?"play every day + every "+L.EXAM_NAME+" island":"play every day ("+L.EXAM_NAME+" papers done! 🎉)"):"play every day + every island");
+      const du=this.duoOf(k);if(du)stats.push({key:"duol",t:"🦉 Duolingo: "+(du.streak?"🔥 "+du.streak+"-day streak":"no streak right now")+(du.today?" · done today ✓":""),c:"var(--soft)"});
       rows.push(Object.assign(this.avNode(k),{key:k,name:L.NAMES[k]+" · "+goal,dots:dots(d=>(s.rbd[d]||0)>0,!s.has&&p!=="dad",p==="dad"?d=>toggleSick(k,d):null,d=>!!s.sick[d]),stats,isDad:false,tip:p==="dad"?"Dad: tap a day to mark a sick day 🤒 (counts as played).":""}))});
     const ds=this.dadStatus(W),dst=[];
     if(ds.old){if(ds.missed.length){dst.push({key:"mk",t:(ds.makeupOK?"✅ Make-up quest done: ":"⚠️ Make-up quest: ")+Math.min(ds.extras,ds.need)+"/"+ds.need+" extra rounds for "+ds.missed.length+" missed Duolingo day"+(ds.missed.length>1?"s":""),c:ds.makeupOK?"#7ED957":"#FFB347"});if(!ds.makeupOK)block("Dad",(ds.need-ds.extras)+" make-up round"+(ds.need-ds.extras>1?"s":""))}
@@ -825,11 +838,12 @@ class Component extends DCLogic {
     else{if(ds.missed.length){dst.push({key:"duo",t:"⚠️ Duolingo not ticked: "+ds.missed.map(d=>L.fmtDay(d)).join(", "),c:"#FFB347"});block("Dad","Duolingo on "+ds.missed.length+" day"+(ds.missed.length>1?"s":""))}
       dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps: ")+(ds.avg?L.nfmt(ds.avg)+" a day on average":"this week's average not entered yet")+" · goal "+L.nfmt(ds.tgtAvg),c:ds.stepsOK?"#7ED957":"var(--ink)"});
       if(!ds.stepsOK)block("Dad",ds.avg?"steps average below "+L.nfmt(ds.tgtAvg):"this week's steps average")}
-    const tickDuo=d=>{const Lg=this.dadLog();if(Lg.duo[d])delete Lg.duo[d];else Lg.duo[d]=true;this.saveDadLog(Lg)};
-    rows.push(Object.assign(this.avNode("dad"),{key:"dad",name:ds.old?"Dad · Duolingo every day + "+L.nfmt(ds.L.target)+" steps a week":"Dad · Duolingo every day + "+L.nfmt(ds.tgtAvg)+" steps a day on average",dots:dots(d=>!!ds.L.duo[d],false,p==="dad"?tickDuo:null,null),stats:dst,isDad:p==="dad",tip:p==="dad"?"Tap a day when you've done Duolingo.":""}));
+    const tickDuo=d=>this.editDadLog(Lg=>{if(Lg.duo[d])delete Lg.duo[d];else Lg.duo[d]=true});
+    const dd=this.duoOf("dad");if(dd&&!ds.old)dst.push({key:"duol",t:"🦉 Duolingo streak: "+dd.streak+" day"+(dd.streak===1?"":"s")+" · days tick themselves every evening",c:"var(--soft)"});
+    rows.push(Object.assign(this.avNode("dad"),{key:"dad",name:ds.old?"Dad · Duolingo every day + "+L.nfmt(ds.L.target)+" steps a week":"Dad · Duolingo every day + "+L.nfmt(ds.tgtAvg)+" steps a day on average",dots:dots(d=>!!ds.L.duo[d],false,p==="dad"?tickDuo:null,null),stats:dst,isDad:p==="dad",tip:p==="dad"?(dd?"Duolingo days tick themselves every evening. Tap a day to fix one by hand.":"Tap a day when you've done Duolingo."):""}));
     o.teamRows=rows;
-    o.dadOld=!!ds.old;o.dadNew=!ds.old;o.dadSteps=S.dadStepsIn;o.onDadSteps=e=>this.setState({dadStepsIn:e.target.value});o.saveSteps=()=>{const Lg=this.dadLog(),n=Math.max(0,parseInt(this.state.dadStepsIn,10)||0);if(ds.old)Lg.steps[W.start]=n;else{Lg.avg=Lg.avg||{};Lg.avg[W.start]=n}this.saveDadLog(Lg);this.toast("Steps saved 👟")};
-    o.dadTarget=S.dadTargetIn;o.onDadTarget=e=>this.setState({dadTargetIn:e.target.value});o.setTarget=()=>{const n=parseInt(this.state.dadTargetIn,10);if(n>0){const Lg=this.dadLog();if(ds.old){Lg.target=n;this.saveDadLog(Lg);this.toast("Weekly goal: "+L.nfmt(n)+" steps")}else{Lg.avgTarget=n;this.saveDadLog(Lg);this.toast("Goal: "+L.nfmt(n)+" steps a day on average")}}};
+    o.dadOld=!!ds.old;o.dadNew=!ds.old;o.dadSteps=S.dadStepsIn;o.onDadSteps=e=>this.setState({dadStepsIn:e.target.value});o.saveSteps=()=>{const n=Math.max(0,parseInt(this.state.dadStepsIn,10)||0);this.editDadLog(Lg=>{if(ds.old)Lg.steps[W.start]=n;else{Lg.avg=Lg.avg||{};Lg.avg[W.start]=n}return "Steps saved 👟"})};
+    o.dadTarget=S.dadTargetIn;o.onDadTarget=e=>this.setState({dadTargetIn:e.target.value});o.setTarget=()=>{const n=parseInt(this.state.dadTargetIn,10);if(n>0)this.editDadLog(Lg=>{if(ds.old){Lg.target=n;return "Weekly goal: "+L.nfmt(n)+" steps"}Lg.avgTarget=n;return "Goal: "+L.nfmt(n)+" steps a day on average"})};
     Object.keys(bl).forEach(w=>blockers.push(w+": "+bl[w].join(" + ")));
     if(unknown){o.resT="⏳ Waiting for everyone's scores. The vault can only open when all three show here.";o.resBg="var(--hint)";o.resInk="var(--hintInk)"}
     else if(!blockers.length){o.resT=W.practice?"🔓 Practice: you'd all be on track!":"🔓 Everyone's on track: the Team Vault opens Sunday 9 pm!";o.resBg="var(--good)";o.resInk="var(--goodInk)"}
