@@ -74,11 +74,18 @@
       }
     };
   }
+  /* app activity (v1.92): sign-ins and sign-outs, shown in Dad's corner */
+  function devType() { var u = navigator.userAgent || ""; return /iPad|Tablet/i.test(u) ? "tablet" : (/Mobi|Android|iPhone/i.test(u) ? "phone" : "computer"); }
+  function logAuth(ev) {
+    if (!session || !client) return Promise.resolve();
+    var t = Date.now(), who = role || "family";
+    return shimDb().doc("activity/" + who + "/" + t.toString(36) + "-" + ev).set({ ev: ev, t: t, role: role || null, dev: devType() }).then(function () {}, function () {});
+  }
   function lsGet(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
   /* merge the hive into this device before the app reads it: newer season state wins, progress is merged */
   function hydrate() {
-    return Promise.all([loadMods(), client.from("hive").select("k,v")]).then(function (res) {
+    return Promise.all([loadMods(), client.from("hive").select("k,v").not("k", "like", "activity/%")]).then(function (res) {
       var L = res[0].L, r = res[1]; if (r.error) throw r.error;
       (r.data || []).forEach(function (row) {
         var i = row.k.indexOf("/"), col = row.k.slice(0, i), id = row.k.slice(i + 1), v = row.v;
@@ -105,7 +112,7 @@
   function showSignOut() {
     if (!session) return; var b = document.getElementById("abOut");
     if (!b) { b = el('<button id="abOut" type="button">Sign out</button>'); document.body.appendChild(b);
-      b.onclick = function () { if (confirm("Sign this device out of the family hive?")) client.auth.signOut().then(function () { location.reload(); }); }; }
+      b.onclick = function () { if (confirm("Sign this device out of the family hive?")) Promise.race([logAuth("out"), new Promise(function (r) { setTimeout(r, 1500); })]).then(function () { return client.auth.signOut(); }).then(function () { location.reload(); }); }; }
     var tick = function () { b.style.display = document.querySelector('[data-screen-label="Who\'s playing"]') ? "block" : "none"; };
     new MutationObserver(tick).observe(document.body, { childList: true, subtree: true }); tick();
   }
@@ -122,7 +129,7 @@
       g.querySelector("#siGo").textContent = "Signing in…";
       client.auth.signInWithPassword({ email: e, password: p }).then(function (r) {
         if (r.error || !r.data || !r.data.session) return signInScreen("That didn't work. Check your username and password.");
-        session = r.data.session; afterSignIn();
+        session = r.data.session; afterSignIn(true);
       });
     };
     g.querySelector("#siGo").onclick = go;
@@ -144,9 +151,9 @@
       family = (r[0] && !r[0].error && r[0].data) || session.user.id; role = (r[1] && !r[1].error && r[1].data) || null;
     }, function () { family = session.user.id; role = null; }).then(function () { window.ACADABEE_ROLE = role; });
   }
-  function afterSignIn() {
+  function afterSignIn(fresh) {
     gate("<h1>🐝 AcadaBee</h1><p>Opening the hive…</p>");
-    whoAmI().then(hydrate).then(function () { if (!names || !names.p1) return familyScreen(); return ready(shimDb()); },
+    whoAmI().then(function () { if (fresh) logAuth("in"); }).then(hydrate).then(function () { if (!names || !names.p1) return familyScreen(); return ready(shimDb()); },
       function () { /* offline or blocked: play on this device, sync later */ names = names || lsGet("ab_family"); ready(shimDb()); });
   }
   function start() {

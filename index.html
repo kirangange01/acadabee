@@ -277,6 +277,17 @@
         <div style="padding:12px 14px;border-radius:16px;background:{{ resBg }};color:{{ resInk }};font:800 13px/1.4 Nunito,sans-serif;text-wrap:pretty">{{ resT }}</div>
         <p style="margin:0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Team rule: gems wait in the Team Vault. Sunday 9 pm: if all three hit their goals, it opens and your gems double (at least +300 💎), plus a honey jar 🍯. Missed a day? Do 2 extra rounds for it by Sunday. Your own ⭐ points always count.</p>
       </div>
+      <sc-if value="{{ showActivity }}">
+      <div data-activity="1" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:12px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🕒 When they were in the app</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ actTip }}</p></div>
+        <sc-for list="{{ actDays }}" as="d" hint-placeholder-count="3">
+          <div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid var(--line)">
+            <div style="font:800 14px/1.3 Nunito,sans-serif;color:var(--ink)">{{ d.title }}</div>
+            <sc-for list="{{ d.lines }}" as="l" hint-placeholder-count="2"><div style="font:700 13px/1.4 Nunito,sans-serif;color:{{ l.c }};text-wrap:pretty">{{ l.t }}</div></sc-for>
+          </div>
+        </sc-for>
+      </div>
+      </sc-if>
       <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
         <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ jarsT }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">{{ jarsS }}</small></div>
         <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 14px/1.25 Fredoka,sans-serif;color:var(--ink)">{{ vaultMine }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">opens Sunday 9 pm</small></div>
@@ -452,8 +463,9 @@ class Component extends DCLogic {
     }).catch(e=>console.error("AcadaBee: content failed to load",e));
     this._esc=e=>{if(e.key==="Escape"&&this.state.learnOpen)this.setState({learnOpen:false})};document.addEventListener("keydown",this._esc);
     this._hyd=()=>{if(!this.L)return;Promise.resolve(this.state.db?this.loadSnap().then(()=>this.pullNotes()).then(()=>this.pullWishes()).then(()=>this.fetchBoard()):null).then(()=>{this.forceUpdate();this.announceNotes()})};window.addEventListener("ab-hydrated",this._hyd);
+    this._act=setInterval(()=>this.actTick(),60000);this._actVis=()=>this.actTick();document.addEventListener("visibilitychange",this._actVis);
   }
-  componentWillUnmount(){document.removeEventListener("keydown",this._esc);window.removeEventListener("ab-hydrated",this._hyd)}
+  componentWillUnmount(){document.removeEventListener("keydown",this._esc);window.removeEventListener("ab-hydrated",this._hyd);clearInterval(this._act);document.removeEventListener("visibilitychange",this._actVis)}
   componentDidUpdate(){this.applyTheme()}
   applyTheme(){const r=this.rootRef.current;if(!r||!this.L)return;const S=this.state,key=S.screen==="pick"?"pick":this.L.WORLDS[this.worldOf(S.player||"p2")].theme;if(this._theme===key)return;this._theme=key;const th=this.L.THEMES[key];Object.keys(th).forEach(k=>r.style.setProperty("--"+k,th[k]))}
 
@@ -477,7 +489,7 @@ class Component extends DCLogic {
     if(S.player==="dad"){ex.notesSeenPrev=this.load("ab_notes_seen",0);this.store("ab_notes_seen",Date.now())}this.setScreen("notes",ex)}
   pick(p){const t=this.L.today();this.store("ab_who",p);const done=this.load("ab_done_"+p+"_"+t,{});
     if(p==="dad"){this.setState({player:p,prevWho:p,done,told:0},()=>{this.goBoard();this.announceNotes()});return}
-    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.unlocked(p,false);this.announceNotes()})}
+    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.unlocked(p,false);this.announceNotes();this.actTick()})}
   toast(msg){clearTimeout(this._toastT);this.setState({toast:msg});this._toastT=setTimeout(()=>this.setState({toast:null}),2400)}
 
   /* exams + islands */
@@ -605,7 +617,7 @@ class Component extends DCLogic {
     this.saveProgress();
     if(!pr&&!(s.golden||[]).includes(lesson.id)&&this.isGolden(p,lesson)){s.golden=[...(s.golden||[]),lesson.id];this.addGems(s,L.GEMS.golden,"golden");ex.push("🌟 "+lesson.title+" is now GOLDEN! +"+L.GEMS.golden+" 💎")}
     const gNew=(s.gems||[]).reduce((a,g)=>a+g.n,0)-g0;if(gNew>0)ex.push("🔐 +"+L.nfmt(gNew)+" 💎 wait in the Team Vault until Sunday 9 pm");
-    this.saveP(s);
+    this.saveP(s);this.actRound();
     const done=Object.assign({},S.done,{[lesson.id]:true});this.store("ab_done_"+p+"_"+t,done);
     const m=this.masteredCount(lesson),tw=this.twiceCount(lesson),gdn=(s.golden||[]).includes(lesson.id),ord=this.mapOrder(p),i=ord.findIndex(x=>x.id===lesson.id);
     const title=S.stung?"Ouch! The bee stung 🐝":pr?"Practice round 🧪":"Island cleared! 🏝️";
@@ -642,8 +654,34 @@ class Component extends DCLogic {
     try{const s=await db.collection("dadlog").get();s.forEach(d=>{const x=d.data();if(x&&x.duo)snap.dadlog=x})}catch(e){}
     try{const s=await db.collection("duolingo").get();s.forEach(d=>{if(d.id==="summary")snap.duol=d.data()})}catch(e){}
     this.setState({dbSnap:snap})}
-  async fetchBoard(){const db=this.state.db;if(!db)return;const rows=[];try{const snap=await db.collection("players").get();snap.forEach(d=>rows.push(d.data()))}catch(e){}this.setState({dbRows:rows})}
+  async fetchBoard(){const db=this.state.db;if(!db)return;if(this.state.player==="dad")this.pullActivity();const rows=[];try{const snap=await db.collection("players").get();snap.forEach(d=>rows.push(d.data()))}catch(e){}this.setState({dbRows:rows})}
   async pullNotes(){const db=this.state.db;if(!db)return;try{const snap=await db.collection("notes").get();const m={};snap.forEach(d=>{const n=d.data();if(n&&n.id)m[n.id]=n});this.setState({dbNotes:m})}catch(e){}}
+
+  /* app activity (v1.92): when each boy is in the app, shown in Dad's corner */
+  devType(){const u=navigator.userAgent||"";return /iPad|Tablet/i.test(u)?"tablet":(/Mobi|Android|iPhone/i.test(u)?"phone":"computer")}
+  actTick(){const S=this.state,p=S.player,db=S.db;if(!this.L||!db||!p||p==="dad"||S.screen==="pick")return;
+    const now=Date.now(),vis=document.visibilityState!=="hidden";let v=this._visit;
+    if(vis){if(!v||v.p!==p||now-v.e>this.L.ACT_GAP)v=this._visit={id:now.toString(36)+Math.random().toString(36).slice(2,5),p,s:now,e:now,r:0,dev:this.devType(),via:window.ACADABEE_ROLE?"own":"family"};else{v.e=now;v.closed=false}}
+    else{if(!v||v.p!==p||v.closed)return;v.e=now;v.closed=true}
+    this.saveVisit(v)}
+  actRound(){this.actTick();const v=this._visit;if(!v||v.p!==this.state.player)return;v.r=(v.r||0)+1;v.e=Date.now();this.saveVisit(v)}
+  saveVisit(v){const db=this.state.db;if(!db)return;try{Promise.resolve(db.doc("activity/"+v.p+"/"+v.id).set({p:v.p,s:v.s,e:v.e,r:v.r,dev:v.dev,via:v.via})).catch(()=>{})}catch(e){}}
+  async pullActivity(){const db=this.state.db;if(!db)return;const rows=[];try{const snap=await db.collection("activity").get();snap.forEach(d=>{const x=d.data();if(x)rows.push(Object.assign({id:d.id},x))})}catch(e){}this.setState({actRows:rows})}
+  activityVals(){const L=this.L,N=L.NAMES,tz="Asia/Kolkata",rows=this.state.actRows||[];
+    const dayOf=ms=>new Date(ms).toLocaleDateString("en-CA",{timeZone:tz}),
+      tm=ms=>new Date(ms).toLocaleTimeString("en-US",{timeZone:tz,hour:"numeric",minute:"2-digit"}).replace(/\s?AM$/," am").replace(/\s?PM$/," pm"),
+      who=k=>k==="dad"?"Dad":(k&&N[k])?N[k]:"The family login";
+    const today=dayOf(Date.now()),days=[];for(let i=0;i<L.ACT_DAYS;i++){const d=L.addDays(today,-i);if(d<L.ACT_FROM)break;days.push(d)}
+    const visits=rows.filter(r=>r.s&&r.p),auth=rows.filter(r=>r.ev&&r.t);
+    const actDays=days.map(d=>{const lines=[];
+      ["p1","p2"].forEach(k=>{const vs=visits.filter(v=>v.p===k&&dayOf(v.s)===d).sort((a,b)=>a.s-b.s);if(!vs.length)return;
+        const mins=vs.reduce((a,v)=>a+Math.max(0,(v.e||v.s)-v.s),0)/60000,rounds=vs.reduce((a,v)=>a+(v.r||0),0),
+          spans=vs.map(v=>((v.e||v.s)-v.s>=60000)?tm(v.s)+"–"+tm(v.e):tm(v.s)).join(", ");
+        lines.push({key:k,c:"var(--ink)",t:(L.EMO[k]||"")+" "+N[k]+": "+spans+" · "+(mins<1?"under 1 min":Math.round(mins)+" min")+(rounds?" · "+rounds+" round"+(rounds>1?"s":""):"")})});
+      auth.filter(a=>dayOf(a.t)===d).sort((a,b)=>a.t-b.t).forEach(a=>lines.push({key:a.id,c:"var(--soft)",t:(a.ev==="out"?"🚪 ":"🔑 ")+who(a.role)+(a.ev==="out"?" signed out at ":" signed in at ")+tm(a.t)+(a.dev?" ("+a.dev+")":"")}));
+      if(!lines.length)lines.push({key:"none",c:"var(--soft)",t:"Nobody opened the app."});
+      return {key:d,title:d===today?"Today":(d===L.addDays(today,-1)?"Yesterday":L.fmtDay(d)),lines}});
+    return {showActivity:!!this.state.db,actDays,actTip:"Times in IST. A visit counts while the app is open on the screen; rounds are the rounds finished in it."}}
 
   /* Dad's log + the team week */
   dadLog(){const def={duo:{},steps:{},avg:{},sick:{},target:35000,avgTarget:this.L.DAD_STEPS_AVG,updatedAt:0},l=this.load("ab_dadlog",null),r=this.state.dbSnap.dadlog;
@@ -719,7 +757,7 @@ class Component extends DCLogic {
   renderVals(){
     const S=this.state;if(!S.ready||!this.L)return {ready:false,isPick:true,isApp:false,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,zNoAv:true,rNoAv:true,dNoAv:true,pickZ:()=>{},pickR:()=>{},pickD:()=>{}};
     const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",navOn:["map","board","notes","chapters","profile","shop"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
-    o.newOn=!S.newClosed&&this.load("ab_seen_ver",null)!==L.APP_VERSION;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
+    o.newOn=!S.newClosed&&this.load("ab_seen_ver",null)!==L.APP_VERSION&&this.whatsNew().length>0;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
     /* pick */
     {const rk=this.roleKey();o.showZ=!rk||rk==="p1";o.showR=!rk||rk==="p2";o.showD=!rk||rk==="dad";o.pickHint=rk?"Tap to play. Not you? Sign out below.":"Founders only. Tap your name."}
     ["p1","p2","dad"].forEach((k,i)=>{const c="zrd"[i],a=this.avNode(k);o[c+"AvUrl"]=a.avUrl;o[c+"NoAv"]=a.noAv;o[c+"Prev"]=S.prevWho===k;o[c+"World"]=L.WORLDS[this.worldOf(k)].name;o[c+"Name"]=L.NAMES[k];o[c+"Role"]=L.ROLE[k]||""});
@@ -883,6 +921,7 @@ class Component extends DCLogic {
     ["p1","p2"].forEach(k=>{const l=this.load("ab_"+k,null),ls=(l&&l.season===L.SEASON)?l:null,i=br.findIndex(r=>r.p===k);if(i<0)br.push({p:k,points:ls?ls.points:0,streak:ls?ls.streak:0});else if(ls&&(ls.updatedAt||0)>(br[i].updatedAt||0))br[i]=Object.assign({},ls,{p:k,av:br[i].av})});
     br.sort((a,b)=>(b.points||0)-(a.points||0));
     o.boardRows=br.map(r=>{const lv=L.levelOf(r.points||0),bd=(L.BADGES[r.p]||[]).map(b=>b.ic).join("");return Object.assign(this.avNode(r.p,r.av),{key:r.p,name:L.NAMES[r.p]+(bd?" "+bd:""),streak:"Lv "+lv.n+" "+lv.name+" · streak "+(r.streak||0)+" 🔥",pts:L.nfmt(r.points||0)})});
+    if(p==="dad")Object.assign(o,this.activityVals());
     return o;
   }
   chaptersVals(){
