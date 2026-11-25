@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>AcadaBee</title><meta name="theme-color" content="#0B1E3A"><link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="icon-192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="AcadaBee"><script src="./config.js"></script><script src="./vendor/supabase.js"></script><script src="./vendor/react.production.min.js"></script><script src="./vendor/react-dom.production.min.js"></script><script src="./site.js"></script><script src="./support.js"></script></head><body>
 <x-dc>
-<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800;900&amp;display=swap"><style>html,body{margin:0;background:#0B1E3A}body{font-family:Nunito,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#45E0E6}a:hover{color:#8FF3F5}button{font-family:Nunito,system-ui,sans-serif}input,select,textarea{font-family:Nunito,system-ui,sans-serif}@keyframes rbFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}@keyframes wave{0%,100%{transform:translateX(0)}50%{transform:translateX(-18px)}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}@keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes toastIn{0%{transform:translate(-50%,20px);opacity:0}100%{transform:translate(-50%,0);opacity:1}}</style></helmet>
+<helmet><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&amp;family=Nunito:wght@600;700;800;900&amp;display=swap"><style>html,body{margin:0;background:#0B1E3A}body{font-family:Nunito,system-ui,sans-serif;-webkit-font-smoothing:antialiased}a{color:#45E0E6}a:hover{color:#8FF3F5}button{font-family:Nunito,system-ui,sans-serif}input,select,textarea{font-family:Nunito,system-ui,sans-serif}@keyframes rbFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-10px) rotate(2deg)}}@keyframes wave{0%,100%{transform:translateX(0)}50%{transform:translateX(-18px)}}@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}@keyframes popIn{0%{transform:scale(.6);opacity:0}70%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}@keyframes toastIn{0%{transform:translate(-50%,20px);opacity:0}100%{transform:translate(-50%,0);opacity:1}}@keyframes rareSpin{to{transform:rotate(360deg)}}@media (prefers-reduced-motion:reduce){[data-rare] *{animation:none!important}}</style></helmet>
 <div ref="{{ rootRef }}" style="min-height:100vh;background:var(--bg,linear-gradient(180deg,#0B1E3A 0%,#10637A 48%,#2FC2D9 78%,#8FEBF7 100%));font-family:Nunito,system-ui,sans-serif;color:var(--ink,#fff);position:relative;overflow-x:hidden">
 
   <!-- PICK -->
@@ -30,7 +30,7 @@
       </button></sc-if>
       <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and rewards" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · rewards</span>→</button></sc-if>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v2.0 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v2.1 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -530,6 +530,25 @@
   </div>
   </sc-if>
 
+  <!-- RARE FIND (v2.1): 1 in 100 full rounds -->
+  <sc-if value="{{ rareOn }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="rareTitle" data-rare="1" style="position:fixed;inset:0;z-index:55;overflow-y:auto;display:flex;align-items:center;justify-content:center;padding:24px 18px;background:radial-gradient(circle at 50% 38%,#6B4BC8 0%,#2A1659 45%,#0E0726 100%);color:#fff">
+    <div style="max-width:420px;width:100%;display:flex;flex-direction:column;align-items:center;gap:12px;text-align:center">
+      <div style="font:900 13px/1 Nunito,sans-serif;letter-spacing:.22em;text-transform:uppercase;color:#FFD83D">✨ 1 in 100 ✨</div>
+      <h2 id="rareTitle" style="margin:0;font:700 42px/1.05 Fredoka,sans-serif;color:#FFE680;text-shadow:0 3px 0 rgba(160,100,0,.55),0 0 28px rgba(255,214,61,.45);animation:popIn .8s ease-out">RARE FIND!</h2>
+      <div data-rare-hero="1" style="position:relative;width:230px;height:230px;display:flex;align-items:center;justify-content:center">
+        <div style="position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,216,61,0),rgba(255,216,61,.6),rgba(124,245,200,0),rgba(255,216,61,.6),rgba(255,216,61,0));animation:rareSpin 6s linear infinite;filter:blur(3px)"></div>
+        <div style="position:absolute;inset:24px;border-radius:50%;background:radial-gradient(circle,#FFF6C8 0%,rgba(255,214,61,.35) 55%,rgba(255,214,61,0) 72%)"></div>
+        <img src="{{ rareAv }}" alt="{{ rareAlt }}" style="position:relative;width:172px;height:178px;display:block;animation:rbFloat 3s ease-in-out infinite;filter:drop-shadow(0 14px 14px rgba(0,0,0,.45))">
+      </div>
+      <p style="margin:0;font:800 23px/1.25 Nunito,sans-serif;text-wrap:balance">You found the {{ rareName }}!</p>
+      <p style="margin:0;font:700 14px/1.45 Nunito,sans-serif;color:#E2D8FF">It's yours to keep · {{ rareCount }}</p>
+      <button onClick="{{ rareWear }}" style="border:0;cursor:pointer;width:100%;margin-top:6px;padding:18px;border-radius:22px;font:700 22px/1 Fredoka,sans-serif;color:#3A2600;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -8px 0 rgba(160,100,0,.35),0 18px 30px -10px rgba(0,0,0,.6)" style-active="transform:translateY(3px)">😎 Wear it now</button>
+      <button onClick="{{ rareLater }}" style="border:0;cursor:pointer;padding:10px 18px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font:800 14px/1 Nunito,sans-serif">Later</button>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- WHAT'S NEW -->
   <sc-if value="{{ newOn }}" hint-placeholder-val="{{ false }}">
   <div role="dialog" aria-modal="true" aria-labelledby="newTitle" style="position:fixed;inset:0;background:rgba(5,20,40,.6);display:flex;align-items:center;justify-content:center;z-index:75;padding:20px">
@@ -566,7 +585,7 @@ class Component extends DCLogic {
   state={ready:false,screen:"pick",player:null,prevWho:null,lesson:null,round:[],qi:0,order:[],earned:0,newPts:0,revCount:0,roundLog:[],attempted:false,dimmed:[],fb:null,wrongFlash:null,nextOn:false,nextLabel:"Next →",done:{},doneNav:{prev:null,next:null},donePts:"+0",doneMsg:"",doneTitle:"",doneExtras:[],hintUsed:false,firstWrong:0,stung:false,practice:null,dbWishes:{},wishText:"",wishPrice:{},
     noteCtx:null,noteBack:"map",noteKind:null,noteText:"",noteAbout:"Whole app",noteErr:false,lastPlace:"Whole app",delArm:null,copyBoxShown:false,notesSeenPrev:0,
     chapWho:null,chapSearch:"",toast:null,learnOpen:false,learnEntry:null,db:null,dbNotes:{},dbSnap:{progress:{},dadlog:null,duol:null},dbRows:[],dadStepsIn:"",dadTargetIn:"",told:0,
-    dbOrders:{},dbMarks:{},dbRw:{},rwSrv:null,annOn:false,annPreview:false,annFaq:null,buyArm:null,subjIn:{},friendsIn:null,actRows:[]};
+    dbOrders:{},dbMarks:{},dbRw:{},rwSrv:null,annOn:false,annPreview:false,annFaq:null,buyArm:null,subjIn:{},friendsIn:null,actRows:[],rareOn:false,rareItem:null};
   rootRef=React.createRef(); fxRef=React.createRef(); beeRef=React.createRef(); MEM={};
 
   componentDidMount(){
@@ -605,7 +624,7 @@ class Component extends DCLogic {
     if(S.player==="dad"){ex.notesSeenPrev=this.load("ab_notes_seen",0);this.store("ab_notes_seen",Date.now())}this.setScreen("notes",ex)}
   pick(p){const t=this.L.today();this.store("ab_who",p);const done=this.load("ab_done_"+p+"_"+t,{});
     if(p==="dad"){this.setState({player:p,prevWho:p,done,told:0},()=>{this.goBoard();this.announceNotes()});return}
-    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.unlocked(p,false);this.announceNotes();this.actTick();this.maybeAnn()})}
+    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.goldUp(p);this.unlocked(p,false);this.announceNotes();this.actTick();this.maybeAnn()})}
   toast(msg){clearTimeout(this._toastT);this.setState({toast:msg});this._toastT=setTimeout(()=>this.setState({toast:null}),2400)}
 
   /* exams + islands */
@@ -648,12 +667,12 @@ class Component extends DCLogic {
   islandsPlayed(p,from,to){const g=this.progOf(p);if(!g)return [];return Object.keys(g.isl).filter(id=>Object.keys(g.isl[id].days||{}).some(d=>d>=from&&d<=to))}
   masteredCount(L){const ip=(this.PG().isl||{})[L.id];if(!ip)return 0;return L.qs.filter(Q=>ip.q[Q.id]&&ip.q[Q.id].m).length}
   twiceCount(L){const ip=(this.PG().isl||{})[L.id];if(!ip)return 0;return L.qs.filter(Q=>ip.q[Q.id]&&(ip.q[Q.id].ok||0)>=2).length}
-  statsOf(p){const L=this.L,r=this.load("ab_"+p,null),s=(r&&r.season===L.SEASON)?r:L.freshSeason(),g=this.progOf(p);return {points:s.points||0,streak:s.streak||0,bestStreak:Math.max(s.bestStreak||0,s.streak||0),golden:(s.golden||[]).length,mastered:this.D.LESSONS[p].filter(Lx=>this.fullyMastered(p,Lx)).length,rounds:g?Object.values(g.isl).reduce((a,ip)=>a+(ip.rounds||0),0):0}}
+  statsOf(p){const L=this.L,r=this.load("ab_"+p,null),s=(r&&r.season===L.SEASON)?r:L.freshSeason(),g=this.progOf(p);return {points:s.points||0,streak:s.streak||0,bestStreak:Math.max(s.bestStreak||0,s.streak||0),golden:(s.golden||[]).length,mastered:this.D.LESSONS[p].filter(Lx=>this.fullyMastered(p,Lx)).length,rounds:g?Object.values(g.isl).reduce((a,ip)=>a+(ip.rounds||0),0):0,rare:s.rare||[]}}
   worldOf(p){const L=this.L,w=this.load("ab_world_"+p,null),have=new Set(this.load("ab_unlock_"+p,[]));if(w&&L.WORLDS[w]){const e=L.worldEarn(p,w);if(!e||have.has(e))return w}return L.HOME_WORLD[p]||"coral"}
   itemsFor(p,k){const L=this.L,n=[L.itemOf(k)].filter(x=>x!==k);Object.keys(L.WORLDS).forEach(w=>{if(L.worldEarn(p,w)===k)n.push(L.WORLDS[w].name+" world")});return n.length?n.join(" + "):k}
   unlocked(p,announce){const E=this.L.EARN,have=new Set(this.load("ab_unlock_"+p,[])),st=this.statsOf(p),fresh=[];
     Object.keys(E).forEach(k=>{if(!have.has(k)&&E[k].ok(st)){have.add(k);fresh.push(k)}});
-    if(fresh.length){this.store("ab_unlock_"+p,[...have]);if(announce)this.toast("🎁 Unlocked for your bee: "+fresh.map(k=>this.itemsFor(p,k)).join(", ")+"! See Profile.")}
+    if(fresh.length){this.store("ab_unlock_"+p,[...have]);const shown=fresh.filter(k=>!/^rare_/.test(k));if(announce&&shown.length)this.toast("🎁 Unlocked for your bee: "+shown.map(k=>this.itemsFor(p,k)).join(", ")+"! See Profile.")}
     return have}
   avOf(p,remote){const l=this.load("ab_av_"+p,null);if(remote&&(!l||(remote.t||0)>(l.t||0)))return remote;return l}
   avNode(p,remote){const a=this.avOf(p,remote);return {avUrl:a?this.L.avatarURL(a):null,noAv:!a,emoji:this.L.EMO[p]}}
@@ -669,6 +688,10 @@ class Component extends DCLogic {
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
   practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";if(p!=="dad"&&this.state.db&&this.rwTodayPts(p)>=L.DAY_PTS_MAX)return "max";if(p!=="dad"&&this.clockOff())return "clock";return null}
   whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0],R=String(this.L.NAMES.p2||"").split(" ")[0],seen=parseFloat(this.load("ab_seen_ver",null))||0;return [
+    {v:2.1,key:"asks",ic:"🛠️",t:"You asked, we built it! Your three asks from the rewards list are live."},
+    {v:2.1,key:"golden2",ic:"🌟",t:"Golden = more: a golden island now gives +1,000 ⭐ (that's +1,000 reward points, on top of the daily max) and 1,000 💎. Islands that were already golden got the extra too."},
+    {v:2.1,key:"hindi2",ic:"🍯",t:"Hindi extra: a full Hindi round fills 2 honeycomb cells, so your hive fills twice as fast. Hindi points are still double!"},
+    {v:2.1,key:"rare",ic:"✨",t:"Rare finds: every full round has a 1-in-100 chance of a rare item for your bee. 12 to collect, from a pirate hat to VR goggles. See Profile!"},
     {v:1.91,key:"wssci",ic:"🔬",t:R+"'s Science and Maths sheets are in too: Fibre and Air Islands have his worksheet and class notes, and Multiples Island has the Factors and Multiples sheets, with primes, factor trees, HCF and LCM. Sheet questions come first."},
     {v:1.9,key:"wssst",ic:"🌊",t:R+"'s SST and Hindi sheets are in: Water Island has his class notes (new terms, oceans and seas, the Ganga, water scarcity), and शब्द and हीरा Islands have the class मुहावरे list, अनेकार्थी शब्द and the आसमान गिरा answers. Sheet questions come first."},
     {v:1.8,key:"wseng",ic:"📝",t:R+"'s PA-2 English sheets are in: verbs and tenses on Tense Island, prepositions, jumbled sentences and experience writing on Word Island, and story words, book answers and unseen passages on Reader Island. Rounds give you the sheet questions first. Good luck on Wednesday, "+R+"! 🍀"},
@@ -718,9 +741,13 @@ class Component extends DCLogic {
     const db=S.db;if(db){try{Promise.resolve(db.doc("progress/"+S.player).set({p:S.player,name:this.L.NAMES[S.player],updatedAt:Date.now(),prog:g})).catch(()=>{})}catch(e){}}
     return ip}
   finishLesson(){
-    const S=this.state,L=this.L,p=S.player,lesson=S.lesson,s=this.P(),t=L.today(),ex=[],pr=S.practice,before=L.levelOf(s.points).n,g0=(s.gems||[]).reduce((a,g)=>a+g.n,0),tb=p!=="dad"?this.rwTodayPts(p):0,firstToday=s.lastDay!==t;
+    const S=this.state,L=this.L,p=S.player,lesson=S.lesson,s=this.P(),t=L.today(),ex=[],pr=S.practice;if(p!=="dad")this.goldFix(s);
+    const before=L.levelOf(s.points).n,g0=(s.gems||[]).reduce((a,g)=>a+g.n,0),tb=p!=="dad"?this.rwTodayPts(p):0,firstToday=s.lastDay!==t;let gp=0,rare=null;
     s.points+=S.newPts;
     if(S.newPts>0){s.pd=s.pd||{};s.pd[t]=(s.pd[t]||0)+S.newPts;const ks=Object.keys(s.pd).sort();while(ks.length>150)delete s.pd[ks.shift()]}
+    this.saveProgress();
+    /* golden = more (v2.1): +GOLD_PTS points (the hive credits them as reward points on top of the daily max) and GEMS.golden gems; the level check below includes them */
+    if(!pr&&!(s.golden||[]).includes(lesson.id)&&this.isGolden(p,lesson)){s.golden=[...(s.golden||[]),lesson.id];gp=L.GOLD_PTS;s.points+=gp;if(p!=="dad")s.gold=(s.gold||0)+1;this.addGems(s,L.GEMS.golden,"golden");ex.push("🌟 "+lesson.title+" is now GOLDEN! +"+L.nfmt(gp)+" ⭐ and +"+L.nfmt(L.GEMS.golden)+" 💎")}
     if(!S.stung)s.fr=(s.fr||0)+1;
     if(!S.stung&&s.lastDay!==t){
       if(!s.lastDay)s.streak=1;
@@ -731,12 +758,11 @@ class Component extends DCLogic {
       if(!pr&&s.streak%7===0&&s.lastChest!==t){s.lastChest=t;this.addGems(s,L.GEMS.chest,"chest");ex.push("🎁 Treasure chest: "+s.streak+" days in a row! +"+L.nfmt(L.GEMS.chest)+" 💎")}
     }
     if(!pr){const after=L.levelOf(s.points).n;if(after>before){this.addGems(s,L.GEMS.level*(after-before),"level");ex.push("⬆️ Level "+after+": "+L.levelOf(s.points).name+"! +"+L.GEMS.level*(after-before)+" 💎")}
-      if(!S.stung){s.cells=(s.cells||0)+1;if(s.cells>=L.CELLS_PER_HIVE){s.cells-=L.CELLS_PER_HIVE;s.hives=(s.hives||0)+1;this.addGems(s,L.GEMS.hive,"hive");ex.push("🍯 Full hive! +"+L.nfmt(L.GEMS.hive)+" 💎")}}}
+      if(!S.stung){const hc=this.isHindi(lesson.id)?2:1;s.cells=(s.cells||0)+hc;if(hc>1)ex.push("🍯 Hindi round: +2 honeycomb cells!");if(s.cells>=L.CELLS_PER_HIVE){s.cells-=L.CELLS_PER_HIVE;s.hives=(s.hives||0)+1;this.addGems(s,L.GEMS.hive,"hive");ex.push("🍯 Full hive! +"+L.nfmt(L.GEMS.hive)+" 💎")}}}
     if(this.state.db&&p!=="dad"&&L.today()>=L.RW.from&&L.today()<=L.RW.to){const cred=Math.min(S.newPts,Math.max(0,L.DAY_PTS_MAX-tb));
       if(cred>0)ex.push("🎁 +"+L.nfmt(cred)+" reward points");if(S.newPts>0&&tb+S.newPts>=L.DAY_PTS_MAX)ex.push("✋ That's the daily max of "+L.nfmt(L.DAY_PTS_MAX)+" points. The rest of today is practice. Great work!");
-      if(!S.stung&&firstToday&&!this.sleeping())ex.push("📅 +"+L.RW.dayPts+" reward points for playing today")}
-    this.saveProgress();
-    if(!pr&&!(s.golden||[]).includes(lesson.id)&&this.isGolden(p,lesson)){s.golden=[...(s.golden||[]),lesson.id];this.addGems(s,L.GEMS.golden,"golden");ex.push("🌟 "+lesson.title+" is now GOLDEN! +"+L.GEMS.golden+" 💎")}
+      if(!S.stung&&firstToday&&!this.sleeping())ex.push("📅 +"+L.RW.dayPts+" reward points for playing today");if(gp>0)ex.push("🎁 +"+L.nfmt(gp)+" reward points for going golden, on top of the daily max")}
+    if(!pr&&!S.stung&&p!=="dad"){rare=this.rareRoll(s);if(rare)ex.push("✨ RARE FIND: the "+rare.n+"! Only 1 in 100 rounds")}
     const gNew=(s.gems||[]).reduce((a,g)=>a+g.n,0)-g0;if(gNew>0)ex.push("🔐 +"+L.nfmt(gNew)+" 💎 wait in the Team Vault until Sunday 9 pm");
     this.saveP(s);this.actRound();
     const done=Object.assign({},S.done,{[lesson.id]:true});this.store("ab_done_"+p+"_"+t,done);
@@ -744,9 +770,22 @@ class Component extends DCLogic {
     const title=S.stung?"Ouch! The bee stung 🐝":pr?"Practice round 🧪":"Island cleared! 🏝️";
     const msg=(pr?this.practiceMsg(pr).replace(/^\S+ /,""):S.stung?"Round over after "+L.STING_AT+" wrong first tries. Points earned stay, but a stung round doesn't count as a day played: finish a full round today!":S.newPts>0?"new points in the hive":"revision round: brain points only 🧠")+" · "+m+"/"+lesson.qs.length+" mastered"+(!gdn&&lesson.qs.length&&m>=lesson.qs.length?" · 🌟 "+tw+"/"+lesson.qs.length+" right twice for golden":"")+" · streak "+s.streak+" 🔥";
     const secs=Math.max(1,Math.round((Date.now()-(S.roundStart||Date.now()))/1000)),okN=S.roundLog.filter(r=>r.ok).length,ansN=S.roundLog.length||1;
-    this.setState({done,donePts:"+"+S.newPts,doneTitle:title,doneMsg:msg,donePct:Math.round(okN*100/ansN)+"% right first time",doneTime:secs<60?secs+" sec":Math.floor(secs/60)+":"+String(secs%60).padStart(2,"0")+" min",doneExtras:ex.map((x,k)=>({key:k,t:x})),doneNav:{prev:i>0?ord[i-1]:null,next:(i>=0&&i<ord.length-1)?ord[i+1]:null},screen:"done"},()=>{window.scrollTo(0,0);this.unlocked(p,true);if(!S.stung)this.bigCelebrate()});
+    this.setState({done,donePts:"+"+S.newPts,doneTitle:title,doneMsg:msg,donePct:Math.round(okN*100/ansN)+"% right first time",doneTime:secs<60?secs+" sec":Math.floor(secs/60)+":"+String(secs%60).padStart(2,"0")+" min",doneExtras:ex.map((x,k)=>({key:k,t:x})),doneNav:{prev:i>0?ord[i-1]:null,next:(i>=0&&i<ord.length-1)?ord[i+1]:null},screen:"done"},()=>{window.scrollTo(0,0);this.unlocked(p,true);if(!S.stung)this.bigCelebrate();if(rare)setTimeout(()=>this.showRare(rare),1400)});
   }
 
+  /* golden = more (v2.1): islands that turned golden before v2.1 get the new bonus once. gold = golden islands that got the points; the hive reads it */
+  goldFix(s){const L=this.L,n=(s.golden||[]).length;if(s.gold!=null&&s.gold>=n)return 0;const add=Math.max(0,n-(s.gold||0));s.gold=n;if(add){s.points+=add*L.GOLD_PTS;this.addGems(s,add*(L.GEMS.golden-L.GOLDEN_OLD),"golden")}return add}
+  goldUp(p){if(p==="dad")return;const L=this.L,s=this.P(p),had=s.gold!=null,add=this.goldFix(s);if(had&&!add)return;this.saveP(s);
+    if(add)this.toast("🌟 Golden = more! Your "+add+" golden island"+(add>1?"s":"")+" just paid +"+L.nfmt(add*L.GOLD_PTS)+" ⭐ and +"+L.nfmt(add*(L.GEMS.golden-L.GOLDEN_OLD))+" 💎")}
+  /* rare finds (v2.1): each full counted round has a 1-in-100 chance of an item not found yet. window.__abRare fixes the roll in tests */
+  rareRand(){if(window.__abRare!=null)return +window.__abRare;try{return crypto.getRandomValues(new Uint32Array(1))[0]/4294967296}catch(e){return Math.random()}}
+  rareRoll(s){const L=this.L,have=s.rare||[],left=L.RARE.filter(x=>!have.includes(x.k));if(!left.length||this.rareRand()>=L.RARE_CHANCE)return null;const x=left[Math.min(left.length-1,Math.floor(this.rareRand()*left.length))];s.rare=[...have,x.k];return x}
+  showRare(x){if(!x)return;if(this.state.screen==="lesson"){this.toast("✨ Rare find: the "+x.n+"! It's in your Profile.");return}
+    this.setState({rareOn:true,rareItem:x,toast:null},()=>setTimeout(()=>{const r=this.rootRef.current,el=r&&r.querySelector('[data-rare-hero="1"]');if(el){this.burst(el,80,true,true);setTimeout(()=>this.burst(el,60,true,true),650)}},250))}
+  rareVals(){const L=this.L,S=this.state,x=S.rareItem||{},p=S.player,av=Object.assign({},L.AV_DEFAULT,this.load("ab_av_"+p,null)||{}),n=(this.P(p).rare||[]).length;
+    return {rareName:x.n||"",rareAv:L.avatarURL(Object.assign({},av,{[x.slot]:x.k})),rareAlt:"Your bee wearing the "+(x.n||"rare item"),rareCount:n+" of "+L.RARE.length+" rare finds",
+      rareWear:()=>{const a=Object.assign({},av,{[x.slot]:x.k,t:Date.now()});this.store("ab_av_"+p,a);try{this.syncUp(this.P())}catch(e){}this.setState({rareOn:false});this.toast("😎 Looking sharp in your "+x.n+"!")},
+      rareLater:()=>{this.setState({rareOn:false});this.toast("✨ Your "+x.n+" is waiting in Profile")}}}
   /* confetti + bee */
   calm(){const p=this.state.player;if(p&&this.L&&this.upcomingExams(p).length&&this.examWeek(p))return true;return (this.props.motion??"game-like")==="calm"||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)}
   burst(el,n,big,force){
@@ -907,7 +946,7 @@ class Component extends DCLogic {
     while(mon<=cur){const dl=L.parseISO(L.addDays(mon,6));dl.setHours(L.VAULT_HOUR,0,0,0);if(nd>=dl&&mon>=L.TEAM25_FROM&&this.teamWeekStatus(this.weekOf(mon))==="ok")out.push(mon);mon=L.addDays(mon,7)}
     this._tw={at:now,v:out};return out}
   rw(k){const L=this.L,R=L.RW,sp=this.srvP(k),sick=this.sickOf(k),t=L.today(),s=this.P(k),days=new Set(),pd={};
-    if(sp){Object.keys(sp.days||{}).forEach(d=>{if(sp.days[d].played)days.add(d);pd[d]=sp.days[d].pts||0})}
+    if(sp){Object.keys(sp.days||{}).forEach(d=>{if(sp.days[d].played)days.add(d);pd[d]=(sp.days[d].pts||0)+(sp.days[d].gold||0)})}
     else{(s.days||[]).forEach(d=>{if(d>=R.from&&d<=R.to)days.add(d)});Object.assign(pd,s.pd||{})}
     Object.keys(sick).forEach(d=>{if(sick[d]&&d>=R.from&&d<=R.to&&d<=t)days.add(d)});
     let bonus=0;this.teamWins().forEach(mon=>{let w=0;for(let i=0;i<7;i++){const d=L.addDays(mon,i);w+=(pd[d]||0)+(days.has(d)?R.dayPts:0)}bonus+=Math.round(w*L.TEAM_BONUS)});
@@ -952,7 +991,7 @@ class Component extends DCLogic {
           subIn:S.subjIn[sk]||"",onSub:e=>this.setState({subjIn:Object.assign({},this.state.subjIn,{[sk]:e.target.value})}),
           addSub:()=>{const v=(this.state.subjIn[sk]||"").trim();if(v.length<2){this.toast("Type the subject first");return}const x=JSON.parse(JSON.stringify(this.marksOf(k)));x.sheets=x.sheets||{};x.sheets[sh.k]=x.sheets[sh.k]||{};if(!(v in x.sheets[sh.k]))x.sheets[sh.k][v]="";this.putMarks(k,x);this.setState({subjIn:Object.assign({},this.state.subjIn,{[sk]:""})})}}})}})}
   rwAlerts(){const L=this.L,first=k=>String(L.NAMES[k]||"").split(" ")[0],out=[];
-    ["p1","p2"].forEach(k=>{const sp=this.srvP(k);((sp&&sp.flags)||[]).slice(0,8).forEach((f,i)=>out.push({key:k+i,t:"⚠️ "+first(k)+", "+L.fmtWhen(Date.parse(f.at))+": +"+L.nfmt(f.raw)+" points in one save ("+(f.note==="after 10 pm"?"after 10 pm":"more than one round can give")+"); "+L.nfmt(f.cred)+" counted."}))});
+    ["p1","p2"].forEach(k=>{const sp=this.srvP(k);((sp&&sp.flags)||[]).slice(0,8).forEach((f,i)=>out.push({key:k+i,t:"⚠️ "+first(k)+", "+L.fmtWhen(Date.parse(f.at))+": "+(f.gold?(f.note==="after 10 pm"?"an island turned golden after 10 pm; it counts in the morning.":f.raw+" islands turned golden in one save (one round can turn only one); "+L.nfmt(f.cred)+" counted."):"+"+L.nfmt(f.raw)+" points in one save ("+(f.note==="after 10 pm"?"after 10 pm":"more than one round can give")+"); "+L.nfmt(f.cred)+" counted.")}))});
     this.sharedDevices().slice(0,8).forEach((d,i)=>out.push({key:"dev"+i,t:"⚠️ "+L.fmtDay(d.day)+": "+first("p1")+" and "+first("p2")+" both used "+d.dev+"."}));
     return out}
   wishRows(){const L=this.L,S=this.state,p=S.player,isDad=p==="dad",tiers=this.rwDoc("tiers").m||{};
@@ -977,13 +1016,14 @@ class Component extends DCLogic {
   /* the launch note: each boy sees it once, when he next opens the app */
   maybeAnn(){const S=this.state,p=S.player;if(!S.db||!p||p==="dad")return;if(this.P(p).rwSeen||this.load("ab_rw_seen_"+p,false))return;this.setState({annOn:true,annPreview:false,annFaq:null},()=>this.annBurst())}
   annBurst(){setTimeout(()=>{const r=this.rootRef.current,el=r&&r.querySelector('[data-ann-hero="1"]');if(el){this.burst(el,70,true,true);setTimeout(()=>this.burst(el,50,true,true),700)}},300)}
-  closeAnn(){const S=this.state,p=S.player;if(!S.annPreview&&p&&p!=="dad"){const s=this.P(p);s.rwSeen=true;this.saveP(s);this.store("ab_rw_seen_"+p,true);this.store("ab_seen_ver",this.L.APP_VERSION);this.setState({annOn:false,newClosed:true},()=>this.goRewards());return}this.setState({annOn:false})}
+  closeAnn(){const S=this.state,p=S.player;if(!S.annPreview&&p&&p!=="dad"){const s=this.P(p);s.rwSeen=true;this.saveP(s);this.store("ab_rw_seen_"+p,true);if((parseFloat(this.load("ab_seen_ver",null))||0)<2)this.store("ab_seen_ver","2.0");this.setState({annOn:false,newClosed:true},()=>this.goRewards());return}this.setState({annOn:false})}
   annVals(){const L=this.L,R=L.RW,T=R.tiers,n=L.nfmt,S=this.state,G=R.gradePts,me=S.player,Z=String(L.NAMES.p1||"").split(" ")[0],Rn=String(L.NAMES.p2||"").split(" ")[0],o={};
     const names=t=>L.REWARDS.filter(x=>x.t===t).map(x=>x.ic+" "+((x.np&&x.np[me])||x.n)).join(" · ");
     o.annEarn=[["⭐","Every app point = 1 reward point","New questions right first time. Hindi still pays double!"],
       ["📅","+"+n(R.dayPts)+" for every day you play","Finish one full round (no bee sting) between 6 am and 10 pm."],
       ["📝","Your marksheet grades count","Every subject on your PA-2 and final marksheets: A+ "+n(G["A+"])+" · A "+n(G.A)+" · B+ "+n(G["B+"])+" · B "+n(G.B)+"."],
-      ["🤝","Team week bonus: +25%","When all three of you hit your goals, that week's points get +25%. Your vault gems too!"]].map(([ic,t,s2])=>({key:t,ic,t,s:s2}));
+      ["🤝","Team week bonus: +25%","When all three of you hit your goals, that week's points get +25%. Your vault gems too!"],
+      ["🌟","Golden island: +"+n(L.GOLD_PTS),"Turn an island golden for +"+n(L.GOLD_PTS)+" reward points, on top of the daily max."]].map(([ic,t,s2])=>({key:t,ic,t,s:s2}));
     o.annShop=[7,6,5,4].map(t=>({key:"s"+t,h:"Tier "+t+" · "+n(T[t].pts),s:names(t)}));
     o.annTrip=[3,2,1].map(t=>({key:"t"+t,h:"Tier "+t+" · "+n(T[t].pts)+" points each",s:names(t),need:t===3?"Points only.":t===2?"+ A or A+ in every subject on the final report card (two Bs allowed).":"+ A or A+ in every subject (one B allowed) + 4 friends using AcadaBee on their phones."}));
     const faq=[
@@ -994,6 +1034,7 @@ class Component extends DCLogic {
       ["Why do we both have to make it?","You're a team of founders. When one of you is behind, the other can quiz him, explain a chapter or practise together. Helping is great; playing his rounds for him isn't, and Dad can see who played on which device."],
       ["Is there a daily limit?","Yes: up to "+n(L.DAY_PTS_MAX)+" app points a day. After that, rounds are practice until tomorrow. Nothing counts from 10 pm to 6 am. The hive keeps its own clock, so changing the time on your phone won't help. Rest is part of learning!"],
       ["Can I rush to get points faster?","Each question pays only once, so rushing wastes it. Right first time pays full; a second try or a clue pays half."],
+      ["Do golden islands count?","Yes! A golden island gives +"+n(L.GOLD_PTS)+" ⭐, so +"+n(L.GOLD_PTS)+" reward points on top of the daily max, plus "+n(L.GEMS.golden)+" 💎. Get every question on an island right twice."],
       ["Does a round where the bee stings count?","The points you earned in it stay, but it doesn't count as a day played. Finish one full round each day."],
       ["What happened to doubling gems?","A won team week now gives +25% on your vault gems AND +25% on that week's reward points."],
       ["How do marks count?","Dad types the grades from each marksheet. Every subject: A+ = "+n(G["A+"])+", A = "+n(G.A)+", B+ = "+n(G["B+"])+", B = "+n(G.B)+"."],
@@ -1014,7 +1055,8 @@ class Component extends DCLogic {
     const S=this.state;if(!S.ready||!this.L)return {ready:false,isPick:true,isApp:false,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,zNoAv:true,rNoAv:true,dNoAv:true,pickZ:()=>{},pickR:()=>{},pickD:()=>{}};
     const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",isRewards:scr==="rewards",navOn:["map","board","notes","chapters","profile","shop","rewards"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
     o.annOn=!!S.annOn&&!!p;if(o.annOn)Object.assign(o,this.annVals());
-    o.newOn=!S.newClosed&&!S.annOn&&this.load("ab_seen_ver",null)!==L.APP_VERSION&&this.whatsNew().length>0;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
+    o.rareOn=!!S.rareOn&&!!p;if(o.rareOn)Object.assign(o,this.rareVals());
+    o.newOn=!S.newClosed&&!S.annOn&&!S.rareOn&&this.load("ab_seen_ver",null)!==L.APP_VERSION&&this.whatsNew().length>0;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
     /* pick */
     {const rk=this.roleKey();o.showZ=!rk||rk==="p1";o.showR=!rk||rk==="p2";o.showD=!rk||rk==="dad";o.pickHint=rk?"Tap to play. Not you? Sign out below.":"Founders only. Tap your name."}
     ["p1","p2","dad"].forEach((k,i)=>{const c="zrd"[i],a=this.avNode(k);o[c+"AvUrl"]=a.avUrl;o[c+"NoAv"]=a.noAv;o[c+"Prev"]=S.prevWho===k;o[c+"World"]=L.WORLDS[this.worldOf(k)].name;o[c+"Name"]=L.NAMES[k];o[c+"Role"]=L.ROLE[k]||""});
@@ -1106,10 +1148,10 @@ class Component extends DCLogic {
       return {key:w,name:W.name,ic:W.ic,prev:th.bg,isle:th.isleA,lk,small:lk?E[e].t:(w===L.HOME_WORLD[p]?"your home world":""),hasSmall:lk||w===L.HOME_WORLD[p],op:lk?.55:1,border:sel?"3px solid #FFC61A":"3px solid transparent",selT:sel?"✓ ":"",
         pick:()=>{if(lk){this.toast("🔒 "+E[e].t+" to unlock "+W.name);return}this.store("ab_world_"+p,w);this._theme=null;this.applyTheme();this.toast(W.ic+" Welcome to "+W.name+"!");this.forceUpdate()}}});
     const save=a=>{a.t=Date.now();this.store("ab_av_"+p,a);try{this.syncUp(this.P())}catch(e){}this.forceUpdate()};
-    const opt=(label,avx,earnKey,onPick,sel,small)=>{const lockedNow=!!(earnKey&&!have.has(earnKey));return {key:label,url:L.avatarURL(avx),locked:lockedNow,label,small:lockedNow?E[earnKey].t:(small||""),hasSmall:!!(lockedNow||small),sel,op:lockedNow?.6:1,bg:sel?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--card)",ink:sel?"#3A2600":"var(--ink)",shadow:sel?"inset 0 2px 0 rgba(255,255,255,.6),inset 0 -5px 0 rgba(160,100,0,.35),0 10px 16px -8px var(--shadow)":"inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow)",pick:()=>{if(lockedNow){this.toast("🔒 "+E[earnKey].t+" to unlock "+label);return}onPick()}}};
+    const opt=(label,avx,earnKey,onPick,sel,small)=>{const lockedNow=!!(earnKey&&!have.has(earnKey));return {key:label,url:L.avatarURL(avx),locked:lockedNow,label,small:lockedNow?E[earnKey].t:(small||""),hasSmall:!!(lockedNow||small),sel,op:lockedNow?.6:1,bg:sel?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--card)",ink:sel?"#3A2600":"var(--ink)",shadow:sel?"inset 0 2px 0 rgba(255,255,255,.6),inset 0 -5px 0 rgba(160,100,0,.35),0 10px 16px -8px var(--shadow)":"inset 0 2px 0 var(--cardHi),inset 0 -5px 0 var(--cardLo),0 10px 16px -8px var(--shadow)",pick:()=>{if(lockedNow){this.toast(E[earnKey].rare?"✨ The "+label+" is a rare find: every full round has a 1-in-100 chance of one":"🔒 "+E[earnKey].t+" to unlock "+label);return}onPick()}}};
     o.beeOpts=Object.entries(L.BEES).map(([k,B])=>{if(B.shop&&!(me.owned||[]).includes(k)){const x=opt(B.name,Object.assign({},av,{bee:k}),null,()=>{},false,"🛒 "+L.nfmt(B.shop)+" 💎 in the Shop");x.locked=true;x.op=.6;x.pick=()=>{this.toast("🛒 "+B.name+" is in the Shop for "+L.nfmt(B.shop)+" 💎");this.goShop()};return x}
       return opt(B.name,Object.assign({},av,{bee:k}),B.earn,()=>save(Object.assign({},av,{bee:k})),av.bee===k,B.note)});
-    o.dressGroups=L.DRESS.map(([key,title,opts])=>({key,title,opts:opts.map(([v,label,earn])=>opt(label,Object.assign({},av,{[key]:v},key==="hc"&&av.hair==="none"?{hair:"spiky"}:{}),earn,()=>save(Object.assign({},av,{[key]:v})),av[key]===v))}));
+    o.dressGroups=L.DRESS.map(([key,title,opts])=>({key,title,opts:opts.map(([v,label,earn,field])=>{const f=field||key;return opt(label,Object.assign({},av,{[f]:v},f==="hc"&&av.hair==="none"?{hair:"spiky"}:{}),earn,()=>save(Object.assign({},av,{[f]:v})),av[f]===v)})}));
     return o;
   }
   shopVals(){

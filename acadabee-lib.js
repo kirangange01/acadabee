@@ -56,6 +56,13 @@ export const EARN={
   mastery1:{t:"Master a whole island",ok:s=>s.mastered>=1}
 };
 [1,2,3,5,7,9,11,13,15,17,22,27,32].forEach(n=>{EARN["r"+n]={n,t:"Finish "+n+" round"+(n>1?"s":""),ok:s=>s.rounds>=n}});
+/* rare finds (v2.1, the founders' ask): every full counted round (no sting, not practice) has a RARE_CHANCE of one item not found yet */
+export const RARE_CHANCE=0.01;
+export const RARE=[["grad","Graduation cap","hat"],["pirate","Pirate hat","hat"],["viking","Viking helmet","hat"],["propeller","Propeller cap","hat"],["tophat","Top hat","hat"],["halo","Halo","hat"],["headset","Gaming headset","hat"],
+  ["pixel","Pixel shades","glasses"],["stars","Star glasses","glasses"],["hearts","Heart glasses","glasses"],["monocle","Monocle","glasses"],["vr","VR goggles","glasses"]].map(([k,n,slot])=>({k,n,slot}));
+RARE.forEach(x=>{EARN["rare_"+x.k]={t:"✨ 1 in 100 full rounds",rare:x.k,ok:s=>(s.rare||[]).includes(x.k)}});
+/* the dresser shows them as one group; the 4th value is the avatar field each item goes on */
+DRESS.push(["rare","✨ Rare finds",RARE.map(x=>[x.k,x.n,"rare_"+x.k,x.slot])]);
 export function itemOf(k){const b=Object.values(BEES).find(B=>B.earn===k);if(b)return b.name;for(const [,,opts] of DRESS){const o=opts.find(x=>x[2]===k);if(o)return o[1]}return k}
 
 /* pools */
@@ -124,10 +131,23 @@ export function avatarSVG(av){
   if(ST[av.stache])s+='<g fill="'+hc+'" stroke="'+dark(hc,.4)+'" stroke-width="1.5">'+ST[av.stache]+'</g>';
   if(av.glasses==="round")s+='<g fill="none" stroke="'+K+'" stroke-width="2.6"><circle cx="48" cy="60" r="11"/><circle cx="72" cy="60" r="11"/><path d="M59 60 L61 60"/></g>';
   if(av.glasses==="shades")s+='<g fill="'+K+'"><rect x="36" y="53" width="22" height="14" rx="5"/><rect x="62" y="53" width="22" height="14" rx="5"/><rect x="57" y="57" width="6" height="3"/></g><g fill="#fff" fill-opacity=".35"><rect x="39" y="55" width="8" height="3" rx="1.5"/><rect x="65" y="55" width="8" height="3" rx="1.5"/></g>';
+  const GL={pixel:'<g fill="#111"><rect x="32" y="53" width="56" height="4"/><rect x="34" y="57" width="22" height="4"/><rect x="64" y="57" width="22" height="4"/><rect x="36" y="61" width="18" height="4"/><rect x="66" y="61" width="18" height="4"/><rect x="40" y="65" width="10" height="4"/><rect x="70" y="65" width="10" height="4"/></g><g fill="#fff"><rect x="38" y="57" width="4" height="4"/><rect x="68" y="57" width="4" height="4"/></g>',
+    stars:'<g fill="#FF5FA2" fill-opacity=".8" stroke="#B0125B" stroke-width="2" stroke-linejoin="round"><polygon points="48.0,49.5 50.9,57.0 58.9,57.4 52.8,62.5 54.8,70.3 48.0,66.0 41.2,70.3 43.2,62.5 37.1,57.4 45.1,57.0"/><polygon points="72.0,49.5 74.9,57.0 82.9,57.4 76.8,62.5 78.8,70.3 72.0,66.0 65.2,70.3 67.2,62.5 61.1,57.4 69.1,57.0"/></g><path d="M58.6 60 L61.4 60" stroke="#B0125B" stroke-width="2.4"/>',
+    hearts:'<g fill="#E5484D" fill-opacity=".78" stroke="#8E1B22" stroke-width="2" stroke-linejoin="round"><path d="M48 69 C35 60 37 48 48 54 C59 48 61 60 48 69 Z"/><path d="M72 69 C59 60 61 48 72 54 C83 48 85 60 72 69 Z"/></g><path d="M58 58 L62 58" stroke="#8E1B22" stroke-width="2.4"/>',
+    monocle:'<circle cx="72" cy="60" r="11.5" fill="#BFE6FF" fill-opacity=".3" stroke="#D4A017" stroke-width="3.2"/><path d="M83 63 Q92 78 86 98" stroke="#D4A017" stroke-width="1.6" fill="none" stroke-dasharray="3 2"/>',
+    vr:'<path d="M21 58 L27 58 M93 58 L99 58" stroke="#2B2D42" stroke-width="5" stroke-linecap="round"/><rect x="27" y="49" width="66" height="23" rx="10" fill="#2B2D42"/><rect x="31" y="52.5" width="58" height="16" rx="7" fill="#45E0E6" fill-opacity=".9"/><path d="M36 56.5 L50 56.5" stroke="#fff" stroke-opacity=".6" stroke-width="2.5" stroke-linecap="round"/>'};
+  if(GL[av.glasses])s+=GL[av.glasses];
   const HT={cap:'<path d="M33 38 Q60 6 87 38 Z" fill="#FF6F61"/><path d="M80 36 L106 41 L84 42 Z" fill="#E5484D"/><path d="M44 30 Q60 16 76 30" stroke="#fff" stroke-opacity=".5" stroke-width="3" fill="none"/>',
     party:'<path d="M45 36 L60 3 L75 36 Z" fill="#2F6FEB"/><path d="M50 26 L70 26 M54 16 L66 16" stroke="#FFD83D" stroke-width="3"/><circle cx="60" cy="5" r="4.5" fill="#E85BA5"/>',
     crown:'<path d="M36 38 L39 14 L50 28 L60 10 L70 28 L81 14 L84 38 Z" fill="#FFC800"/><circle cx="60" cy="30" r="3.5" fill="#E5484D"/><circle cx="48" cy="33" r="2.5" fill="#45E0E6"/><circle cx="72" cy="33" r="2.5" fill="#45E0E6"/>',
-    wizard:'<path d="M38 36 L66 2 L84 36 Z" fill="#6B4BC8"/><ellipse cx="60" cy="37" rx="30" ry="5" fill="#5A3DB0"/><path d="M60 20 l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="#FFD83D"/>'};
+    wizard:'<path d="M38 36 L66 2 L84 36 Z" fill="#6B4BC8"/><ellipse cx="60" cy="37" rx="30" ry="5" fill="#5A3DB0"/><path d="M60 20 l2 4 4 .5-3 3 1 4-4-2-4 2 1-4-3-3 4-.5z" fill="#FFD83D"/>',
+    grad:'<path d="M38 38 L38 27 Q60 33 82 27 L82 38 Q60 44 38 38 Z" fill="#1F2430"/><path d="M60 10 L100 22 L60 32 L20 22 Z" fill="#2B3140"/><path d="M60 12.5 L93 22" stroke="#fff" stroke-opacity=".25" stroke-width="2" fill="none"/><path d="M60 21 Q80 20 92 25 L92 42" stroke="#FFC800" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="60" cy="21" r="2.6" fill="#FFC800"/><path d="M89 41 L95 41 L96.5 50 L87.5 50 Z" fill="#FFC800"/>',
+    pirate:'<path d="M24 36 Q26 20 40 22 Q48 8 60 8 Q72 8 80 22 Q94 20 96 36 Q60 46 24 36 Z" fill="#1C1C1E"/><path d="M26 35 Q60 44 94 35" stroke="#E9B949" stroke-width="3" fill="none"/><path d="M51 32 L69 25 M51 25 L69 32" stroke="#F5F5F5" stroke-width="2.6" stroke-linecap="round"/><circle cx="60" cy="21" r="6.5" fill="#F5F5F5" stroke="none"/><rect x="56.5" y="25" width="7" height="4" rx="1.5" fill="#F5F5F5" stroke="none"/><circle cx="57.6" cy="20.5" r="1.7" fill="#1C1C1E" stroke="none"/><circle cx="62.4" cy="20.5" r="1.7" fill="#1C1C1E" stroke="none"/>',
+    viking:'<path d="M34 30 Q16 28 13 8 Q22 20 38 21 Z" fill="#F1E6C8"/><path d="M86 30 Q104 28 107 8 Q98 20 82 21 Z" fill="#F1E6C8"/><path d="M30 38 Q30 12 60 12 Q90 12 90 38 Z" fill="#A7B1BC"/><path d="M60 13 L60 32" stroke="#7A8794" stroke-width="3"/><rect x="28" y="32" width="64" height="8" rx="3" fill="#7A8794"/><g fill="#E2E8EE" stroke="none"><circle cx="38" cy="36" r="1.6"/><circle cx="49" cy="36" r="1.6"/><circle cx="60" cy="36" r="1.6"/><circle cx="71" cy="36" r="1.6"/><circle cx="82" cy="36" r="1.6"/></g>',
+    propeller:'<path d="M33 38 A27 24 0 0 1 87 38 Z" fill="#2F6FEB"/><path d="M60 14 L33 38 L46.5 38 Z" fill="#E5484D"/><path d="M60 14 L46.5 38 L60 38 Z" fill="#FFD83D"/><path d="M60 14 L60 38 L73.5 38 Z" fill="#7ED957"/><path d="M60 14 L60 6" stroke="#333" stroke-width="2.5"/><ellipse cx="49" cy="5.5" rx="11" ry="3.2" fill="#E5484D"/><ellipse cx="71" cy="5.5" rx="11" ry="3.2" fill="#45E0E6"/><circle cx="60" cy="5.5" r="2.6" fill="#333"/>',
+    tophat:'<rect x="42" y="5" width="36" height="30" rx="3" fill="#1C1C1E"/><rect x="42" y="25" width="36" height="6" fill="#E5484D" stroke="none"/><path d="M47.5 9 L47.5 22" stroke="#fff" stroke-opacity=".18" stroke-width="3"/><ellipse cx="60" cy="36" rx="29" ry="5.5" fill="#111"/>',
+    halo:'<ellipse cx="60" cy="14" rx="22" ry="5.5" fill="none" stroke="#FFD34D" stroke-width="5"/><ellipse cx="60" cy="14" rx="22" ry="5.5" fill="none" stroke="#FFF5C2" stroke-width="1.6"/>',
+    headset:'<path d="M25 54 Q24 14 60 14 Q96 14 95 54" stroke="#2A2A2E" stroke-width="7" fill="none" stroke-linecap="round"/><path d="M34 30 Q46 19 60 19" stroke="#fff" stroke-opacity=".18" stroke-width="2.5" fill="none"/><rect x="13" y="45" width="17" height="24" rx="8" fill="#2F6FEB"/><rect x="90" y="45" width="17" height="24" rx="8" fill="#2F6FEB"/><rect x="17" y="50" width="9" height="14" rx="4.5" fill="#45E0E6" stroke="none"/><rect x="94" y="50" width="9" height="14" rx="4.5" fill="#45E0E6" stroke="none"/><path d="M22 67 Q24 86 42 86" stroke="#2A2A2E" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="44" cy="86" r="4" fill="#2A2A2E"/>'};
   if(HT[av.hat])s+='<g stroke="rgba(0,0,0,.25)" stroke-width="1.5" stroke-linejoin="round">'+HT[av.hat]+'</g>';
   return s+'</svg>';
 }
@@ -155,7 +175,10 @@ export function worldEarn(p,w){if(w===HOME_WORLD[p])return null;if(w==="sunset")
 export const SEASON=1;
 export const LEVELS=[[0,"Egg"],[1000,"Larva"],[3000,"Pupa"],[6000,"Worker Bee"],[10000,"Forager"],[15000,"Scout"],[21000,"Guard"],[28000,"Honey Maker"],[36000,"Hive Hero"],[45000,"Queen's Council"]];
 export function levelOf(points){let i=0;while(i+1<LEVELS.length&&points>=LEVELS[i+1][0])i++;const nx=LEVELS[i+1]||null;return {n:i+1,name:LEVELS[i][1],at:LEVELS[i][0],nextAt:nx?nx[0]:null,nextName:nx?nx[1]:null}}
-export const GEMS={hive:1000,chest:300,level:200,golden:500,team:300};
+export const GEMS={hive:1000,chest:300,level:200,golden:1000,team:300};
+/* golden = more (v2.1, the founders' ask): a golden island also gives GOLD_PTS points. Islands that turned golden before v2.1 got GOLDEN_OLD gems,
+   so they are topped up once (see goldFix in the component); the players row carries gold = golden islands that got the points */
+export const GOLD_PTS=1000, GOLDEN_OLD=500;
 /* Rewards (v2.0, 25 Nov 2026). Reward points = app points + RW.dayPts for each day with a full round (no sting) + marksheet grades
    + a TEAM_BONUS on won team weeks. The hive credits app points and days itself, by its own clock: at most DAY_PTS_MAX app points a day,
    nothing 10 pm–6 am (see site/rewards-ledger.sql). Tiers 4–7 are a shop (points are spent). Tiers 1–3 are the year-end trip, on points
@@ -182,7 +205,7 @@ export const REWARDS=[
 /* Dad (from 16 Nov 2026): no islands or points; two goals only: Duolingo every day + an average of DAD_STEPS_AVG steps a day */
 export const DAD_STEPS_AVG=7000, DAD_RULE_FROM="2026-11-16";
 /* "What's new" pop-up: shown once per device for each new version */
-export const APP_VERSION="2.0";
+export const APP_VERSION="2.1";
 /* app activity for Dad's corner (v1.92): days shown, first day recorded, gap that starts a new visit */
 export const ACT_DAYS=7,ACT_FROM="2026-11-24",ACT_GAP=5*60*1000;
 export const CELLS_PER_HIVE=20, DAY_CAP=20, STING_AT=3, SLEEP_FROM=22, SLEEP_TO=6, VAULT_HOUR=21;
@@ -190,4 +213,4 @@ export const FREEZER={price:400,max:2};
 export const HINDI_ISLANDS=["z-hindi","z-muha","r-hindi","r-nakli","d-hindi"];
 export const BADGES={p2:[{ic:"🏅",t:"First to 10,000",s:"Founder badge: the test-app record"}]};
 export const MERCH=[{k:"level5",t:"Reach Level 5 (Forager)",ok:s=>s.points>=10000},{k:"golden3",t:"Turn 3 islands golden",ok:s=>s.golden>=3},{k:"streak30",t:"A 30-day streak",ok:s=>s.bestStreak>=30}];
-export function freshSeason(){return {season:SEASON,points:0,streak:0,bestStreak:0,lastDay:null,days:[],freezers:1,frozen:[],gems:[],spent:0,cells:0,hives:0,golden:[],owned:[],lastChest:null,pd:{},fr:0,updatedAt:0}}
+export function freshSeason(){return {season:SEASON,points:0,streak:0,bestStreak:0,lastDay:null,days:[],freezers:1,frozen:[],gems:[],spent:0,cells:0,hives:0,golden:[],owned:[],rare:[],lastChest:null,pd:{},fr:0,updatedAt:0}}
