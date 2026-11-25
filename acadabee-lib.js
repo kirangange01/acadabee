@@ -195,7 +195,7 @@ export const REWARDS=[
   {k:"store",t:4,ic:"🛍️",n:"Hamleys or Decathlon package (₹5,000)",np:{p1:"Decathlon package (₹5,000)",p2:"Hamleys package (₹5,000)"}},
   {k:"comic",t:4,ic:"🦸",n:"Comic Con tickets"},{k:"roblox",t:4,ic:"🎮",n:"Roblox cards (2)",game:true},{k:"brawl",t:4,ic:"💥",n:"2,000 Brawl Stars gems",game:true},
   {k:"sports",t:4,ic:"🏏",n:"Sports match tickets"},{k:"duck",t:4,ic:"🦆",n:"Choose VIP duck at P.F. Chang's"},{k:"jump",t:4,ic:"🤸",n:"Trampoline park, go-karting or laser tag"},
-  {k:"pirates",t:4,ic:"🏴‍☠️",n:"Pirates of the Caribbean"},
+  {k:"pirates",t:4,ic:"🏴‍☠️",n:"Pirates of the Caribbean restaurant"},
   {k:"candy",t:5,ic:"🍫",n:"Imported candy / Swiss chocolate"},{k:"menu",t:5,ic:"🥢",n:"Choose the menu + dessert at P.F. Chang's"},{k:"cinema",t:5,ic:"🍿",n:"Cinema trip with popcorn"},
   {k:"museum",t:5,ic:"🔭",n:"Museum, science centre or planetarium day"},{k:"zoo",t:5,ic:"🦜",n:"Zoo, aquarium or bird-watching morning"},
   {k:"tshirt",t:5,ic:"👕",n:"Your own design printed on a T-shirt"},{k:"cook",t:5,ic:"🍳",n:"Cook together: you pick the recipe"},
