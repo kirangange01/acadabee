@@ -156,10 +156,33 @@ export const SEASON=1;
 export const LEVELS=[[0,"Egg"],[1000,"Larva"],[3000,"Pupa"],[6000,"Worker Bee"],[10000,"Forager"],[15000,"Scout"],[21000,"Guard"],[28000,"Honey Maker"],[36000,"Hive Hero"],[45000,"Queen's Council"]];
 export function levelOf(points){let i=0;while(i+1<LEVELS.length&&points>=LEVELS[i+1][0])i++;const nx=LEVELS[i+1]||null;return {n:i+1,name:LEVELS[i][1],at:LEVELS[i][0],nextAt:nx?nx[0]:null,nextName:nx?nx[1]:null}}
 export const GEMS={hive:1000,chest:300,level:200,golden:500,team:300};
+/* Rewards (v2.0, 25 Nov 2026). Reward points = app points + RW.dayPts for each day with a full round (no sting) + marksheet grades
+   + a TEAM_BONUS on won team weeks. The hive credits app points and days itself, by its own clock: at most DAY_PTS_MAX app points a day,
+   nothing 10 pm–6 am (see site/rewards-ledger.sql). Tiers 4–7 are a shop (points are spent). Tiers 1–3 are the year-end trip, on points
+   EARNED this year (spending never lowers them); both boys must qualify, and they get the best tier both reach. */
+export const DAY_PTS_MAX=2000, TEAM_BONUS=0.25, TEAM25_FROM="2026-11-23";
+export const RW={from:"2026-11-15",to:"2027-03-31",dayPts:100,grades:["A+","A","B+","B","C"],gradePts:{"A+":1500,"A":1000,"B+":600,"B":400,"C":0},
+  tiers:{1:{pts:80000,bs:1,friends:4},2:{pts:50000,bs:2},3:{pts:30000},4:{pts:35000},5:{pts:12000},6:{pts:5000},7:{pts:2000}},
+  sheets:[{k:"pa2",t:"PA-2 (Nov–Dec 2026)"},{k:"final",t:"Final report card (March 2027)"}],
+  subjects:{p1:["English","Hindi","Maths","Science","Social Science","Spanish"],p2:["English","Hindi","Maths","Science","Social Science"]}};
+export const REWARDS=[
+  {k:"intl",t:1,ic:"✈️",n:"International trip, 3 days (Sri Lanka / SE Asia / Dubai)"},
+  {k:"hike",t:2,ic:"🥾",n:"Hiking trip"},{k:"beach",t:2,ic:"🏖️",n:"Beach trip (India)"},{k:"fish",t:2,ic:"🎣",n:"Fishing + camping trip (India)"},
+  {k:"stay",t:3,ic:"🏨",n:"Local staycation (24 hours)"},{k:"blr",t:3,ic:"🌆",n:"Bangalore trip"},{k:"hotel",t:3,ic:"🧳",n:"Hotel trip outside NCR"},
+  {k:"store",t:4,ic:"🛍️",n:"Hamleys or Decathlon package (₹5,000)",np:{p1:"Decathlon package (₹5,000)",p2:"Hamleys package (₹5,000)"}},
+  {k:"comic",t:4,ic:"🦸",n:"Comic Con tickets"},{k:"roblox",t:4,ic:"🎮",n:"Roblox cards (2)",game:true},{k:"brawl",t:4,ic:"💥",n:"2,000 Brawl Stars gems",game:true},
+  {k:"sports",t:4,ic:"🏏",n:"Sports match tickets"},{k:"duck",t:4,ic:"🦆",n:"Choose VIP duck at P.F. Chang's"},{k:"jump",t:4,ic:"🤸",n:"Trampoline park, go-karting or laser tag"},
+  {k:"pirates",t:4,ic:"🏴‍☠️",n:"Pirates of the Caribbean"},
+  {k:"candy",t:5,ic:"🍫",n:"Imported candy / Swiss chocolate"},{k:"menu",t:5,ic:"🥢",n:"Choose the menu + dessert at P.F. Chang's"},{k:"cinema",t:5,ic:"🍿",n:"Cinema trip with popcorn"},
+  {k:"museum",t:5,ic:"🔭",n:"Museum, science centre or planetarium day"},{k:"zoo",t:5,ic:"🦜",n:"Zoo, aquarium or bird-watching morning"},
+  {k:"tshirt",t:5,ic:"👕",n:"Your own design printed on a T-shirt"},{k:"cook",t:5,ic:"🍳",n:"Cook together: you pick the recipe"},
+  {k:"kinder",t:6,ic:"🥚",n:"Kinder Joy"},{k:"miniso",t:6,ic:"🛍️",n:"Miniso (₹750)"},{k:"book",t:6,ic:"📚",n:"Book or comic of your choice"},
+  {k:"kit",t:6,ic:"🧪",n:"Science or hobby kit"},{k:"board",t:6,ic:"🎲",n:"Board game for weekends with Dad"},
+  {k:"chips",t:7,ic:"🌶️",n:"Chips or Takis"},{k:"mc",t:7,ic:"⛏️",n:"Minecraft purchase",game:true},{k:"candies",t:7,ic:"🍬",n:"7/11 candies"}];
 /* Dad (from 16 Nov 2026): no islands or points; two goals only: Duolingo every day + an average of DAD_STEPS_AVG steps a day */
 export const DAD_STEPS_AVG=7000, DAD_RULE_FROM="2026-11-16";
 /* "What's new" pop-up: shown once per device for each new version */
-export const APP_VERSION="1.92";
+export const APP_VERSION="2.0";
 /* app activity for Dad's corner (v1.92): days shown, first day recorded, gap that starts a new visit */
 export const ACT_DAYS=7,ACT_FROM="2026-11-24",ACT_GAP=5*60*1000;
 export const CELLS_PER_HIVE=20, DAY_CAP=20, STING_AT=3, SLEEP_FROM=22, SLEEP_TO=6, VAULT_HOUR=21;
@@ -167,4 +190,4 @@ export const FREEZER={price:400,max:2};
 export const HINDI_ISLANDS=["z-hindi","z-muha","r-hindi","r-nakli","d-hindi"];
 export const BADGES={p2:[{ic:"🏅",t:"First to 10,000",s:"Founder badge: the test-app record"}]};
 export const MERCH=[{k:"level5",t:"Reach Level 5 (Forager)",ok:s=>s.points>=10000},{k:"golden3",t:"Turn 3 islands golden",ok:s=>s.golden>=3},{k:"streak30",t:"A 30-day streak",ok:s=>s.bestStreak>=30}];
-export function freshSeason(){return {season:SEASON,points:0,streak:0,bestStreak:0,lastDay:null,days:[],freezers:1,frozen:[],gems:[],spent:0,cells:0,hives:0,golden:[],owned:[],lastChest:null,updatedAt:0}}
+export function freshSeason(){return {season:SEASON,points:0,streak:0,bestStreak:0,lastDay:null,days:[],freezers:1,frozen:[],gems:[],spent:0,cells:0,hives:0,golden:[],owned:[],lastChest:null,pd:{},fr:0,updatedAt:0}}

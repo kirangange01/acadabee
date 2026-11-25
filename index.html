@@ -28,9 +28,9 @@
         <sc-if value="{{ rPrev }}" hint-placeholder-val="{{ false }}"><span style="font:800 11px/1 Nunito,sans-serif;padding:6px 9px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600">👋 last time</span></sc-if>
         <span style="font:600 20px/1 Fredoka,sans-serif;color:#FF6F61">→</span>
       </button></sc-if>
-      <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and the Wish Jar" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · Wish Jar</span>→</button></sc-if>
+      <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and rewards" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · rewards</span>→</button></sc-if>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v1.91 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v2.0 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -57,6 +57,7 @@
       </div>
       </sc-if>
       <sc-if value="{{ showVault }}"><button onClick="{{ goVault }}" aria-label="Team Vault: open the Board" style="border:0;cursor:pointer;text-align:left;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow)" style-active="transform:translateY(2px)"><span style="flex:none;font-size:32px;line-height:1">{{ vIc }}</span><span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ vT }}</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft);text-wrap:pretty">{{ vS }}</small><small style="font:800 12px/1.35 Nunito,sans-serif;color:{{ vInk }};text-wrap:pretty">{{ vToDo }}</small></span><span style="flex:none;font:800 16px/1 Nunito,sans-serif;color:var(--soft)">›</span></button></sc-if>
+      <sc-if value="{{ showRw }}"><button onClick="{{ goRw }}" aria-label="Rewards: open the shop" style="border:0;cursor:pointer;text-align:left;width:100%;display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:20px;background:linear-gradient(160deg,#FFF3C4,#FFD36B);color:#3A2600;box-shadow:inset 0 3px 0 rgba(255,255,255,.7),inset 0 -8px 0 rgba(160,100,0,.3),0 16px 26px -10px var(--shadow)" style-active="transform:translateY(2px)"><span style="flex:1;min-width:0;display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif">{{ rwMapT }}</b><small style="font:800 12px/1.35 Nunito,sans-serif;opacity:.8">{{ rwMapS }}</small></span><span style="flex:none;font:800 16px/1 Nunito,sans-serif;opacity:.7">›</span></button></sc-if>
       <div style="display:flex;align-items:center;gap:16px;padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow)">
         <div style="display:flex;flex-direction:column;align-items:center;min-width:64px"><span style="font:700 36px/1 Fredoka,sans-serif;color:var(--acc)">{{ streakN }}</span><span style="font:800 10px/1 Nunito,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-top:4px">day streak</span></div>
         <div style="flex:1;display:flex;flex-direction:column;gap:8px;min-width:0">
@@ -228,7 +229,7 @@
     <div data-screen-label="Shop" style="display:flex;flex-direction:column;gap:14px">
       <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;align-items:center;gap:14px">
         <span style="font-size:40px">💎</span>
-        <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><b style="font:600 24px/1 Fredoka,sans-serif;color:var(--ink)">{{ walletT }} to spend</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft)">🔐 {{ pendingT }} more wait in the Team Vault. If all three hit their goals, they open Sunday 9 pm, doubled.</small></div>
+        <div style="display:flex;flex-direction:column;gap:3px;min-width:0"><b style="font:600 24px/1 Fredoka,sans-serif;color:var(--ink)">{{ walletT }} to spend</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft)">🔐 {{ pendingT }} more wait in the Team Vault. If all three hit their goals, they open Sunday 9 pm with a +25% bonus.</small></div>
       </div>
       <sc-if value="{{ hasMelted }}"><p style="margin:0 4px;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ meltedT }}</p></sc-if>
       <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;align-items:center;gap:14px">
@@ -275,7 +276,7 @@
           </div>
         </sc-for>
         <div style="padding:12px 14px;border-radius:16px;background:{{ resBg }};color:{{ resInk }};font:800 13px/1.4 Nunito,sans-serif;text-wrap:pretty">{{ resT }}</div>
-        <p style="margin:0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Team rule: gems wait in the Team Vault. Sunday 9 pm: if all three hit their goals, it opens and your gems double (at least +300 💎), plus a honey jar 🍯. Missed a day? Do 2 extra rounds for it by Sunday. Your own ⭐ points always count.</p>
+        <p style="margin:0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Team rule: gems wait in the Team Vault. Sunday 9 pm: if all three hit their goals, it opens with a +25% bonus, and that week's reward points get +25% too. A day counts when you finish a full round (no bee sting). Missed a day? Do 2 extra rounds for it by Sunday. Your own ⭐ points always count.</p>
       </div>
       <sc-if value="{{ showActivity }}">
       <div data-activity="1" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:12px">
@@ -289,21 +290,8 @@
       </div>
       </sc-if>
       <div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px">
-        <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ jarsT }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">{{ jarsS }}</small></div>
+        <button onClick="{{ goRw }}" aria-label="Open Rewards" style="border:0;cursor:pointer;text-align:left;padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px" style-active="transform:translateY(2px)"><b style="font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ jarsT }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">{{ jarsS }}</small></button>
         <div style="padding:12px 14px;border-radius:20px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px"><b style="font:600 14px/1.25 Fredoka,sans-serif;color:var(--ink)">{{ vaultMine }}</b><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">opens Sunday 9 pm</small></div>
-      </div>
-      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:10px">
-        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🍯 The Wish Jar</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Add a wish. Dad prices it in honey jars. Win team weeks to fill the jar.</p></div>
-        <sc-if value="{{ noWishes }}"><p style="margin:0;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">No wishes yet.</p></sc-if>
-        <sc-for list="{{ wishes }}" as="w" hint-placeholder-count="1">
-          <div style="padding:10px 12px;border-radius:16px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;gap:6px;opacity:{{ w.op }}">
-            <div style="display:flex;align-items:flex-start;gap:8px"><span style="flex:1;font:800 14px/1.35 Nunito,sans-serif">{{ w.text }}</span><span style="flex:none;font:800 12px/1.3 Nunito,sans-serif;white-space:nowrap">{{ w.priceT }}</span></div>
-            <small style="font:700 11px/1.2 Nunito,sans-serif;opacity:.8">{{ w.by }}</small>
-            <sc-if value="{{ w.isDad }}"><div style="display:flex;gap:6px;flex-wrap:wrap"><input type="number" inputMode="numeric" min="1" placeholder="jars" aria-label="Price in honey jars" value="{{ w.priceIn }}" onChange="{{ w.onPrice }}" style="width:80px;border:0;padding:8px 10px;border-radius:12px;background:var(--field);color:var(--fieldInk);font:700 14px/1 Nunito,sans-serif"><button onClick="{{ w.setPrice }}" style="border:0;cursor:pointer;padding:8px 12px;border-radius:12px;background:var(--chip);color:var(--chipInk);font:800 12px/1 Nunito,sans-serif">Set price</button><button onClick="{{ w.grant }}" style="border:0;cursor:pointer;padding:8px 12px;border-radius:12px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 12px/1 Nunito,sans-serif">Grant 🎉</button></div></sc-if>
-            <sc-if value="{{ w.canDel }}"><button onClick="{{ w.del }}" style="align-self:flex-start;border:0;cursor:pointer;padding:6px 10px;border-radius:10px;background:transparent;color:inherit;font:800 11px/1 Nunito,sans-serif;opacity:.75">🗑 remove</button></sc-if>
-          </div>
-        </sc-for>
-        <sc-if value="{{ notDad }}"><div style="display:flex;gap:8px"><input type="text" placeholder="My wish…" aria-label="Your wish" value="{{ wishText }}" onChange="{{ onWishText }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ addWish }}" style="border:0;cursor:pointer;padding:12px 16px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35),0 8px 14px -6px var(--shadow);flex:none" style-active="transform:translateY(2px)">Add</button></div></sc-if>
       </div>
       <div style="font:800 12px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin:6px 4px 0">Season 1 points</div>
       <sc-for list="{{ boardRows }}" as="r" hint-placeholder-count="3">
@@ -314,6 +302,92 @@
         </div>
       </sc-for>
       <p style="margin:0;text-align:center;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Board meeting: Sunday.</p>
+    </div>
+    </sc-if>
+
+    <!-- REWARDS (v2.0) -->
+    <sc-if value="{{ isRewards }}">
+    <div data-screen-label="Rewards" style="display:flex;flex-direction:column;gap:14px">
+      <sc-if value="{{ rwOff }}"><div style="padding:14px 16px;border-radius:20px;background:var(--hint);color:var(--hintInk);font:800 13px/1.4 Nunito,sans-serif">Rewards live in the hive. Open AcadaBee on the website and sign in to use them.</div></sc-if>
+      <sc-if value="{{ notDadR }}">
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:14px"><span style="font-size:42px;line-height:1">🎁</span><div style="display:flex;flex-direction:column;gap:4px;min-width:0"><b style="font:600 26px/1 Fredoka,sans-serif;color:var(--ink)">{{ balT }} to spend</b><small style="font:800 12px/1.35 Nunito,sans-serif;color:var(--soft)">Trip points this year: {{ earnedT }} · spending never lowers them</small></div></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><sc-for list="{{ rwBreak }}" as="b" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:10px;font:700 13px/1.3 Nunito,sans-serif;color:var(--ink)"><span style="font-size:16px;width:22px;text-align:center">{{ b.ic }}</span><span style="flex:1">{{ b.t }}</span><b style="white-space:nowrap;color:var(--acc)">{{ b.n }}</b></div></sc-for></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="display:block;height:12px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ todayW }};border-radius:999px;background:linear-gradient(90deg,#FFC61A,#FFE680)"></span></span><small style="font:800 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ todayT }}</small></div>
+        <sc-if value="{{ hasLiveNote }}"><small style="font:800 12px/1.35 Nunito,sans-serif;color:var(--soft)">{{ liveNote }}</small></sc-if>
+      </div>
+      </sc-if>
+      <sc-if value="{{ isDadR }}">
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:12px">
+        <h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🎁 The founders' reward points</h3>
+        <sc-for list="{{ boys }}" as="b" hint-placeholder-count="2"><div style="display:flex;gap:12px;align-items:center;padding-top:10px;border-top:1px solid var(--line)"><span style="flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:22px;background:var(--opt);box-shadow:inset 0 -4px 0 var(--cardLo);overflow:hidden"><sc-if value="{{ b.avUrl }}"><img src="{{ b.avUrl }}" alt="" style="width:40px;height:40px;display:block"></sc-if><sc-if value="{{ b.noAv }}">{{ b.emoji }}</sc-if></span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><b style="font:800 15px/1.3 Nunito,sans-serif;color:var(--ink)">{{ b.name }}</b><small style="font:700 12px/1.35 Nunito,sans-serif;color:var(--soft);text-wrap:pretty">{{ b.s }}</small></div></div></sc-for>
+      </div>
+      <div data-orders="1" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:10px">
+        <h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">📦 Orders to hand over</h3>
+        <sc-if value="{{ noWait }}"><p style="margin:0;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">No orders waiting.</p></sc-if>
+        <sc-for list="{{ waitOrders }}" as="o" hint-placeholder-count="1"><div style="padding:10px 12px;border-radius:16px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;gap:8px"><div style="display:flex;flex-direction:column;gap:2px"><b style="font:800 14px/1.35 Nunito,sans-serif">{{ o.t }}</b><small style="font:700 12px/1.3 Nunito,sans-serif;opacity:.8">{{ o.s }}</small></div><div style="display:flex;gap:8px"><button onClick="{{ o.give }}" data-give="{{ o.key }}" style="border:0;cursor:pointer;padding:10px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35);flex:none">Handed over ✓</button><button onClick="{{ o.cancel }}" data-cancel="{{ o.key }}" style="border:0;cursor:pointer;padding:10px 14px;border-radius:999px;background:var(--chip);color:var(--chipInk);font:800 13px/1 Nunito,sans-serif">Cancel ↩</button></div></div></sc-for>
+      </div>
+      <div data-checks="1" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:8px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">⚠️ Checks</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Point jumps the game can't produce, and both boys on the same device on the same day.</p></div>
+        <sc-if value="{{ noAlerts }}"><p style="margin:0;font:800 13px/1.4 Nunito,sans-serif;color:#7ED957">All clear ✅</p></sc-if>
+        <sc-for list="{{ alerts }}" as="a" hint-placeholder-count="1"><div style="font:700 13px/1.4 Nunito,sans-serif;color:var(--ink);text-wrap:pretty">{{ a.t }}</div></sc-for>
+      </div>
+      </sc-if>
+      <div data-trip="1" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:12px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🌍 The big trip</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ tripTip }}</p></div>
+        <div style="padding:12px 14px;border-radius:16px;background:var(--hint);color:var(--hintInk);font:800 13px/1.4 Nunito,sans-serif;text-wrap:pretty">{{ tripHead }}</div>
+        <sc-for list="{{ tripRows }}" as="tr" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:6px;padding-top:12px;border-top:1px solid var(--line)">
+          <div style="display:flex;align-items:center;gap:8px"><b style="flex:1;font:600 17px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ tr.h }} · {{ tr.pts }}</b><span style="flex:none;padding:5px 9px;border-radius:999px;background:{{ tr.badgeBg }};color:{{ tr.badgeInk }};font:800 11px/1 Nunito,sans-serif;white-space:nowrap">{{ tr.badge }}</span></div>
+          <small style="font:700 12px/1.4 Nunito,sans-serif;color:var(--soft);text-wrap:pretty">{{ tr.items }}</small>
+          <sc-for list="{{ tr.bars }}" as="b" hint-placeholder-count="2"><div style="display:flex;align-items:center;gap:8px"><span style="flex:none;width:64px;font:800 12px/1 Nunito,sans-serif;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.name }}</span><span style="flex:1;display:block;height:10px;border-radius:999px;background:var(--field);box-shadow:inset 0 2px 4px rgba(0,0,0,.25);overflow:hidden"><span style="display:block;height:100%;width:{{ b.w }};border-radius:999px;background:{{ b.bg }}"></span></span><span style="flex:none;font:800 11px/1 Nunito,sans-serif;color:var(--soft);white-space:nowrap">{{ b.t }}</span></div></sc-for>
+          <sc-if value="{{ tr.hasNeed }}"><sc-for list="{{ tr.need }}" as="nd" hint-placeholder-count="2"><small style="font:700 12px/1.4 Nunito,sans-serif;color:var(--ink);text-wrap:pretty">{{ nd.t }}</small></sc-for></sc-if>
+        </div></sc-for>
+      </div>
+      <sc-if value="{{ notDadR }}">
+      <h3 style="margin:6px 4px 0;font:600 20px/1 Fredoka,sans-serif;color:var(--ink)">🛍️ The shop</h3>
+      <sc-for list="{{ shop }}" as="sec" hint-placeholder-count="4"><div data-tier="{{ sec.key }}" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:4px">
+        <div style="display:flex;align-items:center;gap:8px;padding-bottom:4px"><b style="flex:1;font:600 18px/1.2 Fredoka,sans-serif;color:var(--ink)">{{ sec.h }}</b><span style="flex:none;padding:6px 10px;border-radius:999px;background:var(--chip);color:var(--chipInk);font:800 12px/1 Nunito,sans-serif;white-space:nowrap">{{ sec.cost }}</span></div>
+        <sc-for list="{{ sec.items }}" as="it" hint-placeholder-count="3"><div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-top:1px solid var(--line)"><span style="flex:none;width:30px;text-align:center;font-size:22px;line-height:1">{{ it.ic }}</span><div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:2px"><span style="font:800 14px/1.3 Nunito,sans-serif;color:var(--ink);text-wrap:pretty">{{ it.n }}</span><sc-if value="{{ it.hasNote }}"><small style="font:700 11px/1.3 Nunito,sans-serif;color:var(--soft)">{{ it.note }}</small></sc-if></div><button onClick="{{ it.buy }}" data-buy="{{ it.key }}" style="flex:none;border:0;cursor:pointer;padding:9px 12px;border-radius:999px;background:{{ it.bg }};color:{{ it.ink }};font:800 12px/1 Nunito,sans-serif;white-space:nowrap;box-shadow:inset 0 -3px 0 rgba(0,0,0,.15)" style-active="transform:translateY(2px)">{{ it.btn }}</button></div></sc-for>
+      </div></sc-for>
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:8px">
+        <h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🧾 My orders</h3>
+        <sc-if value="{{ noMyOrders }}"><p style="margin:0;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">Nothing ordered yet.</p></sc-if>
+        <sc-for list="{{ myOrders }}" as="o" hint-placeholder-count="1"><div style="padding:10px 12px;border-radius:16px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;gap:2px;opacity:{{ o.op }}"><b style="font:800 14px/1.35 Nunito,sans-serif">{{ o.t }}</b><small style="font:700 12px/1.3 Nunito,sans-serif;opacity:.85">{{ o.s }}</small><small style="font:800 12px/1.3 Nunito,sans-serif">{{ o.st }}</small></div></sc-for>
+      </div>
+      </sc-if>
+      <sc-if value="{{ isDadR }}">
+      <div data-marks="1" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:10px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">📝 Marksheet grades</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Pick each subject's grade from the marksheet. A+ 1,500 · A 1,000 · B+ 600 · B 400 · C or lower 0. The final report card also decides the trip grades.</p></div>
+        <sc-for list="{{ marks }}" as="mk" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;border-top:1px solid var(--line)">
+          <b style="font:800 15px/1.3 Nunito,sans-serif;color:var(--ink)">{{ mk.name }} · {{ mk.pts }}</b>
+          <sc-for list="{{ mk.sheets }}" as="sh" hint-placeholder-count="2"><div style="display:flex;flex-direction:column;gap:6px;padding:10px 12px;border-radius:16px;background:var(--opt);color:var(--optInk)">
+            <small style="font:800 12px/1.2 Nunito,sans-serif">{{ sh.t }}</small>
+            <sc-for list="{{ sh.rows }}" as="r" hint-placeholder-count="5"><div style="display:flex;align-items:center;gap:8px"><span style="flex:1;font:700 13px/1.3 Nunito,sans-serif">{{ r.sub }}</span><select value="{{ r.val }}" onChange="{{ r.on }}" data-grade="{{ r.id }}" aria-label="{{ r.sub }} grade" style="border:0;padding:10px 12px;border-radius:12px;background:var(--field);color:var(--fieldInk);font:700 14px/1.2 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);appearance:auto"><sc-for list="{{ r.opts }}" as="op" hint-placeholder-count="6"><option value="{{ op.v }}">{{ op.t }}</option></sc-for></select></div></sc-for>
+            <div style="display:flex;gap:6px"><input type="text" placeholder="another subject" aria-label="Add a subject" value="{{ sh.subIn }}" onChange="{{ sh.onSub }}" style="border:0;padding:10px 12px;border-radius:12px;background:var(--field);color:var(--fieldInk);font:700 14px/1.2 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);flex:1;min-width:0"><button onClick="{{ sh.addSub }}" style="border:0;cursor:pointer;padding:8px 12px;border-radius:12px;background:var(--chip);color:var(--chipInk);font:800 12px/1 Nunito,sans-serif">Add</button></div>
+          </div></sc-for>
+        </div></sc-for>
+      </div>
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:10px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">👥 Friends using AcadaBee on their phones</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">Tier 1 needs 4: friends with their own login who use the app on a phone.</p></div>
+        <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="0" aria-label="Friends using the app" value="{{ friendsIn }}" onChange="{{ onFriends }}" style="border:0;padding:10px 12px;border-radius:12px;background:var(--field);color:var(--fieldInk);font:700 14px/1.2 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);flex:1;min-width:0"><button onClick="{{ saveFriends }}" style="border:0;cursor:pointer;padding:10px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35);flex:none">Save</button></div>
+      </div>
+      <sc-if value="{{ hasPast }}"><div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:8px">
+        <h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🧾 Handed over and cancelled</h3>
+        <sc-for list="{{ pastOrders }}" as="o" hint-placeholder-count="1"><div style="padding:10px 12px;border-radius:16px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;gap:2px;opacity:{{ o.op }}"><b style="font:800 14px/1.35 Nunito,sans-serif">{{ o.t }}</b><small style="font:700 12px/1.3 Nunito,sans-serif;opacity:.85">{{ o.s }} · {{ o.st }}</small></div></sc-for>
+      </div></sc-if>
+      </sc-if>
+      <div style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:10px">
+        <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">💡 Got a reward idea?</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ ideasTip }}</p></div>
+        <sc-if value="{{ noIdeas }}"><p style="margin:0;font:700 13px/1.4 Nunito,sans-serif;color:var(--soft)">No ideas yet.</p></sc-if>
+        <sc-for list="{{ ideas }}" as="w" hint-placeholder-count="1"><div style="padding:10px 12px;border-radius:16px;background:var(--opt);color:var(--optInk);display:flex;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:flex-start;gap:8px"><span style="flex:1;font:800 14px/1.35 Nunito,sans-serif">{{ w.text }}</span><span style="flex:none;font:800 12px/1.3 Nunito,sans-serif;text-align:right">{{ w.st }}</span></div>
+          <small style="font:700 11px/1.2 Nunito,sans-serif;opacity:.8">{{ w.by }}</small>
+          <sc-if value="{{ w.isDad }}"><select value="{{ w.val }}" onChange="{{ w.onTier }}" data-wish="{{ w.key }}" aria-label="Tier for this idea" style="border:0;padding:10px 12px;border-radius:12px;background:var(--field);color:var(--fieldInk);font:700 14px/1.2 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);appearance:auto"><sc-for list="{{ w.opts }}" as="op" hint-placeholder-count="5"><option value="{{ op.v }}">{{ op.t }}</option></sc-for></select></sc-if>
+          <sc-if value="{{ w.canDel }}"><button onClick="{{ w.del }}" style="align-self:flex-start;border:0;cursor:pointer;padding:6px 10px;border-radius:10px;background:transparent;color:inherit;font:800 11px/1 Nunito,sans-serif;opacity:.75">🗑 remove</button></sc-if>
+        </div></sc-for>
+        <sc-if value="{{ notDadR }}"><div style="display:flex;gap:8px"><input type="text" placeholder="My reward idea…" aria-label="Your reward idea" value="{{ wishText }}" onChange="{{ onWishText }}" style="border:0;padding:10px 12px;border-radius:12px;background:var(--field);color:var(--fieldInk);font:700 14px/1.2 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2);flex:1;min-width:0"><button onClick="{{ addWish }}" style="border:0;cursor:pointer;padding:10px 14px;border-radius:999px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35);flex:none">Add</button></div></sc-if>
+      </div>
+      <button onClick="{{ reread }}" style="border:0;cursor:pointer;width:100%;padding:14px;border-radius:20px;font:600 16px/1 Fredoka,sans-serif;color:var(--optInk);background:var(--opt);box-shadow:inset 0 -5px 0 var(--cardLo)" style-active="transform:translateY(2px)">{{ rereadT }}</button>
     </div>
     </sc-if>
 
@@ -415,6 +489,47 @@
   </sc-if>
   </sc-if>
 
+  <!-- REWARDS LAUNCH NOTE (v2.0) -->
+  <sc-if value="{{ annOn }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="annTitle" data-ann="1" style="position:fixed;inset:0;z-index:55;overflow-y:auto;background:radial-gradient(circle at 50% 0%,#2A6FB0 0%,#0B1E3A 55%,#06101F 100%);color:#fff">
+    <div style="max-width:560px;margin:0 auto;padding:28px 18px 48px;display:flex;flex-direction:column;gap:16px">
+      <sc-if value="{{ annIsPrev }}"><div style="align-self:center;padding:7px 12px;border-radius:999px;background:rgba(255,255,255,.15);font:800 12px/1 Nunito,sans-serif">{{ annPrevT }}</div></sc-if>
+      <div data-ann-hero="1" style="text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;padding-top:6px">
+        <div style="font-size:76px;line-height:1;animation:rbFloat 3s ease-in-out infinite;filter:drop-shadow(0 14px 12px rgba(0,0,0,.4))">🎁</div>
+        <div style="font:900 13px/1 Nunito,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:#FFD83D">Big news, founders!</div>
+        <h2 id="annTitle" style="margin:0;font:700 38px/1.05 Fredoka,sans-serif;color:#FFE680;text-shadow:0 3px 0 rgba(160,100,0,.55),0 0 24px rgba(255,214,61,.35);animation:popIn .8s ease-out">AcadaBee Rewards are LIVE 🚀</h2>
+        <p style="margin:0;font:700 15px/1.45 Nunito,sans-serif;color:#C9F3FF;max-width:430px">Your points now win real rewards, and this school year decides your big trip in March.</p>
+      </div>
+      <div style="padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.08);box-shadow:inset 0 2px 0 rgba(255,255,255,.12);display:flex;flex-direction:column;gap:10px">
+        <h3 style="margin:0;font:600 21px/1.2 Fredoka,sans-serif;color:#fff">① Earn reward points</h3>
+        <sc-for list="{{ annEarn }}" as="e" hint-placeholder-count="4"><div style="display:flex;gap:12px;align-items:flex-start"><span style="flex:none;width:30px;text-align:center;font-size:24px;line-height:1.2">{{ e.ic }}</span><div style="display:flex;flex-direction:column;gap:2px"><b style="font:800 15px/1.3 Nunito,sans-serif;color:#fff">{{ e.t }}</b><small style="font:700 13px/1.4 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">{{ e.s }}</small></div></div></sc-for>
+      </div>
+      <div style="padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.08);box-shadow:inset 0 2px 0 rgba(255,255,255,.12);display:flex;flex-direction:column;gap:10px">
+        <h3 style="margin:0;font:600 21px/1.2 Fredoka,sans-serif;color:#fff">② Spend them in the shop</h3>
+        <p style="margin:0;font:700 13px/1.45 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">Tiers 4 to 7, on the new 🎁 Rewards tab. Buy as often as you like; Dad hands it over at the weekend.</p>
+        <sc-for list="{{ annShop }}" as="sh" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:3px;padding-top:8px;border-top:1px solid rgba(255,255,255,.12)"><b style="font:800 14px/1.3 Nunito,sans-serif;color:#FFE680">{{ sh.h }} points</b><small style="font:700 13px/1.4 Nunito,sans-serif;color:#E6F7FF;text-wrap:pretty">{{ sh.s }}</small></div></sc-for>
+      </div>
+      <div style="padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.08);box-shadow:inset 0 2px 0 rgba(255,255,255,.12);display:flex;flex-direction:column;gap:10px">
+        <h3 style="margin:0;font:600 21px/1.2 Fredoka,sans-serif;color:#fff">③ The big trip</h3>
+        <p style="margin:0;font:700 13px/1.45 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">Decided at the end of March: the best tier you BOTH reach. Trip points are everything you earn this year, and spending never lowers them.</p>
+        <sc-for list="{{ annTrip }}" as="tr" hint-placeholder-count="3"><div style="display:flex;flex-direction:column;gap:3px;padding-top:8px;border-top:1px solid rgba(255,255,255,.12)"><b style="font:800 14px/1.3 Nunito,sans-serif;color:#FFE680">{{ tr.h }}</b><small style="font:700 13px/1.4 Nunito,sans-serif;color:#E6F7FF;text-wrap:pretty">{{ tr.s }}</small><small style="font:800 12px/1.4 Nunito,sans-serif;color:#9FF0C2;text-wrap:pretty">{{ tr.need }}</small></div></sc-for>
+      </div>
+      <div style="padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.08);box-shadow:inset 0 2px 0 rgba(255,255,255,.12);display:flex;flex-direction:column;gap:10px">
+        <h3 style="margin:0;font:600 21px/1.2 Fredoka,sans-serif;color:#fff">④ Fair play</h3>
+        <div style="margin:0;font:700 13px/1.45 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">✋ Up to {{ annMaxT }} app points a day; after that it's practice until tomorrow.</div>
+        <div style="margin:0;font:700 13px/1.45 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">🌙 Nothing counts from 10 pm to 6 am. Sleep wins!</div>
+        <div style="margin:0;font:700 13px/1.45 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">🐝 A day counts when you finish a full round (no bee sting).</div>
+        <div style="margin:0;font:700 13px/1.45 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">🤝 Help each other learn, but play only your own rounds.</div>
+      </div>
+      <div style="padding:16px 18px;border-radius:22px;background:rgba(255,255,255,.08);box-shadow:inset 0 2px 0 rgba(255,255,255,.12);display:flex;flex-direction:column;gap:10px">
+        <h3 style="margin:0;font:600 21px/1.2 Fredoka,sans-serif;color:#fff">❓ FAQ</h3>
+        <sc-for list="{{ annFaqRows }}" as="f" hint-placeholder-count="5"><div style="border-top:1px solid rgba(255,255,255,.12)"><button onClick="{{ f.tap }}" style="width:100%;border:0;background:transparent;color:#fff;cursor:pointer;display:flex;align-items:center;gap:10px;padding:11px 0;text-align:left;font:800 14px/1.35 Nunito,sans-serif"><span style="flex:1">{{ f.q }}</span><span style="flex:none;font:800 18px/1 Nunito,sans-serif;color:#FFD83D">{{ f.sign }}</span></button><sc-if value="{{ f.open }}"><p style="margin:0 0 12px;font:700 13px/1.5 Nunito,sans-serif;color:#C9F3FF;text-wrap:pretty">{{ f.a }}</p></sc-if></div></sc-for>
+      </div>
+      <button onClick="{{ annClose }}" style="border:0;cursor:pointer;width:100%;padding:18px;border-radius:22px;font:700 22px/1 Fredoka,sans-serif;color:#3A2600;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -8px 0 rgba(160,100,0,.35),0 18px 30px -10px rgba(0,0,0,.6)" style-active="transform:translateY(3px)">{{ annBtn }}</button>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- WHAT'S NEW -->
   <sc-if value="{{ newOn }}" hint-placeholder-val="{{ false }}">
   <div role="dialog" aria-modal="true" aria-labelledby="newTitle" style="position:fixed;inset:0;background:rgba(5,20,40,.6);display:flex;align-items:center;justify-content:center;z-index:75;padding:20px">
@@ -450,7 +565,8 @@
 class Component extends DCLogic {
   state={ready:false,screen:"pick",player:null,prevWho:null,lesson:null,round:[],qi:0,order:[],earned:0,newPts:0,revCount:0,roundLog:[],attempted:false,dimmed:[],fb:null,wrongFlash:null,nextOn:false,nextLabel:"Next →",done:{},doneNav:{prev:null,next:null},donePts:"+0",doneMsg:"",doneTitle:"",doneExtras:[],hintUsed:false,firstWrong:0,stung:false,practice:null,dbWishes:{},wishText:"",wishPrice:{},
     noteCtx:null,noteBack:"map",noteKind:null,noteText:"",noteAbout:"Whole app",noteErr:false,lastPlace:"Whole app",delArm:null,copyBoxShown:false,notesSeenPrev:0,
-    chapWho:null,chapSearch:"",toast:null,learnOpen:false,learnEntry:null,db:null,dbNotes:{},dbSnap:{progress:{},dadlog:null,duol:null},dbRows:[],dadStepsIn:"",dadTargetIn:"",told:0};
+    chapWho:null,chapSearch:"",toast:null,learnOpen:false,learnEntry:null,db:null,dbNotes:{},dbSnap:{progress:{},dadlog:null,duol:null},dbRows:[],dadStepsIn:"",dadTargetIn:"",told:0,
+    dbOrders:{},dbMarks:{},dbRw:{},rwSrv:null,annOn:false,annPreview:false,annFaq:null,buyArm:null,subjIn:{},friendsIn:null,actRows:[]};
   rootRef=React.createRef(); fxRef=React.createRef(); beeRef=React.createRef(); MEM={};
 
   componentDidMount(){
@@ -462,7 +578,7 @@ class Component extends DCLogic {
       this.setState({ready:true,prevWho:(prev&&D.LESSONS[prev])?prev:null},()=>{this.applyTheme();this.initDb()});
     }).catch(e=>console.error("AcadaBee: content failed to load",e));
     this._esc=e=>{if(e.key==="Escape"&&this.state.learnOpen)this.setState({learnOpen:false})};document.addEventListener("keydown",this._esc);
-    this._hyd=()=>{if(!this.L)return;Promise.resolve(this.state.db?this.loadSnap().then(()=>this.pullNotes()).then(()=>this.pullWishes()).then(()=>this.fetchBoard()):null).then(()=>{this.forceUpdate();this.announceNotes()})};window.addEventListener("ab-hydrated",this._hyd);
+    this._hyd=()=>{if(!this.L)return;Promise.resolve(this.state.db?this.loadSnap().then(()=>this.pullNotes()).then(()=>this.pullWishes()).then(()=>this.pullRewards()).then(()=>this.fetchBoard()):null).then(()=>{this.forceUpdate();this.announceNotes()})};window.addEventListener("ab-hydrated",this._hyd);
     this._act=setInterval(()=>this.actTick(),60000);this._actVis=()=>this.actTick();document.addEventListener("visibilitychange",this._actVis);
   }
   componentWillUnmount(){document.removeEventListener("keydown",this._esc);window.removeEventListener("ab-hydrated",this._hyd);clearInterval(this._act);document.removeEventListener("visibilitychange",this._actVis)}
@@ -489,7 +605,7 @@ class Component extends DCLogic {
     if(S.player==="dad"){ex.notesSeenPrev=this.load("ab_notes_seen",0);this.store("ab_notes_seen",Date.now())}this.setScreen("notes",ex)}
   pick(p){const t=this.L.today();this.store("ab_who",p);const done=this.load("ab_done_"+p+"_"+t,{});
     if(p==="dad"){this.setState({player:p,prevWho:p,done,told:0},()=>{this.goBoard();this.announceNotes()});return}
-    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.unlocked(p,false);this.announceNotes();this.actTick()})}
+    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.unlocked(p,false);this.announceNotes();this.actTick();this.maybeAnn()})}
   toast(msg){clearTimeout(this._toastT);this.setState({toast:msg});this._toastT=setTimeout(()=>this.setState({toast:null}),2400)}
 
   /* exams + islands */
@@ -551,14 +667,14 @@ class Component extends DCLogic {
     return this.L.shuffle(out)}
   sleeping(){const h=new Date().getHours();return h>=this.L.SLEEP_FROM||h<this.L.SLEEP_TO}
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
-  practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";return null}
+  practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";if(p!=="dad"&&this.state.db&&this.rwTodayPts(p)>=L.DAY_PTS_MAX)return "max";if(p!=="dad"&&this.clockOff())return "clock";return null}
   whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0],R=String(this.L.NAMES.p2||"").split(" ")[0],seen=parseFloat(this.load("ab_seen_ver",null))||0;return [
     {v:1.91,key:"wssci",ic:"🔬",t:R+"'s Science and Maths sheets are in too: Fibre and Air Islands have his worksheet and class notes, and Multiples Island has the Factors and Multiples sheets, with primes, factor trees, HCF and LCM. Sheet questions come first."},
     {v:1.9,key:"wssst",ic:"🌊",t:R+"'s SST and Hindi sheets are in: Water Island has his class notes (new terms, oceans and seas, the Ganga, water scarcity), and शब्द and हीरा Islands have the class मुहावरे list, अनेकार्थी शब्द and the आसमान गिरा answers. Sheet questions come first."},
     {v:1.8,key:"wseng",ic:"📝",t:R+"'s PA-2 English sheets are in: verbs and tenses on Tense Island, prepositions, jumbled sentences and experience writing on Word Island, and story words, book answers and unseen passages on Reader Island. Rounds give you the sheet questions first. Good luck on Wednesday, "+R+"! 🍀"},
     {v:1.8,key:"handout",ic:"🧭",t:"Compass Island has 10 new questions from "+Z+"'s class construction handout: bisectors, 90°, 60°, 30° and 15°. All the best for Maths, "+Z+"! 🍀"},
     {v:1.7,key:"wsmaths",ic:"📝",t:"New questions from your teachers' PA-2 practice sheets are on Expression, Triangle and Compass Islands. Rounds give you the new ones first. All the best for Maths, "+Z+"! 🍀"},
-    {v:1.6,key:"double",ic:"💎",t:"Team weeks now DOUBLE your gems! If all three of you hit your goals, the Team Vault opens with twice your gems (at least +300) and a honey jar 🍯."},
+    {v:1.6,key:"double",ic:"💎",t:"Team weeks boost your gems! If all three of you hit your goals, the Team Vault opens with a +25% bonus."},
     {v:1.6,key:"vaultmap",ic:"🔐",t:"Your Map shows the Team Vault: how many gems are waiting and what the team still has to do before Sunday 9 pm."},
     {v:1.6,key:"half",ic:"🏝️",t:"Exam weeks: play every day plus HALF of your PA-2 islands, any you like. Good luck in the exams! 🍀"},
     {v:1.5,key:"duolingo",ic:"🦉",t:"Your Duolingo streak now shows on your Profile and on the Board. It updates every evening."},
@@ -567,7 +683,7 @@ class Component extends DCLogic {
     {v:1.3,key:"score",ic:"🎯",t:"After every round you see your % right first time and how long it took ⏱️. "+Z+"'s idea!"},
     {v:1.3,key:"gold",ic:"🌟",t:"Golden islands: a full ring means every question is right once. Get each one right twice to turn it golden. The island shows how many are left, and rounds give you the ones you still need."},
     {v:1.3,key:"dad",ic:"👔",t:"Dad has his own corner now, with his Duolingo and steps goals. He still counts for the Team Vault!"}].filter(x=>x.v>seen)}
-  practiceMsg(w){const L=this.L;return {prelaunch:"🧪 Practice round: Season 1 starts "+L.fmtDay(L.LAUNCH)+". No ⭐ or 💎 yet.",sleep:"🌙 The hive is sleeping (10 pm–6 am): practice only, no ⭐ or 💎.",cap:"🛑 "+L.DAY_CAP+" rounds today! Practice only now: no more ⭐ or 💎 today."}[w]||""}
+  practiceMsg(w){const L=this.L;return {prelaunch:"🧪 Practice round: Season 1 starts "+L.fmtDay(L.LAUNCH)+". No ⭐ or 💎 yet.",sleep:"🌙 The hive is sleeping (10 pm–6 am): practice only, no ⭐ or 💎.",cap:"🛑 "+L.DAY_CAP+" rounds today! Practice only now: no more ⭐ or 💎 today.",max:"✋ Daily max: "+L.nfmt(L.DAY_PTS_MAX)+" points today! The rest of today is practice (no ⭐ or 💎). Rest that brain and come back tomorrow 🧠",clock:"⏰ This device's date, time or time zone doesn't match India time. Fix it in Settings to earn points; until then it's practice."}[w]||""}
   isHindi(id){return this.L.HINDI_ISLANDS.includes(id)}
   addGems(s,n,why){const t=this.L.today();s.gems=s.gems||[];s.gems.push({w:this.L.mondayOf(t),d:t,n,why})}
   isGolden(p,Lx){const g=this.progOf(p),ip=g&&g.isl[Lx.id];if(!ip||!Lx.qs.length)return false;return Lx.qs.every(Q=>ip.q&&ip.q[Q.id]&&(ip.q[Q.id].ok||0)>=2)}
@@ -597,23 +713,28 @@ class Component extends DCLogic {
   nextQ(){const S=this.state;if(S.stung){this.finishLesson();return}const qi=S.qi+1;if(qi<S.round.length){this.setState({qi,order:this.L.shuffle([0,1,2,3].slice(0,S.round[qi].o.length)),attempted:false,hintUsed:false,dimmed:[],fb:null,nextOn:false,wrongFlash:null},()=>window.scrollTo(0,0))}else this.finishLesson()}
   saveProgress(){const S=this.state,g=this.PG(),ip=this.islP(g,S.lesson.id),t=this.L.today();
     S.roundLog.forEach(r=>{const s=ip.q[r.id]||(ip.q[r.id]={seen:0,ok:0,miss:0});s.seen++;s.last=t;if(r.ok){s.ok++;s.m=1}else if(r.miss){s.miss++}if(r.pts>0)s.sc=1});
-    ip.rounds++;if(!ip.firstDone)ip.firstDone=t;ip.lastDone=t;ip.days=ip.days||{};ip.days[t]=(ip.days[t]||0)+1;
+    ip.rounds++;if(!ip.firstDone)ip.firstDone=t;ip.lastDone=t;ip.days=ip.days||{};if(!S.stung)ip.days[t]=(ip.days[t]||0)+1;else{ip.stung=ip.stung||{};ip.stung[t]=(ip.stung[t]||0)+1}
     this.store("ab_prog_"+S.player,g);
     const db=S.db;if(db){try{Promise.resolve(db.doc("progress/"+S.player).set({p:S.player,name:this.L.NAMES[S.player],updatedAt:Date.now(),prog:g})).catch(()=>{})}catch(e){}}
     return ip}
   finishLesson(){
-    const S=this.state,L=this.L,p=S.player,lesson=S.lesson,s=this.P(),t=L.today(),ex=[],pr=S.practice,before=L.levelOf(s.points).n,g0=(s.gems||[]).reduce((a,g)=>a+g.n,0);
+    const S=this.state,L=this.L,p=S.player,lesson=S.lesson,s=this.P(),t=L.today(),ex=[],pr=S.practice,before=L.levelOf(s.points).n,g0=(s.gems||[]).reduce((a,g)=>a+g.n,0),tb=p!=="dad"?this.rwTodayPts(p):0,firstToday=s.lastDay!==t;
     s.points+=S.newPts;
-    if(s.lastDay!==t){
+    if(S.newPts>0){s.pd=s.pd||{};s.pd[t]=(s.pd[t]||0)+S.newPts;const ks=Object.keys(s.pd).sort();while(ks.length>150)delete s.pd[ks.shift()]}
+    if(!S.stung)s.fr=(s.fr||0)+1;
+    if(!S.stung&&s.lastDay!==t){
       if(!s.lastDay)s.streak=1;
       else{const gap=[];for(let d=L.addDays(s.lastDay,1);d<t;d=L.addDays(d,1))gap.push(d);const sick=this.sickOf(p),need=gap.filter(d=>!sick[d]);
         if(need.length<=(s.freezers||0)){if(need.length){s.freezers-=need.length;s.frozen=[...(s.frozen||[]),...need].slice(-30);ex.push("🧊 "+(need.length>1?need.length+" freezers":"A freezer")+" saved your streak")}s.streak=(s.streak||0)+1}
         else s.streak=1}
-      s.lastDay=t;if(!s.days.includes(t))s.days.push(t);s.days=s.days.slice(-60);s.bestStreak=Math.max(s.bestStreak||0,s.streak);
+      s.lastDay=t;if(!s.days.includes(t))s.days.push(t);s.days=s.days.slice(-400);s.bestStreak=Math.max(s.bestStreak||0,s.streak);
       if(!pr&&s.streak%7===0&&s.lastChest!==t){s.lastChest=t;this.addGems(s,L.GEMS.chest,"chest");ex.push("🎁 Treasure chest: "+s.streak+" days in a row! +"+L.nfmt(L.GEMS.chest)+" 💎")}
     }
     if(!pr){const after=L.levelOf(s.points).n;if(after>before){this.addGems(s,L.GEMS.level*(after-before),"level");ex.push("⬆️ Level "+after+": "+L.levelOf(s.points).name+"! +"+L.GEMS.level*(after-before)+" 💎")}
       if(!S.stung){s.cells=(s.cells||0)+1;if(s.cells>=L.CELLS_PER_HIVE){s.cells-=L.CELLS_PER_HIVE;s.hives=(s.hives||0)+1;this.addGems(s,L.GEMS.hive,"hive");ex.push("🍯 Full hive! +"+L.nfmt(L.GEMS.hive)+" 💎")}}}
+    if(this.state.db&&p!=="dad"&&L.today()>=L.RW.from&&L.today()<=L.RW.to){const cred=Math.min(S.newPts,Math.max(0,L.DAY_PTS_MAX-tb));
+      if(cred>0)ex.push("🎁 +"+L.nfmt(cred)+" reward points");if(S.newPts>0&&tb+S.newPts>=L.DAY_PTS_MAX)ex.push("✋ That's the daily max of "+L.nfmt(L.DAY_PTS_MAX)+" points. The rest of today is practice. Great work!");
+      if(!S.stung&&firstToday&&!this.sleeping())ex.push("📅 +"+L.RW.dayPts+" reward points for playing today")}
     this.saveProgress();
     if(!pr&&!(s.golden||[]).includes(lesson.id)&&this.isGolden(p,lesson)){s.golden=[...(s.golden||[]),lesson.id];this.addGems(s,L.GEMS.golden,"golden");ex.push("🌟 "+lesson.title+" is now GOLDEN! +"+L.GEMS.golden+" 💎")}
     const gNew=(s.gems||[]).reduce((a,g)=>a+g.n,0)-g0;if(gNew>0)ex.push("🔐 +"+L.nfmt(gNew)+" 💎 wait in the Team Vault until Sunday 9 pm");
@@ -621,15 +742,15 @@ class Component extends DCLogic {
     const done=Object.assign({},S.done,{[lesson.id]:true});this.store("ab_done_"+p+"_"+t,done);
     const m=this.masteredCount(lesson),tw=this.twiceCount(lesson),gdn=(s.golden||[]).includes(lesson.id),ord=this.mapOrder(p),i=ord.findIndex(x=>x.id===lesson.id);
     const title=S.stung?"Ouch! The bee stung 🐝":pr?"Practice round 🧪":"Island cleared! 🏝️";
-    const msg=(pr?this.practiceMsg(pr).replace(/^\S+ /,""):S.stung?"Round over after "+L.STING_AT+" wrong first tries. Points earned stay; no honeycomb cell this time.":S.newPts>0?"new points in the hive":"revision round: brain points only 🧠")+" · "+m+"/"+lesson.qs.length+" mastered"+(!gdn&&lesson.qs.length&&m>=lesson.qs.length?" · 🌟 "+tw+"/"+lesson.qs.length+" right twice for golden":"")+" · streak "+s.streak+" 🔥";
+    const msg=(pr?this.practiceMsg(pr).replace(/^\S+ /,""):S.stung?"Round over after "+L.STING_AT+" wrong first tries. Points earned stay, but a stung round doesn't count as a day played: finish a full round today!":S.newPts>0?"new points in the hive":"revision round: brain points only 🧠")+" · "+m+"/"+lesson.qs.length+" mastered"+(!gdn&&lesson.qs.length&&m>=lesson.qs.length?" · 🌟 "+tw+"/"+lesson.qs.length+" right twice for golden":"")+" · streak "+s.streak+" 🔥";
     const secs=Math.max(1,Math.round((Date.now()-(S.roundStart||Date.now()))/1000)),okN=S.roundLog.filter(r=>r.ok).length,ansN=S.roundLog.length||1;
     this.setState({done,donePts:"+"+S.newPts,doneTitle:title,doneMsg:msg,donePct:Math.round(okN*100/ansN)+"% right first time",doneTime:secs<60?secs+" sec":Math.floor(secs/60)+":"+String(secs%60).padStart(2,"0")+" min",doneExtras:ex.map((x,k)=>({key:k,t:x})),doneNav:{prev:i>0?ord[i-1]:null,next:(i>=0&&i<ord.length-1)?ord[i+1]:null},screen:"done"},()=>{window.scrollTo(0,0);this.unlocked(p,true);if(!S.stung)this.bigCelebrate()});
   }
 
   /* confetti + bee */
   calm(){const p=this.state.player;if(p&&this.L&&this.upcomingExams(p).length&&this.examWeek(p))return true;return (this.props.motion??"game-like")==="calm"||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)}
-  burst(el,n,big){
-    if(!el||!this.fxRef.current||this.calm())return;
+  burst(el,n,big,force){
+    if(!el||!this.fxRef.current||(force?(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches):this.calm()))return;
     const C=["#FFD83D","#45E0E6","#FFFFFF","#7ED957","#FF6F61"],r=el.getBoundingClientRect(),cx=r.left+r.width/2,cy=r.top+r.height/2;
     for(let i=0;i<n;i++){const s=document.createElement("span");s.style.cssText="position:absolute;width:10px;height:14px;border-radius:3px;left:"+cx+"px;top:"+cy+"px;background:"+C[i%C.length];this.fxRef.current.appendChild(s);
       const ang=Math.random()*Math.PI*2,d=(big?130:70)+Math.random()*(big?160:60);
@@ -646,7 +767,7 @@ class Component extends DCLogic {
   /* hive sync (optional) */
   roleKey(){const r=window.ACADABEE_ROLE;return (r==="p1"||r==="p2"||r==="dad")?r:null}
   async initDb(){let db=null;try{db=await (window.claude&&window.claude.use?window.claude.use("db"):null)}catch(e){db=null}
-    this.setState({db});const rk=this.roleKey();if(rk&&this.state.screen==="pick"&&!this.state.player)this.pick(rk);if(!db)return;await this.loadSnap();await this.pullNotes();await this.pullWishes();await this.fetchBoard();this.announceNotes()}
+    this.setState({db});const rk=this.roleKey();if(rk&&this.state.screen==="pick"&&!this.state.player)this.pick(rk);if(!db)return;await this.loadSnap();await this.pullNotes();await this.pullWishes();await this.pullRewards();await this.fetchBoard();this.announceNotes()}
   async pullWishes(){const db=this.state.db;if(!db)return;try{const snap=await db.collection("wishes").get();const m={};snap.forEach(d=>{const n=d.data();if(n&&n.id)m[n.id]=n});this.setState({dbWishes:m})}catch(e){}}
   async syncUp(s){const S=this.state;if(!S.db||!S.player)return;try{await S.db.doc("players/"+S.player).set(Object.assign({},s,{p:S.player,name:this.L.NAMES[S.player],av:this.load("ab_av_"+S.player,null),updatedAt:s.updatedAt||Date.now()}))}catch(e){}}
   async loadSnap(){const db=this.state.db;if(!db)return;const snap={progress:{},dadlog:null},N=this.L.NAMES;
@@ -661,24 +782,25 @@ class Component extends DCLogic {
   devType(){const u=navigator.userAgent||"";return /iPad|Tablet/i.test(u)?"tablet":(/Mobi|Android|iPhone/i.test(u)?"phone":"computer")}
   actTick(){const S=this.state,p=S.player,db=S.db;if(!this.L||!db||!p||p==="dad"||S.screen==="pick")return;
     const now=Date.now(),vis=document.visibilityState!=="hidden";let v=this._visit;
-    if(vis){if(!v||v.p!==p||now-v.e>this.L.ACT_GAP)v=this._visit={id:now.toString(36)+Math.random().toString(36).slice(2,5),p,s:now,e:now,r:0,dev:this.devType(),via:window.ACADABEE_ROLE?"own":"family"};else{v.e=now;v.closed=false}}
+    if(vis){if(!v||v.p!==p||now-v.e>this.L.ACT_GAP)v=this._visit={id:now.toString(36)+Math.random().toString(36).slice(2,5),p,s:now,e:now,r:0,dev:this.devType(),did:this.devId(),via:window.ACADABEE_ROLE?"own":"family"};else{v.e=now;v.closed=false}}
     else{if(!v||v.p!==p||v.closed)return;v.e=now;v.closed=true}
     this.saveVisit(v)}
   actRound(){this.actTick();const v=this._visit;if(!v||v.p!==this.state.player)return;v.r=(v.r||0)+1;v.e=Date.now();this.saveVisit(v)}
-  saveVisit(v){const db=this.state.db;if(!db)return;try{Promise.resolve(db.doc("activity/"+v.p+"/"+v.id).set({p:v.p,s:v.s,e:v.e,r:v.r,dev:v.dev,via:v.via})).catch(()=>{})}catch(e){}}
+  saveVisit(v){const db=this.state.db;if(!db)return;try{Promise.resolve(db.doc("activity/"+v.p+"/"+v.id).set({p:v.p,s:v.s,e:v.e,r:v.r,dev:v.dev,did:v.did||null,via:v.via})).catch(()=>{})}catch(e){}}
   async pullActivity(){const db=this.state.db;if(!db)return;const rows=[];try{const snap=await db.collection("activity").get();snap.forEach(d=>{const x=d.data();if(x)rows.push(Object.assign({id:d.id},x))})}catch(e){}this.setState({actRows:rows})}
   activityVals(){const L=this.L,N=L.NAMES,tz="Asia/Kolkata",rows=this.state.actRows||[];
     const dayOf=ms=>new Date(ms).toLocaleDateString("en-CA",{timeZone:tz}),
       tm=ms=>new Date(ms).toLocaleTimeString("en-US",{timeZone:tz,hour:"numeric",minute:"2-digit"}).replace(/\s?AM$/," am").replace(/\s?PM$/," pm"),
       who=k=>k==="dad"?"Dad":(k&&N[k])?N[k]:"The family login";
     const today=dayOf(Date.now()),days=[];for(let i=0;i<L.ACT_DAYS;i++){const d=L.addDays(today,-i);if(d<L.ACT_FROM)break;days.push(d)}
-    const visits=rows.filter(r=>r.s&&r.p),auth=rows.filter(r=>r.ev&&r.t);
+    const visits=rows.filter(r=>r.s&&r.p),auth=rows.filter(r=>r.ev&&r.t),lab=this.devLabeler(rows);
     const actDays=days.map(d=>{const lines=[];
       ["p1","p2"].forEach(k=>{const vs=visits.filter(v=>v.p===k&&dayOf(v.s)===d).sort((a,b)=>a.s-b.s);if(!vs.length)return;
         const mins=vs.reduce((a,v)=>a+Math.max(0,(v.e||v.s)-v.s),0)/60000,rounds=vs.reduce((a,v)=>a+(v.r||0),0),
           spans=vs.map(v=>((v.e||v.s)-v.s>=60000)?tm(v.s)+"–"+tm(v.e):tm(v.s)).join(", ");
-        lines.push({key:k,c:"var(--ink)",t:(L.EMO[k]||"")+" "+N[k]+": "+spans+" · "+(mins<1?"under 1 min":Math.round(mins)+" min")+(rounds?" · "+rounds+" round"+(rounds>1?"s":""):"")})});
-      auth.filter(a=>dayOf(a.t)===d).sort((a,b)=>a.t-b.t).forEach(a=>lines.push({key:a.id,c:"var(--soft)",t:(a.ev==="out"?"🚪 ":"🔑 ")+who(a.role)+(a.ev==="out"?" signed out at ":" signed in at ")+tm(a.t)+(a.dev?" ("+a.dev+")":"")}));
+        const dv=[...new Set(vs.map(v=>lab(v.did)).filter(Boolean))].join(", ");
+        lines.push({key:k,c:"var(--ink)",t:(L.EMO[k]||"")+" "+N[k]+": "+spans+" · "+(mins<1?"under 1 min":Math.round(mins)+" min")+(rounds?" · "+rounds+" round"+(rounds>1?"s":""):"")+(dv?" · "+dv:"")})});
+      auth.filter(a=>dayOf(a.t)===d).sort((a,b)=>a.t-b.t).forEach(a=>lines.push({key:a.id,c:"var(--soft)",t:(a.ev==="out"?"🚪 ":"🔑 ")+who(a.role)+(a.ev==="out"?" signed out at ":" signed in at ")+tm(a.t)+(a.dev?" ("+a.dev+(a.did?", "+lab(a.did):"")+")":"")}));
       if(!lines.length)lines.push({key:"none",c:"var(--soft)",t:"Nobody opened the app."});
       return {key:d,title:d===today?"Today":(d===L.addDays(today,-1)?"Yesterday":L.fmtDay(d)),lines}});
     return {showActivity:!!this.state.db,actDays,actTip:"Times in IST. A visit counts while the app is open on the screen; rounds are the rounds finished in it."}}
@@ -713,7 +835,7 @@ class Component extends DCLogic {
   vault(p){const L=this.L,raw=this.load("ab_"+p,null),s=(raw&&raw.season===L.SEASON)?raw:L.freshSeason(),byW={};(s.gems||[]).forEach(g=>{byW[g.w]=(byW[g.w]||0)+g.n});
     const now=new Date(),cur=L.mondayOf(L.today());let mon=L.mondayOf(L.LAUNCH),carry=0,wallet=0,melted=0,jars=0,last=null;
     while(mon<=cur){const end=L.addDays(mon,6),dl=L.parseISO(end);dl.setHours(L.VAULT_HOUR,0,0,0);const gw=byW[mon]||0;
-      if(now>=dl){const st=this.teamWeekStatus(this.weekOf(mon));last=st;if(st==="ok"){const open=gw+carry;wallet+=open+Math.max(open,L.GEMS.team);jars++;carry=0}else if(st==="unknown"){carry+=gw}else{melted+=carry;carry=gw}}
+      if(now>=dl){const st=this.teamWeekStatus(this.weekOf(mon));last=st;if(st==="ok"){const open=gw+carry;wallet+=open+(mon>=L.TEAM25_FROM?Math.round(open*L.TEAM_BONUS):Math.max(open,L.GEMS.team));jars++;carry=0}else if(st==="unknown"){carry+=gw}else{melted+=carry;carry=gw}}
       else carry+=gw;
       mon=L.addDays(mon,7)}
     return {wallet:Math.max(0,wallet-(s.spent||0)),pending:carry,melted,jars,last}}
@@ -748,7 +870,141 @@ class Component extends DCLogic {
   putWish(n){n.upd=Date.now();const a=this.localWishes(),i=a.findIndex(x=>x.id===n.id);if(i>=0)a[i]=n;else a.push(n);this.store("ab_wishes",a);
     const db=this.state.db;this.setState({dbWishes:Object.assign({},this.state.dbWishes,{[n.id]:n})});if(db){try{Promise.resolve(db.doc("wishes/"+n.id).set(n)).catch(()=>{})}catch(e){}}}
   addWish(){const S=this.state,t=(S.wishText||"").trim();if(t.length<2){this.toast("Write your wish first");return}
-    this.putWish({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),p:S.player,by:this.L.NAMES[S.player],text:t,price:0,at:Date.now(),done:false});this.setState({wishText:""});this.toast("🍯 Wish added! Dad will price it in honey jars.")}
+    this.putWish({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),p:S.player,by:this.L.NAMES[S.player],text:t,price:0,at:Date.now(),done:false});this.setState({wishText:""});this.toast("💡 Idea added! Dad will give it a tier.")}
+
+
+  /* ---------- rewards (v2.0) ---------- */
+  devId(){let d=this.load("ab_dev",null);if(!d){d=Math.random().toString(36).slice(2,8);this.store("ab_dev",d)}return d}
+  devLabeler(rows){const ids=[...new Set((rows||[]).slice().sort((a,b)=>(a.s||a.t||0)-(b.s||b.t||0)).map(r=>r.did).filter(Boolean))];return d=>d&&ids.includes(d)?"device "+String.fromCharCode(65+ids.indexOf(d)%26):""}
+  sharedDevices(){const L=this.L,rows=this.state.actRows||[],lab=this.devLabeler(rows),dayOf=ms=>new Date(ms).toLocaleDateString("en-CA",{timeZone:"Asia/Kolkata"}),by={};
+    rows.forEach(r=>{const k=r.s?r.p:(r.role||null),t=r.s||r.t;if(!r.did||!t||(k!=="p1"&&k!=="p2"))return;const d=dayOf(t);((by[d]=by[d]||{})[r.did]=by[d][r.did]||new Set()).add(k)});
+    const out=[];Object.keys(by).sort().reverse().forEach(d=>Object.keys(by[d]).forEach(id=>{if(by[d][id].size>1)out.push({day:d,dev:lab(id)})}));return out}
+  goRewards(){this.pullRewards();this.setScreen("rewards",{buyArm:null})}
+  async pullRewards(){const db=this.state.db;if(!db)return;const o={},m={},rw={};
+    try{const s=await db.collection("orders").get();s.forEach(d=>{const x=d.data();if(x&&x.id)o[x.id]=x})}catch(e){}
+    try{const s=await db.collection("marks").get();s.forEach(d=>{const x=d.data();if(x&&x.p)m[x.p]=x})}catch(e){}
+    try{const s=await db.collection("rewards").get();s.forEach(d=>{rw[d.id]=d.data()})}catch(e){}
+    let srv=null;try{if(db.rw){const t0=performance.now(),x=await db.rw(),t1=performance.now();if(x&&x.now)srv={x,perf:(t0+t1)/2,at:Date.parse(x.now)}}}catch(e){}
+    /* an order this device placed that never reached the hive goes again */
+    const me=this.state.player;this.localOrders().filter(x=>x.p===me&&!o[x.id]).forEach(x=>{try{Promise.resolve(db.doc("orders/"+x.p+"/"+x.id).set(x)).catch(()=>{})}catch(e){}});
+    this.setState({dbOrders:o,dbMarks:m,dbRw:rw,rwSrv:srv||this.state.rwSrv})}
+  srvP(k){const s=this.state.rwSrv;return (s&&s.x&&s.x.p&&s.x.p[k])||null}
+  clockOff(){const s=this.state.rwSrv;if(!s||!this.state.db)return false;const trusted=s.at+(performance.now()-s.perf);return Math.abs(Date.now()-trusted)>10*60*1000||new Date().getTimezoneOffset()!==-330}
+  rwTodayPts(k){const t=this.L.today(),loc=((this.P(k).pd||{})[t])||0,sp=this.srvP(k),srv=(sp&&sp.days&&sp.days[t]&&sp.days[t].pts)||0;return Math.max(loc,srv)}
+  rwDoc(id){const d=(this.state.dbRw||{})[id],l=this.load("ab_rw_"+id,null);return (d&&l)?((l.upd||0)>(d.upd||0)?l:d):(d||l||{})}
+  putRwDoc(id,x){x.upd=Date.now();this.store("ab_rw_"+id,x);this.setState({dbRw:Object.assign({},this.state.dbRw,{[id]:x})});const db=this.state.db;if(db){try{Promise.resolve(db.doc("rewards/"+id).set(x)).catch(()=>{})}catch(e){}}}
+  rwFriends(){return this.rwDoc("settings").friends||0}
+  marksOf(k){const d=(this.state.dbMarks||{})[k],l=this.load("ab_marks_"+k,null),x=(d&&l)?((l.upd||0)>(d.upd||0)?l:d):(d||l);return (x&&x.sheets)?x:{p:k,sheets:{}}}
+  putMarks(k,x){x.p=k;x.upd=Date.now();this.store("ab_marks_"+k,x);this.setState({dbMarks:Object.assign({},this.state.dbMarks,{[k]:x})});const db=this.state.db;if(db){try{Promise.resolve(db.doc("marks/"+k).set(x)).catch(()=>{})}catch(e){}}}
+  rwMarks(k){const G=this.L.RW.gradePts,sh=this.marksOf(k).sheets||{};let n=0;Object.values(sh).forEach(x=>Object.values(x||{}).forEach(g=>{n+=G[g]||0}));return n}
+  localOrders(){const a=this.load("ab_orders",[]);return Array.isArray(a)?a:[]}
+  ordersAll(){const m={},st=this.rwDoc("status").m||{};Object.values(this.state.dbOrders||{}).forEach(n=>{if(n&&n.id)m[n.id]=n});this.localOrders().forEach(n=>{if(n&&n.id&&!m[n.id])m[n.id]=n});
+    return Object.values(m).map(n=>Object.assign({},n,{st:(st[n.id]&&st[n.id].st)||"waiting"})).sort((a,b)=>(b.at||0)-(a.at||0))}
+  setOrderStatus(id,stt){const x=JSON.parse(JSON.stringify(this.rwDoc("status")));x.m=x.m||{};x.m[id]={st:stt,at:Date.now()};this.putRwDoc("status",x)}
+  setWishTier(id,t){const x=JSON.parse(JSON.stringify(this.rwDoc("tiers")));x.m=x.m||{};if(t)x.m[id]=t;else delete x.m[id];this.putRwDoc("tiers",x);this.toast(t?"💡 In the shop at tier "+t:"Tier removed")}
+  /* won team weeks from the week of 23 Nov (their vault already opened) */
+  teamWins(){const now=Date.now();if(this._tw&&now-this._tw.at<1500)return this._tw.v;const L=this.L,cur=L.mondayOf(L.today()),out=[],nd=new Date();let mon=L.mondayOf(L.LAUNCH);
+    while(mon<=cur){const dl=L.parseISO(L.addDays(mon,6));dl.setHours(L.VAULT_HOUR,0,0,0);if(nd>=dl&&mon>=L.TEAM25_FROM&&this.teamWeekStatus(this.weekOf(mon))==="ok")out.push(mon);mon=L.addDays(mon,7)}
+    this._tw={at:now,v:out};return out}
+  rw(k){const L=this.L,R=L.RW,sp=this.srvP(k),sick=this.sickOf(k),t=L.today(),s=this.P(k),days=new Set(),pd={};
+    if(sp){Object.keys(sp.days||{}).forEach(d=>{if(sp.days[d].played)days.add(d);pd[d]=sp.days[d].pts||0})}
+    else{(s.days||[]).forEach(d=>{if(d>=R.from&&d<=R.to)days.add(d)});Object.assign(pd,s.pd||{})}
+    Object.keys(sick).forEach(d=>{if(sick[d]&&d>=R.from&&d<=R.to&&d<=t)days.add(d)});
+    let bonus=0;this.teamWins().forEach(mon=>{let w=0;for(let i=0;i<7;i++){const d=L.addDays(mon,i);w+=(pd[d]||0)+(days.has(d)?R.dayPts:0)}bonus+=Math.round(w*L.TEAM_BONUS)});
+    const app=sp?(sp.pts||0):(s.points||0),dayPts=days.size*R.dayPts,marks=this.rwMarks(k),earned=app+dayPts+marks+bonus,
+      spent=this.ordersAll().filter(o=>o.p===k&&o.st!=="cancelled").reduce((a,o)=>a+(o.cost||0),0);
+    return {app,days:days.size,dayPts,marks,bonus,earned,spent,bal:Math.max(0,earned-spent),today:this.rwTodayPts(k),live:!!sp}}
+  rwGrades(k,t){const R=this.L.RW,fin=(this.marksOf(k).sheets||{}).final||{},subs=[...new Set([...(R.subjects[k]||[]),...Object.keys(fin)])],gs=subs.map(x=>fin[x]||"");
+    if(gs.some(g=>!g))return "wait";const bs=gs.filter(g=>g==="B+"||g==="B").length,cs=gs.filter(g=>g==="C").length;return (cs===0&&bs<=R.tiers[t].bs)?"ok":"no"}
+  tripVals(){const L=this.L,R=L.RW,B=["p1","p2"],rr={},fr=this.rwFriends(),first=k=>String(L.NAMES[k]||"").split(" ")[0];B.forEach(k=>rr[k]=this.rw(k));
+    const rows=[3,2,1].map(t=>{const T=R.tiers[t],need=[];let pts=true,other=true,wait=false;
+      const bars=B.map(k=>{const e=rr[k].earned,ok=e>=T.pts;if(!ok)pts=false;return {key:k,name:first(k),w:Math.max(3,Math.min(100,Math.round(e*100/T.pts)))+"%",t:ok?"✅ "+L.nfmt(T.pts):L.nfmt(e)+" / "+L.nfmt(T.pts),bg:ok?"linear-gradient(90deg,#7ED957,#C9F7B4)":"linear-gradient(90deg,#FFC61A,#FFE680)"}});
+      if(T.bs!=null)B.forEach(k=>{const g=this.rwGrades(k,t);if(g==="no")other=false;if(g==="wait")wait=true;need.push({key:"g"+k,t:(g==="ok"?"✅ ":g==="no"?"❌ ":"⏳ ")+first(k)+": A or A+ in every subject, "+(T.bs===1?"one B":"two Bs")+" allowed"+(g==="wait"?" (final report card)":"")})});
+      if(T.friends){if(fr<T.friends)other=false;need.push({key:"fr",t:(fr>=T.friends?"✅ ":"⏳ ")+fr+" of "+T.friends+" friends using AcadaBee on their phones"})}
+      const done=pts&&other&&!wait;
+      return {key:"t"+t,t,h:"Tier "+t,items:L.REWARDS.filter(x=>x.t===t).map(x=>x.ic+" "+x.n).join(" · "),pts:L.nfmt(T.pts)+" points each",bars,need,hasNeed:need.length>0,
+        badge:done?"✅ Reached":(pts?"⭐ Points done":"🎯 Goal"),badgeBg:done||pts?"linear-gradient(180deg,#C9F7B4,#7ED957)":"var(--chip)",badgeInk:done||pts?"#0F4A1C":"var(--chipInk)",ptsDone:pts}});
+    const best=[1,2,3].find(t=>rows.find(x=>x.t===t).ptsDone);let head;
+    if(best)head="🎉 You've both earned the points for Tier "+best+"!"+(best<=2?" The final report card"+(best===1?" and 4 friends on the app":"")+" decide the rest.":"")+(best>1?" Next: Tier "+(best-1)+" at "+L.nfmt(R.tiers[best-1].pts)+" each.":"");
+    else head="🎯 Next stop: Tier 3 at "+L.nfmt(R.tiers[3].pts)+" points each. "+B.map(k=>first(k)+" needs "+L.nfmt(Math.max(0,R.tiers[3].pts-rr[k].earned))).join(", ")+" more.";
+    return {tripRows:rows,tripHead:head,tripTip:"Decided on "+L.fmtDay(R.to)+": the best tier you BOTH reach. Trip points are every point you earn this year; spending never lowers them."}}
+  shopRw(p,r){const L=this.L,R=L.RW,S=this.state,tiers=this.rwDoc("tiers").m||{},live=r.live;
+    const items=[...L.REWARDS.filter(x=>x.t>=4).map(x=>({k:x.k,t:x.t,ic:x.ic,n:(x.np&&x.np[p])||x.n,game:!!x.game})),...this.wishesAll().filter(w=>!w.done&&tiers[w.id]>=4).map(w=>({k:"w-"+w.id,t:tiers[w.id],ic:"💡",n:w.text,game:false}))];
+    return [7,6,5,4].map(t=>{const cost=R.tiers[t].pts,can=live&&r.bal>=cost;return {key:"s"+t,h:"Tier "+t,cost:L.nfmt(cost)+" points",items:items.filter(x=>x.t===t).map(x=>{const arm=S.buyArm===x.k;
+      return {key:x.k,ic:x.ic,n:x.n,hasNote:x.game,note:"Game time follows Dad's screen-time rule",btn:arm?"Tap again to buy":(can?"Buy":(live?L.nfmt(cost-r.bal)+" to go":"offline")),
+        bg:arm?"linear-gradient(180deg,#C9F7B4,#7ED957)":(can?"linear-gradient(180deg,#FFE680,#FFC61A)":"var(--opt)"),ink:arm?"#0F4A1C":(can?"#3A2600":"var(--soft)"),buy:()=>this.buyReward(x,cost)}})}})}
+  buyReward(x,cost){const S=this.state,p=S.player,L=this.L;if(p==="dad")return;
+    if(!S.db||!this.srvP(p)){this.toast("Rewards need the internet. Try again in a moment.");this.pullRewards();return}
+    const r=this.rw(p);if(r.bal<cost){this.toast("You need "+L.nfmt(cost-r.bal)+" more points for this one");return}
+    if(S.buyArm!==x.k){clearTimeout(this._buyT);this.setState({buyArm:x.k});this._buyT=setTimeout(()=>this.setState({buyArm:null}),4000);return}
+    const o={id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),p,k:x.k,n:x.n,t:x.t,cost,at:Date.now()};
+    const a=this.localOrders();a.push(o);this.store("ab_orders",a.slice(-300));this.setState({buyArm:null,dbOrders:Object.assign({},S.dbOrders,{[o.id]:o})});
+    try{Promise.resolve(S.db.doc("orders/"+p+"/"+o.id).set(o)).catch(()=>{})}catch(e){}
+    this.toast("🎉 Ordered: "+x.n+"! Dad hands it over at the weekend.");const el=this.rootRef.current&&this.rootRef.current.querySelector('[data-screen-label="Rewards"]');if(el)this.burst(el,40,true)}
+  orderRows(forDad){const L=this.L,p=this.state.player,first=k=>String(L.NAMES[k]||"").split(" ")[0],lab={waiting:"⏳ Dad hands it over at the weekend",given:"✅ handed over",cancelled:"↩ cancelled, points back"};
+    return this.ordersAll().filter(o=>forDad||o.p===p).slice(0,40).map(o=>({key:o.id,t:(forDad?first(o.p)+": ":"")+o.n,s:"Tier "+o.t+" · "+L.nfmt(o.cost)+" points · "+L.fmtWhen(o.at),st:lab[o.st]||o.st,waiting:o.st==="waiting",op:o.st==="cancelled"?.6:1,
+      give:()=>{this.setOrderStatus(o.id,"given");this.toast("✅ Marked as handed over")},cancel:()=>{this.setOrderStatus(o.id,"cancelled");this.toast("↩ Cancelled: the points are back")}}))}
+  marksVals(){const L=this.L,R=L.RW,S=this.state,first=k=>String(L.NAMES[k]||"").split(" ")[0];
+    return ["p1","p2"].map(k=>{const m=this.marksOf(k),subs=R.subjects[k]||[];
+      return {key:k,name:first(k),pts:L.nfmt(this.rwMarks(k))+" points from marks",sheets:R.sheets.map(sh=>{const cur=(m.sheets||{})[sh.k]||{},all=[...subs,...Object.keys(cur).filter(x=>!subs.includes(x))],sk=k+":"+sh.k;
+        return {key:sh.k,t:sh.t,rows:all.map(sub=>({key:sub,id:k+":"+sh.k+":"+sub,sub,val:cur[sub]||"",opts:[{key:"-",v:"",t:"—"},...R.grades.map(g=>({key:g,v:g,t:(g==="C"?"C or lower":g)+" · "+L.nfmt(R.gradePts[g])}))],
+          on:e=>{const x=JSON.parse(JSON.stringify(this.marksOf(k)));x.sheets=x.sheets||{};x.sheets[sh.k]=x.sheets[sh.k]||{};x.sheets[sh.k][sub]=e.target.value||"";this.putMarks(k,x);this.toast("📝 "+first(k)+", "+sub+": "+(e.target.value||"cleared"))}})),
+          subIn:S.subjIn[sk]||"",onSub:e=>this.setState({subjIn:Object.assign({},this.state.subjIn,{[sk]:e.target.value})}),
+          addSub:()=>{const v=(this.state.subjIn[sk]||"").trim();if(v.length<2){this.toast("Type the subject first");return}const x=JSON.parse(JSON.stringify(this.marksOf(k)));x.sheets=x.sheets||{};x.sheets[sh.k]=x.sheets[sh.k]||{};if(!(v in x.sheets[sh.k]))x.sheets[sh.k][v]="";this.putMarks(k,x);this.setState({subjIn:Object.assign({},this.state.subjIn,{[sk]:""})})}}})}})}
+  rwAlerts(){const L=this.L,first=k=>String(L.NAMES[k]||"").split(" ")[0],out=[];
+    ["p1","p2"].forEach(k=>{const sp=this.srvP(k);((sp&&sp.flags)||[]).slice(0,8).forEach((f,i)=>out.push({key:k+i,t:"⚠️ "+first(k)+", "+L.fmtWhen(Date.parse(f.at))+": +"+L.nfmt(f.raw)+" points in one save ("+(f.note==="after 10 pm"?"after 10 pm":"more than one round can give")+"); "+L.nfmt(f.cred)+" counted."}))});
+    this.sharedDevices().slice(0,8).forEach((d,i)=>out.push({key:"dev"+i,t:"⚠️ "+L.fmtDay(d.day)+": "+first("p1")+" and "+first("p2")+" both used "+d.dev+"."}));
+    return out}
+  wishRows(){const L=this.L,S=this.state,p=S.player,isDad=p==="dad",tiers=this.rwDoc("tiers").m||{};
+    return this.wishesAll().filter(w=>!w.done).map(w=>{const t=tiers[w.id]||0;return {key:w.id,text:w.text,by:w.by||"Founder",st:t?"Tier "+t+" · in the shop for "+L.nfmt(L.RW.tiers[t].pts):"💡 waiting for Dad's tier",isDad,
+      opts:[{key:"0",v:"0",t:"No tier yet"},...[4,5,6,7].map(x=>({key:String(x),v:String(x),t:"Tier "+x+" · "+L.nfmt(L.RW.tiers[x].pts)}))],val:String(t),onTier:e=>this.setWishTier(w.id,parseInt(e.target.value,10)||0),
+      canDel:isDad||w.p===p,del:()=>{w.del=true;this.putWish(w);this.toast("Idea removed")}}})}
+  rewardsVals(){const L=this.L,R=L.RW,S=this.state,p=S.player,isDad=p==="dad",o={isDadR:isDad,notDadR:!isDad,rwOff:!S.db,rwOn:!!S.db},first=k=>String(L.NAMES[k]||"").split(" ")[0];
+    if(!isDad){const r=this.rw(p);o.balT=L.nfmt(r.bal);o.earnedT=L.nfmt(r.earned);
+      o.rwBreak=[["⭐","App points",r.app],["📅","Days played: "+r.days+" × "+R.dayPts,r.dayPts],["📝","Marksheet grades",r.marks],["🤝","Team week bonus",r.bonus],["🛍️","Spent in the shop",-r.spent]].map(([ic,t,n])=>({key:t,ic,t,n:(n<0?"−":"")+L.nfmt(Math.abs(n))}));
+      const td=Math.min(r.today,L.DAY_PTS_MAX);o.todayT="Today: "+L.nfmt(td)+" / "+L.nfmt(L.DAY_PTS_MAX)+" app points"+(r.today>=L.DAY_PTS_MAX?" · daily max reached 🌙":"");o.todayW=Math.max(2,Math.round(td*100/L.DAY_PTS_MAX))+"%";
+      o.liveNote=r.live?"":"⏳ Checking your points with the hive… if this stays, check the internet.";o.hasLiveNote=!r.live&&!!S.db;
+      o.shop=this.shopRw(p,r);o.myOrders=this.orderRows(false);o.hasMyOrders=o.myOrders.length>0;o.noMyOrders=!o.hasMyOrders}
+    else{o.boys=["p1","p2"].map(k=>{const r=this.rw(k);return Object.assign(this.avNode(k),{key:k,name:first(k)+": "+L.nfmt(r.bal)+" to spend",s:"Trip points "+L.nfmt(r.earned)+" (app "+L.nfmt(r.app)+" · "+r.days+" days · marks "+L.nfmt(r.marks)+" · team bonus "+L.nfmt(r.bonus)+") · spent "+L.nfmt(r.spent)})});
+      const all=this.orderRows(true);o.waitOrders=all.filter(x=>x.waiting);o.hasWait=o.waitOrders.length>0;o.noWait=!o.hasWait;o.pastOrders=all.filter(x=>!x.waiting).slice(0,15);o.hasPast=o.pastOrders.length>0;
+      o.marks=this.marksVals();o.alerts=this.rwAlerts();o.hasAlerts=o.alerts.length>0;o.noAlerts=!o.hasAlerts;
+      o.friendsIn=S.friendsIn!=null?S.friendsIn:String(this.rwFriends());o.onFriends=e=>this.setState({friendsIn:e.target.value});
+      o.saveFriends=()=>{const n=Math.max(0,Math.min(99,parseInt(this.state.friendsIn,10)||0));const x=JSON.parse(JSON.stringify(this.rwDoc("settings")));x.friends=n;this.putRwDoc("settings",x);this.setState({friendsIn:null});this.toast("👥 Friends using the app: "+n)}}
+    Object.assign(o,this.tripVals());
+    o.ideas=this.wishRows();o.noIdeas=!o.ideas.length;o.ideasTip=isDad?"Give an idea a tier (4 to 7) and it shows up in the shop.":"Suggest something! Dad gives it a tier, and it shows up in the shop.";o.wishText=S.wishText;o.onWishText=e=>this.setState({wishText:e.target.value});o.addWish=()=>this.addWish();
+    o.reread=()=>this.setState({annOn:true,annPreview:isDad,annFaq:null},()=>this.annBurst());o.rereadT=isDad?"👀 Preview the boys' launch note":"📜 The launch note and FAQ";
+    return o}
+  /* the launch note: each boy sees it once, when he next opens the app */
+  maybeAnn(){const S=this.state,p=S.player;if(!S.db||!p||p==="dad")return;if(this.P(p).rwSeen||this.load("ab_rw_seen_"+p,false))return;this.setState({annOn:true,annPreview:false,annFaq:null},()=>this.annBurst())}
+  annBurst(){setTimeout(()=>{const r=this.rootRef.current,el=r&&r.querySelector('[data-ann-hero="1"]');if(el){this.burst(el,70,true,true);setTimeout(()=>this.burst(el,50,true,true),700)}},300)}
+  closeAnn(){const S=this.state,p=S.player;if(!S.annPreview&&p&&p!=="dad"){const s=this.P(p);s.rwSeen=true;this.saveP(s);this.store("ab_rw_seen_"+p,true);this.store("ab_seen_ver",this.L.APP_VERSION);this.setState({annOn:false,newClosed:true},()=>this.goRewards());return}this.setState({annOn:false})}
+  annVals(){const L=this.L,R=L.RW,T=R.tiers,n=L.nfmt,S=this.state,G=R.gradePts,me=S.player,Z=String(L.NAMES.p1||"").split(" ")[0],Rn=String(L.NAMES.p2||"").split(" ")[0],o={};
+    const names=t=>L.REWARDS.filter(x=>x.t===t).map(x=>x.ic+" "+((x.np&&x.np[me])||x.n)).join(" · ");
+    o.annEarn=[["⭐","Every app point = 1 reward point","New questions right first time. Hindi still pays double!"],
+      ["📅","+"+n(R.dayPts)+" for every day you play","Finish one full round (no bee sting) between 6 am and 10 pm."],
+      ["📝","Your marksheet grades count","Every subject on your PA-2 and final marksheets: A+ "+n(G["A+"])+" · A "+n(G.A)+" · B+ "+n(G["B+"])+" · B "+n(G.B)+"."],
+      ["🤝","Team week bonus: +25%","When all three of you hit your goals, that week's points get +25%. Your vault gems too!"]].map(([ic,t,s2])=>({key:t,ic,t,s:s2}));
+    o.annShop=[7,6,5,4].map(t=>({key:"s"+t,h:"Tier "+t+" · "+n(T[t].pts),s:names(t)}));
+    o.annTrip=[3,2,1].map(t=>({key:"t"+t,h:"Tier "+t+" · "+n(T[t].pts)+" points each",s:names(t),need:t===3?"Points only.":t===2?"+ A or A+ in every subject on the final report card (two Bs allowed).":"+ A or A+ in every subject (one B allowed) + 4 friends using AcadaBee on their phones."}));
+    const faq=[
+      ["What are reward points?","Your app points, plus "+n(R.dayPts)+" for every day you play, plus points for your marksheet grades, plus a 25% team bonus. They live on the new 🎁 Rewards tab."],
+      ["How do I spend them?","Open 🎁 Rewards, pick anything in tiers 4 to 7 and tap Buy twice. Buy as often as you like! Dad hands it over at the weekend."],
+      ["If I spend points, do I lose the trip?","Never! Trip points are every point you EARN this year. Spending doesn't touch them, so go ahead and treat yourself."],
+      ["How is the big trip decided?","On "+L.fmtDay(R.to)+" you get the best tier you BOTH reach. Tier 3: "+n(T[3].pts)+" points each. Tier 2: "+n(T[2].pts)+" each, plus A or A+ in every subject on the final report card (two Bs allowed). Tier 1: "+n(T[1].pts)+" each, the grades (one B allowed) and 4 friends using AcadaBee on their phones."],
+      ["Why do we both have to make it?","You're a team of founders. When one of you is behind, the other can quiz him, explain a chapter or practise together. Helping is great; playing his rounds for him isn't, and Dad can see who played on which device."],
+      ["Is there a daily limit?","Yes: up to "+n(L.DAY_PTS_MAX)+" app points a day. After that, rounds are practice until tomorrow. Nothing counts from 10 pm to 6 am. The hive keeps its own clock, so changing the time on your phone won't help. Rest is part of learning!"],
+      ["Can I rush to get points faster?","Each question pays only once, so rushing wastes it. Right first time pays full; a second try or a clue pays half."],
+      ["Does a round where the bee stings count?","The points you earned in it stay, but it doesn't count as a day played. Finish one full round each day."],
+      ["What happened to doubling gems?","A won team week now gives +25% on your vault gems AND +25% on that week's reward points."],
+      ["How do marks count?","Dad types the grades from each marksheet. Every subject: A+ = "+n(G["A+"])+", A = "+n(G.A)+", B+ = "+n(G["B+"])+", B = "+n(G.B)+"."],
+      ["Do points ever reset?","Shop points and trip points start again on 1 April with the new school year. Your level and the Board never reset."],
+      ["Who are the 4 friends?","Four friends with their own AcadaBee logins who use the app on their phones. Growing AcadaBee is part of a founder's job! Dad sets up their logins."],
+      ["Can I suggest a new reward?","Yes! Add it under \"Got a reward idea?\" on the Rewards tab. Dad gives it a tier and it shows up in the shop."],
+      ["What about game buys?","Roblox, Brawl Stars and Minecraft still follow Dad's screen-time rule."],
+      ["Can Dad see when I'm on the app?","Yes. Dad's corner shows when each of you was in the app, so he can cheer you on."]];
+    o.annFaqRows=faq.map(([q,a],i)=>({key:"f"+i,q,a,open:S.annFaq===i,sign:S.annFaq===i?"−":"+",tap:()=>this.setState({annFaq:this.state.annFaq===i?null:i})}));
+    o.annMaxT=n(L.DAY_PTS_MAX);o.annClose=()=>this.closeAnn();o.annIsPrev=!!S.annPreview;o.annPrevT="Preview: this is what "+Z+" and "+Rn+" see.";o.annBtn=S.annPreview?"Close the preview":"🚀 Let's go!";
+    return o}
 
   /* learn more */
   openLearn(){const S=this.state,e=this.learnFor(S.round[S.qi]);if(!e)return;this.setState({learnOpen:true,learnEntry:e})}
@@ -756,8 +1012,9 @@ class Component extends DCLogic {
   /* ---------- render values ---------- */
   renderVals(){
     const S=this.state;if(!S.ready||!this.L)return {ready:false,isPick:true,isApp:false,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,zNoAv:true,rNoAv:true,dNoAv:true,pickZ:()=>{},pickR:()=>{},pickD:()=>{}};
-    const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",navOn:["map","board","notes","chapters","profile","shop"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
-    o.newOn=!S.newClosed&&this.load("ab_seen_ver",null)!==L.APP_VERSION&&this.whatsNew().length>0;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
+    const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",isRewards:scr==="rewards",navOn:["map","board","notes","chapters","profile","shop","rewards"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
+    o.annOn=!!S.annOn&&!!p;if(o.annOn)Object.assign(o,this.annVals());
+    o.newOn=!S.newClosed&&!S.annOn&&this.load("ab_seen_ver",null)!==L.APP_VERSION&&this.whatsNew().length>0;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
     /* pick */
     {const rk=this.roleKey();o.showZ=!rk||rk==="p1";o.showR=!rk||rk==="p2";o.showD=!rk||rk==="dad";o.pickHint=rk?"Tap to play. Not you? Sign out below.":"Founders only. Tap your name."}
     ["p1","p2","dad"].forEach((k,i)=>{const c="zrd"[i],a=this.avNode(k);o[c+"AvUrl"]=a.avUrl;o[c+"NoAv"]=a.noAv;o[c+"Prev"]=S.prevWho===k;o[c+"World"]=L.WORLDS[this.worldOf(k)].name;o[c+"Name"]=L.NAMES[k];o[c+"Role"]=L.ROLE[k]||""});
@@ -765,7 +1022,7 @@ class Component extends DCLogic {
     if(!p)return o;
     /* header */
     const me=this.avNode(p);o.pts=L.nfmt(this.P().points);o.gems=L.nfmt(this.vault(p).wallet);o.goShop=()=>this.goShop();o.whoAvUrl=me.avUrl;o.whoNoAv=me.noAv;o.whoEmoji=me.emoji;o.goPick=()=>this.goPick();o.pillDisp=p==="dad"?"none":"inline-flex";o.swMl=p==="dad"?"auto":"0";
-    o.headTitle={map:"The Map",chapters:"Chapters 📚",board:"The Board 🐝",notes:"The Notebook 📝",profile:"Profile",shop:"Shop 💎"}[scr]||"";
+    o.headTitle={map:"The Map",chapters:"Chapters 📚",board:"The Board 🐝",notes:"The Notebook 📝",profile:"Profile",shop:"Shop 💎",rewards:"Rewards"}[scr]||"";
     if(scr==="map")Object.assign(o,this.mapVals());
     else if(scr==="lesson")Object.assign(o,this.lessonVals());
     else if(scr==="done")Object.assign(o,this.doneVals());
@@ -775,6 +1032,7 @@ class Component extends DCLogic {
     else if(scr==="note")Object.assign(o,this.noteVals());
     else if(scr==="notes")Object.assign(o,this.notesVals());
     else if(scr==="shop")Object.assign(o,this.shopVals());
+    else if(scr==="rewards")Object.assign(o,this.rewardsVals());
     if(o.navOn)Object.assign(o,this.navVals());
     if(S.learnOpen&&S.learnEntry){const e=S.learnEntry;o.learnBlurb=e.blurb||"";o.learnLinks=(e.links||[]).map((k,i)=>({key:i,href:k.url,icon:k.kind==="video"?"▶️":"📖",title:(k.kind==="video"?"Watch: ":"Read: ")+k.title,small:k.kind==="video"?((k.channel||"YouTube")+(k.mins?" · "+k.mins+" min":"")):(/simple\.wikipedia/.test(k.url)?"Simple Wikipedia":/hi\.wikipedia/.test(k.url)?"हिंदी विकिपीडिया":"Wikipedia")}));
       o.closeLearn=()=>this.setState({learnOpen:false});o.learnOverlay=e=>{if(e.target===e.currentTarget)this.setState({learnOpen:false})}}
@@ -783,9 +1041,10 @@ class Component extends DCLogic {
   mapVals(){
     const L=this.L,S=this.state,p=S.player,s=this.P(),o={};
     {const W=this.weekInfo(),v=this.vault(p),dl=L.parseISO(W.end);dl.setHours(L.VAULT_HOUR,0,0,0);o.showVault=!W.practice&&p!=="dad";
-      if(o.showVault){if(new Date()>=dl){const won=v.last==="ok";o.vIc=won?"🔓":"🔒";o.vT=won?"The Team Vault opened!":"The Team Vault stayed shut";o.vS=won?"Your gems doubled and the team won a honey jar 🍯":"Not this week. Win next week to open the vault, doubled.";o.vToDo="";o.vInk="var(--soft)"}
-        else{const bv=this.boardVals();o.vIc="🔐";o.vT="Team Vault: "+L.nfmt(v.pending)+" 💎 waiting";o.vS="Opens Sunday 9 pm. If all three of you hit your goals, your gems double (at least +"+L.nfmt(L.GEMS.team)+") and the team wins a honey jar 🍯";o.vToDo=bv.toDoT;o.vInk=bv.toDoOK?"#7ED957":"var(--ink)"}}
+      if(o.showVault){if(new Date()>=dl){const won=v.last==="ok";o.vIc=won?"🔓":"🔒";o.vT=won?"The Team Vault opened!":"The Team Vault stayed shut";o.vS=won?"Your gems opened with a +25% bonus, and that week's reward points got +25% too 🎁":"Not this week. Win next week to open the vault with a +25% bonus.";o.vToDo="";o.vInk="var(--soft)"}
+        else{const bv=this.boardVals();o.vIc="🔐";o.vT="Team Vault: "+L.nfmt(v.pending)+" 💎 waiting";o.vS="Opens Sunday 9 pm. If all three of you hit your goals, these gems and this week's reward points get +25%.";o.vToDo=bv.toDoT;o.vInk=bv.toDoOK?"#7ED957":"var(--ink)"}}
       o.goVault=()=>this.goBoard()}
+    o.showRw=!!S.db&&p!=="dad";if(o.showRw){const r=this.rw(p);o.rwMapT="🎁 "+L.nfmt(r.bal)+" reward points to spend";o.rwMapS="Today: "+L.nfmt(Math.min(r.today,L.DAY_PTS_MAX))+" / "+L.nfmt(L.DAY_PTS_MAX)+" · trip points "+L.nfmt(r.earned);o.goRw=()=>this.goRewards()}
     o.streakN=s.streak;o.hexes=[];for(let i=6;i>=0;i--){const d=L.daysAgoISO(i);o.hexes.push({key:d,bg:s.days.includes(d)?"linear-gradient(180deg,#FFE680,#FFB800)":"var(--ring)",outline:i===0?"2px dashed var(--acc)":"none"})}
     const lv=L.levelOf(s.points);o.lvlT="Level "+lv.n+" · "+lv.name;o.lvlW=(lv.nextAt?Math.max(3,Math.round((s.points-lv.at)*100/(lv.nextAt-lv.at))):100)+"%";o.lvlS=lv.nextAt?L.nfmt(s.points)+" / "+L.nfmt(lv.nextAt)+" ⭐ to "+lv.nextName:"Top level! 👑";
     o.cellsT="🍯 Hive "+(s.cells||0)+"/"+L.CELLS_PER_HIVE;o.cellsW=Math.max(3,Math.round((s.cells||0)*100/L.CELLS_PER_HIVE))+"%";o.cellsS="every round = 1 cell · full hive = "+L.nfmt(L.GEMS.hive)+" 💎";
@@ -861,7 +1120,7 @@ class Component extends DCLogic {
     const av=Object.assign({},L.AV_DEFAULT,this.load("ab_av_"+p,null)||{});
     o.skins=Object.entries(L.BEES).filter(([k,B])=>B.shop).map(([k,B])=>{const own=(s.owned||[]).includes(k);return {key:k,name:B.name,url:L.avatarURL(Object.assign({},av,{bee:k})),price:L.nfmt(B.shop)+" 💎",own,btn:own?"✓ Yours":"Buy",op:own?.75:1,
       buy:()=>{const s2=this.P(p),v2=this.vault(p);if((s2.owned||[]).includes(k)){this.toast("It's yours! Pick it in Profile.");return}if(v2.wallet<B.shop){this.toast("You need "+L.nfmt(B.shop)+" 💎 to spend");return}s2.owned=[...(s2.owned||[]),k];s2.spent=(s2.spent||0)+B.shop;this.saveP(s2);this.toast("🐝 "+B.name+" is yours! Pick it in Profile.");this.forceUpdate()}}});
-    o.earnRows=[["🍯","Full hive (20 rounds)",L.nfmt(L.GEMS.hive)],["🌟","Golden island (every question right twice)",L.nfmt(L.GEMS.golden)],["🎁","Chest for every 7 days in a row",L.nfmt(L.GEMS.chest)],["⬆️","Level up",L.nfmt(L.GEMS.level)],["🤝","Team week won: your vault gems double (at least +"+L.nfmt(L.GEMS.team)+")","×2"]].map(([ic,t,n])=>({key:t,ic,t,n:(n==="×2"?"×2":"+"+n)+" 💎"}));
+    o.earnRows=[["🍯","Full hive (20 rounds)",L.nfmt(L.GEMS.hive)],["🌟","Golden island (every question right twice)",L.nfmt(L.GEMS.golden)],["🎁","Chest for every 7 days in a row",L.nfmt(L.GEMS.chest)],["⬆️","Level up",L.nfmt(L.GEMS.level)],["🤝","Team week won: your vault gems get a bonus","25%"]].map(([ic,t,n])=>({key:t,ic,t,n:/%$/.test(n)?"+"+n:"+"+n+" 💎"}));
     o.backMap=()=>this.goMap();
     return o;
   }
@@ -902,20 +1161,13 @@ class Component extends DCLogic {
     else if(!blockers.length){o.resT=W.practice?"🔓 Practice: you'd all be on track!":"🔓 Everyone's on track: the Team Vault opens Sunday 9 pm!";o.resBg="var(--good)";o.resInk="var(--goodInk)"}
     else{o.resT="🔒 The vault stays shut until: "+blockers.join(" · ");o.resBg="var(--chip)";o.resInk="var(--chipInk)"}
     o.toDoT=unknown?"⏳ Waiting for everyone's scores":blockers.length?"Still to do: "+blockers.join(" · "):"✅ Everyone's on track!";o.toDoOK=!unknown&&!blockers.length;
-    /* Team Vault + honey jars */
-    const v=this.vault(p),jars=this.teamJars();
+    /* Team Vault + the rewards tile */
+    const v=this.vault(p);
     o.vaultMine=v.pending?"🔐 Your gems in the vault: "+L.nfmt(v.pending)+" 💎":"🔐 Your vault is empty this week";
     if(p==="dad"){const pend=this.vault("p1").pending+this.vault("p2").pending;o.vaultMine=pend?"🔐 The boys' gems in the vault: "+L.nfmt(pend)+" 💎":"🔐 The boys' vaults are empty this week"}
-    o.jarsT="🍯 "+jars.left+" honey jar"+(jars.left===1?"":"s");o.jarsS=jars.earned>jars.left?jars.earned+" earned · "+(jars.earned-jars.left)+" spent on wishes":"+1 jar for every team week won";
-    /* Wish Jar */
-    const isDad=p==="dad";o.isDadP=isDad;o.notDad=!isDad;
-    o.wishes=this.wishesAll().map(w=>{const price=w.price||0,can=isDad&&!w.done&&price>0&&jars.left>=price;
-      return {key:w.id,text:w.text,by:(w.by||"Founder"),priceT:w.done?"✅ granted":(price?"🍯 "+price+" jar"+(price>1?"s":""):"waiting for Dad's price"),op:w.done?.65:1,isDad,
-        priceIn:(S.wishPrice[w.id]!=null)?S.wishPrice[w.id]:(price?String(price):""),onPrice:e=>this.setState({wishPrice:Object.assign({},this.state.wishPrice,{[w.id]:e.target.value})}),
-        setPrice:()=>{const n=parseInt(this.state.wishPrice[w.id],10);if(!(n>0)){this.toast("Type a price in honey jars");return}w.price=n;this.putWish(w);this.toast("🍯 Priced at "+n+" jar"+(n>1?"s":""))},
-        canGrant:can,grant:()=>{if(!can){this.toast(price?"Not enough honey jars yet":"Set a price first");return}w.done=true;this.putWish(w);this.toast("🎉 Wish granted!");this.forceUpdate()},
-        canDel:!w.done&&(isDad||w.p===p),del:()=>{w.del=true;this.putWish(w);this.toast("Wish removed")}}});
-    o.noWishes=!o.wishes.length;o.wishText=S.wishText;o.onWishText=e=>this.setState({wishText:e.target.value});o.addWish=()=>this.addWish();
+    if(p==="dad"){const w=this.ordersAll().filter(x=>x.st==="waiting").length;o.jarsT="🎁 "+(w?w+" order"+(w>1?"s":"")+" to hand over":"No orders waiting");o.jarsS="Rewards: orders, grades, friends"}
+    else{const r=this.rw(p);o.jarsT="🎁 "+L.nfmt(r.bal)+" reward points";o.jarsS="to spend · trip points "+L.nfmt(r.earned)}
+    o.goRw=()=>this.goRewards();o.isDadP=p==="dad";o.notDad=p!=="dad";
     /* points board (never resets) */
     let br=S.dbRows.slice();br.forEach(r=>{if(r&&!r.p)r.p=Object.keys(L.NAMES).find(x=>L.NAMES[x]===r.name)});br=br.filter(r=>r&&r.p&&r.p!=="dad"&&(r.p in L.NAMES)&&(r.season===L.SEASON));
     ["p1","p2"].forEach(k=>{const l=this.load("ab_"+k,null),ls=(l&&l.season===L.SEASON)?l:null,i=br.findIndex(r=>r.p===k);if(i<0)br.push({p:k,points:ls?ls.points:0,streak:ls?ls.streak:0});else if(ls&&(ls.updatedAt||0)>(br[i].updatedAt||0))br[i]=Object.assign({},ls,{p:k,av:br[i].av})});
@@ -968,8 +1220,8 @@ class Component extends DCLogic {
     return o;
   }
   navVals(){const S=this.state,scr=S.screen,c=this.notesAll().filter(n=>!n.done).length,nn=S.player==="dad"?this.newNotesForDad().length:0,me=S.player==="dad"?null:this.avOf(S.player);
-    let items=[["map","🗺️","Map",()=>this.goMap()],["chapters","📚","Chapters",()=>this.goChapters()],["board","🏆","Board",()=>this.goBoard()],["notes","📝","Notes",()=>this.goNotes()],["profile","🐝","Profile",()=>this.goProfile()]];
-    if(S.player==="dad")items=items.filter(x=>x[0]==="board"||x[0]==="chapters"||x[0]==="notes");
+    let items=[["map","🗺️","Map",()=>this.goMap()],["chapters","📚","Chapters",()=>this.goChapters()],["board","🏆","Board",()=>this.goBoard()],["rewards","🎁","Rewards",()=>this.goRewards()],["notes","📝","Notes",()=>this.goNotes()],["profile","🐝","Profile",()=>this.goProfile()]];
+    if(S.player==="dad")items=items.filter(x=>x[0]==="board"||x[0]==="chapters"||x[0]==="rewards"||x[0]==="notes");
     return {navItems:items.map(([k,ic,l,go])=>{const sel=scr===k,av=k==="profile"&&me?this.L.avatarURL(me):null;return {key:k,ic,l,go,sel,bg:sel?"linear-gradient(180deg,#FFE680,#FFC61A)":"transparent",ink:sel?"#3A2600":"var(--soft)",shadow:sel?"inset 0 2px 0 rgba(255,255,255,.6),inset 0 -4px 0 rgba(160,100,0,.35)":"none",badge:k==="notes"&&c?String(c):"",hasBadge:k==="notes"&&c>0,hasDot:k==="notes"&&nn>0,avUrl:av,noAv:!av,aria:k==="notes"?"Notes, "+c+" open"+(nn?", "+nn+" new":""):l}})}}
 }
 </script>

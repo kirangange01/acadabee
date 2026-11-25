@@ -64,6 +64,9 @@
             .then(function (r) { if (r.error) throw r.error; return true; });
         } };
       },
+      rw: function () { /* v2.0: reward points as the hive credits them, plus the hive's clock */
+        return client.rpc("rw_summary").then(function (r) { if (r.error) throw r.error; return r.data; });
+      },
       collection: function (name) {
         return { get: function () {
           return client.from("hive").select("k,v").like("k", name + "/%").then(function (r) {
@@ -75,11 +78,12 @@
     };
   }
   /* app activity (v1.92): sign-ins and sign-outs, shown in Dad's corner */
+  function devId() { var d = lsGet("ab_dev"); if (!d) { d = Math.random().toString(36).slice(2, 8); lsSet("ab_dev", d); } return d; }
   function devType() { var u = navigator.userAgent || ""; return /iPad|Tablet/i.test(u) ? "tablet" : (/Mobi|Android|iPhone/i.test(u) ? "phone" : "computer"); }
   function logAuth(ev) {
     if (!session || !client) return Promise.resolve();
     var t = Date.now(), who = role || "family";
-    return shimDb().doc("activity/" + who + "/" + t.toString(36) + "-" + ev).set({ ev: ev, t: t, role: role || null, dev: devType() }).then(function () {}, function () {});
+    return shimDb().doc("activity/" + who + "/" + t.toString(36) + "-" + ev).set({ ev: ev, t: t, role: role || null, dev: devType(), did: devId() }).then(function () {}, function () {});
   }
   function lsGet(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
   function lsSet(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
