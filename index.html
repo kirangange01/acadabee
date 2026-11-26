@@ -549,6 +549,21 @@
   </div>
   </sc-if>
 
+  <!-- DAD'S ASK (v2.1) -->
+  <sc-if value="{{ askOn }}" hint-placeholder-val="{{ false }}">
+  <div role="dialog" aria-modal="true" aria-labelledby="askTitle" data-ask="1" style="position:fixed;inset:0;z-index:55;display:flex;align-items:center;justify-content:center;padding:18px;background:rgba(6,16,31,.82)">
+    <div style="max-width:400px;width:100%;background:linear-gradient(180deg,#1E4F7A,#0B1E3A);border:2px solid rgba(255,216,61,.5);border-radius:26px;padding:22px 20px;color:#fff;display:flex;flex-direction:column;gap:12px;box-shadow:0 24px 50px -10px rgba(0,0,0,.7)">
+      <h2 id="askTitle" style="margin:0;font:700 26px/1.15 Fredoka,sans-serif;color:#FFE680">{{ askTitle }}</h2>
+      <p style="margin:0;font:700 15px/1.45 Nunito,sans-serif">{{ askText }}</p>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <sc-for list="{{ askItems }}" as="x" hint-placeholder-count="2"><div style="padding:10px 12px;border-radius:14px;background:rgba(255,255,255,.1);font:800 14px/1.4 Nunito,sans-serif">{{ x.t }}</div></sc-for>
+      </div>
+      <button onClick="{{ askYes }}" style="border:0;cursor:pointer;width:100%;margin-top:4px;padding:16px;border-radius:20px;font:700 20px/1.1 Fredoka,sans-serif;color:#3A2600;background:linear-gradient(180deg,#FFE680,#FFC61A);box-shadow:inset 0 3px 0 rgba(255,255,255,.6),inset 0 -6px 0 rgba(160,100,0,.35)">{{ askYesLabel }}</button>
+      <button onClick="{{ askLater }}" style="border:0;cursor:pointer;align-self:center;padding:9px 18px;border-radius:999px;background:rgba(255,255,255,.12);color:#fff;font:800 14px/1 Nunito,sans-serif">Later</button>
+    </div>
+  </div>
+  </sc-if>
+
   <!-- WHAT'S NEW -->
   <sc-if value="{{ newOn }}" hint-placeholder-val="{{ false }}">
   <div role="dialog" aria-modal="true" aria-labelledby="newTitle" style="position:fixed;inset:0;background:rgba(5,20,40,.6);display:flex;align-items:center;justify-content:center;z-index:75;padding:20px">
@@ -585,7 +600,7 @@ class Component extends DCLogic {
   state={ready:false,screen:"pick",player:null,prevWho:null,lesson:null,round:[],qi:0,order:[],earned:0,newPts:0,revCount:0,roundLog:[],attempted:false,dimmed:[],fb:null,wrongFlash:null,nextOn:false,nextLabel:"Next →",done:{},doneNav:{prev:null,next:null},donePts:"+0",doneMsg:"",doneTitle:"",doneExtras:[],hintUsed:false,firstWrong:0,stung:false,practice:null,dbWishes:{},wishText:"",wishPrice:{},
     noteCtx:null,noteBack:"map",noteKind:null,noteText:"",noteAbout:"Whole app",noteErr:false,lastPlace:"Whole app",delArm:null,copyBoxShown:false,notesSeenPrev:0,
     chapWho:null,chapSearch:"",toast:null,learnOpen:false,learnEntry:null,db:null,dbNotes:{},dbSnap:{progress:{},dadlog:null,duol:null},dbRows:[],dadStepsIn:"",dadTargetIn:"",told:0,
-    dbOrders:{},dbMarks:{},dbRw:{},rwSrv:null,annOn:false,annPreview:false,annFaq:null,buyArm:null,subjIn:{},friendsIn:null,actRows:[],rareOn:false,rareItem:null};
+    dbOrders:{},dbMarks:{},dbRw:{},rwSrv:null,annOn:false,annPreview:false,annFaq:null,buyArm:null,subjIn:{},friendsIn:null,actRows:[],rareOn:false,rareItem:null,askOn:false,ask:null,askLater:null};
   rootRef=React.createRef(); fxRef=React.createRef(); beeRef=React.createRef(); MEM={};
 
   componentDidMount(){
@@ -624,7 +639,7 @@ class Component extends DCLogic {
     if(S.player==="dad"){ex.notesSeenPrev=this.load("ab_notes_seen",0);this.store("ab_notes_seen",Date.now())}this.setScreen("notes",ex)}
   pick(p){const t=this.L.today();this.store("ab_who",p);const done=this.load("ab_done_"+p+"_"+t,{});
     if(p==="dad"){this.setState({player:p,prevWho:p,done,told:0},()=>{this.goBoard();this.announceNotes()});return}
-    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.goldUp(p);this.unlocked(p,false);this.announceNotes();this.actTick();this.maybeAnn()})}
+    this.setState({player:p,prevWho:p,done,told:0,screen:"map"},()=>{window.scrollTo(0,0);this.goldUp(p);this.unlocked(p,false);this.announceNotes();this.actTick();this.maybeAnn();this.maybeAsk()})}
   toast(msg){clearTimeout(this._toastT);this.setState({toast:msg});this._toastT=setTimeout(()=>this.setState({toast:null}),2400)}
 
   /* exams + islands */
@@ -786,6 +801,13 @@ class Component extends DCLogic {
     return {rareName:x.n||"",rareAv:L.avatarURL(Object.assign({},av,{[x.slot]:x.k})),rareAlt:"Your bee wearing the "+(x.n||"rare item"),rareCount:n+" of "+L.RARE.length+" rare finds",
       rareWear:()=>{const a=Object.assign({},av,{[x.slot]:x.k,t:Date.now()});this.store("ab_av_"+p,a);try{this.syncUp(this.P())}catch(e){}this.setState({rareOn:false});this.toast("😎 Looking sharp in your "+x.n+"!")},
       rareLater:()=>{this.setState({rareOn:false});this.toast("✨ Your "+x.n+" is waiting in Profile")}}}
+  /* Dad's asks (v2.1): a row asks/<player> in the hive (only Dad can write it) shows once per login until the boy says yes; his yes is saved in his players row */
+  async maybeAsk(){const S=this.state,p=S.player;if(!S.db||!p||p==="dad"||S.annOn||S.askOn)return;let a=null;
+    try{const s=await S.db.collection("asks").get();s.forEach(d=>{if(d.id===p)a=d.data()})}catch(e){}
+    if(!a||!a.id||a.off||this.state.player!==p||this.state.annOn)return;if((this.P(p).asksDone||[]).includes(a.id)||this.state.askLater===a.id)return;this.setState({askOn:true,ask:a})}
+  askVals(){const a=this.state.ask||{},p=this.state.player;return {askTitle:a.title||"A quick ask",askText:a.text||"",askItems:(a.items||[]).map((t,i)=>({key:"a"+i,t})),askYesLabel:a.yes||"👍 OK",
+    askYes:()=>{const s=this.P(p);s.asksDone=[...(s.asksDone||[]),a.id];this.saveP(s);this.setState({askOn:false});this.toast(a.thanks||"🙌 Thanks!")},
+    askLater:()=>{this.setState({askOn:false,askLater:a.id});this.toast("OK, I'll ask again next time")}}}
   /* confetti + bee */
   calm(){const p=this.state.player;if(p&&this.L&&this.upcomingExams(p).length&&this.examWeek(p))return true;return (this.props.motion??"game-like")==="calm"||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches)}
   burst(el,n,big,force){
@@ -1016,7 +1038,7 @@ class Component extends DCLogic {
   /* the launch note: each boy sees it once, when he next opens the app */
   maybeAnn(){const S=this.state,p=S.player;if(!S.db||!p||p==="dad")return;if(this.P(p).rwSeen||this.load("ab_rw_seen_"+p,false))return;this.setState({annOn:true,annPreview:false,annFaq:null},()=>this.annBurst())}
   annBurst(){setTimeout(()=>{const r=this.rootRef.current,el=r&&r.querySelector('[data-ann-hero="1"]');if(el){this.burst(el,70,true,true);setTimeout(()=>this.burst(el,50,true,true),700)}},300)}
-  closeAnn(){const S=this.state,p=S.player;if(!S.annPreview&&p&&p!=="dad"){const s=this.P(p);s.rwSeen=true;this.saveP(s);this.store("ab_rw_seen_"+p,true);if((parseFloat(this.load("ab_seen_ver",null))||0)<2)this.store("ab_seen_ver","2.0");this.setState({annOn:false,newClosed:true},()=>this.goRewards());return}this.setState({annOn:false})}
+  closeAnn(){const S=this.state,p=S.player;if(!S.annPreview&&p&&p!=="dad"){const s=this.P(p);s.rwSeen=true;this.saveP(s);this.store("ab_rw_seen_"+p,true);setTimeout(()=>this.maybeAsk(),900);if((parseFloat(this.load("ab_seen_ver",null))||0)<2)this.store("ab_seen_ver","2.0");this.setState({annOn:false,newClosed:true},()=>this.goRewards());return}this.setState({annOn:false})}
   annVals(){const L=this.L,R=L.RW,T=R.tiers,n=L.nfmt,S=this.state,G=R.gradePts,me=S.player,Z=String(L.NAMES.p1||"").split(" ")[0],Rn=String(L.NAMES.p2||"").split(" ")[0],o={};
     const names=t=>L.REWARDS.filter(x=>x.t===t).map(x=>x.ic+" "+((x.np&&x.np[me])||x.n)).join(" · ");
     o.annEarn=[["⭐","Every app point = 1 reward point","New questions right first time. Hindi still pays double!"],
@@ -1057,7 +1079,8 @@ class Component extends DCLogic {
     const L=this.L,scr=S.screen,p=S.player,o={ready:true,rootRef:this.rootRef,fxRef:this.fxRef,beeRef:this.beeRef,isPick:scr==="pick",isApp:scr!=="pick",isMap:scr==="map",isLesson:scr==="lesson",isDone:scr==="done",isProfile:scr==="profile",isBoard:scr==="board",isChapters:scr==="chapters",isNote:scr==="note",isNotes:scr==="notes",isShop:scr==="shop",isRewards:scr==="rewards",navOn:["map","board","notes","chapters","profile","shop","rewards"].includes(scr),toast:S.toast,hasToast:!!S.toast,learnOpen:S.learnOpen};
     o.annOn=!!S.annOn&&!!p;if(o.annOn)Object.assign(o,this.annVals());
     o.rareOn=!!S.rareOn&&!!p;if(o.rareOn)Object.assign(o,this.rareVals());
-    o.newOn=!S.newClosed&&!S.annOn&&!S.rareOn&&this.load("ab_seen_ver",null)!==L.APP_VERSION&&this.whatsNew().length>0;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
+    o.askOn=!!S.askOn&&!!p&&!S.annOn&&!S.rareOn;if(o.askOn)Object.assign(o,this.askVals());
+    o.newOn=!S.newClosed&&!S.annOn&&!S.rareOn&&!S.askOn&&this.load("ab_seen_ver",null)!==L.APP_VERSION&&this.whatsNew().length>0;if(o.newOn){o.newItems=this.whatsNew();o.closeNew=()=>{this.store("ab_seen_ver",L.APP_VERSION);this.setState({newClosed:true})}}
     /* pick */
     {const rk=this.roleKey();o.showZ=!rk||rk==="p1";o.showR=!rk||rk==="p2";o.showD=!rk||rk==="dad";o.pickHint=rk?"Tap to play. Not you? Sign out below.":"Founders only. Tap your name."}
     ["p1","p2","dad"].forEach((k,i)=>{const c="zrd"[i],a=this.avNode(k);o[c+"AvUrl"]=a.avUrl;o[c+"NoAv"]=a.noAv;o[c+"Prev"]=S.prevWho===k;o[c+"World"]=L.WORLDS[this.worldOf(k)].name;o[c+"Name"]=L.NAMES[k];o[c+"Role"]=L.ROLE[k]||""});
