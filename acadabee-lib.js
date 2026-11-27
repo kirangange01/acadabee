@@ -205,7 +205,7 @@ export const REWARDS=[
 /* Dad (from 16 Nov 2026): no islands or points; two goals only: Duolingo every day + an average of DAD_STEPS_AVG steps a day */
 export const DAD_STEPS_AVG=7000, DAD_RULE_FROM="2026-11-16";
 /* "What's new" pop-up: shown once per device for each new version */
-export const APP_VERSION="2.1";
+export const APP_VERSION="2.11";
 /* app activity for Dad's corner (v1.92): days shown, first day recorded, gap that starts a new visit */
 export const ACT_DAYS=7,ACT_FROM="2026-11-24",ACT_GAP=5*60*1000;
 export const CELLS_PER_HIVE=20, DAY_CAP=20, STING_AT=3, SLEEP_FROM=22, SLEEP_TO=6, VAULT_HOUR=21;

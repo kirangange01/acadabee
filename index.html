@@ -30,7 +30,7 @@
       </button></sc-if>
       <sc-if value="{{ showD }}" hint-placeholder-val="{{ true }}"><button onClick="{{ pickD }}" aria-label="Dad's corner: goals, sick days and rewards" style="align-self:center;margin-top:6px;border:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:999px;background:rgba(255,255,255,.18);color:#fff;font:800 14px/1 Nunito,sans-serif;box-shadow:inset 0 2px 0 rgba(255,255,255,.22),0 8px 16px -8px rgba(0,0,0,.45)" style-active="transform:translateY(2px)">👔 Dad's corner<span style="font:700 12px/1 Nunito,sans-serif;color:#C9F3FF">goals · sick days · rewards</span>→</button></sc-if>
     </div>
-    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v2.1 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
+    <p style="margin:auto 0 0;padding-top:20px;font:700 12px/1.4 Nunito,sans-serif;color:#0B2E3F;text-align:center;position:relative">AcadaBee v2.11 · Season 1 · built by the founders · island map by {{ zName }} · Raybees by {{ rName }}</p>
   </div>
   </sc-if>
 
@@ -267,9 +267,9 @@
               <sc-for list="{{ r.stats }}" as="s" hint-placeholder-count="1"><div style="font:700 13px/1.4 Nunito,sans-serif;color:{{ s.c }};text-wrap:pretty">{{ s.t }}</div></sc-for>
               <sc-if value="{{ r.isDad }}">
                 <div style="display:flex;flex-direction:column;gap:8px">
-                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="0" placeholder="average steps a day" aria-label="Average steps a day this week" value="{{ dadSteps }}" onChange="{{ onDadSteps }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ saveSteps }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(160,100,0,.35)">Save steps</button></div>
+                  <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="0" placeholder="last week's average a day" aria-label="Average steps a day, last Monday to Sunday" value="{{ dadSteps }}" onChange="{{ onDadSteps }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ saveSteps }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:linear-gradient(180deg,#FFE680,#FFC61A);color:#3A2600;font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 rgba(160,100,0,.35)">Save steps</button></div>
                   <div style="display:flex;gap:8px"><input type="number" inputMode="numeric" min="1000" step="500" aria-label="Goal: average steps a day" value="{{ dadTarget }}" onChange="{{ onDadTarget }}" style="flex:1;min-width:0;border:0;padding:12px 14px;border-radius:14px;background:var(--field);color:var(--fieldInk);font:700 15px/1 Nunito,sans-serif;box-shadow:inset 0 2px 4px rgba(0,0,0,.2)"><button onClick="{{ setTarget }}" style="border:0;cursor:pointer;padding:12px 14px;border-radius:14px;background:var(--opt);color:var(--optInk);font:800 13px/1 Nunito,sans-serif;box-shadow:inset 0 -3px 0 var(--cardLo)">Set daily goal</button></div>
-                  <div style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">Enter this week's daily average from your phone. Goal below.</div>
+                  <div style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">Your Monday–Sunday average goes on the Board every Monday morning. If it doesn't, type last week's average here. Goal below.</div>
                 </div>
               </sc-if>
             </div>
@@ -703,6 +703,7 @@ class Component extends DCLogic {
   roundsToday(p){return this.roundsByDay(p)[this.L.today()]||0}
   practiceWhy(p){const L=this.L;if(L.today()<L.LAUNCH)return "prelaunch";if(this.sleeping())return "sleep";if(this.roundsToday(p)>=L.DAY_CAP)return "cap";if(p!=="dad"&&this.state.db&&this.rwTodayPts(p)>=L.DAY_PTS_MAX)return "max";if(p!=="dad"&&this.clockOff())return "clock";return null}
   whatsNew(){const Z=String(this.L.NAMES.p1||"").split(" ")[0],R=String(this.L.NAMES.p2||"").split(" ")[0],seen=parseFloat(this.load("ab_seen_ver",null))||0;return [
+    {v:2.11,key:"dadsteps",ic:"👟",t:"Dad's steps now count Monday to Sunday, like your week. His average goes on the Board on Monday morning, and the Team Vault waits for it: nothing melts while it waits."},
     {v:2.1,key:"asks",ic:"🛠️",t:"You asked, we built it! Your three asks from the rewards list are live."},
     {v:2.1,key:"golden2",ic:"🌟",t:"Golden = more: a golden island now gives +1,000 ⭐ (that's +1,000 reward points, on top of the daily max) and 1,000 💎. Islands that were already golden got the extra too."},
     {v:2.1,key:"hindi2",ic:"🍯",t:"Hindi extra: a full Hindi round fills 2 honeycomb cells, so your hive fills twice as fast. Hindi points are still double!"},
@@ -892,7 +893,9 @@ class Component extends DCLogic {
     return {has,rbd,sick,missed,need,extras,makeupOK:extras>=need,left,togo,goalN:g.need,doneReq:Math.min(doneReq,g.need),half:g.half,ok:extras>=need&&togo===0}}
   /* exam weeks (v1.6): half of the islands of the papers still ahead, any of them; other weeks: every required island */
   islandGoal(p,W){const list=this.requiredIslandsFor(p,W),half=list.length>1&&(this.L.EXAMS[p]||[]).some(x=>x.d>=W.start);return {list,half,need:half?Math.ceil(list.length/2):list.length}}
-  teamWeekStatus(W){const z=this.boyStatus("p1",W),r=this.boyStatus("p2",W),d=this.dadStatus(W);if(!z.has||!r.has)return "unknown";return (z.ok&&r.ok&&d.ok)?"ok":"missed"}
+  teamWeekStatus(W){const z=this.boyStatus("p1",W),r=this.boyStatus("p2",W),d=this.dadStatus(W);if(!z.has||!r.has)return "unknown";
+    if(!d.old&&d.pending)return (z.ok&&r.ok&&!d.missed.length)?"unknown":"missed";return (z.ok&&r.ok&&d.ok)?"ok":"missed"}
+  dadStepsWait(W){const d=this.dadStatus(W);return !d.old&&d.pending}
   vault(p){const L=this.L,raw=this.load("ab_"+p,null),s=(raw&&raw.season===L.SEASON)?raw:L.freshSeason(),byW={};(s.gems||[]).forEach(g=>{byW[g.w]=(byW[g.w]||0)+g.n});
     const now=new Date(),cur=L.mondayOf(L.today());let mon=L.mondayOf(L.LAUNCH),carry=0,wallet=0,melted=0,jars=0,last=null;
     while(mon<=cur){const end=L.addDays(mon,6),dl=L.parseISO(end);dl.setHours(L.VAULT_HOUR,0,0,0);const gw=byW[mon]||0;
@@ -904,8 +907,11 @@ class Component extends DCLogic {
   dadStatus(W){const L=this.dadLog(),past=W.days.filter(d=>d<W.t),missed=past.filter(d=>!L.duo[d]);
     if(W.start<this.L.DAD_RULE_FROM){const rbd=this.roundsByDay("dad"),rounds=W.days.reduce((s,d)=>s+(rbd[d]||0),0),need=2*missed.length,tgt=Math.round((L.target||35000)*W.days.length/7/100)*100,steps=L.steps[W.start]||0;
       return {L,old:true,rbd,missed,need,extras:rounds,makeupOK:rounds>=need,steps,tgt,stepsOK:steps>=tgt,ok:rounds>=need&&steps>=tgt}}
-    const tgtAvg=L.avgTarget||this.L.DAD_STEPS_AVG,avg=(L.avg&&L.avg[W.start]!=null)?L.avg[W.start]:(L.steps&&L.steps[W.start]?Math.round(L.steps[W.start]/W.days.length):0);
-    return {L,old:false,missed,avg,tgtAvg,duoOK:!missed.length,stepsOK:avg>=tgtAvg,ok:!missed.length&&avg>=tgtAvg}}
+    /* v2.11: the week's Mon–Sun average goes on the Board on Monday morning, so until then the steps goal is pending, not missed */
+    const tgtAvg=L.avgTarget||this.L.DAD_STEPS_AVG,typed=L.avg&&L.avg[W.start]!=null,legacy=!!(L.steps&&L.steps[W.start]),avg=typed?L.avg[W.start]:(legacy?Math.round(L.steps[W.start]/W.days.length):0);
+    return {L,old:false,missed,avg,tgtAvg,pending:!typed&&!legacy,duoOK:!missed.length,stepsOK:avg>=tgtAvg,ok:!missed.length&&avg>=tgtAvg}}
+  /* the week whose steps average is due: last Monday to Sunday */
+  dadStepsWeek(){const L=this.L,mon=L.addDays(L.mondayOf(L.today()),-7);return mon<L.DAD_RULE_FROM?null:this.weekOf(mon)}
 
   /* notes */
   localNotes(){const a=this.load("ab_notes",[]);return Array.isArray(a)?a:[]}
@@ -1107,8 +1113,10 @@ class Component extends DCLogic {
   mapVals(){
     const L=this.L,S=this.state,p=S.player,s=this.P(),o={};
     {const W=this.weekInfo(),v=this.vault(p),dl=L.parseISO(W.end);dl.setHours(L.VAULT_HOUR,0,0,0);o.showVault=!W.practice&&p!=="dad";
-      if(o.showVault){if(new Date()>=dl){const won=v.last==="ok";o.vIc=won?"🔓":"🔒";o.vT=won?"The Team Vault opened!":"The Team Vault stayed shut";o.vS=won?"Your gems opened with a +25% bonus, and that week's reward points got +25% too 🎁":"Not this week. Win next week to open the vault with a +25% bonus.";o.vToDo="";o.vInk="var(--soft)"}
-        else{const bv=this.boardVals();o.vIc="🔐";o.vT="Team Vault: "+L.nfmt(v.pending)+" 💎 waiting";o.vS="Opens Sunday 9 pm. If all three of you hit your goals, these gems and this week's reward points get +25%.";o.vToDo=bv.toDoT;o.vInk=bv.toDoOK?"#7ED957":"var(--ink)"}}
+      const lastW=this.dadStepsWeek(),lastWait=lastW&&!W.practice&&this.dadStepsWait(lastW)&&this.teamWeekStatus(lastW)==="unknown";
+      if(o.showVault){if(new Date()>=dl&&v.last==="unknown"&&this.dadStepsWait(this.weekOf(W.mon))){o.vIc="⏳";o.vT="Team Vault: "+L.nfmt(v.pending)+" 💎 waiting for Dad's steps";o.vS="Dad's steps for the week go on the Board on Monday morning. If all three of you hit your goals, the vault opens then with a +25% bonus.";o.vToDo="";o.vInk="var(--soft)"}
+        else if(new Date()>=dl){const won=v.last==="ok";o.vIc=won?"🔓":"🔒";o.vT=won?"The Team Vault opened!":"The Team Vault stayed shut";o.vS=won?"Your gems opened with a +25% bonus, and that week's reward points got +25% too 🎁":"Not this week. Win next week to open the vault with a +25% bonus.";o.vToDo="";o.vInk="var(--soft)"}
+        else{const bv=this.boardVals();o.vIc="🔐";o.vT="Team Vault: "+L.nfmt(v.pending)+" 💎 waiting";o.vS=lastWait?"Last week's gems are in here too: that vault opens when Dad's steps for last week are in, on Monday morning. This week's is checked Sunday 9 pm (Dad's steps on Monday morning).":"Checked Sunday 9 pm (Dad's steps on Monday morning). If all three of you hit your goals, these gems and this week's reward points get +25%.";o.vToDo=bv.toDoT;o.vInk=bv.toDoOK?"#7ED957":"var(--ink)"}}
       o.goVault=()=>this.goBoard()}
     o.showRw=!!S.db&&p!=="dad";if(o.showRw){const r=this.rw(p);o.rwMapT="🎁 "+L.nfmt(r.bal)+" reward points to spend";o.rwMapS="Today: "+L.nfmt(Math.min(r.today,L.DAY_PTS_MAX))+" / "+L.nfmt(L.DAY_PTS_MAX)+" · trip points "+L.nfmt(r.earned);o.goRw=()=>this.goRewards()}
     o.streakN=s.streak;o.hexes=[];for(let i=6;i>=0;i--){const d=L.daysAgoISO(i);o.hexes.push({key:d,bg:s.days.includes(d)?"linear-gradient(180deg,#FFE680,#FFB800)":"var(--ring)",outline:i===0?"2px dashed var(--acc)":"none"})}
@@ -1214,17 +1222,18 @@ class Component extends DCLogic {
       dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps this week: ")+L.nfmt(ds.steps)+" / "+L.nfmt(ds.tgt)+(W.days.length<7?" (short week)":""),c:ds.stepsOK?"#7ED957":"var(--ink)"});
       if(!ds.stepsOK)block("Dad",L.nfmt(ds.tgt-ds.steps)+" more steps")}
     else{if(ds.missed.length){dst.push({key:"duo",t:"⚠️ Duolingo not ticked: "+ds.missed.map(d=>L.fmtDay(d)).join(", "),c:"#FFB347"});block("Dad","Duolingo on "+ds.missed.length+" day"+(ds.missed.length>1?"s":""))}
-      dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps: ")+(ds.avg?L.nfmt(ds.avg)+" a day on average":"this week's average not entered yet")+" · goal "+L.nfmt(ds.tgtAvg),c:ds.stepsOK?"#7ED957":"var(--ink)"});
-      if(!ds.stepsOK)block("Dad",ds.avg?"steps average below "+L.nfmt(ds.tgtAvg):"this week's steps average")}
+      if(ds.pending)dst.push({key:"steps",t:"👟 Steps: this week's Monday–Sunday average goes on the Board on Monday morning · goal "+L.nfmt(ds.tgtAvg)+" a day",c:"var(--soft)"});
+      else{dst.push({key:"steps",t:(ds.stepsOK?"✅ Steps: ":"👟 Steps: ")+L.nfmt(ds.avg)+" a day on average · goal "+L.nfmt(ds.tgtAvg),c:ds.stepsOK?"#7ED957":"var(--ink)"});if(!ds.stepsOK)block("Dad","steps average below "+L.nfmt(ds.tgtAvg))}
+      const PW=W.final?null:this.dadStepsWeek();if(PW){const pd=this.dadStatus(PW);dst.push({key:"stepsLast",t:"👟 Last week ("+L.fmtDay(PW.start)+" → "+L.fmtDay(PW.end)+"): "+(pd.pending?"average not in yet, it goes on the Board on Monday morning":L.nfmt(pd.avg)+" a day "+(pd.stepsOK?"✅":"❌")),c:pd.pending?"var(--soft)":(pd.stepsOK?"#7ED957":"#FFB347")})}}
     const tickDuo=d=>this.editDadLog(Lg=>{if(Lg.duo[d])delete Lg.duo[d];else Lg.duo[d]=true});
     const dd=this.duoOf("dad");if(dd&&!ds.old)dst.push({key:"duol",t:"🦉 Duolingo streak: "+dd.streak+" day"+(dd.streak===1?"":"s")+" · days tick themselves every evening",c:"var(--soft)"});
     rows.push(Object.assign(this.avNode("dad"),{key:"dad",name:ds.old?"Dad · Duolingo every day + "+L.nfmt(ds.L.target)+" steps a week":"Dad · Duolingo every day + "+L.nfmt(ds.tgtAvg)+" steps a day on average",dots:dots(d=>!!ds.L.duo[d],false,p==="dad"?tickDuo:null,null),stats:dst,isDad:p==="dad",tip:p==="dad"?(dd?"Duolingo days tick themselves every evening. Tap a day to fix one by hand.":"Tap a day when you've done Duolingo."):""}));
     o.teamRows=rows;
-    o.dadOld=!!ds.old;o.dadNew=!ds.old;o.dadSteps=S.dadStepsIn;o.onDadSteps=e=>this.setState({dadStepsIn:e.target.value});o.saveSteps=()=>{const n=Math.max(0,parseInt(this.state.dadStepsIn,10)||0);this.editDadLog(Lg=>{if(ds.old)Lg.steps[W.start]=n;else{Lg.avg=Lg.avg||{};Lg.avg[W.start]=n}return "Steps saved 👟"})};
+    o.dadOld=!!ds.old;o.dadNew=!ds.old;o.dadSteps=S.dadStepsIn;o.onDadSteps=e=>this.setState({dadStepsIn:e.target.value});o.saveSteps=()=>{const n=Math.max(0,parseInt(this.state.dadStepsIn,10)||0);this.editDadLog(Lg=>{if(ds.old)Lg.steps[W.start]=n;else{const PW=this.dadStepsWeek()||W;Lg.avg=Lg.avg||{};Lg.avg[PW.start]=n;return "Steps saved for "+L.fmtDay(PW.start)+" → "+L.fmtDay(PW.end)+" 👟"}return "Steps saved 👟"})};
     o.dadTarget=S.dadTargetIn;o.onDadTarget=e=>this.setState({dadTargetIn:e.target.value});o.setTarget=()=>{const n=parseInt(this.state.dadTargetIn,10);if(n>0)this.editDadLog(Lg=>{if(ds.old){Lg.target=n;return "Weekly goal: "+L.nfmt(n)+" steps"}Lg.avgTarget=n;return "Goal: "+L.nfmt(n)+" steps a day on average"})};
     Object.keys(bl).forEach(w=>blockers.push(w+": "+bl[w].join(" + ")));
     if(unknown){o.resT="⏳ Waiting for everyone's scores. The vault can only open when all three show here.";o.resBg="var(--hint)";o.resInk="var(--hintInk)"}
-    else if(!blockers.length){o.resT=W.practice?"🔓 Practice: you'd all be on track!":"🔓 Everyone's on track: the Team Vault opens Sunday 9 pm!";o.resBg="var(--good)";o.resInk="var(--goodInk)"}
+    else if(!blockers.length){o.resT=W.practice?"🔓 Practice: you'd all be on track!":(ds.pending?"🔓 Everyone's on track! The Team Vault opens on Monday morning, when Dad's steps for the week are in.":"🔓 Everyone's on track: the Team Vault opens Sunday 9 pm!");o.resBg="var(--good)";o.resInk="var(--goodInk)"}
     else{o.resT="🔒 The vault stays shut until: "+blockers.join(" · ");o.resBg="var(--chip)";o.resInk="var(--chipInk)"}
     o.toDoT=unknown?"⏳ Waiting for everyone's scores":blockers.length?"Still to do: "+blockers.join(" · "):"✅ Everyone's on track!";o.toDoOK=!unknown&&!blockers.length;
     /* Team Vault + the rewards tile */
