@@ -281,10 +281,39 @@
       <sc-if value="{{ showActivity }}">
       <div data-activity="1" style="padding:16px 18px;border-radius:24px;background:var(--card);box-shadow:inset 0 3px 0 var(--cardHi),inset 0 -8px 0 var(--cardLo),0 16px 26px -10px var(--shadow);display:flex;flex-direction:column;gap:12px">
         <div><h3 style="margin:0;font:600 20px/1.2 Fredoka,sans-serif;color:var(--ink)">🕒 When they were in the app</h3><p style="margin:4px 0 0;font:700 12px/1.4 Nunito,sans-serif;color:var(--soft)">{{ actTip }}</p></div>
+        <div style="display:flex;flex-direction:column;gap:8px;padding:12px;border-radius:16px;background:var(--opt)">
+          <div style="font:800 11px/1 Nunito,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--soft)">Last 7 days</div>
+          <sc-for list="{{ actWeek }}" as="w" hint-placeholder-count="2">
+            <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+              <span style="font:800 14px/1.2 Nunito,sans-serif;color:var(--ink);min-width:86px">{{ w.name }}</span>
+              <span style="display:flex;gap:4px"><sc-for list="{{ w.dots }}" as="o" hint-placeholder-count="7"><span style="width:14px;height:14px;border-radius:50%;background:{{ o.bg }}"></span></sc-for></span>
+              <span style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ w.t }}</span>
+            </div>
+          </sc-for>
+        </div>
         <sc-for list="{{ actDays }}" as="d" hint-placeholder-count="3">
-          <div style="display:flex;flex-direction:column;gap:4px;padding-top:10px;border-top:1px solid var(--line)">
+          <div style="display:flex;flex-direction:column;gap:8px;padding-top:10px;border-top:1px solid var(--line)">
             <div style="font:800 14px/1.3 Nunito,sans-serif;color:var(--ink)">{{ d.title }}</div>
-            <sc-for list="{{ d.lines }}" as="l" hint-placeholder-count="2"><div style="font:700 13px/1.4 Nunito,sans-serif;color:{{ l.c }};text-wrap:pretty">{{ l.t }}</div></sc-for>
+            <sc-if value="{{ d.none }}"><div style="font:700 13px/1.3 Nunito,sans-serif;color:var(--soft)">😴 Nobody opened the app</div></sc-if>
+            <sc-for list="{{ d.rows }}" as="r" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;gap:5px">
+                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
+                  <span style="font:800 14px/1.2 Nunito,sans-serif;color:var(--ink);margin-right:2px">{{ r.name }}</span>
+                  <span style="padding:3px 8px;border-radius:999px;background:var(--opt);font:800 12px/1.2 Nunito,sans-serif;color:var(--ink)">{{ r.mins }}</span>
+                  <span style="padding:3px 8px;border-radius:999px;background:var(--opt);font:800 12px/1.2 Nunito,sans-serif;color:var(--ink)">{{ r.rounds }}</span>
+                  <span style="font:700 12px/1.2 Nunito,sans-serif;color:var(--soft)">{{ r.when }}</span>
+                </div>
+                <div style="position:relative;height:20px;border-radius:10px;background:var(--opt);overflow:hidden">
+                  <sc-for list="{{ r.blocks }}" as="b" hint-placeholder-count="3"><span data-block="1" title="{{ b.tip }}" style="position:absolute;top:2px;bottom:2px;left:{{ b.l }};width:{{ b.w }};border-radius:5px;background:{{ b.c }}"></span></sc-for>
+                </div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ d.hasRows }}">
+              <div style="position:relative;height:12px;margin-top:-4px">
+                <sc-for list="{{ d.ticks }}" as="k" hint-placeholder-count="5"><span style="position:absolute;left:{{ k.l }};transform:translateX({{ k.tx }});font:700 10px/1 Nunito,sans-serif;color:var(--soft);white-space:nowrap">{{ k.t }}</span></sc-for>
+              </div>
+            </sc-if>
+            <sc-for list="{{ d.notes }}" as="n" hint-placeholder-count="1"><div style="font:700 12px/1.3 Nunito,sans-serif;color:var(--soft)">{{ n.t }}</div></sc-for>
           </div>
         </sc-for>
       </div>
@@ -856,16 +885,26 @@ class Component extends DCLogic {
       who=k=>k==="dad"?"Dad":(k&&N[k])?N[k]:"The family login";
     const today=dayOf(Date.now()),days=[];for(let i=0;i<L.ACT_DAYS;i++){const d=L.addDays(today,-i);if(d<L.ACT_FROM)break;days.push(d)}
     const visits=rows.filter(r=>r.s&&r.p),auth=rows.filter(r=>r.ev&&r.t),lab=this.devLabeler(rows);
-    const actDays=days.map(d=>{const lines=[];
+    /* v2.1 visual: per day, one timeline bar per boy with a block for each visit; the scale zooms to the hours played that day; totals as chips */
+    const COL={p1:"#FFB020",p2:"#45C8F0"},hrs=ms=>{const t=new Date(ms).toLocaleTimeString("en-GB",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false}).split(":");return +t[0]+(+t[1])/60},
+      fmtMin=m=>m<1?"<1 min":(m>=60?Math.floor(m/60)+" h "+Math.round(m%60)+" min":Math.round(m)+" min");
+    const hl=h=>((h%24)%12||12)+((h%24)<12?" am":" pm");
+    const actDays=days.map(d=>{const rows2=[],dv0=visits.filter(v=>(v.p==="p1"||v.p==="p2")&&dayOf(v.s)===d);
+      let H0=Math.floor(Math.min(...dv0.map(v=>hrs(v.s)),24)),H1=Math.ceil(Math.max(...dv0.map(v=>Math.max(hrs(v.e||v.s),hrs(v.s)+0.05)),0));
+      if(!dv0.length){H0=6;H1=22}if(H1-H0<2)H1=H0+2;const step=H1-H0<=4?1:(H1-H0<=8?2:4);
+      const pos=h=>Math.max(0,Math.min(100,(h-H0)/(H1-H0)*100)),ticks=[];for(let h=H0;h<=H1;h+=step)ticks.push({key:"t"+h,l:pos(h).toFixed(2)+"%",tx:h===H0?"0":(h+step>H1?"-100%":"-50%"),t:hl(h)});
       ["p1","p2"].forEach(k=>{const vs=visits.filter(v=>v.p===k&&dayOf(v.s)===d).sort((a,b)=>a.s-b.s);if(!vs.length)return;
-        const mins=vs.reduce((a,v)=>a+Math.max(0,(v.e||v.s)-v.s),0)/60000,rounds=vs.reduce((a,v)=>a+(v.r||0),0),
-          spans=vs.map(v=>((v.e||v.s)-v.s>=60000)?tm(v.s)+"–"+tm(v.e):tm(v.s)).join(", ");
-        const dv=[...new Set(vs.map(v=>lab(v.did)).filter(Boolean))].join(", ");
-        lines.push({key:k,c:"var(--ink)",t:(L.EMO[k]||"")+" "+N[k]+": "+spans+" · "+(mins<1?"under 1 min":Math.round(mins)+" min")+(rounds?" · "+rounds+" round"+(rounds>1?"s":""):"")+(dv?" · "+dv:"")})});
-      auth.filter(a=>dayOf(a.t)===d).sort((a,b)=>a.t-b.t).forEach(a=>lines.push({key:a.id,c:"var(--soft)",t:(a.ev==="out"?"🚪 ":"🔑 ")+who(a.role)+(a.ev==="out"?" signed out at ":" signed in at ")+tm(a.t)+(a.dev?" ("+a.dev+(a.did?", "+lab(a.did):"")+")":"")}));
-      if(!lines.length)lines.push({key:"none",c:"var(--soft)",t:"Nobody opened the app."});
-      return {key:d,title:d===today?"Today":(d===L.addDays(today,-1)?"Yesterday":L.fmtDay(d)),lines}});
-    return {showActivity:!!this.state.db,actDays,actTip:"Times in IST. A visit counts while the app is open on the screen; rounds are the rounds finished in it."}}
+        const mins=vs.reduce((a,v)=>a+Math.max(0,(v.e||v.s)-v.s),0)/60000,rounds=vs.reduce((a,v)=>a+(v.r||0),0),dv=[...new Set(vs.map(v=>lab(v.did)).filter(Boolean))].join(", ");
+        const blocks=vs.map((v,i)=>{const l=pos(hrs(v.s)),r=pos(hrs(v.e||v.s));return {key:k+i,l:Math.min(l,98.5).toFixed(2)+"%",w:Math.max(r-l,1.5).toFixed(2)+"%",c:COL[k],tip:tm(v.s)+((v.e||v.s)-v.s>=60000?"–"+tm(v.e):"")+(v.r?" · "+v.r+" round"+(v.r>1?"s":""):"")}});
+        rows2.push({key:k,name:(L.EMO[k]||"")+" "+N[k].split(" ")[0],c:COL[k],when:tm(vs[0].s)+(vs.length>1||(vs[0].e||vs[0].s)-vs[0].s>=60000?" – "+tm(vs[vs.length-1].e||vs[vs.length-1].s):""),
+          mins:"⏱️ "+fmtMin(mins),rounds:"🏝️ "+rounds+" round"+(rounds===1?"":"s"),dev:dv?"📱 "+dv:"",hasDev:!!dv,blocks})});
+      const notes=auth.filter(a=>dayOf(a.t)===d).sort((a,b)=>a.t-b.t).map(a=>({key:a.id,t:(a.ev==="out"?"🚪 ":"🔑 ")+(N[a.role]?N[a.role].split(" ")[0]:who(a.role))+(a.ev==="out"?" signed out ":" signed in ")+tm(a.t)+(a.dev?" · "+a.dev+(a.did?", "+lab(a.did):""):"")}));
+      return {key:d,title:d===today?"Today":(d===L.addDays(today,-1)?"Yesterday":L.fmtDay(d)),rows:rows2,ticks,hasRows:rows2.length>0,none:!rows2.length,notes,hasNotes:notes.length>0}});
+    const actWeek=["p1","p2"].map(k=>{const vs=visits.filter(v=>v.p===k&&days.includes(dayOf(v.s)));
+      const n=new Set(vs.map(v=>dayOf(v.s))).size,mins=vs.reduce((a,v)=>a+Math.max(0,(v.e||v.s)-v.s),0)/60000,rounds=vs.reduce((a,v)=>a+(v.r||0),0);
+      return {key:k,name:(L.EMO[k]||"")+" "+N[k].split(" ")[0],c:COL[k],dots:days.slice().reverse().map(d=>({key:k+d,on:vs.some(v=>dayOf(v.s)===d),bg:vs.some(v=>dayOf(v.s)===d)?COL[k]:"var(--opt)"})),
+        t:n+" of "+days.length+" days · "+fmtMin(mins)+" · "+rounds+" round"+(rounds===1?"":"s")}});
+    return {showActivity:!!this.state.db,actDays,actWeek,actTip:"IST · each block is a visit while the app was on screen"}}
 
   /* Dad's log + the team week */
   dadLog(){const def={duo:{},steps:{},avg:{},sick:{},target:35000,avgTarget:this.L.DAD_STEPS_AVG,updatedAt:0},l=this.load("ab_dadlog",null),r=this.state.dbSnap.dadlog;
